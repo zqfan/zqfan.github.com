@@ -2,7 +2,7 @@
 layout: post
 title: "Use Jekyll For Github Blog"
 description: ""
-category:
+category: github
 tags: [jekyll, github-proxy, github-blog]
 ---
 {% include JB/setup %}
@@ -39,7 +39,7 @@ NOTE, you may need to run `echo 'insecure' >> ~/.curlrc` befor you do the follow
 
     $ curl https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer | bash -s stable
     $ echo '[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm' >> ~/.bashrc
-    $ source ~/.zshrc
+    $ source ~/.bashrc
     $ rvm requirements
 
 and run the command rvm tells you todo, particularly, install the ruby dependency packages.
