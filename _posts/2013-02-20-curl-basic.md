@@ -1,0 +1,22 @@
+---
+layout: post
+title: "curl basic"
+description: ""
+category: 
+tags: [linux, curl]
+---
+{% include JB/setup %}
+# License
+this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+
+## get 
+curl -d '{"auth":{"passwordCredentials":{"username": "joeuser", "password": "secrete"}}}' -H "Content-type: application/json" http://localhost:35357/v2.0/tokens
+
+## parse json data
+curl url | python -mjson.tool
+## post
+curl -X POST url
+## post with content
+curl -X POST -d '' url
+## with header
+curl -H "Content-type: application/json" url

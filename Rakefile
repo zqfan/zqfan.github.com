@@ -69,6 +69,9 @@ task :post do
     post.puts "tags: #{tags}"
     post.puts "---"
     post.puts "{% include JB/setup %}"
+    # (aji): add license announcement
+    post.puts "## License"
+    post.puts "this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)"
   end
 end # task :post
 

@@ -1,0 +1,209 @@
+---
+layout: post
+title: "Puppet Exp"
+description: ""
+category: 
+tags: []
+---
+{% include JB/setup %}
+## License
+this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+
+
+## puppet node
+[reference: node definition](http://docs.puppetlabs.com/puppet/2.7/reference/lang_node_definitions.html)
+
+from the reference, i know how to use regular expression to indicate nodes
+
+    node /^(foo|bar)\.example\.com$/ {
+      include common
+    }
+
+
+## puppet scope
+[reference: scope](http://docs.puppetlabs.com/guides/scope_and_puppet.html)
+
+from the reference, i konw how to use scope
+
+    $var = "from topscope"
+    node default {
+      $var = "from node"
+      include lookup_example
+    }
+
+    class lookup_example {
+      notify { $var: }   # will be "from node"
+      notify { $::var: } # will be "from topscope"
+    }
+
+
+## Puppet Require
+I want to require a package on another class
+
+    class foo {
+        package { "bar": ensure => installed, }
+    }
+    class fooo {
+        package { "barr":
+            ensure => installed,
+            require => Package["bar"],
+        }
+    }
+
+This does not work, and `require => Class["foo"]` does not too. However, add a `include "foo"` in fooo works.
+
+## how to use puppet tags
+[reference: wiki](http://projects.puppetlabs.com/projects/puppet/wiki/Using_Tags)
+
+[reference: 2.7 doc](http://docs.puppetlabs.com/puppet/2.7/reference/lang_tags.html)
+
+if i did not assgin a tag to an agent, the agent will search the master's config for a node named `hostname` or 'default'. but if you give a tag for the agent, then it will search all resources have the tags.
+
+### assgin a tag to agent
+
+1. your hostname is a tag too
+2. add tags when you run `puppet agent`
+
+    $ puppetd --tags webserver,ftpserver
+
+3. add tags option in puppet.conf
+
+    # cat /etc/puppet/puppet.conf
+    tags = webserver, ftpserver
+
+### add a tag to resource
+
+1. tag => webserver
+2. for class, add tag("webserver")
+3. in fact, all node, class and define has a automatical generated tag, it's their name exactly
+
+
+## how to use puppet kick
+see the `puppet kick --help` first, the `USAGE NOTES` says:
+
+    Puppet kick is useless unless puppet agent is listening for incoming
+    connections and allowing access to the `run` endpoint. This entails
+    starting the agent with `listen = true` in its puppet.conf file, and
+    allowing access to the `/run` path in its auth.conf file; see
+    `http://docs.puppetlabs.com/guides/rest_auth_conf.html` for more
+    details.
+
+    Additionally, due to a known bug, you must make sure a
+    namespaceauth.conf file exists in puppet agent's $confdir. This file
+    will not be consulted, and may be left empty.
+
+NOTE: all the following steps must run by root or sudo
+### step 1
+to enable listen conf, add the following line in /etc/puppet/puppet.conf in your puppet slave
+
+    [agent]
+    listen=true
+
+or you can run command by:
+
+    # augtool << EOF
+    set /files/etc/puppet/puppet.conf/agent/listen true
+    save
+    EOF
+
+### step 2
+to allow access to the /run path, you should edit /etc/puppet/auth.conf in your puppet slave
+    
+    path /run
+    auth any
+    method save
+    allow master.puppet.com
+
+    # this one is not stricly necessary, but it has the merit
+    # to show the default policy which is deny everything else
+    path /
+    auth any
+
+note puppet-master.puppet.com must be add in the /etc/hosts entry
+### step 3
+add a empty file on your puppet slave
+
+    # touch /etc/puppet/namespaceauth.conf
+
+### step 4
+to test the `puppet kick`, on puppet slave node, run `puppet agent --debug --verbose --no-daemonize`, on puppet master node, run `puppet kick --foreground --debug --host slave.puppet.com`. plz not that you should add entry on your /etc/hosts of slave.puppet.com
+
+NOTE: 1) The --tag option is a decorader to object, you can not just specify tag without host class. 
+
+NOTE: 2) That puppet listen on 8139, please let firewall allow that port.
+
+
+## ldap  <=== this section is not completed
+[reference: ldap nodes](http://projects.puppetlabs.com/projects/1/wiki/Ldap_Nodes)
+
+[reference: openldap quick guide](http://www.blogjava.net/kapok/archive/2005/05/05/4034.html)
+
+
+### step 1
+Install ldap server
+
+    # apt-get install slapd ldap-utils
+    # wget https://raw.github.com/puppetlabs/puppet/master/ext/ldap/puppet.schema
+    # cp puppet.schema /etc/ldap/schema/
+    
+Add a include puppet.schema line in /usr/share/slapd/slapd.conf
+
+    include         /etc/ldap/schema/core.schema
+    include         /etc/ldap/schema/cosine.schema
+    include         /etc/ldap/schema/nis.schema
+    include         /etc/ldap/schema/inetorgperson.schema
+    include         /etc/ldap/schema/puppet.schema
+
+The reference tells me to restart the server, i did it, but i don't know if it is necessary. Maybe you can try this:
+
+    # sudo /etc/init.d/ldap start
+
+Add a default node in your LDAP
+    
+    # cat test.ldif
+    dn: cn=default,dc=orgName,dc=com
+    objectClass: device
+    objectClass: puppetClient
+    objectClass: top
+    cn: default
+    # ldapadd -x -f test.ldif
+
+The last command seems failed because of "ldap_add: Invalid syntax (21)"
+### step 2
+Install ldap ruby binding for puppet master
+
+    # apt-get install ruby-ldap
+
+Check it
+
+    # ruby -rldap -e 'puts :installed'
+    installed
+    # ruby -rpuppet -e 'p Puppet.features.ldap?'
+    true
+
+Edit /etc/puppet/puppet.conf
+
+    [puppetmasterd]
+    node_terminus = ldap
+    ldapserver = ldapserver.yourdomain.com
+    ldapbase = dc=puppet
+
+Add a empty default node in your site.pp
+
+    node default {}
+
+
+## Common Issues
+### SSL
+    
+    warning: Certificate validation failed; consider using the certname configuration option
+    err: Could not retrieve catalog: Certificates were not trusted: SSL_connect returned=1 errno=0 state=SSLv3 read server certificate B: certificate verify failed
+
+Add certname on puppet.conf, cert server domain is pointed to master.puppet.com or you can use master.puppet.com directly.
+
+    [master]
+    certname=cert.puppet.com
+
+[reference](https://wiki.koumbit.net/PuppetMasterDebianInstall)
+
+NOTE: `puppetca clean --all` and remove /var/lib/puppet/ssl will not work

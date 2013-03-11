@@ -62,3 +62,11 @@ if jekyll is running, open your browser and type `localhost:4000` your will see 
     $ rake page name="pages/about"
 
 the last command will create ./page/about/index.html
+
+## customize rake post content
+`rake post` will create a very basical file, but if you want add some addtional content, you can edit Rakefile in the first level directory, locate the lines:
+
+    desc "Begin a new post in #{CONFIG['posts']}"
+    task :post do
+
+and add `post.puts` in this function, suit yourself.
