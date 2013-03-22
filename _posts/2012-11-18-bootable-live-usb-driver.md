@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "bootable live usb driver"
+title: "Bootable Live USB Driver"
 description: ""
 category: 
 tags: []
