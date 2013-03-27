@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Quantum Source Code review"
+title: "Quantum API Source Code review"
 description: ""
 category: 
-tags: [quantum, openstack, source code]
+tags: [quantum, quantum-api, openstack, code-review]
 ---
 {% include JB/setup %}
 ## License
