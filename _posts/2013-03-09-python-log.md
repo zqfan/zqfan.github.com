@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Using Log"
+title: "Python Log"
 description: ""
 category: 
 tags: [log, logging, python]
