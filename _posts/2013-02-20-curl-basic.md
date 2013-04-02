@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "curl basic"
+title: "curl"
 description: ""
 category: 
 tags: [linux, curl]
