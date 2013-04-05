@@ -10,7 +10,8 @@ tags: [linux, curl]
 this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 ## get 
-curl -d '{"auth":{"passwordCredentials":{"username": "joeuser", "password": "secrete"}}}' -H "Content-type: application/json" http://localhost:35357/v2.0/tokens
+
+    curl -d '{"auth":{"tenantId":"123","passwordCredentials":{"username": "joeuser", "password": "secrete"}}}' -H "Content-type: application/json" http://localhost:35357/v2.0/tokens
 
 ## parse json data
 curl url | python -mjson.tool
