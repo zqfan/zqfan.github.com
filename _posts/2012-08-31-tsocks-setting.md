@@ -1,0 +1,40 @@
+---
+layout: post
+title: "tsocks setting"
+description: ""
+category: 
+tags: [tsocks]
+---
+{% include JB/setup %}
+## License
+this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+
+this article may be usefull to those who want to access specifical host via proxy server, these hosts may be blocked by LAN firewall or cannot be accessed by users in education WLAN
+## install tsocks
+
+    @:sudo apt-get install tsocks
+
+or
+
+    @:sudo aptitude install tsocks
+
+## configure tsocks
+usually the configure file should be /etc/tsocks.conf
+read the hint carefully
+you should set the following properties at least, and can comment all others by starting with '#'
+
+    local = proxy-server-ip/255.255.255.255
+    server = proxy-server-ip
+    server-type = 4/5
+    server-port = 1080
+
+you can get free proxy servers from internet
+## use tsocks
+
+    @:tsocks your-application
+
+## problem you may get
+### proxy-server-ip is not in local subnet
+this because you use default 'local' value that may be 192.168.*.* or something else, you should make 'server' value exactly same as 'local' value and set sub-mask to 255.255.255.255 not to 255.255.255.0
+### proxy-server can not be reached
+select an active server instead
