@@ -2,7 +2,7 @@
 layout: post
 title: "Python Module: Argparse"
 description: ""
-category: python
+category: Python
 tags: [python, argparse]
 ---
 {% include JB/setup %}

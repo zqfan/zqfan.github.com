@@ -2,7 +2,7 @@
 layout: post
 title: "Use Jekyll For Github Blog"
 description: ""
-category: github
+category: Github
 tags: [jekyll, github-proxy, github-blog]
 ---
 {% include JB/setup %}
