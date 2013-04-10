@@ -2,7 +2,7 @@
 layout: post
 title: "Python Desktop Notifier For Linux"
 description: ""
-category: 
+category: Python
 tags: [python, notifier]
 ---
 {% include JB/setup %}

@@ -2,7 +2,7 @@
 layout: post
 title: "Openstack Grizzly on Ubuntu Precise"
 description: ""
-category: 
+category: OpenStack
 tags: [openstack, grizzly, ubuntu, precise]
 ---
 {% include JB/setup %}

@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Libraries"
+title: "Python Libraries"
 description: ""
-category: 
-tags: []
+category: Python
+tags: [python, python library]
 ---
 {% include JB/setup %}
 # License
@@ -13,11 +13,9 @@ this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses
 vimrc: https://github.com/vgod/vimrc
 
 ## graphics
-### python 
 opencv
 
 ## web
-### python
 beautifulsoup: a html parser
 
 

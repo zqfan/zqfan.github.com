@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "masslynx spy user guide and update logs"
+title: "MasslynxSpy User Guide And Update Logs"
 description: ""
-category: 
+category: Other
 tags: []
 ---
 {% include JB/setup %}

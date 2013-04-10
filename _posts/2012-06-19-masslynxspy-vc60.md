@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "masslynxSpy VC6.0"
+title: "MasslynxSpy VC6.0"
 description: ""
-category: 
-tags: [vc6.0, mfc]
+category: C++
+tags: [C++, vc6.0, mfc]
 ---
 {% include JB/setup %}
 ## License

@@ -2,7 +2,7 @@
 layout: post
 title: "Ubuntu Customize"
 description: ""
-category: 
+category: Linux
 tags: [ubuntu, desktop, interface]
 ---
 {% include JB/setup %}

@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "python paste.deploy"
+title: "Python paste.deploy"
 description: ""
-category: 
+category: Python
 tags: [python, paste, deploy]
 ---
 {% include JB/setup %}

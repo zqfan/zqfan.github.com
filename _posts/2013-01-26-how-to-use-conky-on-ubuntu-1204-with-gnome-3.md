@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "how to use conky on ubuntu 12.04 with gnome 3"
+title: "Conky On Ubuntu 12.04 With Gnome 3"
 description: ""
 category: Linux
 tags: [conky]

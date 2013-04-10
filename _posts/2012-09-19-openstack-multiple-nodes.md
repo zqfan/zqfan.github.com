@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "openstack multiple nodes"
+title: "Openstack Multiple Nodes"
 description: ""
-category:
-tags: []
+category: OpenStack
+tags: [openstack, multi_host]
 ---
 {% include JB/setup %}
 ## License

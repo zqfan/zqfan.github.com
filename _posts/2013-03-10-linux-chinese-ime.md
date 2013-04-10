@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "linux chinese ime"
+title: "Linux Chinese"
 description: ""
-category: 
-tags: []
+category: Linux
+tags: [linux, ime]
 ---
 {% include JB/setup %}
 ## License

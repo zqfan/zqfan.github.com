@@ -2,7 +2,7 @@
 layout: post
 title: "Design Pattern"
 description: ""
-category: 
+category: Other
 tags: [design pattern]
 ---
 {% include JB/setup %}

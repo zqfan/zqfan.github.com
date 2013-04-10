@@ -2,7 +2,7 @@
 layout: post
 title: "Why I Design This Way   OpenStack Install"
 description: ""
-category: 
+category: OpenStack
 tags: [openstack, fixed_range_v4]
 ---
 {% include JB/setup %}

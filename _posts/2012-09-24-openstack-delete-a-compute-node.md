@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "openstack delete a compute node"
+title: "Openstack Delete Compute Node"
 description: ""
 category: OpenStack
 tags: [openstack, nova-compute]
