@@ -15,6 +15,10 @@ this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses
 * Scott Meyers, Effective C++: 50 Specific Ways to Improve Your Programs and Design (2nd Edition)
 * Scott Meyers, More Effective C++: 35 New Ways to Improve Your Programs and Designs
 * Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides, Design Patterns: Elements of Reusable Object-Oriented software
+* Python Cookbook
+* Programming Python
 
 ## WISH LIST
+
+## DONE
 

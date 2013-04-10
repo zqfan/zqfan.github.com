@@ -70,3 +70,7 @@ the last command will create ./page/about/index.html
     task :post do
 
 and add `post.puts` in this function, suit yourself.
+
+## trouble shoot
+### REXML could not parse this XML/HTML
+**solution**: your post title may include `&` character, remove it

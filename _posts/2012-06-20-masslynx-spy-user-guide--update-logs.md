@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "masslynx spy user guide & update logs"
+title: "masslynx spy user guide and update logs"
 description: ""
 category: 
 tags: []
