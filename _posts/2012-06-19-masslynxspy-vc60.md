@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "masslynxSpy VC6.0环境下与其他应用程序交互的实验"
+title: "masslynxSpy VC6.0"
 description: ""
 category: 
 tags: [vc6.0, mfc]
