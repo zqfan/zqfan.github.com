@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "make local debain repo"
+title: "Make Local Debain Repo"
 description: ""
-category: 
+category: Linux
 tags: [apt-mirror, dpkg-scanpackages]
 ---
 {% include JB/setup %}

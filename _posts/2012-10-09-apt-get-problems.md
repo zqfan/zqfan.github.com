@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "apt get problems"
+title: "APT-GET"
 description: ""
 category: Linux
-tags: [apt-get]
+tags: [apt-get, linux]
 ---
 {% include JB/setup %}
 ## License

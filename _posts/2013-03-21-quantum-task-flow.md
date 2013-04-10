@@ -2,7 +2,7 @@
 layout: post
 title: "Quantum Task Flow"
 description: ""
-category: 
+category: OpenStack
 tags: [quantum, nova]
 ---
 {% include JB/setup %}

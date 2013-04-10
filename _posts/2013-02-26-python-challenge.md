@@ -2,8 +2,8 @@
 layout: post
 title: "Python Challenge"
 description: ""
-category: 
-tags: []
+category: Python
+tags: [python, python challenge]
 ---
 {% include JB/setup %}
 # License

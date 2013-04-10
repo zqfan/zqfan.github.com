@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "ssh write failed: Broken pipe"
+title: "SSH Write Failed: Broken Pipe"
 description: ""
 category: Linux
 tags: [ssh]

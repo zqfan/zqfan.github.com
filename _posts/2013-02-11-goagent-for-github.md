@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "goagent for github"
+title: "Goagent For Github"
 description: ""
 category: Linux
 tags: [goagent, github]

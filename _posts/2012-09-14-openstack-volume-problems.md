@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "openstack volume problems"
+title: "Openstack Volume Problems"
 description: ""
-category:
+category: OpenStack
 tags: [nova-volumes, openstack]
 ---
 {% include JB/setup %}

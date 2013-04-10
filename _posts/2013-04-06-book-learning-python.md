@@ -80,3 +80,16 @@ It is simple, fast and better for memory space. Pythonic!
     2 p
     3 p
     4 y
+
+### python app release tool
+* py2exe
+* pyInstaller
+* freeze
+* .zip (support encrypt)
+* distutils
+* python eggs
+
+### Vaults of Parnassus
+Unfortunately the page is inactive at the the time of this writing (Feb 25, 2012).
+
+If you were looking for a python package library you should go over here: [pypi](http://pypi.python.org/pypi)

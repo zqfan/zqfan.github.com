@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "add a service to linux"
+title: "Add A Service To Linux"
 description: ""
-category: 
+category: Linux
 tags: [linux, python, bash, system service]
 ---
 {% include JB/setup %}
