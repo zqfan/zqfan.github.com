@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Python Module: Argparse"
+title: "Python Argparse"
 description: ""
 category: Python
 tags: [python, argparse]
@@ -26,6 +26,19 @@ add arguments
 parse arguments
 
     >>> args = ap.parse_args(sys.argv[1:])
+
+## subcommad
+
+    parser = argparse.ArgumentParser()
+    sub_parser = parser.add_subparsers()
+    parser_command = sub_parser.add_parser('command')
+    parser_command.set_defaults(func=func_name)
+    parser_command.add_argument('arg')
+    args = parser.parse_args(sys.argv[1:])
+    d = vars(args)
+    func = d.pop('func')
+    func(**d)
+
 
 [official documents](http://docs.python.org/2/library/argparse)
 
