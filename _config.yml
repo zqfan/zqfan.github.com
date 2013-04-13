@@ -8,10 +8,10 @@ pygments: true
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
 #
-title : Ajiva Fan's Blog
-tagline: Site Tagline
+title : Simple Blog by Zhiqiang Fan
+tagline: 
 author :
-  name : Ajiva Fan
+  name : Zhiqiang Fan
   email : aji.zqfan@gmail.com
   github : zqfan
   twitter : 

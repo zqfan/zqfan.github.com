@@ -13,9 +13,9 @@ this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses
 Because i am bound by the company's rule, however i think some contribute may not confict with the company, so i decide to do some little work that may not hurt anyone.
 
 ## Steps
-[how to contribute](https://wiki.openstack.org/wiki/HowToContribute)
-[osrs](http://www.slideshare.net/itsmeduh/osrs)
-[gerrit workflow](https://wiki.openstack.org/wiki/GerritWorkflow)
+* [how to contribute](https://wiki.openstack.org/wiki/HowToContribute)
+* [osrs](http://www.slideshare.net/itsmeduh/osrs)
+* [gerrit workflow](https://wiki.openstack.org/wiki/GerritWorkflow)
 
 Basic setup
 1. register on launchpad and update ssh key
