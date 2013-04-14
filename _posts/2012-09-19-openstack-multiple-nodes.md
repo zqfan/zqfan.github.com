@@ -2,7 +2,7 @@
 layout: post
 title: "Openstack Multiple Nodes"
 description: ""
-category: OpenStack
+category: openstack
 tags: [openstack, multi_host]
 ---
 {% include JB/setup %}

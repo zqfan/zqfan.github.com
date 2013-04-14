@@ -2,7 +2,7 @@
 layout: post
 title: "Bootable Live USB Driver"
 description: ""
-category: Linux
+category: linux
 tags: [usb, linux]
 ---
 {% include JB/setup %}

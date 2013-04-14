@@ -2,7 +2,7 @@
 layout: post
 title: "chinese input method for linux"
 description: ""
-category: Linux
+category: linux
 tags: []
 ---
 {% include JB/setup %}

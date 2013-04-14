@@ -2,7 +2,7 @@
 layout: post
 title: "Openstack Start Service On Reboot"
 description: ""
-category: OpenStack
+category: openstack
 tags: [openstack]
 ---
 {% include JB/setup %}

@@ -2,7 +2,7 @@
 layout: post
 title: "Book Learning Python"
 description: ""
-category: Book
+category: book
 tags: [python, learning python]
 ---
 {% include JB/setup %}

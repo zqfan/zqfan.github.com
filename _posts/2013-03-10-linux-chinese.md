@@ -2,7 +2,7 @@
 layout: post
 title: "Linux Chinese"
 description: ""
-category: Linux
+category: linux
 tags: [linux]
 ---
 {% include JB/setup %}

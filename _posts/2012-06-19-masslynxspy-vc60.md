@@ -2,7 +2,7 @@
 layout: post
 title: "MasslynxSpy VC6.0"
 description: ""
-category: C++
+category: c
 tags: [C++, vc6.0, mfc]
 ---
 {% include JB/setup %}
@@ -118,3 +118,6 @@ even a window was found, it's child component may not have been initialized, so 
     ttc.AddTool(CWnd* target, tool_tip_text);
 
 * override BOOL PreTranslateMessage(MSG* pMsg), add content to it: if (ttc.GetSafeHwnd)   ttc.RelayEvent(pMsg);
+### edit box interact
+  ::SendMessage(hwnd, WM_SETTEXT, 0, (LPARAM)some_str);
+### toggle button interact

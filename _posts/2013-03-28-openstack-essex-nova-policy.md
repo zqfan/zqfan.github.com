@@ -2,7 +2,7 @@
 layout: post
 title: "OpenStack Essex Nova Policy"
 description: ""
-category: OpenStack
+category: openstack
 tags: [openstack, essex, nova, policy, python]
 ---
 {% include JB/setup %}

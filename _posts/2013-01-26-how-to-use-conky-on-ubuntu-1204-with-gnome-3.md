@@ -2,7 +2,7 @@
 layout: post
 title: "Conky On Ubuntu 12.04 With Gnome 3"
 description: ""
-category: Linux
+category: linux
 tags: [conky]
 ---
 {% include JB/setup %}

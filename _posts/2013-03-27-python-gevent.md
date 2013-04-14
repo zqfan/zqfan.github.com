@@ -2,7 +2,7 @@
 layout: post
 title: "Python gevent"
 description: ""
-category: Python
+category: python
 tags: [python, gevent, thread]
 ---
 {% include JB/setup %}
