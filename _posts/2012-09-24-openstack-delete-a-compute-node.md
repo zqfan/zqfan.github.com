@@ -2,7 +2,7 @@
 layout: post
 title: "Openstack Delete Compute Node"
 description: ""
-category: OpenStack
+category: openstack
 tags: [openstack, nova-compute]
 ---
 {% include JB/setup %}

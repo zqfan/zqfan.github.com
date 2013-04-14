@@ -2,7 +2,7 @@
 layout: post
 title: "Openstack Xvpvncviewer"
 description: ""
-category: OpenStack
+category: openstack
 tags: [openstack, vnc, xvpvnc]
 ---
 {% include JB/setup %}

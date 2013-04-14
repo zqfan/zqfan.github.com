@@ -2,7 +2,7 @@
 layout: post
 title: "Python Libraries"
 description: ""
-category: Python
+category: python
 tags: [python, python library]
 ---
 {% include JB/setup %}

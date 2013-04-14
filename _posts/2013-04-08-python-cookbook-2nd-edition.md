@@ -2,7 +2,7 @@
 layout: post
 title: "Python Cookbook 2nd Edition"
 description: ""
-category: Book
+category: book
 tags: [python, python cookbook]
 ---
 {% include JB/setup %}

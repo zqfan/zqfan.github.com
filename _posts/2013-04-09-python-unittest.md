@@ -2,7 +2,7 @@
 layout: post
 title: "Python unittest"
 description: ""
-category: Python
+category: python
 tags: [python, unittest]
 ---
 {% include JB/setup %}

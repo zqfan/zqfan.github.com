@@ -2,7 +2,7 @@
 layout: post
 title: "Python Log"
 description: ""
-category: Python
+category: python
 tags: [log, logging, python]
 ---
 {% include JB/setup %}

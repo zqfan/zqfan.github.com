@@ -2,7 +2,7 @@
 layout: post
 title: "cPickle A faster pickle"
 description: ""
-category: Python
+category: python
 tags: [pickle]
 ---
 {% include JB/setup %}

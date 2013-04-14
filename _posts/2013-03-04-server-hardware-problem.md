@@ -2,7 +2,7 @@
 layout: post
 title: "Server Hardware Problem"
 description: ""
-category: Other
+category: other
 tags: []
 ---
 {% include JB/setup %}

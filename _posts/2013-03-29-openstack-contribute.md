@@ -2,7 +2,7 @@
 layout: post
 title: "Openstack Contribute"
 description: ""
-category: OpenStack
+category: openstack
 tags: [openstack, free software, open source, contribute]
 ---
 {% include JB/setup %}

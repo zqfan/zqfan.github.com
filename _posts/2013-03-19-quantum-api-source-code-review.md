@@ -2,7 +2,7 @@
 layout: post
 title: "Quantum API Source Code review"
 description: ""
-category: OpenStack
+category: openstack
 tags: [quantum, quantum-api, openstack, code-review]
 ---
 {% include JB/setup %}

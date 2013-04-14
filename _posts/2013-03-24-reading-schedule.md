@@ -2,7 +2,7 @@
 layout: post
 title: "Reading Schedule"
 description: ""
-category: Book
+category: book
 tags: []
 ---
 {% include JB/setup %}

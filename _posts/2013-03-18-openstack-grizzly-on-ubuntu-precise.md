@@ -2,7 +2,7 @@
 layout: post
 title: "Openstack Grizzly on Ubuntu Precise"
 description: ""
-category: OpenStack
+category: openstack
 tags: [openstack, grizzly, ubuntu, precise]
 ---
 {% include JB/setup %}
@@ -10,8 +10,8 @@ tags: [openstack, grizzly, ubuntu, precise]
 this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 ## reference
-[longgeek](http://longgeek.com/2013/03/11/openstack-grizzly-g3-for-ubuntu-12-04-all-in-one-installation/)
-[mseknibilel](https://github.com/mseknibilel/OpenStack-Grizzly-Install-Guide)
+* [longgeek](http://longgeek.com/2013/03/11/openstack-grizzly-g3-for-ubuntu-12-04-all-in-one-installation/)
+* [mseknibilel](https://github.com/mseknibilel/OpenStack-Grizzly-Install-Guide)
 
 ## Architecture
 Keystone+Glance+Nova+Horizon

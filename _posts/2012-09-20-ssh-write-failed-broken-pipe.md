@@ -2,7 +2,7 @@
 layout: post
 title: "SSH Write Failed: Broken Pipe"
 description: ""
-category: Linux
+category: linux
 tags: [ssh]
 ---
 {% include JB/setup %}

@@ -2,7 +2,7 @@
 layout: post
 title: "Goagent For Github"
 description: ""
-category: Linux
+category: linux
 tags: [goagent, github]
 ---
 {% include JB/setup %}

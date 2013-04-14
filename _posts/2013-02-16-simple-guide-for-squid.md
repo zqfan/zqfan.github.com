@@ -2,7 +2,7 @@
 layout: post
 title: "Simple Guide for Squid"
 description: ""
-category: Linux
+category: linux
 tags: [linux, squid]
 ---
 {% include JB/setup %}

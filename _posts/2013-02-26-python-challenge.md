@@ -2,7 +2,7 @@
 layout: post
 title: "Python Challenge"
 description: ""
-category: Python
+category: python
 tags: [python, python challenge]
 ---
 {% include JB/setup %}

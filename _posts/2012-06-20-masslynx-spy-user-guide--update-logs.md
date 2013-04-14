@@ -2,7 +2,7 @@
 layout: post
 title: "MasslynxSpy User Guide And Update Logs"
 description: ""
-category: Other
+category: other
 tags: []
 ---
 {% include JB/setup %}
@@ -42,6 +42,3 @@ in current version, it works as follows:
 ## update logs
   2012-06-20 add "channels" edit box, this allows you to select specific channels which you want to analyze.
   2012-06-19 basic version finished
-
-## more information
-to get more information, please visit http://blog.sina.com.cn/s/blog_a712a45901014u1l.html

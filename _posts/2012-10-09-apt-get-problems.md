@@ -2,7 +2,7 @@
 layout: post
 title: "APT-GET"
 description: ""
-category: Linux
+category: linux
 tags: [apt-get, linux]
 ---
 {% include JB/setup %}

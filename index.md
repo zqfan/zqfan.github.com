@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Ajiva Fan's Blog
+title: Zhiqiang Fan's Blog
 tagline: 
 ---
 {% include JB/setup %}
