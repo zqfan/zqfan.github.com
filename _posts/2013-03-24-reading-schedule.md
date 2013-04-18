@@ -21,7 +21,7 @@ this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses
 * Programming Python
 * Python Cookbook
 * C++ Primer
-* Dive into Python
 
 ## DONE
 * Mark Lutz, Learning Python, 3rd Edition
+* Mark Pilgrim, Dive into Python 
