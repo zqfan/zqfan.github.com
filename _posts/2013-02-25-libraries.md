@@ -9,6 +9,9 @@ tags: [python, python library]
 # License
 this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
+# non standard libraries
+* pep8
+
 ## software conf
 vimrc: https://github.com/vgod/vimrc
 
@@ -16,6 +19,6 @@ vimrc: https://github.com/vgod/vimrc
 opencv
 
 ## web
-beautifulsoup: a html parser
+beautifulsoup: a html parser, [docs](http://www.crummy.com/software/BeautifulSoup/bs3/documentation.zh.html)
 
 
