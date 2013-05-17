@@ -77,6 +77,8 @@ Generally, your packages downloaded via apt will store in /var/cache/apt/archive
     # sudo echo "deb file:/var/cache/apt/ archives/" > /etc/apt/sources.list
     # sudo apt-get update
 
+your directory can be different from archives, specifically, can be anywhere, then run `dpkg-scanpackages debs/ /dev/null | gzip > debs/Packages.gz`
+
 Since the packages fingerprint has been changed, you will receive authentication prompt when you install packages, or you can use --force-yes option to avoid this.
 
 NOTE(aji): there is something wired of the postfix "/" of dir, and currently, i just could not remember which is necessary, i will confirm when i try next time.
