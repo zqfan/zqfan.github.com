@@ -214,7 +214,8 @@ from quantum.api.extensions.plugin_aware_extension_middleware_factory i know tha
     
 the PluginAwareExtensionManager is inherit from ExtensionManager, the get_instance() is a classmethod, using singleton pattern, which will invoke global method get_extension_path to get path and init his father's instance. so the extensions in cfg.CONF.api_extensions_path and quantum.extensions.__path__ will automatically loaded by ExtensionManager.
 
-but i can't find the router extension and floatingip extension, however, quotasv2.py exists. so let post /quotas. the ext_name is generaged by mod_name, so the quotas extension is located in quotasv2.Quotasv2
+<del>but i can't find the router extension and floatingip extension,</del>
+router is an alias of l3 externsion, however, quotasv2.py exists. so let post /quotas. the ext_name is generaged by mod_name, so the quotas extension is located in quotasv2.Quotasv2
 
     class Quotasv2(extensions.ExtensionDescriptor):
         def get_name(cls)
