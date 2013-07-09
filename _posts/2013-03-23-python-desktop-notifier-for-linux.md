@@ -7,7 +7,7 @@ tags: [python, notifier]
 ---
 {% include JB/setup %}
 ## License
-this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+this file is published under [CC BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 ## Reference
 * [example](http://ole.im/blog/2011/oct/20/python-notify)

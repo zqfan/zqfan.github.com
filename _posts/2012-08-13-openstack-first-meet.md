@@ -7,14 +7,14 @@ tags: [openstack]
 ---
 {% include JB/setup %}
 ## License
-this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+this file is published under [CC BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 ## OpenStack encompass three components
 * Nova - compute -- a cloud computing fabric controller
 * Swift - object storage -- a massively scalable redundant storage system
-* Glance - image service -- provides discovery, registration, and delivery services for virtual disk images [1]
+* Glance - image service -- provides discovery, registration, and delivery services for virtual disk images (1)
 
-## OpenStack toplogy [2]
+## OpenStack toplogy (2)
 
     host-switch1_________________
                  |        |     |
@@ -33,7 +33,7 @@ OpenStack components relation
                         |_________________________________auth__Object-Store--swift
 
 ## OpenStack's mission
-  to produce the ubiquitous Open Source Cloud Computing platform that will meet the needs of public and private clouds regardless of size, by being simple to implement and massively scalable. [3]
+  to produce the ubiquitous Open Source Cloud Computing platform that will meet the needs of public and private clouds regardless of size, by being simple to implement and massively scalable. (3)
 
 ## OpenStack object storage Swift VS. Apache Hadoop HDFS
 by Chuck Thier, Openstack Swift developer, 2011-02-10
@@ -45,7 +45,7 @@ by Chuck Thier, Openstack Swift developer, 2011-02-10
 
 by Joshua McKenty, As Chief Architect of NASA Nebula, 2011-02-12
 
-  HDFS is built to allow MapReduce processing using Hadoop across the object within the storage invironment; Supporting processing within swift is a roadmap item for many of the OpenStack companies, although not everyone thinks that MR is the answer. [4]
+  HDFS is built to allow MapReduce processing using Hadoop across the object within the storage invironment; Supporting processing within swift is a roadmap item for many of the OpenStack companies, although not everyone thinks that MR is the answer. (4)
 
 Users
 * NASA

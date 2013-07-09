@@ -7,7 +7,7 @@ tags: [nova-volumes, openstack]
 ---
 {% include JB/setup %}
 ## License
-this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+this file is published under [CC BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 ## problem
 when you just have one disk, you will choose to create a image file to act as a disk, like this:

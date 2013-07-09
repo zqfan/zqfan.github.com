@@ -7,14 +7,14 @@ tags: [upstart, start-stop-daemon]
 ---
 {% include JB/setup %}
 # License
-this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+this file is published under [CC BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 # Reference
-1. [http://upstart.ubuntu.com/cookbook](http://upstart.ubuntu.com/cookbook)
-2. [start-stop-daemon to create multiple instances of executable through upstart](http://datum-bits.blogspot.com/2011/09/start-stop-daemon-to-create-multiple.html)
+* [http://upstart.ubuntu.com/cookbook](http://upstart.ubuntu.com/cookbook)
+* [start-stop-daemon to create multiple instances of executable through upstart](http://datum-bits.blogspot.com/2011/09/start-stop-daemon-to-create-multiple.html)
 
 # How to
-In reference [2](http://datum-bits.blogspot.com/2011/09/start-stop-daemon-to-create-multiple.html), the author Atul Dambalkar mentioned a way to start multiple instances via start-stop-daemon, which is by specify the `--name` option.
+In reference [start-stop-daemon to create multiple instances of executable through upstart](http://datum-bits.blogspot.com/2011/09/start-stop-daemon-to-create-multiple.html), the author Atul Dambalkar mentioned a way to start multiple instances via start-stop-daemon, which is by specify the `--name` option.
 
     start-stop-daemon --start --quiet --chuid myuser --name myapp1 \
                       --exec /usr/bin/myapp -- --config /etc/myapp-configfile1
