@@ -7,7 +7,7 @@ tags: [openstack, nova-compute]
 ---
 {% include JB/setup %}
 ## License
-this file is published under [CC BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 currently, i just use nova-manage to disable a service:
 

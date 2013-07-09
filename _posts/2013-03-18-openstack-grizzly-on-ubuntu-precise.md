@@ -7,7 +7,7 @@ tags: [openstack, grizzly, ubuntu, precise]
 ---
 {% include JB/setup %}
 ## License
-this file is published under [CC BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 ## reference
 * [longgeek](http://longgeek.com/2013/03/11/openstack-grizzly-g3-for-ubuntu-12-04-all-in-one-installation/)
