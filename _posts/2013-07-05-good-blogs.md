@@ -11,3 +11,6 @@ this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses
 
 # Brain Storm
 * [http://www.matrix67.com/blog/](http://www.matrix67.com/blog/)
+
+# Hackers
+* [Armin Ronacher](http://lucumr.pocoo.org/), author of Flask, Jinja2 and werkzeug
