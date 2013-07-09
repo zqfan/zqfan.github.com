@@ -7,7 +7,7 @@ tags: [python, descriptor]
 ---
 {% include JB/setup %}
 # License
-this file is published under [CC BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 # Reference
 1. [http://docs.python.org/2/howto/descriptor.html](http://docs.python.org/2/howto/descriptor.html)

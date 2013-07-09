@@ -7,7 +7,7 @@ tags: []
 ---
 {% include JB/setup %}
 ## License
-this file is published under [CC BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 ## I'm not a operator
 But they still bother me, because i installed a software on their machine! And they think their machine is solid, although i think software is not worse than hardware. Since i'm a reasonable man and they will ignore their hardware problem again and again, i just write this blog and will continue to update it.
