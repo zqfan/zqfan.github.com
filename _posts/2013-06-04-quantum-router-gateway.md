@@ -7,7 +7,7 @@ tags: [openstack, quantum, router, external network, gateway]
 ---
 {% include JB/setup %}
 # License
-this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+this file is published under [CC BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 # Details
 * rest api doesn't have router-gateway-{set,clear}
@@ -45,8 +45,8 @@ internal_network_added
 
 routers_updated mainly invoke \_process_routers which just remove routers no longer exist
 
-## __router_added(router_id, router)
-* add router info to cache: self.router_info
+## `__router_added(router_id, router)`
+* add router info to cache: self.router\_info
 * create namespace if needed
 * handle metadata filter and nat rules
 * ri.iptables_manager.apply()

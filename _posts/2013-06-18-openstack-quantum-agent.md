@@ -7,14 +7,14 @@ tags: [quantum, openstack, agent, python]
 ---
 {% include JB/setup %}
 # License
-this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+this file is published under [CC BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 # quantum.agent
 ## rpc
 * create_consumers
 
 ### PluginReportStateAPI(proxy.RpcProxy)
-* report_state, rpc call for <report_state, agent_state>
+* report_state, rpc call for (report_state, agent_state)
 
 ### PluginApi(proxy.RpcProxy)
 all methods are just directly rpc call
@@ -87,9 +87,9 @@ setup a quantum client and init flavor_driver_map via conf.meta_flavor_driver_ma
 * cfg: ip_lib_force_root
 
 ### SubProcessBase(object)
-* _run(...) call _as_root(...) if namespace, or it call _execute(...)
-* _as_root(...) call _execute(...)
-* _execute(...) run process `[ip netns exec] ip`
+* `_run(...)` call `_as_root(...)` if namespace, or it call `_execute(...)`
+* `_as_root(...)` call `_execute(...)`
+* `_execute(...)` run process `[ip netns exec] ip`
 
 ### IPWrapper(SubProcessBase)
 * device(name) get device by name
@@ -144,8 +144,8 @@ For ipv4 and ipv6, the built-in INPUT, OUTPUT, and FORWARD filter chains are wra
 
 For ipv4, the built-in PREROUTING, OUTPUT, and POSTROUTING nat chains are wrapped in the same was as the built-in filter chains. Additionally, there's a snat chain that is applied after the POSTROUTING chain.
 
-* apply() wrapper of _apply()
-* _apply() apply the current in-memory set of iptables rules. This will blow away any rules left over from previous runs of the same component of Nova, and replace them with our current set of rules. This happens atomically, thanks to iptables-restore. this method is decorated by lockutils. it use iptables-save and iptables-restore to apply rules
+* apply() wrapper of `_apply()`
+* `_apply()` apply the current in-memory set of iptables rules. This will blow away any rules left over from previous runs of the same component of Nova, and replace them with our current set of rules. This happens atomically, thanks to iptables-restore. this method is decorated by lockutils. it use iptables-save and iptables-restore to apply rules
 * _modify_rules(...)
 
 ## linux.ovs_lib

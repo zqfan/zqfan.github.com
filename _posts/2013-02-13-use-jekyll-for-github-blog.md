@@ -7,7 +7,7 @@ tags: [jekyll, github-proxy, github-blog]
 ---
 {% include JB/setup %}
 # License
-this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+this file is published under [CC BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 # use proxy
 since github is blocked by GFW, you must use proxy or vpn to access it, and i recommand *goagent*, just google it.

@@ -7,7 +7,7 @@ tags: [openstack, quantum, dhcp]
 ---
 {% include JB/setup %}
 # License
-this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+this file is published under [CC BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 # quantum.agent.dhcp_agent
 ## DhcpAgent(manager.Manager)
@@ -36,7 +36,7 @@ there are some hanlder of network.action.end notification event, all are decorat
 it stores topic and context, also get host from cfg, all it does is make_msg and invoke self.call or self.cast
 
 ## NetworkCache(object)
-it holds tree cache: cache, subnet_lookup and port_lookup. cache actually is network_lookup. if we put a port to this cache, it will append it to cache[network_id], and update port_lookup[port.id] = network.id. the same process with put subnet.
+it holds tree cache: cache, subnet_lookup and port_lookup. cache actually is network_lookup. if we put a port to this cache, it will append it to `cache[network_id]`, and update `port_lookup[port.id] = network.id`. the same process with put subnet.
 
 ## DeviceManager(object)
 * plugin = plugin, driver = interface_driver

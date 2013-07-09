@@ -7,14 +7,14 @@ tags: [usb, linux]
 ---
 {% include JB/setup %}
 ## License
-this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+this file is published under [CC BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 ## win32 image writer
 [download](https://launchpad.net/win32-image-writer/+download)
 
 There is just one thing you need to notice:
 
-when you change the *.iso to *.raw, imagewriter will not find it from gtk file selector. You just need copy the filename *.raw to the location. Then, just continue next.
+when you change the `*.iso` to `*.raw`, imagewriter will not find it from gtk file selector. You just need copy the filename `*.raw` to the location. Then, just continue next.
 
 But there is a critical problem:
 

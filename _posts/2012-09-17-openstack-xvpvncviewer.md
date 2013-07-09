@@ -7,12 +7,11 @@ tags: [openstack, vnc, xvpvnc]
 ---
 {% include JB/setup %}
 ## License
-this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+this file is published under [CC BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 version 2012.1
 
-there is a mistake in official manual when you follow the step:
-java -jar VncViewer.jar [access_url]
+there is a mistake in official manual when you follow the step: `java -jar VncViewer.jar [access_url]`
 
 that will definitely cause a output:
 

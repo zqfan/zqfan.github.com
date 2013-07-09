@@ -7,7 +7,7 @@ tags: [C++, vc6.0, mfc]
 ---
 {% include JB/setup %}
 ## License
-this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+this file is published under [CC BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 ## References：
 spy++ & application interact:
@@ -118,6 +118,8 @@ even a window was found, it's child component may not have been initialized, so 
     ttc.AddTool(CWnd* target, tool_tip_text);
 
 * override BOOL PreTranslateMessage(MSG* pMsg), add content to it: if (ttc.GetSafeHwnd)   ttc.RelayEvent(pMsg);
+
 ### edit box interact
-  ::SendMessage(hwnd, WM_SETTEXT, 0, (LPARAM)some_str);
+`::SendMessage(hwnd, WM_SETTEXT, 0, (LPARAM)some_str);`
+
 ### toggle button interact

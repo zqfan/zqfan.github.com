@@ -7,7 +7,7 @@ tags: [python, learning python]
 ---
 {% include JB/setup %}
 ## License
-this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+this file is published under [CC BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 ## tips
 ### iterate dict by order
@@ -23,7 +23,7 @@ or you can be pythonic:
         do_sth(d[key])
 
 ### slice
-L[I:J:K], default k is 1, you can specific a step, if k is negative, then it will reverse and slice it, so l.reverse() is equal to l[::-1]
+L\[I:J:K\], default k is 1, you can specific a step, if k is negative, then it will reverse and slice it, so l.reverse() is equal to l\[::-1\]
 
 ### ascii code
 * ord('a')
