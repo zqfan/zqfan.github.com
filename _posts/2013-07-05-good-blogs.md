@@ -17,3 +17,5 @@ this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses
 
 # Python
 * [http://pymotw.com/](http://pymotw.com/)
+* [http://doughellmann.com/](http://doughellmann.com/)
+* [The Hitchhiker’s Guide to Python!](http://docs.python-guide.org/en/latest/)
