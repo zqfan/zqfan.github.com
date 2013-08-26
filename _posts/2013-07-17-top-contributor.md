@@ -14,3 +14,4 @@ I know i am nothing, and many people think so, but i will not give up.
 
 ## OpenStack
 * 2013-07-17 Neutron Top Contributor Category Answer show up
+* 2913-08-27 Invitation to participate in OpenStack's "Open Mic" technical contributor series
