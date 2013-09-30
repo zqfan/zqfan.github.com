@@ -52,3 +52,21 @@ secondary links:
     # squid3 -z
     # squid3 -k parse
     # squid3 -s
+    
+# squid for windows
+ref:
+
+1. [大雄兔](http://hi.baidu.com/billdkj/item/eefaf03d6ae8ab617c034b2d)
+2. [windows service management](http://www.metsky.com/archives/571.html)
+
+## steps
+
+1. download squid for windows: http://squid.acmeconsulting.it/
+2. extract it to C:\
+3. cp all files in C:\squid\etc and rename them by remove the trailing '.default'
+4. edit squid.conf, see example in ref 1
+5. cd c:\squid\sbin
+6. squid -i
+7. squid -z
+8. net start squid
+
