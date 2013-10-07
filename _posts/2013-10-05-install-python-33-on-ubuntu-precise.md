@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Install Python 3.3 on Ubuntu 12.04"
+title: "Install Python 3.3 on Ubuntu Precise"
 description: ""
 category: python
 tags: [py33]
