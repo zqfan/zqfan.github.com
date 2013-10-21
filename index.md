@@ -5,7 +5,7 @@ tagline:
 ---
 {% include JB/setup %}
 
-## 簡介
+## 簡單介紹
 * 我是個碼農，我喜歡編程，至少從2013年秋起
 * 我喜歡開源的軟件，或者說我喜歡自由開放的東西
 * 我在2009年夏獲得了北大計算機理學學士學位，三年後理學碩士學位，這似乎是我一生中最大的成就了
@@ -28,8 +28,9 @@ tagline:
 
 ## 編程語言，其實這些我都不精通
 * c：最早接觸的，至今只會拿它寫算法題
-* python：主力，python解釋器也是c寫的
+* python：主力，openstack开发，以及代替shell脚本
 * c++：一直沒弄懂但是偶爾還在用的，醜
+* shell: 很强大，适合管理系统但不适合开发项目
 * java: 醜
 * php: 醜
 
@@ -44,14 +45,24 @@ tagline:
 ### crackTheCodingInterview
 * [source code](https://github.com/zqfan/crackingTheCodingInterview)
 
-## 理想工作，白日夢系列
+## 理想工作，其實都是白日夢
 * work at home
 * open source project
 * python, c, lisp
 * git(+gerrit+jenkins)
 
+## 奮鬥目標
+* DONE Top Contributor of Neutron
+* WISH Neutron Core
+* TODO Top Contributor of Keystone
+* WISH Keystone Core
+* TODO Top Contributor of Nova
+* TODO Contributor of OpenVSwitch
+* TODO Contributor of Linux
+* TODO 50,000 $/Y before 30 - 我並不需要多少錢，這些是爲家人
+
 ## Introduction
 * I'm a programmer, i love coding, at least since Aug 1, 2013
 * I love open source software, or more generally, freedom
 * I got Master's of Science in Computer Science, at Peking University on Jul 10, 2012, which seems like my greatest honour i've had, sad story
-* Once in a while, i'm a painter, painting Chinese tranditional paint, and designing simple graphic art, but now they are gone. I love beautiful things, even they are hard to pursue
+* In my school days, i learned Chinese tranditional paint, and designing simple graphic art. I love beautiful things, even they are hard to pursue
