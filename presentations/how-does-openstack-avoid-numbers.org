@@ -63,7 +63,9 @@ keystone = authtoken keystonecontext extensions neutronapiapp_v2_0
 /etc/neutron/policy.json
 "get_network": "rule:admin_or_owner or rule:shared"
 #+END_SRC
-Restart Neutron service \\Then external networks are only visiable to admin or owner
+Restart Neutron service
+
+Then external networks are only visiable to admin or owner
 
 * Exception
 - Inherited Exception
@@ -87,7 +89,7 @@ FAULT_MAP = {exceptions.NotFound: webob.exc.HTTPNotFound,
 #+END_SRC
 
 ** Human Readable Benefits
-- System Scenario: unique - ensurement by compiler
+- System Scenario: unique - ensured by compiler
 - Developer Scenario: try...except
 - Operator Scenario: log
 - End User Scenario: fault message
