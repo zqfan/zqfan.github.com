@@ -1,0 +1,127 @@
+#+TITLE: How Does OpenStack Avoid Numbers
+#+AUTHOR: ZhiQiang Fan
+#+EMAIL: aji.zqfan@gmail.com
+#+DATE: CC BY-NC-SA 3.0
+#+OPTIONS: ^:{}
+
+#+REVEAL_ROOT: http://cdn.jsdelivr.net/reveal.js/2.5.0/
+#+OPTIONS: toc:1
+#+REVEAL_HLEVEL: 2
+
+* OpenStack API features
+
+- ReSTful
+- Atomic Responsibility
+- Asynchronous
+- Configurable
+
+** ReSTful API
+Lists networks to which the specified tenant has access
+
+GET v2/{tenant_id}/networks
+
+** Atomic Responsibility
+- Each resource has CRUD operations
+- Each API only do one thing
+- Easy to use, hard to composite
+
+** Asynchronous
+- Quick API Response
+- Robust Agent
+- Eventually Consistency
+
+** Configurable
+Application pipeline
+#+Begin_SRC python
+keystone = authtoken keystonecontext extensions neutronapiapp_v2_0
+#+END_SRC
+
+   - authtoken: Authentication
+   - keystonecontext: Context initialization: useri_id, tenant_id, roles
+   - extensions: Neutron extension api entry
+   - neutronapiapp_v2_0: Neutron basical api entry
+
+* Authentication
+- Keystone
+- Token Based
+- User, Role, Group, Tenant, Domain
+- Black Box
+
+* Authorization
+- Policy: Rule based
+- Rule: Role based
+- Human Readable
+- Configurable
+
+#+BEGIN_SRC json
+/etc/neutron/policy.json
+"get_network": "rule:admin_or_owner or rule:shared or rule:external"
+#+END_SRC
+
+** Lower External Network Visibility
+#+BEGIN_SRC json
+/etc/neutron/policy.json
+"get_network": "rule:admin_or_owner or rule:shared"
+#+END_SRC
+Restart Neutron service \\Then external networks are only visiable to admin or owner
+
+* Exception
+- Inherited Exception
+- Map to HTTPException
+- Precise Exception Name
+
+** NetworkNotFound
+- class NeutronException(Exception)
+- class NotFound(NeutronException)
+- class NetworkNotFound(NotFound)
+
+** Exception Map to HTTPException
+#+BEGIN_SRC python
+FAULT_MAP = {exceptions.NotFound: webob.exc.HTTPNotFound,
+             exceptions.Conflict: webob.exc.HTTPConflict,
+             exceptions.InUse: webob.exc.HTTPConflict,
+             exceptions.BadRequest: webob.exc.HTTPBadRequest,
+             exceptions.ServiceUnavailable: webob.exc.HTTPServiceUnavailable,
+             exceptions.NotAuthorized: webob.exc.HTTPForbidden,
+             netaddr.AddrFormatError: webob.exc.HTTPBadRequest,}
+#+END_SRC
+
+** Human Readable Benefits
+- System Scenario: unique - ensurement by compiler
+- Developer Scenario: try...except
+- Operator Scenario: log
+- End User Scenario: fault message
+
+* Message Internationalization
+- gettext
+- Runtime Translate
+- Auto Collect
+- self-identifier
+
+** gettext
+- Easy to develope
+- Easy to deploy
+- Easy to translate
+- Easy to customize
+
+** Scenario
+- Developer
+#+BEGIN_SRC python
+class NetworkNotFound(NotFound):
+    message = _("Network %(net_id)s could not be found")
+#+END_SRC
+- Operator
+#+BEGIN_SRC bash
+export LC_ALL=zh_TW.UTF-8
+#+END_SRC
+- Translator
+#+BEGIN_SRC python
+#: neutron/common/exceptions.py:79
+#, python-format
+msgid "Network %(net_id)s could not be found"
+msgstr "找不到網路 %(net_id)s"
+#+END_SRC
+
+* Thanks To
+- OpenStack
+- reveal.js & org-reveal
