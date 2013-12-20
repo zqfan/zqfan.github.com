@@ -70,8 +70,7 @@ task :post do
     post.puts "---"
     post.puts "{% include JB/setup %}"
     # (aji): add license announcement
-    post.puts "# License"
-    post.puts "this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)"
+    post.puts "License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)"
   end
 end # task :post
 

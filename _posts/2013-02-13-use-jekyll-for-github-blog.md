@@ -6,8 +6,7 @@ category: github
 tags: [jekyll, github-proxy, github-blog]
 ---
 {% include JB/setup %}
-# License
-this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 # use proxy
 since github is blocked by GFW, you must use proxy or vpn to access it, and i recommand *goagent*, just google it.
@@ -71,6 +70,17 @@ the last command will create ./page/about/index.html
 
 and add `post.puts` in this function, suit yourself.
 
+## add google analytics
+set the `tracking_id` in `_config.yml` to what you get from [google analytics](https://www.google.com/analytics/), [this article](http://truongtx.me/2013/04/05/google-analytics-for-jekyll-bootstrap/) provides more detail although it is a little outdated
+
+## highlight
+edit `_includes/themes/theme-name/default.html` and add the following lines:
+
+    <link rel="stylesheet" href="styles/default.css">
+    <script src="highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+[this article](http://truongtx.me/2012/12/28/jekyll-bootstrap-syntax-highlighting/) provides more detail about highlight.
 ## trouble shoot
 ### REXML could not parse this XML/HTML
 **solution**: your post title may include `&` character, remove it
