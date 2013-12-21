@@ -6,8 +6,8 @@ category: java
 tags: [ova, java]
 ---
 {% include JB/setup %}
-# License
-this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+
+License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 # References
 1. [抓取网页内容](http://www.zhuoda.org/lunzi/90049.html)

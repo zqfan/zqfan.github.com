@@ -6,8 +6,8 @@ category: python
 tags: [log, logging, python]
 ---
 {% include JB/setup %}
-## License
-this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+#
+License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 ## python
 [http://docs.python.org/2/howto/logging.html](http://docs.python.org/2/howto/logging.html)

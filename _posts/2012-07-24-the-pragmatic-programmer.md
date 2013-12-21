@@ -6,8 +6,8 @@ category: book
 tags: []
 ---
 {% include JB/setup %}
-# License
-this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+
+License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 # Book
 Andrew Hunt, David Thomas. The Pragmatic Programmer: from journeyman to master, first edition. Pearson Education, Inc, 2000.

@@ -6,8 +6,8 @@ category: linux
 tags: [apt-get, linux]
 ---
 {% include JB/setup %}
-## License
-this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+#
+License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
     E: Encountered a section with no Package: header
     E: Problem with MergeList /var/lib/apt/lists/mirror.bjtu.edu.cn_ubuntu_dists_precise_universe_i18n_Translation-en

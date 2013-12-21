@@ -6,8 +6,8 @@ category: python
 tags: [python, cliff]
 ---
 {% include JB/setup %}
-# License
-this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+
+License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 # Reference
 1. [readthedocs](https://cliff.readthedocs.org/en/latest/)

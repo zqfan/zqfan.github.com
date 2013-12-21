@@ -6,8 +6,8 @@ category: linux
 tags: [ubuntu, desktop, interface]
 ---
 {% include JB/setup %}
-## License
-this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+#
+License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 ## scrollbar
 it is uncomfortable for me to use the thinner scrollbar, it often jump to the top of window, so i decide to disable it.

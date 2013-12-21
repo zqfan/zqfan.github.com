@@ -6,8 +6,8 @@ category: openstack
 tags: [openstack, fixed_range_v4]
 ---
 {% include JB/setup %}
-## License
-this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+#
+License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 ## fixed ip in host's network when single nic used
 if you only have one nic, and you want multi mode, then you have two choice:

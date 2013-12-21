@@ -6,8 +6,8 @@ category: book
 tags: [python, book]
 ---
 {% include JB/setup %}
-# License
-this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+
+License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 # Tips
 * you should invoke father class's init method, if you define the init method

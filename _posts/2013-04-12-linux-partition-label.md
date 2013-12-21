@@ -6,8 +6,8 @@ category: linux
 tags: [linux, partition, blkid, e2label, tune2fs]
 ---
 {% include JB/setup %}
-# License
-this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+
+License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 # Reference
 1. [Linux Partition HOWTO](http://www.tldp.org/HOWTO/html_single/Partition/)

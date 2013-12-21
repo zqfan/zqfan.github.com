@@ -80,7 +80,42 @@ edit `_includes/themes/theme-name/default.html` and add the following lines:
     <script src="highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
 
-[this article](http://truongtx.me/2012/12/28/jekyll-bootstrap-syntax-highlighting/) provides more detail about highlight.
+you should download highlight and put them under proper place, or you can link the files online:
+
+{% highlight html %}
+<link rel="stylesheet" href="http://yandex.st/highlightjs/7.5/styles/default.min.css">
+<script src="http://yandex.st/highlightjs/7.5/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+{% endhighlight %}
+
+note, highlight version may upgrade, so please change the href uri if you need
+
+ [truongtx's blog](http://truongtx.me/2012/12/28/jekyll-bootstrap-syntax-highlighting/) provides more detail about highlight.
+
+if you don't mind to add extra liquid statement which is not standard markdown syntax in your blog source file, then you can use `pygments`
+
+{% highlight bash linenos=table %}
+$ sudo apt-get install python-pygments
+$ cd path/to/jekyll/project/folder
+$ pygmentize -S default -f html > pygments.css
+{% endhighlight %}
+
+then add `pygments: true` in `_config.yml` to enable pygments, and add pygments.css to your default theme's default.html
+
+{% highlight html linenos=table %}
+<link rel="stylesheet" href="/pygments.css">
+{% endhighlight %}
+
+now you can use syntax highlight statement as following example, you can replace python with the real language you're using:
+
+{% raw %}
+    {% highlight python linenos=table %}
+    your code is here and doesn't need indent
+    {% endhighlight %}
+{% endraw %}
+
+note, linenos=table can enable copy source code without line numbers, read [jekyll guide for posts](http://jekyllrb.com/docs/posts/) and [stackoverflow answer](http://stackoverflow.com/questions/11093241/how-to-support-line-number-when-using-pygments-with-jekyll) for more details
+
 ## trouble shoot
 ### REXML could not parse this XML/HTML
 **solution**: your post title may include `&` character, remove it

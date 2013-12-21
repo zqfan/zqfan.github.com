@@ -6,12 +6,11 @@ category: python
 tags: [requests]
 ---
 {% include JB/setup %}
-# License
-this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
-# python module requests
+License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+
 ## sslerror
-behavior: `requests.exceptions.SSLError:[Errno 1] _ssl.c:504: error:14090086:SSL routines:SSL3_GET_SERVER_CERTIFICATE:certificate verify failed`
+behavior: requests.exceptions.SSLError:\[Errno 1\] \_ssl.c:504: error:14090086:SSL routines:SSL3\_GET\_SERVER\_CERTIFICATE:certificate verify failed
 
 solutions:
 1. requests.get('https://somehost.com', verify=False), [ref: Python Requests throwing up SSLError](http://stackoverflow.com/questions/10667960/python-requests-throwing-up-sslerror)

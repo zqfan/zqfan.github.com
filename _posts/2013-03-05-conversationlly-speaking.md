@@ -6,8 +6,8 @@ category: book
 tags: []
 ---
 {% include JB/setup %}
-## License
-this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+#
+License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 ## 通过提问题促进交谈
 ### 问题：封闭式与开放式

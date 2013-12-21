@@ -6,8 +6,8 @@ category: linux
 tags: [upstart, start-stop-daemon]
 ---
 {% include JB/setup %}
-# License
-this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+
+License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 # Reference
 * [http://upstart.ubuntu.com/cookbook](http://upstart.ubuntu.com/cookbook)

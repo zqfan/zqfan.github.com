@@ -6,8 +6,8 @@ category: openstack
 tags: [openstack, free software, open source, contribute]
 ---
 {% include JB/setup %}
-## License
-this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+#
+License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 ## Why so late
 Because i am bound by the company's rule, however i think some contribute may not confict with the company, so i decide to do some little work that may not hurt anyone.

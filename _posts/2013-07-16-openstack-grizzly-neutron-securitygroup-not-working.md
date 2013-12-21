@@ -6,8 +6,8 @@ category: openstack
 tags: [openstack, quantum, neutron, security group]
 ---
 {% include JB/setup %}
-# License
-this file is published under [(CC) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+
+License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 # Desc
 Although security group is set, and by default it will deny any ingress traffic, but instance still can be ping or provide any other service.
