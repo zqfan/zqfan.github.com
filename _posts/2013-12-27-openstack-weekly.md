@@ -24,11 +24,11 @@ Zhiqiang Fan
 Gerrit:
 
 * [openstack hacking][0.1]: Empty files shouldn't contain copyright nor license
-* webob.exc.HTTP* should use kwargs explanation instead of detail, or http response will generate message with default explanation
+* we should use kwargs explanation instead of detail when raise webob.exc.WSGIHTTPException, or http response will generate message with default explanation
 
 Maillist:
 
-There is a discussion about "Complex query BP implementation" using POST to do rich query. Jay Pipes againsted to it because it breaks the verb's original meanning,and suggest to use `POST /reports` and `GET /posts/{id}` to do rich query. But Ceilometer PTL [Julien Danjou confirmed][0.2] that POST for rich query is ok, and currently Ceilometer will not store user's query since it amis on IaaS.
+There is a discussion about "Complex query BP implementation" using POST to do rich query. Jay Pipes disagrees with this way because it breaks the verb's original meaning, and suggests to use `POST /reports` and `GET /posts/{id}` to do rich query. But Ceilometer PTL [Julien Danjou has confirmed][0.2] that POST for rich query is ok, and currently Ceilometer will not store user's query since it amis to IaaS.
 
 Blogs:
 
