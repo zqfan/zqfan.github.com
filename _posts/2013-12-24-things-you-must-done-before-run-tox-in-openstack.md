@@ -20,7 +20,9 @@ sudo pip install tox
 
 Before run test suite, tox need to install required python package. they are defined in requirements.txt, and test-requirements.txt which only needed when run test. pip will install them automatically one by one, so their order makes sense. But pip cannot deal with dependency of non python packages, so there are potential unmet dependency.
 
-# ceilometer
+NOTE: I do the following project tox one by one, so it is possible a later project's dependency is already met in previous one. It is simple just search the error message in this post, and **PLEASE COMMENT** on this post so I can update it.
+
+# Ceilometer
 For now, Dec 24, 2013, ceilometer requires MySQL-python, xattr, lxml, and mongodb, here is a list of unmet dependency:
 
 * MySQL-python: libmysqlclient-dev
@@ -56,4 +58,16 @@ In my environment, mysql-server is already installed, so if you've not done this
 
 {% highlight bash linenos=table %}
 sudo apt-get install mysql-server
+{% endhighlight %}
+
+# Glance
+Dependency
+* psycopg2: libpq-dev
+
+Error message:
+* Error: pg_config executable not found
+
+Solution:
+{% highlight bash linenos=table %}
+sudo apt-get install libpq-dev
 {% endhighlight %}
