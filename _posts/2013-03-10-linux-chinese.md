@@ -11,7 +11,7 @@ License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 ## ime
 ### rime
-[https://code.google.com/p/rimeime/wiki/RimeWithIBus](ttps://code.google.com/p/rimeime/wiki/RimeWithIBus)
+[https://code.google.com/p/rimeime/wiki/RimeWithIBus](https://code.google.com/p/rimeime/wiki/RimeWithIBus)
 
 For Ubuntu 12.04 precise:
 
@@ -28,7 +28,7 @@ sudo apt-get install ibus-rime
 ibus-daemon -d
 {% endhighlight %}
 
-Then click ibus icon and set Preference.
+Then click ibus icon and set Preference. Enter F4 to change rime setting.
 
 ## Character Encoding
 * iconv

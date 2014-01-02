@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: page
 title: "OpenStack Weekly"
 description: ""
 category: "openstack"
@@ -9,6 +9,13 @@ tags: []
 This post is a draft of OpenStack newsletter and process log of my contribution to OpenStack in 2014.
 
 License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+
+# Week 1
+Launchpad:
+
+* Neutron openvswitch agent efficiency problem, ovs-vsctl takes too much time in a small cluster, [bug link][1.1]
+
+[1.1]: https://bugs.launchpad.net/neutron/+bug/1264608
 
 ## Week 0
 Stackalytics:
