@@ -24,4 +24,10 @@ In reference [start-stop-daemon to create multiple instances of executable throu
 
 However, it cannot execute correctly in upstart, because start-stop-daemon will block at the first command and the second one will not be executed. Specify the --background(-b) option will not correct this because it will fork the instance and you can no longer use `stop` command to manage the forked instance since its pid is changed.
 
-The fix is simple, just let the start-stop-daemon run in background by append the `&`, and be careful, the last command of start-stop-daemon should not end with `&`, if every command is run in background, the `stop` command will fail and you can only terminate the instances via `kill` command.
+The fix is simple, just let the start-stop-daemon run in background by append the `&`, and be careful, the last command of start-stop-daemon should not end with `&`, if every command are run in background, the `stop` command will fail and you can only terminate the instances via `kill` command. The final solution is:
+
+    start-stop-daemon --start --quiet --chuid myuser --name myapp1 \
+                      --exec /usr/bin/myapp -- --config /etc/myapp-configfile1 &
+
+    start-stop-daemon --start --quiet --chuid myuser --name myapp2 \
+                      --exec /usr/bin/myapp -- --config /etc/someapp-configfile2

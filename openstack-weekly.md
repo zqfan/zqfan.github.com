@@ -8,7 +8,21 @@ tags: []
 {% include JB/setup %}
 This post is a draft of OpenStack newsletter and process log of my contribution to OpenStack in 2014.
 
-License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+# Week 2
+Launchpad:
+
+* \[oslo\][common-ssh-client][2.0], High-level ssh client library, based on paramiko. It seemes there are some choices for ssh library, from low to high, [paramiko][2.3], [spur][2.2], [Fabric][2.4]. Advanced reading: [spur.py: A simplified interface for SSH and subprocess in Python][2.1]
+
+[2.0]: https://blueprints.launchpad.net/oslo/+spec/common-ssh-client
+[2.1]: http://mike.zwobble.org/2013/02/spur-py-a-simplified-interface-for-ssh-and-subprocess-in-python/
+[2.2]: https://github.com/mwilliamson/spur.py
+[2.3]: https://github.com/paramiko/paramiko
+[2.4]: https://github.com/fabric/fabric
+
+Mailing List:
+
+* samsung贡献者Deok-June Yi提出ceilometer告警延迟具有不可预知性，而Synaps的告警延迟稳定在2秒钟以内。原因在于ceilometer有大量数据库IO操作，而Synaps却是从内存以及流中读取数据。Deok-June Yi提议重新开始曾被搁置的Synaps并入ceilometer的特性，实现实时告警的需求。
+
 
 # Week 1
 Stackalytics:
@@ -62,3 +76,5 @@ UnitedStack: [OpenStack Ceilometer 简介][0.3] by Suo, Guangyu
 [0.1]: http://docs.openstack.org/developer/hacking/#openstack-licensing "openstack hacking"
 [0.2]: http://www.mail-archive.com/openstack-dev@lists.openstack.org/msg12514.html
 [0.3]: http://www.ustack.com/blog/ceilometer/
+
+License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
