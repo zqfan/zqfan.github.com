@@ -116,6 +116,9 @@ now you can use syntax highlight statement as following example, you can replace
 
 note, linenos=table can enable copy source code without line numbers, read [jekyll guide for posts](http://jekyllrb.com/docs/posts/) and [stackoverflow answer](http://stackoverflow.com/questions/11093241/how-to-support-line-number-when-using-pygments-with-jekyll) for more details
 
+## disqus
+Edit `_config.yml` and set `disqus_shortname` to your own instead of jekyllbootstrap.
+
 ## trouble shoot
 ### REXML could not parse this XML/HTML
 **solution**: your post title may include `&` character, remove it
