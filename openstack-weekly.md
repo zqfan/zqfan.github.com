@@ -8,7 +8,29 @@ tags: []
 {% include JB/setup %}
 This post is a draft of OpenStack newsletter and process log of my contribution to OpenStack in 2014.
 
-# Week 2
+# Week 03
+Stackalytics:
+* Total commits: 25
+* Total LOC: 680
+* Review stat (-2, -1, +1, +2, A): 0, 16, 72, 0, 0
+* Draft Blueprints: 1
+* Completed Blueprints: 0
+* Emails: 2
+
+Blogs:
+* [Setting up gating in the OpenStack intrastructure][03.1]
+* [Ceilometer Quickstart ][03.2]
+
+Mailing List:
+* Mirantis的Nadya Privalova抱怨Ceilometer在海量数据下的低响应，提出要在DB中另起一表，暂存某种特殊查询的数据，或者周期任务的数据。Jay Pipes反驳说Ceilometer的重点是收集数据，预处理以及持久化。加速工作可以交由下游组件完成，如Pentaho。
+* Julien Danjou注册了[基于通知的告警][03.3]特性，未实现，当包含某些属性的特定类型的通知到达时，发出告警。
+
+[03.1]: http://jaegerandi.blogspot.com/2014/01/setting-up-gating-in-openstack.html
+[03.2]: http://openstack.redhat.com/CeilometerQuickStart
+[03.3]: https://blueprints.launchpad.net/ceilometer/+spec/alarm-on-notification
+
+
+# Week 02
 Launchpad:
 
 * \[oslo\][common-ssh-client][2.0], High-level ssh client library, based on paramiko. It seemes there are some choices for ssh library, from low to high, [paramiko][2.3], [spur][2.2], [Fabric][2.4]. Advanced reading: [spur.py: A simplified interface for SSH and subprocess in Python][2.1]
