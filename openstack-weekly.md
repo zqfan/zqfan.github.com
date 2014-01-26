@@ -3,10 +3,56 @@ layout: page
 title: "OpenStack Weekly"
 description: ""
 category: "openstack"
-tags: []
+tags: [news]
 ---
 {% include JB/setup %}
 This post is a draft of OpenStack newsletter and process log of my contribution to OpenStack in 2014.
+
+Information is coming from:
+* OpenStack Developer Mailing List
+* https://launchpad.net/openstack
+* http://stackalytics.com/
+* Ceilometer PTL's blog: http://julien.danjou.info/blog/
+* UnitedStack blog: http://www.ustack.com/blog/
+* enovance blog: http://techs.enovance.com/
+
+# Week 04
+zqfan@Stackalytics:
+* Total commits: 37
+* Total LOC: 1221
+* Review stat (-2, -1, +1, +2, A): 0, 23, 101, 0, 0
+* Draft Blueprints: 1
+* Completed Blueprints: 0
+* Emails: 7
+
+Blogs:
+* Mirantis: [Understanding OpenStack Authentication: Keystone PKI][4.6]，介绍了OpenStack Keystone的token机制，包括UUID和PKI（从Grizzly开始）两种形式。
+* Julien Danjou [Inside Synaps, a CloudWatch-like implementation for OpenStack][4.1]，介绍了Synaps这个AWS CloudWatch的开源实现并分析了其与Heat和Ceilometer的异同。Synaps使用了Cassandra并与之直接相连。取消了数据库引擎中间件；它允许直接写新数据但是缺乏从OpenStack其他组件拉取数据的能力；Synaps做了数据集中以加快读取速度，但是缺乏历史数据支持导致不适合作为计费的底层系统（？）。
+
+Mails:
+* horizon: [web accessibility issues][4.5]（个人觉得不止是可用性问题，Havana版本的horizon中文简体翻译就是个渣，但是仍然要感谢翻译团队所做的工作）
+* Doug Hellmann@dreamhost: [writing comments as complete sentences][4.8]，强调注释文档不仅仅是写给自己看的，甚至不是写给英语母语的人看到的，因此如果要写，就认真点。（看看大师的风范）
+
+Launchpad:
+* Matthieu Huin@enovance: [per domain/project/user quotas on alarms][4.2]，对告警数量进行配额限制（亚马逊对单个账户的告警数量限制为5000，[官网链接][4.4]），但是Julien Danjou认为基础功能即可不必太过复杂，且反对由各项目独自负责quota的实现，[邮件详情][4.3]
+* VijayKumar Kodam: [Dynamically enable or disable meters][4.7]，之前在邮件列表里已经讨论过的，在不重启ceilometer进程的情况下动态启用和禁止某些指标的监控。实现方式是使用pyinotify监控配置文件的变化，然后向所有关联进程发送消息通知其重新加载配置文件。由于存在异议，这个特性目前仍处于等待审核的状态。
+* Toni Zehnder: [Monitoring Physical Devices][4.10]，硬件设备监控，包括服务器和交换机。[代码审核][4.11]进行中。
+
+Gerrit:
+
+* Gordon Chung@ibm: [meter table contains redundant/duplicate data][4.9]，ceilometer性能问题由来已久，早在Havana发布前，Jay Pipes就提到Meter表作为最基础的表之一，体积庞大，但是列本身内容太多，可以精简一下；Gordon Chung提交了一个改进，将meter_name，meter_type，meter_unit移除，新建MeterDef模型对应meter_def表。（从抽象角度，个人认为meter_type，meter_unit可以再独立出去，因为他们数量极少且相对稳定，但是太琐碎了，没必要）
+
+[4.1]: http://julien.danjou.info/blog/2012/openstack-synaps-exploration
+[4.2]: https://blueprints.launchpad.net/ceilometer/+spec/quotas-on-alarms
+[4.3]: http://osdir.com/ml/openstack-dev/2014-01/msg00924.html
+[4.4]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_limits.html
+[4.5]: http://www.mail-archive.com/openstack-dev@lists.openstack.org/msg14612.html
+[4.6]: http://www.mirantis.com/blog/understanding-openstack-authentication-keystone-pki/
+[4.7]: https://blueprints.launchpad.net/ceilometer/+spec/dynamic-meters
+[4.8]: http://www.mail-archive.com/openstack-dev@lists.openstack.org/msg13692.html
+[4.9]: https://review.openstack.org/#/c/65786/
+[4.10]: https://blueprints.launchpad.net/ceilometer/+spec/monitoring-physical-devices
+[4.11]: https://review.openstack.org/#q,topic:bp/monitoring-physical-devices,n,z
 
 # Week 03
 Stackalytics:
