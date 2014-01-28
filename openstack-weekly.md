@@ -16,6 +16,18 @@ Information is coming from:
 * UnitedStack blog: http://www.ustack.com/blog/
 * enovance blog: http://techs.enovance.com/
 
+# Week 05
+Launchpad:
+* Julien Danjou: [Support for OpenStack Climate][5.1]
+
+Gerrit:
+* Yuuichi Fujioka: [Implements monitoring-network][5.2]
+* Yuuichi Fujioka: [Implements monitoring-network-from-opendaylight][5.3]
+
+[5.1]: https://blueprints.launchpad.net/ceilometer/+spec/climate-support
+[5.2]: https://review.openstack.org/#/c/60473/
+[5.3]: https://review.openstack.org/#/c/63890/
+
 # Week 04
 zqfan@Stackalytics:
 * Total commits: 37
