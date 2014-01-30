@@ -43,14 +43,14 @@ NOTE, you may need to run `echo 'insecure' >> ~/.curlrc` befor you do the follow
 
 and run the command rvm tells you todo, particularly, install the ruby dependency packages.
 
-    $ rvm install 1.9.2 && rvm use 1.9.2
+    $ rvm install 2.1.0 && rvm use 2.1.0
     $ rvm rubygems latest
     $ gem install jekyll
 
 you can now disable insecure mode of curl by delete insecure line in ~/.curlrc.
 
     $ cd USERNAME.github.com
-    $ jekyll --server
+    $ jekyll serve
 
 if jekyll is running, open your browser and type `localhost:4000` your will see your blog :)
 
