@@ -41,7 +41,7 @@ OpenStack现在的API文档写得并不尽善尽美，有时候官方的例子�
 
 基本上所有REST接口都可以通过这种打开debug选项的CLI接口的途径，获得http请求和响应的例子。但是有一点要注意，cli接口是封装rest接口的但是不是等于rest接口，这意味着有时候它会多加一些参数或者限制，多做一些步骤来完成调用。所以，**你不能依赖cli发出的http请求来判断哪些参数是必选的**。
 
-最后补充下，你可以使用`keystone service-list`查看有哪些服务，使用`keystone endpoint-list`查看服务的url信息，然后对照控制台输出辨别出哪些是你要的http请求。我给出的例子中的curl命令拷贝后运行与CLI命令效果是一致的。（但要注意移除ceilometer url中多余的一个斜杠，即//应该为/，这是我环境下故意留的一个bug，正常情形下应保证没有多余的斜杠，否则会产生错误。）
+最后补充下，你可以使用`keystone service-list`查看有哪些服务，使用`keystone endpoint-list`查看服务的url信息，然后对照控制台输出辨别出哪些是你要的http请求。我给出的例子中的curl命令拷贝后运行与CLI命令效果是一致的。
 
 祝好运。
 
