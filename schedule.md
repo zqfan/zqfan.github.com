@@ -9,6 +9,8 @@ tags: [schedule]
 
 # TODO
 * (post) ceilometer-collector mechanism
+* (exp) devstack install on dev machine
+* (doc) release ceilometer havana api v2 document under apache license
 
 # WAIT
 * (bug) [delete non-existent alarm return incorrect faultstring](https://bugs.launchpad.net/ceilometer/+bug/1280036)
@@ -18,6 +20,8 @@ tags: [schedule]
 * cinder-volumes is out of space while no volume is created
 
 # DONE
+* 2014.02.18 (fix) [Enable hacking H233 rule](https://review.openstack.org/68545)
+* 2014.02.18 (doc) release ceilometer havana api v2 document version 0.3
 * 2014.02.18 (fix) [Add auth_uri option](https://review.openstack.org/#/c/73307/)
 * 2014.02.17 (doc) [ceilometer havana key config option](https://github.com/zqfan/openstack/blob/master/ceilometer/ceilometer-configuration-reference.md)
 * 2014.02.15 (doc) ceilometer havana api v2 document
