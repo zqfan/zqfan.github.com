@@ -6,7 +6,7 @@ category: "openstack"
 tags: [news]
 ---
 {% include JB/setup %}
-This post is a draft of OpenStack newsletter and process log of my contribution to OpenStack in 2014.
+This page is a draft of OpenStack newsletter and process log of my contribution to OpenStack in 2014.
 
 Information is coming from:
 * OpenStack Developer Mailing List
