@@ -4,24 +4,18 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>OpenStack Ceilometer Havana API V2</title>
   <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="./main.css" type="text/css" />
+  <link rel="stylesheet" href="./huawei.css" type="text/css" />
 </head>
 <body>
+<div id="header">
+<h1 class="title">OpenStack Ceilometer Havana API V2</h1>
+</div>
 <p>Copyright (c) 2014, Huawei Technologies Co., Ltd</p>
-<pre><code>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-implied.
-See the License for the specific language governing permissions and
-limitations under the License.</code></pre>
+<p>  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />  you may not use this file except in compliance with the License.<br />  You may obtain a copy of the License at</p>
+<p>  http://www.apache.org/licenses/LICENSE-2.0</p>
+<p>  Unless required by applicable law or agreed to in writing, software<br />  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or<br />  implied.<br />  See the License for the specific language governing permissions and<br />  limitations under the License.</p>
 <p>Author: ZhiQiang Fan <script type="text/javascript">
 <!--
 h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x61;&#106;&#x69;&#46;&#122;&#x71;&#102;&#x61;&#110;';e=n+a+h;
@@ -29,10 +23,10 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 // -->
 </script><noscript>&#x61;&#106;&#x69;&#46;&#122;&#x71;&#102;&#x61;&#110;&#32;&#x61;&#116;&#32;&#x67;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;</noscript></p>
 <p>This document summarizes configuration reference for Ceilometer Havana. You can read /etc/ceilometer/ceilometer.conf to get direct help information, and set non-default options by learning example from <a href="http://docs.openstack.org/trunk/install-guide/install/apt/content/ceilometer-install.html">openstack-manuals install guide</a></p>
-<h1 id="运维视角operator-perspective">运维视角（Operator Perspective）</h1>
-<h2 id="必选选项required">必选选项（Required）</h2>
+<h1 id="运维视角operator-perspective"><span class="header-section-number">1</span> 运维视角（Operator Perspective）</h1>
+<h2 id="必选选项required"><span class="header-section-number">1.1</span> 必选选项（Required）</h2>
 <p>以下选项若不设置，服务将无法正常运行，或者虽能运行但功能的正确性无法保障。</p>
-<h3 id="ceilometer">ceilometer</h3>
+<h3 id="ceilometer"><span class="header-section-number">1.1.1</span> ceilometer</h3>
 <p>你需要在ceilometer.conf中进行下列选项的设置</p>
 <table>
 <thead>
@@ -110,7 +104,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tr>
 </tbody>
 </table>
-<h3 id="nova">nova</h3>
+<h3 id="nova"><span class="header-section-number">1.1.2</span> nova</h3>
 <p>你需要在nova.conf中进行下列选项的设置</p>
 <table>
 <thead>
@@ -153,7 +147,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tr>
 </tbody>
 </table>
-<h3 id="glance">glance</h3>
+<h3 id="glance"><span class="header-section-number">1.1.3</span> glance</h3>
 <p>你需要在glance-api.conf中进行下列选项的设置</p>
 <table>
 <thead>
@@ -182,7 +176,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tr>
 </tbody>
 </table>
-<h3 id="cinder">cinder</h3>
+<h3 id="cinder"><span class="header-section-number">1.1.4</span> cinder</h3>
 <p>你需要在cinder.conf中进行下列选项的设置</p>
 <table>
 <thead>
@@ -211,13 +205,13 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tr>
 </tbody>
 </table>
-<h3 id="swift">swift</h3>
+<h3 id="swift"><span class="header-section-number">1.1.5</span> swift</h3>
 <p>swift与其他OpenStack核心项目不同，你需要在proxy-server.conf中设置</p>
 <pre><code>[filter:ceilometer]
 use = egg:ceilometer#swift
 [pipeline:main]
 pipeline = healthcheck cache authtoken keystoneauth ceilometer proxy-server</code></pre>
-<h2 id="推荐选项recommended">推荐选项（Recommended）</h2>
+<h2 id="推荐选项recommended"><span class="header-section-number">1.2</span> 推荐选项（Recommended）</h2>
 <p>以下选项可以不设置，但性能及安全性将受到影响</p>
 <table>
 <thead>
@@ -260,7 +254,7 @@ pipeline = healthcheck cache authtoken keystoneauth ceilometer proxy-server</cod
 </tr>
 </tbody>
 </table>
-<h2 id="优化选项optimized">优化选项（Optimized）</h2>
+<h2 id="优化选项optimized"><span class="header-section-number">1.3</span> 优化选项（Optimized）</h2>
 <p>以下选项若正确设置，能让你的工作更轻松愉快</p>
 <table>
 <thead>
@@ -289,9 +283,9 @@ pipeline = healthcheck cache authtoken keystoneauth ceilometer proxy-server</cod
 </tr>
 </tbody>
 </table>
-<h1 id="服务视角service-perspective">服务视角（Service Perspective）</h1>
-<h2 id="ceilometer-1">ceilometer</h2>
-<h3 id="ceilometer.alarm">ceilometer.alarm</h3>
+<h1 id="服务视角service-perspective"><span class="header-section-number">2</span> 服务视角（Service Perspective）</h1>
+<h2 id="ceilometer-1"><span class="header-section-number">2.1</span> ceilometer</h2>
+<h3 id="ceilometer.alarm"><span class="header-section-number">2.1.1</span> ceilometer.alarm</h3>
 <table>
 <thead>
 <tr class="header">
@@ -354,7 +348,7 @@ pipeline = healthcheck cache authtoken keystoneauth ceilometer proxy-server</cod
 </tr>
 </tbody>
 </table>
-<h3 id="ceilometer.api">ceilometer.api</h3>
+<h3 id="ceilometer.api"><span class="header-section-number">2.1.2</span> ceilometer.api</h3>
 <table>
 <thead>
 <tr class="header">
@@ -403,7 +397,7 @@ pipeline = healthcheck cache authtoken keystoneauth ceilometer proxy-server</cod
 </tr>
 </tbody>
 </table>
-<h3 id="ceilometer.collector">ceilometer.collector</h3>
+<h3 id="ceilometer.collector"><span class="header-section-number">2.1.3</span> ceilometer.collector</h3>
 <table>
 <thead>
 <tr class="header">
@@ -508,7 +502,7 @@ pipeline = healthcheck cache authtoken keystoneauth ceilometer proxy-server</cod
 </tr>
 </tbody>
 </table>
-<h3 id="ceilometer.compute">ceilometer.compute</h3>
+<h3 id="ceilometer.compute"><span class="header-section-number">2.1.4</span> ceilometer.compute</h3>
 <table>
 <thead>
 <tr class="header">
@@ -564,8 +558,8 @@ pipeline = healthcheck cache authtoken keystoneauth ceilometer proxy-server</cod
 </tr>
 </tbody>
 </table>
-<h3 id="未明确的unclassified">未明确的（unclassified）</h3>
-<h4 id="ceilometer.pipeline">ceilometer.pipeline</h4>
+<h3 id="未明确的unclassified"><span class="header-section-number">2.1.5</span> 未明确的（unclassified）</h3>
+<h4 id="ceilometer.pipeline"><span class="header-section-number">2.1.5.1</span> ceilometer.pipeline</h4>
 <table>
 <thead>
 <tr class="header">
@@ -586,7 +580,7 @@ pipeline = healthcheck cache authtoken keystoneauth ceilometer proxy-server</cod
 </tr>
 </tbody>
 </table>
-<h4 id="ceilometer.publisher">ceilometer.publisher</h4>
+<h4 id="ceilometer.publisher"><span class="header-section-number">2.1.5.2</span> ceilometer.publisher</h4>
 <table>
 <thead>
 <tr class="header">
@@ -614,7 +608,7 @@ pipeline = healthcheck cache authtoken keystoneauth ceilometer proxy-server</cod
 </tr>
 </tbody>
 </table>
-<h4 id="ceilometer.sample">ceilometer.sample</h4>
+<h4 id="ceilometer.sample"><span class="header-section-number">2.1.5.3</span> ceilometer.sample</h4>
 <table>
 <thead>
 <tr class="header">
@@ -635,7 +629,7 @@ pipeline = healthcheck cache authtoken keystoneauth ceilometer proxy-server</cod
 </tr>
 </tbody>
 </table>
-<h4 id="ceilometer.service">ceilometer.service</h4>
+<h4 id="ceilometer.service"><span class="header-section-number">2.1.5.4</span> ceilometer.service</h4>
 <table>
 <thead>
 <tr class="header">
@@ -705,7 +699,7 @@ pipeline = healthcheck cache authtoken keystoneauth ceilometer proxy-server</cod
 </tr>
 </tbody>
 </table>
-<h4 id="ceilometer.storage">ceilometer.storage</h4>
+<h4 id="ceilometer.storage"><span class="header-section-number">2.1.5.5</span> ceilometer.storage</h4>
 <table>
 <thead>
 <tr class="header">
@@ -740,8 +734,8 @@ pipeline = healthcheck cache authtoken keystoneauth ceilometer proxy-server</cod
 </tr>
 </tbody>
 </table>
-<h2 id="keystone">keystone</h2>
-<h3 id="keystoneclient.middleware.auth_token">keystoneclient.middleware.auth_token</h3>
+<h2 id="keystone"><span class="header-section-number">2.2</span> keystone</h2>
+<h3 id="keystoneclient.middleware.auth_token"><span class="header-section-number">2.2.1</span> keystoneclient.middleware.auth_token</h3>
 <table>
 <thead>
 <tr class="header">
@@ -930,7 +924,7 @@ pipeline = healthcheck cache authtoken keystoneauth ceilometer proxy-server</cod
 </tr>
 </tbody>
 </table>
-<h1 id="oslo">oslo</h1>
+<h1 id="oslo"><span class="header-section-number">3</span> oslo</h1>
 <table>
 <thead>
 <tr class="header">
@@ -1608,5 +1602,31 @@ pipeline = healthcheck cache authtoken keystoneauth ceilometer proxy-server</cod
 </tr>
 </tbody>
 </table>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-45606410-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'zqfan'; // required: replace example with your forum shortname
+    /* var disqus_title = '$title$'; */
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+<p><a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a> <span class="math"><em>t</em><em>i</em><em>t</em><em>l</em><em>e</em></span></p>
 </body>
 </html>
