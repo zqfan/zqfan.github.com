@@ -34,3 +34,7 @@ th, td {
   padding-right: 5px;
   word-wrap: break-word;
 }
+
+#disqus_thread {
+  margin-top: 20px;
+}
