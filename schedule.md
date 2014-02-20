@@ -18,6 +18,8 @@ This page showes what I'm going to do, and what I've done in OpenStack project.
 # WAIT
 * (bug) (ceilometer) [delete non-existent alarm return incorrect faultstring](https://bugs.launchpad.net/ceilometer/+bug/1280036)
 * (fix) (neutronclient) [Enable hacking H233 rule](https://review.openstack.org/68545)
+* (fix) (openstack-manuals) [Add ceilometer-alarm-* service for SLES install guide](https://review.openstack.org/#/c/75004/)
+* (fix) (api-site) [Add delete method on alarm in Ceilometer API reference](https://review.openstack.org/#/c/75012/)
 
 # WISH
 * nova server name is not injected to hostname
