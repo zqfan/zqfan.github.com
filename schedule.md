@@ -13,6 +13,7 @@ This page showes what I'm going to do, and what I've done in OpenStack project.
 * (post) ceilometer-collector mechanism
 * (exp) devstack install on dev machine
 * openstack bug fix
+* (doc) update ceilometer havana api v2 online document to version 0.4
 
 # WAIT
 * (bug) (ceilometer) [delete non-existent alarm return incorrect faultstring](https://bugs.launchpad.net/ceilometer/+bug/1280036)
