@@ -12,7 +12,7 @@ This page showes what I'm going to do, and what I've done in OpenStack project.
 # TODO
 * (post) ceilometer-collector mechanism
 * (exp) devstack install on dev machine
-* (doc) ceilometer mongodb data is overload
+* openstack bug fix
 
 # WAIT
 * (bug) (ceilometer) [delete non-existent alarm return incorrect faultstring](https://bugs.launchpad.net/ceilometer/+bug/1280036)
@@ -21,6 +21,7 @@ This page showes what I'm going to do, and what I've done in OpenStack project.
 # WISH
 * nova server name is not injected to hostname
 * cinder-volumes is out of space while no volume is created
+* (doc) ceilometer mongodb data is overload
 
 # DONE
 * 2014.02.19 (fix) (openstack-manuals) [Fix syntax error in controller node sql setup](https://review.openstack.org/#/c/74666/)
