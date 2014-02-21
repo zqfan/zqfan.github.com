@@ -11,14 +11,12 @@ This page showes what I'm going to do, and what I've done in OpenStack project.
 
 # TODO
 * (post) ceilometer-collector mechanism
-* (exp) devstack install on dev machine
 * openstack bug fix
 * (doc) update ceilometer havana api v2 online document to version 0.4
 
 # WAIT
 * (bug) (ceilometer) [delete non-existent alarm return incorrect faultstring](https://bugs.launchpad.net/ceilometer/+bug/1280036)
 * (fix) (neutronclient) [Enable hacking H233 rule](https://review.openstack.org/68545)
-* (fix) (openstack-manuals) [Add ceilometer-alarm-* service for SLES install guide](https://review.openstack.org/#/c/75004/)
 * (fix) (api-site) [Add delete method on alarm in Ceilometer API reference](https://review.openstack.org/#/c/75012/)
 * (fix) (neutronclient) [Refactor tests/unit/test_shell.py](https://review.openstack.org/#/c/41615/)
 * (fix) (hacking) [Enhance H233 rule](https://review.openstack.org/#/c/68573/)
@@ -30,6 +28,8 @@ This page showes what I'm going to do, and what I've done in OpenStack project.
 * (doc) ceilometer mongodb data is overload
 
 # DONE
+* 2014.02.21 (fix) (openstack-manuals) [Add ceilometer-alarm-* service for SLES install guide](https://review.openstack.org/#/c/75004/) Note that openstack-manuals project is no longer tracked by stackalytics.com, so I will stop logging such activities
+* 2014.02.21 (exp) devstack install on dev machine
 * 2014.02.20 (post) [Simple Example of Pandoc MarkDown](http://zqfan.github.io/linux/2014/02/20/simple-example-of-pandoc-markdown/)
 * 2014.02.19 (fix) (openstack-manuals) [Fix syntax error in controller node sql setup](https://review.openstack.org/#/c/74666/)
 * 2014.02.19 (doc) release [ceilometer havana configuration reference](http://zqfan.github.io/assets/doc/ceilometer-configuration-reference.html)
