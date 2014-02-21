@@ -20,6 +20,9 @@ This page showes what I'm going to do, and what I've done in OpenStack project.
 * (fix) (neutronclient) [Enable hacking H233 rule](https://review.openstack.org/68545)
 * (fix) (openstack-manuals) [Add ceilometer-alarm-* service for SLES install guide](https://review.openstack.org/#/c/75004/)
 * (fix) (api-site) [Add delete method on alarm in Ceilometer API reference](https://review.openstack.org/#/c/75012/)
+* (fix) (neutronclient) [Refactor tests/unit/test_shell.py](https://review.openstack.org/#/c/41615/)
+* (fix) (hacking) [Enhance H233 rule](https://review.openstack.org/#/c/68573/)
+* (fix) (nova) [Fix incorrect kwargs 'reason' for HTTPBadRequest](https://review.openstack.org/#/c/64264/)
 
 # WISH
 * nova server name is not injected to hostname
