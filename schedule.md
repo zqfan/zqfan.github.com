@@ -11,16 +11,19 @@ This page showes what I'm going to do, and what I've done in OpenStack project.
 
 # TODO
 * (post) ceilometer-collector mechanism
-* openstack bug fix
 * (doc) update ceilometer havana api v2 online document to version 0.4
 
 # WAIT
-* (bug) (ceilometer) [delete non-existent alarm return incorrect faultstring](https://bugs.launchpad.net/ceilometer/+bug/1280036)
-* (fix) (neutronclient) [Enable hacking H233 rule](https://review.openstack.org/68545)
 * (fix) (api-site) [Add delete method on alarm in Ceilometer API reference](https://review.openstack.org/#/c/75012/)
+* (exp) (ceilometer) http head size limit
+* (bug) (ceilometer) [delete non-existent alarm return incorrect faultstring](https://bugs.launchpad.net/ceilometer/+bug/1280036)
+* (fix) (ceilometerclient) [Adjust Exception inheritance relationship](https://review.openstack.org/#/c/75428/)
+* (fix) (heat) [Remove redundant default value None for dict.get](https://review.openstack.org/#/c/75612/)
+* (fix) (neutronclient) [Enable hacking H233 rule](https://review.openstack.org/68545)
+* (fix( (neutronclient) [Remove cliff-tablib from test-requirements](https://review.openstack.org/#/c/49886/)
 * (fix) (neutronclient) [Refactor tests/unit/test_shell.py](https://review.openstack.org/#/c/41615/)
-* (fix) (hacking) [Enhance H233 rule](https://review.openstack.org/#/c/68573/)
 * (fix) (nova) [Fix incorrect kwargs 'reason' for HTTPBadRequest](https://review.openstack.org/#/c/64264/)
+
 
 # WISH
 * nova server name is not injected to hostname
@@ -28,7 +31,9 @@ This page showes what I'm going to do, and what I've done in OpenStack project.
 * (doc) ceilometer mongodb data is overload
 
 # DONE
-* 2014.02.21 (fix) (openstack-manuals) [Add ceilometer-alarm-* service for SLES install guide](https://review.openstack.org/#/c/75004/) Note that openstack-manuals project is no longer tracked by stackalytics.com, so I will stop logging such activities
+* 2014.02.24 (post) [OpenStack Weekly News](http://zqfan.github.io/openstack-weekly.html)
+* 2014.02.21 (fix) (hacking) [Enhance H233 rule](https://review.openstack.org/#/c/68573/)
+* 2014.02.21 (fix) (openstack-manuals) [Add ceilometer-alarm-* service for SLES install guide](https://review.openstack.org/#/c/75004/)
 * 2014.02.21 (exp) devstack install on dev machine
 * 2014.02.20 (post) [Simple Example of Pandoc MarkDown](http://zqfan.github.io/linux/2014/02/20/simple-example-of-pandoc-markdown/)
 * 2014.02.19 (fix) (openstack-manuals) [Fix syntax error in controller node sql setup](https://review.openstack.org/#/c/74666/)
