@@ -16,6 +16,13 @@ Information is coming from:
 * UnitedStack blog: http://www.ustack.com/blog/
 * enovance blog: http://techs.enovance.com/
 
+# week 08
+* Mailing List:
+* Joe Gordon建议成立oslo-sync团队，打算以nova项目做试点并在征集志愿者，目的是解决现在oslo-sync乱象问题。[原文](http://lists.openstack.org/pipermail/openstack-dev/2014-February/027631.html)
+* Russell Bryant提议延迟Nova API V3稳定版在Icehouse的发布，而作为实验性接口与V2并存，Seab Dague同意不必急于求成，但提到最终要达到一套接口的目标，而不是维护两套接口疲于奔命。[原文](http://lists.openstack.org/pipermail/openstack-dev/2014-February/027588.html)
+* Vishvananda Ishaya提出OpenStack对象都是租户级别的，缺乏层次化多租户资源控制，打算成立一个团队解决这个问题。[原文](http://lists.openstack.org/pipermail/openstack-dev/2014-January/025706.html)
+* David Kranz提出配置文件中参数默认值的问题，最好是对于不同场景有推荐的配置。[原文](https://www.mail-archive.com/openstack-dev@lists.openstack.org/msg16469.html)
+
 # Week 05
 Launchpad:
 * Julien Danjou: [Support for OpenStack Climate][5.1]
