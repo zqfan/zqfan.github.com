@@ -25,16 +25,16 @@ code > span.al { color: #ff0000; font-weight: bold; }
 code > span.fu { color: #06287e; }
 code > span.er { color: #ff0000; font-weight: bold; }
   </style>
-  <link rel="stylesheet" href="./huawei.css" type="text/css" />
+  <link rel="stylesheet" href="huawei.css" type="text/css" />
 </head>
 <body>
 <div id="header">
 <h1 class="title">OpenStack Ceilometer Havana API V2</h1>
 </div>
 <p>Copyright (c) 2014, Huawei Technologies Co., Ltd</p>
-<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p>
-<p>http://www.apache.org/licenses/LICENSE-2.0</p>
-<p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or<br />implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>
+<p>  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />  you may not use this file except in compliance with the License.<br />  You may obtain a copy of the License at</p>
+<p>  http://www.apache.org/licenses/LICENSE-2.0</p>
+<p>  Unless required by applicable law or agreed to in writing, software<br />  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or<br />  implied.<br />  See the License for the specific language governing permissions and<br />  limitations under the License.</p>
 <p>Author: ZhiQiang Fan <script type="text/javascript">
 <!--
 h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x61;&#106;&#x69;&#46;&#122;&#x71;&#102;&#x61;&#110;';e=n+a+h;
@@ -51,8 +51,8 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 <p>文档修改历史</p>
 <table>
 <col width="12%" />
-<col width="78%" />
-<col width="9%" />
+<col width="76%" />
+<col width="10%" />
 <thead>
 <tr class="header">
 <th align="left">修改时间</th>
@@ -63,15 +63,20 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 <tbody>
 <tr class="odd">
 <td align="left">2014-02-19</td>
-<td align="left">1、文档json示例按照模板编写；<br />2、修正若干错误</td>
+<td align="left">1、增加对请求uri中查询关键字取值value的说明；<br />2、修正对象模型的类型列；<br />3、修正若干错误。</td>
 <td align="left">f00253402</td>
 </tr>
 <tr class="even">
-<td align="left">2014-02-15</td>
-<td align="left">1、修正了描述错误的接口，获取指定meter的statistics，由POST改为了GET；<br />2、文档整体结构按照模板填写；<br />3、将模型中未定义的字段由-改为了N/A；<br />4、进一步改善正确性和可使用性</td>
+<td align="left">2014-02-19</td>
+<td align="left">1、文档json示例按照模板编写；<br />2、修正若干错误。</td>
 <td align="left">f00253402</td>
 </tr>
 <tr class="odd">
+<td align="left">2014-02-15</td>
+<td align="left">1、修正了描述错误的接口，获取指定meter的statistics，由POST改为了GET；<br />2、文档整体结构按照模板填写；<br />3、将模型中未定义的字段由-改为了N/A；<br />4、进一步改善正确性和可使用性。</td>
+<td align="left">f00253402</td>
+</tr>
+<tr class="even">
 <td align="left">2014-02-11</td>
 <td align="left">初稿</td>
 <td align="left">f00253402</td>
@@ -170,18 +175,18 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tr>
 <tr class="even">
 <td align="left">first_sample_timestamp</td>
-<td align="left">date string</td>
+<td align="left">string</td>
 <td align="left">r</td>
 <td align="left">N/A</td>
-<td align="left">N/A</td>
+<td align="left">datetime</td>
 <td align="left">数据采集最初UTC时间</td>
 </tr>
 <tr class="odd">
 <td align="left">last_sample_timestamp</td>
-<td align="left">date string</td>
+<td align="left">string</td>
 <td align="left">r</td>
 <td align="left">N/A</td>
-<td align="left">N/A</td>
+<td align="left">datetime</td>
 <td align="left">数据采集最近UTC时间</td>
 </tr>
 <tr class="even">
@@ -189,7 +194,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 <td align="left">string</td>
 <td align="left">r</td>
 <td align="left">N/A</td>
-<td align="left">N/A</td>
+<td align="left">json dict</td>
 <td align="left">资源元数据，格式化的json对象</td>
 </tr>
 </tbody>
@@ -345,7 +350,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tr>
 <tr class="odd">
 <td align="left">counter_volume</td>
-<td align="left">string</td>
+<td align="left">float</td>
 <td align="left">cr</td>
 <td align="left">N/A</td>
 <td align="left">N/A</td>
@@ -377,10 +382,10 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tr>
 <tr class="odd">
 <td align="left">timestamp</td>
-<td align="left">date string</td>
+<td align="left">string</td>
 <td align="left">r</td>
 <td align="left">N/A</td>
-<td align="left">N/A</td>
+<td align="left">datetime</td>
 <td align="left">时间戳</td>
 </tr>
 <tr class="even">
@@ -388,8 +393,8 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 <td align="left">string</td>
 <td align="left">cr</td>
 <td align="left">N/A</td>
-<td align="left">N/A</td>
-<td align="left">资源元数据（和resource冗余吗？）</td>
+<td align="left">json dict</td>
+<td align="left">资源元数据</td>
 </tr>
 <tr class="odd">
 <td align="left">message_id</td>
@@ -436,7 +441,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tr>
 <tr class="even">
 <td align="left">min</td>
-<td align="left">string</td>
+<td align="left">float</td>
 <td align="left">r</td>
 <td align="left">N/A</td>
 <td align="left">N/A</td>
@@ -444,7 +449,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tr>
 <tr class="odd">
 <td align="left">max</td>
-<td align="left">string</td>
+<td align="left">float</td>
 <td align="left">r</td>
 <td align="left">N/A</td>
 <td align="left">N/A</td>
@@ -452,7 +457,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tr>
 <tr class="even">
 <td align="left">avg</td>
-<td align="left">string</td>
+<td align="left">float</td>
 <td align="left">r</td>
 <td align="left">N/A</td>
 <td align="left">N/A</td>
@@ -460,7 +465,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tr>
 <tr class="odd">
 <td align="left">sum</td>
-<td align="left">string</td>
+<td align="left">float</td>
 <td align="left">r</td>
 <td align="left">N/A</td>
 <td align="left">N/A</td>
@@ -468,7 +473,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tr>
 <tr class="even">
 <td align="left">count</td>
-<td align="left">string</td>
+<td align="left">int</td>
 <td align="left">r</td>
 <td align="left">N/A</td>
 <td align="left">N/A</td>
@@ -476,50 +481,50 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tr>
 <tr class="odd">
 <td align="left">period</td>
-<td align="left">string</td>
+<td align="left">int</td>
 <td align="left">r</td>
 <td align="left">N/A</td>
-<td align="left">N/A</td>
+<td align="left">非负数</td>
 <td align="left">周期，单位秒</td>
 </tr>
 <tr class="even">
 <td align="left">period_start</td>
-<td align="left">date string</td>
+<td align="left">string</td>
 <td align="left">r</td>
 <td align="left">N/A</td>
-<td align="left">N/A</td>
+<td align="left">datetime</td>
 <td align="left">周期起始时间</td>
 </tr>
 <tr class="odd">
 <td align="left">period_end</td>
-<td align="left">date string</td>
+<td align="left">string</td>
 <td align="left">r</td>
 <td align="left">N/A</td>
-<td align="left">N/A</td>
+<td align="left">datetime</td>
 <td align="left">周期结束时间</td>
 </tr>
 <tr class="even">
 <td align="left">duration</td>
-<td align="left">string</td>
+<td align="left">int</td>
 <td align="left">r</td>
 <td align="left">N/A</td>
-<td align="left">N/A</td>
+<td align="left">非负数</td>
 <td align="left">持续时间</td>
 </tr>
 <tr class="odd">
 <td align="left">duration_start</td>
-<td align="left">date string</td>
+<td align="left">string</td>
 <td align="left">r</td>
 <td align="left">N/A</td>
-<td align="left">N/A</td>
+<td align="left">datetime</td>
 <td align="left">持续时间起始时间</td>
 </tr>
 <tr class="even">
 <td align="left">duration_end</td>
-<td align="left">date string</td>
+<td align="left">string</td>
 <td align="left">r</td>
 <td align="left">N/A</td>
-<td align="left">N/A</td>
+<td align="left">datetime</td>
 <td align="left">持续时间结束时</td>
 </tr>
 <tr class="odd">
@@ -533,7 +538,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tbody>
 </table>
 <h2 id="alarm"><span class="header-section-number">3.5</span> Alarm</h2>
-<p>alarm对应数据库alarm表</p>
+<p>Alarm对应数据库alarm表</p>
 <ul>
 <li>Alarm属性表</li>
 </ul>
@@ -583,7 +588,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tr>
 <tr class="odd">
 <td align="left">enabled</td>
-<td align="left">string</td>
+<td align="left">bool</td>
 <td align="left">crw</td>
 <td align="left">N/A</td>
 <td align="left">N/A</td>
@@ -602,7 +607,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 <td align="left">string</td>
 <td align="left">crw</td>
 <td align="left">N/A</td>
-<td align="left">N/A</td>
+<td align="left">json dict</td>
 <td align="left">条件，满足条件即触发alarm</td>
 </tr>
 <tr class="even">
@@ -631,26 +636,26 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tr>
 <tr class="odd">
 <td align="left">period</td>
-<td align="left">string</td>
+<td align="left">int</td>
 <td align="left">crw</td>
 <td align="left">N/A</td>
-<td align="left">N/A</td>
+<td align="left">非负数</td>
 <td align="left">时间窗口，单位秒</td>
 </tr>
 <tr class="even">
 <td align="left">timestamp</td>
-<td align="left">date string</td>
+<td align="left">string</td>
 <td align="left">r</td>
 <td align="left">N/A</td>
-<td align="left">N/A</td>
+<td align="left">datetime</td>
 <td align="left">最后一次更新的时间戳</td>
 </tr>
 <tr class="odd">
 <td align="left">state_timestamp</td>
-<td align="left">date string</td>
+<td align="left">string</td>
 <td align="left">r</td>
 <td align="left">N/A</td>
-<td align="left">N/A</td>
+<td align="left">datetime</td>
 <td align="left">最后一次状态更新的时间戳</td>
 </tr>
 <tr class="even">
@@ -679,7 +684,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tr>
 <tr class="odd">
 <td align="left">repeat_actions</td>
-<td align="left">string</td>
+<td align="left">bool</td>
 <td align="left">crw</td>
 <td align="left">N/A</td>
 <td align="left">N/A</td>
@@ -787,10 +792,10 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tr>
 <tr class="even">
 <td align="left">timestamp</td>
-<td align="left">datetime</td>
+<td align="left">string</td>
 <td align="left">r</td>
 <td align="left">N/A</td>
-<td align="left">N/A</td>
+<td align="left">datetime</td>
 <td align="left">时间戳</td>
 </tr>
 </tbody>
@@ -855,27 +860,27 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 <tr class="odd">
 <td align="left">q.op</td>
 <td align="left">string</td>
-<td align="left">见op表</td>
+<td align="left">见op可选值表</td>
 <td align="left">No</td>
 <td align="left">操作符</td>
 </tr>
 <tr class="even">
 <td align="left">q.value</td>
 <td align="left">string</td>
-<td align="left">N/A</td>
+<td align="left">见value约束表</td>
 <td align="left">No</td>
 <td align="left">值</td>
 </tr>
 <tr class="odd">
 <td align="left">q.field</td>
 <td align="left">string</td>
-<td align="left">见filed表</td>
+<td align="left">见filed可选值表</td>
 <td align="left">No</td>
 <td align="left">查询关键字</td>
 </tr>
 </tbody>
 </table>
-<p>op表</p>
+<p>op可选值表</p>
 <table>
 <thead>
 <tr class="header">
@@ -912,7 +917,24 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tr>
 </tbody>
 </table>
-<p>field表</p>
+<p>value约束表</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">可选值</th>
+<th align="left">约束</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">任意合法时间字符串</td>
+<td align="left">field=timpestamp</td>
+<td align="left">至少形如yyyy-mm-dd，指定精确时间格式可以为yyyy-mm-ddThh:mm:ss，例如2014-02-17T03%3A01%3A05（已经经过url编码替换了特殊字符）</td>
+</tr>
+</tbody>
+</table>
+<p>field可选值表</p>
 <table>
 <thead>
 <tr class="header">
@@ -959,7 +981,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tr>
 <tr class="even">
 <td align="left">metadata</td>
-<td align="left">元数据</td>
+<td align="left">元数据，必须以metadata.{key}的形式出现，key的取值无约束</td>
 </tr>
 <tr class="odd">
 <td align="left">pagination</td>
@@ -1046,7 +1068,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 <col width="2%" />
 <tbody>
 <tr class="odd">
-<td align="left">GET /v2/resources?q.op=eq&amp;q.value=network.nonexistenthostname&amp;q.field=metadata.host</td>
+<td align="left">GET /v2/resources?q.op=eq&amp;q.value=network.nonexistentHostName&amp;q.field=metadata.host</td>
 </tr>
 <tr class="even">
 <td align="left">N/A</td>
@@ -1208,13 +1230,13 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 <tr class="odd">
 <td align="left">q.field</td>
 <td align="left">string</td>
-<td align="left">见filed表</td>
+<td align="left">见filed可选值表</td>
 <td align="left">No</td>
 <td align="left">查询关键字</td>
 </tr>
 </tbody>
 </table>
-<p>field表</p>
+<p>field可选值表</p>
 <table>
 <thead>
 <tr class="header">
@@ -1365,27 +1387,44 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 <tr class="even">
 <td align="left">q.value</td>
 <td align="left">string</td>
-<td align="left">N/A</td>
+<td align="left">见value约束表</td>
 <td align="left">No</td>
 <td align="left">值</td>
 </tr>
 <tr class="odd">
 <td align="left">q.field</td>
 <td align="left">string</td>
-<td align="left">见filed表</td>
+<td align="left">见filed可选值表</td>
 <td align="left">No</td>
 <td align="left">查询关键字</td>
 </tr>
 <tr class="even">
 <td align="left">limit</td>
 <td align="left">int</td>
-<td align="left">N/A</td>
+<td align="left">必须为非负数</td>
 <td align="left">No</td>
 <td align="left">返回结果数</td>
 </tr>
 </tbody>
 </table>
-<p>field表</p>
+<p>value约束表</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">可选值</th>
+<th align="left">约束</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">任意合法时间字符串</td>
+<td align="left">field={start,end}</td>
+<td align="left">至少形如yyyy-mm-dd，指定精确时间格式可以为yyyy-mm-ddThh:mm:ss，例如2014-02-17T03%3A01%3A05（已经经过url编码替换了特殊字符）</td>
+</tr>
+</tbody>
+</table>
+<p>field可选值表</p>
 <table>
 <thead>
 <tr class="header">
@@ -1427,18 +1466,18 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tr>
 <tr class="odd">
 <td align="left">start_timestamp_op</td>
-<td align="left">见tsop表</td>
+<td align="left">见tsop可选值表</td>
 <td align="left">起始时间戳操作符</td>
 </tr>
 <tr class="even">
 <td align="left">end_timpestamp_op</td>
-<td align="left">见tsop表</td>
+<td align="left">见tsop可选值表</td>
 <td align="left">结束时间戳操作符</td>
 </tr>
 <tr class="odd">
 <td align="left">metadata</td>
 <td align="left">N/A</td>
-<td align="left">元数据</td>
+<td align="left">元数据，形如metadata.{key}，key取值无限制</td>
 </tr>
 <tr class="even">
 <td align="left">meter</td>
@@ -1447,7 +1486,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tr>
 </tbody>
 </table>
-<p>tsop表</p>
+<p>见tsop可选值表</p>
 <table>
 <thead>
 <tr class="header">
@@ -1669,7 +1708,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 <tr class="even">
 <td align="left">counter_type</td>
 <td align="left">string</td>
-<td align="left">YES</td>
+<td align="left">见counter可选值表</td>
 <td align="left">YES</td>
 <td align="left">度量类型</td>
 </tr>
@@ -1685,7 +1724,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 <td align="left">float</td>
 <td align="left">N/A</td>
 <td align="left">YES</td>
-<td align="left">度量值</td>
+<td align="left">度量值，可以取负数！</td>
 </tr>
 <tr class="odd">
 <td align="left">resource_id</td>
@@ -1709,15 +1748,16 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 <td align="left">用户id</td>
 </tr>
 <tr class="even">
-<td align="left">resource_metadata string</td>
-<td align="left">json object</td>
+<td align="left">resource_metadata</td>
+<td align="left">string</td>
+<td align="left">json dict</td>
 <td align="left">NO</td>
 <td align="left">资源元数据</td>
 </tr>
 <tr class="odd">
 <td align="left">timestamp</td>
-<td align="left">date string</td>
-<td align="left">必须为时间格式</td>
+<td align="left">string</td>
+<td align="left">datetime</td>
 <td align="left">NO</td>
 <td align="left">时间戳</td>
 </tr>
@@ -1730,7 +1770,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tr>
 </tbody>
 </table>
-<p>couter_type可选值</p>
+<p>couter_type可选值表</p>
 <table>
 <thead>
 <tr class="header">
@@ -1773,7 +1813,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
         <span class="dt">&quot;counter_name&quot;</span>: <span class="st">&quot;router&quot;</span>,
         <span class="dt">&quot;counter_type&quot;</span>: <span class="st">&quot;gauge&quot;</span>,
         <span class="dt">&quot;counter_unit&quot;</span>: <span class="st">&quot;router&quot;</span>,
-        <span class="dt">&quot;counter_volume&quot;</span>: <span class="st">&quot;1&quot;</span>,
+        <span class="dt">&quot;counter_volume&quot;</span>: <span class="st">&quot;-1&quot;</span>,
         <span class="dt">&quot;resource_id&quot;</span>: <span class="st">&quot;x&quot;</span>
     }
 ]</code></pre></td>
@@ -1796,7 +1836,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
         <span class="dt">&quot;counter_name&quot;</span>: <span class="st">&quot;router&quot;</span>,
         <span class="dt">&quot;counter_type&quot;</span>: <span class="st">&quot;gauge&quot;</span>,
         <span class="dt">&quot;counter_unit&quot;</span>: <span class="st">&quot;router&quot;</span>,
-        <span class="dt">&quot;counter_volume&quot;</span>: <span class="fl">1.0</span>,
+        <span class="dt">&quot;counter_volume&quot;</span>: <span class="fl">-1.0</span>,
         <span class="dt">&quot;message_id&quot;</span>: <span class="st">&quot;90919fdc-927b-11e3-9310-548998f6e71d&quot;</span>,
         <span class="dt">&quot;project_id&quot;</span>: <span class="st">&quot;313a8bc21b994e60b93d6fff7c1e0c1b&quot;</span>,
         <span class="dt">&quot;resource_id&quot;</span>: <span class="st">&quot;x&quot;</span>,
@@ -1851,34 +1891,51 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 <tr class="even">
 <td align="left">q.value</td>
 <td align="left">string</td>
-<td align="left">N/A</td>
+<td align="left">见value约束表</td>
 <td align="left">No</td>
 <td align="left">值</td>
 </tr>
 <tr class="odd">
 <td align="left">q.field</td>
 <td align="left">string</td>
-<td align="left">见filed取值表</td>
+<td align="left">见filed可选值表</td>
 <td align="left">No</td>
 <td align="left">查询关键字</td>
 </tr>
 <tr class="even">
 <td align="left">period</td>
 <td align="left">int</td>
-<td align="left">非负数</td>
+<td align="left">非负整数</td>
 <td align="left">No</td>
 <td align="left">间隔</td>
 </tr>
 <tr class="odd">
 <td align="left">groupby</td>
 <td align="left">string</td>
-<td align="left">见groupby取值表</td>
+<td align="left">见groupby可选值表</td>
 <td align="left">No</td>
 <td align="left">分组</td>
 </tr>
 </tbody>
 </table>
-<p>field取值表</p>
+<p>value约束表</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">可选值</th>
+<th align="left">约束</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">任意合法时间字符串</td>
+<td align="left">field={start,end}</td>
+<td align="left">至少形如yyyy-mm-dd，指定精确时间格式可以为yyyy-mm-ddThh:mm:ss，例如2014-02-17T03%3A01%3A05（已经经过url编码替换了特殊字符）</td>
+</tr>
+</tbody>
+</table>
+<p>field可选值表</p>
 <table>
 <thead>
 <tr class="header">
@@ -1913,15 +1970,15 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tr>
 <tr class="odd">
 <td align="left">start_timestamp_op</td>
-<td align="left">起始时间戳操作符，见tsop取值表</td>
+<td align="left">起始时间戳操作符，见tsop可选值表</td>
 </tr>
 <tr class="even">
 <td align="left">end_timpestamp_op</td>
-<td align="left">结束时间戳操作符，见tsop取值表</td>
+<td align="left">结束时间戳操作符，见tsop可选值表</td>
 </tr>
 <tr class="odd">
 <td align="left">metadata</td>
-<td align="left">元数据</td>
+<td align="left">元数据，形如metadata.{key}，key取值无限制</td>
 </tr>
 <tr class="even">
 <td align="left">meter</td>
@@ -1929,7 +1986,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tr>
 </tbody>
 </table>
-<p>tsop取值表</p>
+<p>tsop可选值表</p>
 <table>
 <thead>
 <tr class="header">
@@ -1960,7 +2017,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tr>
 </tbody>
 </table>
-<p>groupby取值表</p>
+<p>groupby可选值表</p>
 <table>
 <thead>
 <tr class="header">
@@ -2179,13 +2236,13 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 <tr class="odd">
 <td align="left">q.field</td>
 <td align="left">string</td>
-<td align="left">见filed取值表</td>
+<td align="left">见filed可选值表</td>
 <td align="left">No</td>
 <td align="left">查询关键字</td>
 </tr>
 </tbody>
 </table>
-<p>field取值表</p>
+<p>field可选值表</p>
 <table>
 <thead>
 <tr class="header">
@@ -2223,7 +2280,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 <tr class="odd">
 <td align="left">enabled</td>
 <td align="left">string</td>
-<td align="left">见enabled取值表</td>
+<td align="left">见enabled约束表</td>
 <td align="left">是否启用</td>
 </tr>
 <tr class="even">
@@ -2389,8 +2446,8 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 <tbody>
 <tr class="odd">
 <td align="left">N/A</td>
+<td align="left">string</td>
 <td align="left">json dict</td>
-<td align="left">N/A</td>
 <td align="left">YES</td>
 <td align="left">Alarm数据</td>
 </tr>
@@ -2418,21 +2475,21 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 <tr class="even">
 <td align="left">type</td>
 <td align="left">string</td>
-<td align="left">YES</td>
+<td align="left">见type可选值表</td>
 <td align="left">YES</td>
 <td align="left">类型</td>
 </tr>
 <tr class="odd">
 <td align="left">threshold_rule</td>
-<td align="left">json dict</td>
-<td align="left">type=threshold</td>
+<td align="left">string</td>
+<td align="left">json dict，当type=threshold时需指定</td>
 <td align="left">YES</td>
 <td align="left">阈值规则</td>
 </tr>
 <tr class="even">
 <td align="left">combination_rule</td>
-<td align="left">json dict</td>
-<td align="left">type=combination</td>
+<td align="left">string</td>
+<td align="left">json dict，当type=combination时需指定</td>
 <td align="left">YES</td>
 <td align="left">alarm id</td>
 </tr>
@@ -2460,14 +2517,14 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 <tr class="even">
 <td align="left">state</td>
 <td align="left">string</td>
-<td align="left">YES</td>
+<td align="left">见state可选值表</td>
 <td align="left">NO</td>
 <td align="left">状态</td>
 </tr>
 <tr class="odd">
 <td align="left">enabled</td>
 <td align="left">bool</td>
-<td align="left">YES</td>
+<td align="left">见enabled约束表</td>
 <td align="left">NO</td>
 <td align="left">是否启用</td>
 </tr>
@@ -2501,7 +2558,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tr>
 </tbody>
 </table>
-<p>type可选值</p>
+<p>type可选值表</p>
 <table>
 <thead>
 <tr class="header">
@@ -2563,21 +2620,21 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 <tr class="odd">
 <td align="left">statistic</td>
 <td align="left">string</td>
-<td align="left">YES</td>
+<td align="left">见statistic可选值表</td>
 <td align="left">NO</td>
 <td align="left">统计选项</td>
 </tr>
 <tr class="even">
 <td align="left">comparison_operator</td>
 <td align="left">string</td>
-<td align="left">YES</td>
+<td align="left">见comparison_operator可选值表</td>
 <td align="left">NO</td>
 <td align="left">比较符</td>
 </tr>
 <tr class="odd">
 <td align="left">query</td>
+<td align="left">string</td>
 <td align="left">json list</td>
-<td align="left">YES</td>
 <td align="left">NO</td>
 <td align="left">统计时的过滤项</td>
 </tr>
@@ -2597,8 +2654,8 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 <tbody>
 <tr class="odd">
 <td align="left">alarm_ids</td>
+<td align="left">string</td>
 <td align="left">json list</td>
-<td align="left">N/A</td>
 <td align="left">YES</td>
 <td align="left">alarm id list</td>
 </tr>
@@ -2632,7 +2689,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tr>
 </tbody>
 </table>
-<p>state可选值</p>
+<p>state可选值表</p>
 <table>
 <thead>
 <tr class="header">
@@ -2655,7 +2712,26 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tr>
 </tbody>
 </table>
-<p>statistic可选值</p>
+<p>enabled约束表</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">可选值</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">t, true, on, y, yes, 1</td>
+<td align="left">大小写不敏感，取值为True</td>
+</tr>
+<tr class="even">
+<td align="left">其他</td>
+<td align="left">取值为False</td>
+</tr>
+</tbody>
+</table>
+<p>statistic可选值表</p>
 <table>
 <thead>
 <tr class="header">
@@ -2686,7 +2762,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tr>
 </tbody>
 </table>
-<p>comparison_operator可选值</p>
+<p>comparison_operator可选值表</p>
 <table>
 <thead>
 <tr class="header">
@@ -2721,7 +2797,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tr>
 </tbody>
 </table>
-<p>operator可选值</p>
+<p>operator可选值表</p>
 <table>
 <thead>
 <tr class="header">
@@ -2732,11 +2808,11 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 <tbody>
 <tr class="odd">
 <td align="left">and</td>
-<td align="left">alarm同时发生</td>
+<td align="left">逻辑与，条件同时满足判定为真</td>
 </tr>
 <tr class="even">
 <td align="left">or</td>
-<td align="left">其中一个alarm发生</td>
+<td align="left">逻辑或，条件之一满足判定为真</td>
 </tr>
 </tbody>
 </table>
@@ -3091,16 +3167,43 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 <table>
 <thead>
 <tr class="header">
-<th align="left">REST VERB</th>
-<th align="left">URI</th>
-<th align="left">DESCRIPTION</th>
+<th align="left">参数名</th>
+<th align="left">参数类型</th>
+<th align="left">约束</th>
+<th align="left">必选</th>
+<th align="left">备注</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td align="left">N/A</td>
 <td align="left">string</td>
-<td align="left">N/A</td>
+<td align="left">见state可选值表</td>
+<td align="left">YES</td>
+<td align="left">告警状态</td>
+</tr>
+</tbody>
+</table>
+<p>state可选值表</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">可选值</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ok</td>
+<td align="left">正常</td>
+</tr>
+<tr class="even">
+<td align="left">alarm</td>
+<td align="left">警报</td>
+</tr>
+<tr class="odd">
+<td align="left">insufficient data</td>
+<td align="left">数据不正确</td>
 </tr>
 </tbody>
 </table>
@@ -3171,13 +3274,13 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 <tr class="odd">
 <td align="left">N/A</td>
 <td align="left">string</td>
-<td align="left">YES</td>
+<td align="left">见state可选值表</td>
 <td align="left">YES</td>
 <td align="left">告警状态</td>
 </tr>
 </tbody>
 </table>
-<p>可选值</p>
+<p>state可选值表</p>
 <table>
 <thead>
 <tr class="header">
@@ -3235,9 +3338,32 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 <tr class="odd">
 <td align="left">N/A</td>
 <td align="left">string</td>
-<td align="left">N/A</td>
+<td align="left">见state可选值表</td>
 <td align="left">YES</td>
 <td align="left">告警状态</td>
+</tr>
+</tbody>
+</table>
+<p>state可选值表</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">可选值</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ok</td>
+<td align="left">正常</td>
+</tr>
+<tr class="even">
+<td align="left">alarm</td>
+<td align="left">警报</td>
+</tr>
+<tr class="odd">
+<td align="left">insufficient data</td>
+<td align="left">数据不正确</td>
 </tr>
 </tbody>
 </table>
@@ -3328,7 +3454,37 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 <td align="left"><pre class="sourceCode json"><code class="sourceCode json">[
     {
         <span class="dt">&quot;alarm_id&quot;</span>: <span class="st">&quot;7505cd03-dc0f-4539-9906-d019783148fe&quot;</span>,
-        <span class="dt">&quot;detail&quot;</span>: <span class="st">&quot;{\&quot;alarm_actions\&quot;: [], \&quot;user_id\&quot;: \&quot;f86eeee169ed48cf892ceac3d5e27a9f\&quot;, \&quot;name\&quot;: \&quot;test-member-create-alarm\&quot;, \&quot;timestamp\&quot;: \&quot;2014-02-08T10:07:03.870024\&quot;, \&quot;enabled\&quot;: true, \&quot;state_timestamp\&quot;: \&quot;2014-02-08T10:07:03.870024\&quot;, \&quot;rule\&quot;: {\&quot;meter_name\&quot;: \&quot;instance\&quot;, \&quot;evaluation_periods\&quot;: 1, \&quot;period\&quot;: 60, \&quot;statistic\&quot;: \&quot;avg\&quot;, \&quot;threshold\&quot;: 5.0, \&quot;query\&quot;: [{\&quot;field\&quot;: \&quot;project_id\&quot;, \&quot;value\&quot;: \&quot;aebb7f33b7fc4cf486d3a2cdacac8ac1\&quot;, \&quot;op\&quot;: \&quot;eq\&quot;}], \&quot;comparison_operator\&quot;: \&quot;eq\&quot;}, \&quot;alarm_id\&quot;: \&quot;7505cd03-dc0f-4539-9906-d019783148fe\&quot;, \&quot;state\&quot;: \&quot;insufficient data\&quot;, \&quot;insufficient_data_actions\&quot;: [], \&quot;repeat_actions\&quot;: false, \&quot;ok_actions\&quot;: [], \&quot;project_id\&quot;: \&quot;aebb7f33b7fc4cf486d3a2cdacac8ac1\&quot;, \&quot;type\&quot;: \&quot;threshold\&quot;, \&quot;description\&quot;: \&quot;Alarm when instance is eq a avg of 5.0 over 60 seconds\&quot;}&quot;</span>,
+        <span class="dt">&quot;detail&quot;</span>: {
+            <span class="dt">&quot;alarm_actions&quot;</span>: [],
+            <span class="dt">&quot;alarm_id&quot;</span>: <span class="st">&quot;7505cd03-dc0f-4539-9906-d019783148fe&quot;</span>,
+            <span class="dt">&quot;description&quot;</span>: <span class="st">&quot;Alarm when instance is eq a avg of 5.0 over 60 seconds&quot;</span>,
+            <span class="dt">&quot;enabled&quot;</span>: <span class="dv">true</span>,
+            <span class="dt">&quot;insufficient_data_actions&quot;</span>: [],
+            <span class="dt">&quot;name&quot;</span>: <span class="st">&quot;test-member-create-alarm&quot;</span>,
+            <span class="dt">&quot;ok_actions&quot;</span>: [],
+            <span class="dt">&quot;project_id&quot;</span>: <span class="st">&quot;aebb7f33b7fc4cf486d3a2cdacac8ac1&quot;</span>,
+            <span class="dt">&quot;repeat_actions&quot;</span>: <span class="dv">false</span>,
+            <span class="dt">&quot;rule&quot;</span>: {
+                <span class="dt">&quot;comparison_operator&quot;</span>: <span class="st">&quot;eq&quot;</span>,
+                <span class="dt">&quot;evaluation_periods&quot;</span>: <span class="dv">1</span>,
+                <span class="dt">&quot;meter_name&quot;</span>: <span class="st">&quot;instance&quot;</span>,
+                <span class="dt">&quot;period&quot;</span>: <span class="dv">60</span>,
+                <span class="dt">&quot;query&quot;</span>: [
+                    {
+                        <span class="dt">&quot;field&quot;</span>: <span class="st">&quot;project_id&quot;</span>,
+                        <span class="dt">&quot;op&quot;</span>: <span class="st">&quot;eq&quot;</span>,
+                        <span class="dt">&quot;value&quot;</span>: <span class="st">&quot;aebb7f33b7fc4cf486d3a2cdacac8ac1&quot;</span>
+                    }
+                ],
+                <span class="dt">&quot;statistic&quot;</span>: <span class="st">&quot;avg&quot;</span>,
+                <span class="dt">&quot;threshold&quot;</span>: <span class="fl">5.0</span>
+            },
+            <span class="dt">&quot;state&quot;</span>: <span class="st">&quot;insufficient data&quot;</span>,
+            <span class="dt">&quot;state_timestamp&quot;</span>: <span class="st">&quot;2014-02-08T10:07:03.870024&quot;</span>,
+            <span class="dt">&quot;timestamp&quot;</span>: <span class="st">&quot;2014-02-08T10:07:03.870024&quot;</span>,
+            <span class="dt">&quot;type&quot;</span>: <span class="st">&quot;threshold&quot;</span>,
+            <span class="dt">&quot;user_id&quot;</span>: <span class="st">&quot;f86eeee169ed48cf892ceac3d5e27a9f&quot;</span>
+        },
         <span class="dt">&quot;event_id&quot;</span>: <span class="st">&quot;758e4f1d-cf0a-4b19-b715-856528be7aba&quot;</span>,
         <span class="dt">&quot;on_behalf_of&quot;</span>: <span class="st">&quot;aebb7f33b7fc4cf486d3a2cdacac8ac1&quot;</span>,
         <span class="dt">&quot;project_id&quot;</span>: <span class="st">&quot;aebb7f33b7fc4cf486d3a2cdacac8ac1&quot;</span>,
@@ -3340,6 +3496,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tr>
 </tbody>
 </table>
+<p>detail的实际返回是：&quot;{&quot;alarm_actions&quot;: [], &quot;user_id&quot;: &quot;f86eeee169ed48cf892ceac3d5e27a9f&quot;, &quot;name&quot;: &quot;test-member-create-alarm&quot;, &quot;timestamp&quot;: &quot;2014-02-08T10:07:03.870024&quot;, &quot;enabled&quot;: true, &quot;state_timestamp&quot;: &quot;2014-02-08T10:07:03.870024&quot;, &quot;rule&quot;: {&quot;meter_name&quot;: &quot;instance&quot;, &quot;evaluation_periods&quot;: 1, &quot;period&quot;: 60, &quot;statistic&quot;: &quot;avg&quot;, &quot;threshold&quot;: 5.0, &quot;query&quot;: [{&quot;field&quot;: &quot;project_id&quot;, &quot;value&quot;: &quot;aebb7f33b7fc4cf486d3a2cdacac8ac1&quot;, &quot;op&quot;: &quot;eq&quot;}], &quot;comparison_operator&quot;: &quot;eq&quot;}, &quot;alarm_id&quot;: &quot;7505cd03-dc0f-4539-9906-d019783148fe&quot;, &quot;state&quot;: &quot;insufficient data&quot;, &quot;insufficient_data_actions&quot;: [], &quot;repeat_actions&quot;: false, &quot;ok_actions&quot;: [], &quot;project_id&quot;: &quot;aebb7f33b7fc4cf486d3a2cdacac8ac1&quot;, &quot;type&quot;: &quot;threshold&quot;, &quot;description&quot;: &quot;Alarm when instance is eq a avg of 5.0 over 60 seconds&quot;}&quot;。考虑到这可能是一个bug，且对排版不利，示例中对这段string做了json转换。</p>
 <script type="text/javascript">
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-45606410-1']);
@@ -3354,7 +3511,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'zqfan'; // required: replace example with your forum shortname
-    /* var disqus_title = '$title'; */
+    /* var disqus_title = '$title$'; */
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
