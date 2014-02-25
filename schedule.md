@@ -11,10 +11,9 @@ This page showes what I'm going to do, and what I've done in OpenStack project.
 
 # TODO
 * (post) ceilometer-collector mechanism
-* (doc) update ceilometer havana api v2 online document to version 0.4
+* (bug) ceilometer mysql storage has bad performance
 
 # WAIT
-* (fix) (api-site) [Add delete method on alarm in Ceilometer API reference](https://review.openstack.org/#/c/75012/)
 * (exp) (ceilometer) http head size limit
 * (bug) (ceilometer) [delete non-existent alarm return incorrect faultstring](https://bugs.launchpad.net/ceilometer/+bug/1280036)
 * (fix) (ceilometerclient) [Adjust Exception inheritance relationship](https://review.openstack.org/#/c/75428/)
@@ -31,7 +30,9 @@ This page showes what I'm going to do, and what I've done in OpenStack project.
 * (doc) ceilometer mongodb data is overload
 
 # DONE
+* 2014.02.25 (doc) update ceilometer havana api v2 online document to version 0.4
 * 2014.02.24 (post) [OpenStack Weekly News](http://zqfan.github.io/openstack-weekly.html)
+* 2014.02.23 (fix) (api-site) [Add delete method on alarm in Ceilometer API reference](https://review.openstack.org/#/c/75012/)
 * 2014.02.21 (fix) (hacking) [Enhance H233 rule](https://review.openstack.org/#/c/68573/)
 * 2014.02.21 (fix) (openstack-manuals) [Add ceilometer-alarm-* service for SLES install guide](https://review.openstack.org/#/c/75004/)
 * 2014.02.21 (exp) devstack install on dev machine
