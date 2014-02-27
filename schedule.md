@@ -10,8 +10,10 @@ tags: [schedule]
 This page showes what I'm going to do, and what I've done in OpenStack project.
 
 # TODO
-* (post) ceilometer-collector mechanism
-* (bug) ceilometer mysql storage has bad performance
+* (post) (ceilometer) data collector mechanism
+* (bug) (ceilometer) mysql storage has bad performance
+* (bp) (ceilometer) advanced policy rule
+* (post) (nova) different and limit for booting from {image, volume, snapshot}, what about using IPSAN as backend?
 
 # WAIT
 * (exp) (ceilometer) http head size limit
@@ -30,6 +32,9 @@ This page showes what I'm going to do, and what I've done in OpenStack project.
 * (doc) ceilometer mongodb data is overload
 
 # DONE
+* 2014.02.27 (fix) (requirements) [Upgrade six to 1.5.2](https://review.openstack.org/#/c/68424/)
+* 2014.02.27 (fix) (keystoneclient) [Remove redundant default value None for dict.get](https://review.openstack.org/#/c/75614/)
+* 2014.02.25 (fix) (keystone) [Remove redundant default value None for dict.get](https://review.openstack.org/#/c/75613/)
 * 2014.02.25 (doc) update ceilometer havana api v2 online document to version 0.4
 * 2014.02.24 (post) [OpenStack Weekly News](http://zqfan.github.io/openstack-weekly.html)
 * 2014.02.23 (fix) (api-site) [Add delete method on alarm in Ceilometer API reference](https://review.openstack.org/#/c/75012/)
