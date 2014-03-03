@@ -15,6 +15,11 @@ Information is coming from:
 * Ceilometer PTL's blog: http://julien.danjou.info/blog/
 * UnitedStack blog: http://www.ustack.com/blog/
 * enovance blog: http://techs.enovance.com/
+* [ceilometer irc meeting record](http://eavesdrop.openstack.org/meetings/ceilometer/2014/)
+
+# week 09
+* cinder ptl John Griffith提到后端vendor一次黑箱操作意图控制cinder代码的行为，呼吁社区合作应当公开透明。[原文](http://lists.openstack.org/pipermail/openstack-dev/2014-March/028624.html)
+* Morgan Fainberg提出为支持多后台身份服务，将user id的长度从64字节增加到255字节，引起激烈讨论，反对者Jay Pipes认为user id有多长是keystone内部的事，外部调用时所使用的应该越短越好，最好只是16字节的uuid，另外大家都担心的对现有数据库迁移。[原文](http://lists.openstack.org/pipermail/openstack-dev/2014-February/028125.html)
 
 # week 08
 * Mailing List:
