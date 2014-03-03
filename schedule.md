@@ -32,6 +32,8 @@ This page showes what I'm going to do, and what I've done in OpenStack project.
 * (doc) ceilometer mongodb data is overload
 
 # DONE
+* 2014.02.17 (fix) (openstack-manuals) [Fix incorrect nova boot command](https://review.openstack.org/#/c/76823/)
+* 2014.02.17 (fix) (openstack-manuals) [Remove compute_scheduler_driver option](https://review.openstack.org/#/c/76741/)
 * 2014.02.27 (fix) (requirements) [Upgrade six to 1.5.2](https://review.openstack.org/#/c/68424/)
 * 2014.02.27 (fix) (keystoneclient) [Remove redundant default value None for dict.get](https://review.openstack.org/#/c/75614/)
 * 2014.02.25 (fix) (keystone) [Remove redundant default value None for dict.get](https://review.openstack.org/#/c/75613/)
