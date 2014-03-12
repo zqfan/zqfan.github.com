@@ -13,17 +13,15 @@ This page showes what I'm going to do, and what I've done in OpenStack project.
 * (post) (ceilometer) data collector mechanism
 * (bug) (ceilometer) mysql storage has bad performance
 * (bp) (ceilometer) advanced policy rule
-* (post) (nova) different and limit for booting from {image, volume, snapshot}, what about using IPSAN as backend?
+* (post) (nova) different and limit for booting from {image, volume, snapshot}
+* (exp) (havana) environment deployment to support experiment
 
 # WAIT
-* (exp) (ceilometer) http head size limit
 * (bug) (ceilometer) [delete non-existent alarm return incorrect faultstring](https://bugs.launchpad.net/ceilometer/+bug/1280036)
 * (fix) (ceilometerclient) [Adjust Exception inheritance relationship](https://review.openstack.org/#/c/75428/)
-* (fix) (heat) [Remove redundant default value None for dict.get](https://review.openstack.org/#/c/75612/)
-* (fix) (neutronclient) [Enable hacking H233 rule](https://review.openstack.org/68545)
 * (fix( (neutronclient) [Remove cliff-tablib from test-requirements](https://review.openstack.org/#/c/49886/)
 * (fix) (neutronclient) [Refactor tests/unit/test_shell.py](https://review.openstack.org/#/c/41615/)
-* (fix) (nova) [Fix incorrect kwargs 'reason' for HTTPBadRequest](https://review.openstack.org/#/c/64264/)
+* (fix) (ceilometer) [Skip central agent interval_task when keystone fails](https://review.openstack.org/#/c/78079/)
 
 
 # WISH
@@ -32,8 +30,12 @@ This page showes what I'm going to do, and what I've done in OpenStack project.
 * (doc) ceilometer mongodb data is overload
 
 # DONE
-* 2014.02.17 (fix) (openstack-manuals) [Fix incorrect nova boot command](https://review.openstack.org/#/c/76823/)
-* 2014.02.17 (fix) (openstack-manuals) [Remove compute_scheduler_driver option](https://review.openstack.org/#/c/76741/)
+* 2014.03.06 (fix) (nova) [Fix incorrect kwargs 'reason' for HTTPBadRequest](https://review.openstack.org/#/c/64264/)
+* 2014.03.05 (fix) (api-site) [Fix incorrect language specification](https://review.openstack.org/#/c/76920/)
+* 2014.03.04 (fix) (heat) [Remove redundant default value None for dict.get](https://review.openstack.org/#/c/75612/)
+* 2014.03.03 (fix) (neutronclient) [Enable hacking H233 rule](https://review.openstack.org/#/c/68545/)
+* 2014.02.28 (fix) (openstack-manuals) [Fix incorrect nova boot command](https://review.openstack.org/#/c/76823/)
+* 2014.02.27 (fix) (openstack-manuals) [Remove compute_scheduler_driver option](https://review.openstack.org/#/c/76741/)
 * 2014.02.27 (fix) (requirements) [Upgrade six to 1.5.2](https://review.openstack.org/#/c/68424/)
 * 2014.02.27 (fix) (keystoneclient) [Remove redundant default value None for dict.get](https://review.openstack.org/#/c/75614/)
 * 2014.02.25 (fix) (keystone) [Remove redundant default value None for dict.get](https://review.openstack.org/#/c/75613/)

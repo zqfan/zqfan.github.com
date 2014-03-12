@@ -17,6 +17,25 @@ Information is coming from:
 * enovance blog: http://techs.enovance.com/
 * [ceilometer irc meeting record](http://eavesdrop.openstack.org/meetings/ceilometer/2014/)
 
+# week 10
+Stackalytics:
+* Total commits: 67
+* Total LOC: 1763
+* Review stat (-2, -1, +1, +2, A): 0, 28, 138, 0, 0
+* Draft Blueprints: 2
+* Completed Blueprints: 0
+* Emails: 16
+
+Gerrit:
+* Ceilometer项目正在试图将oslo.rpc替换为oslo.messaging，[Replace oslo.rpc by oslo.messaging](https://review.openstack.org/#/c/57457/38)
+
+Mailing List:
+* Sean Dague提出在Gerrit上审核Nova Blueprint，获得一致认可并已在商讨细节问题。[原文](http://lists.openstack.org/pipermail/openstack-dev/2014-March/029232.html)
+* OpenStack Launchpad Answers现已正式迁移到Ask.openstack.org，Stefano Maffulli正联系各项目PTL关闭Launchapd上的Answer功能。[原文](http://lists.openstack.org/pipermail/openstack-dev/2014-March/028787.html)
+* nova api v2 v.s. v3讨论：[Russell Bryant: Concrete Proposal for Keeping V2 API](http://lists.openstack.org/pipermail/openstack-dev/2014-March/028724.html)
+* Miguel Angel Ajo提到rootwrap的效率很低，导致主机启动时耗费了大量时间（2.5倍于sudo）。一些想法如C重写rootwrap，开启管道通信等被提出但仍在讨论中。[原文](http://lists.openstack.org/pipermail/openstack-dev/2014-March/029017.html)
+* Yuzhou提议一个类似于网吧系统或者沙盘系统的非持久化存储，当虚拟机一停机，所有新增数据就被删除。Joe Gordon提出这个想法可以通过快照-删vm-从快照创vm的流程解决。尽管Qin Zhao等人向他灌输业务流程里使用者也许压根没有权限创建虚拟机，Joe却无法理解为何会出现这种场景。我觉得这个讨论值得玩味，管中窥豹，东西方环境差异导致的思维差异，可见一斑。[原文](http://lists.openstack.org/pipermail/openstack-dev/2014-March/028799.html)
+
 # week 09
 * cinder ptl John Griffith提到后端vendor一次黑箱操作意图控制cinder代码的行为，呼吁社区合作应当公开透明。[原文](http://lists.openstack.org/pipermail/openstack-dev/2014-March/028624.html)
 * Morgan Fainberg提出为支持多后台身份服务，将user id的长度从64字节增加到255字节，引起激烈讨论，反对者Jay Pipes认为user id有多长是keystone内部的事，外部调用时所使用的应该越短越好，最好只是16字节的uuid，另外大家都担心的对现有数据库迁移。[原文](http://lists.openstack.org/pipermail/openstack-dev/2014-February/028125.html)
