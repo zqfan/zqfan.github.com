@@ -39,6 +39,17 @@ bhs.BaseHTTPRequestHandler.address_string = lambda x: x.client_address[0]
 
 then restart the ceilometer-api service, done.
 
+But the ceilometer-drive (core developers) doesn't accept monkypatch module, see [https://review.openstack.org/#/c/79876/](https://review.openstack.org/#/c/79876/), so we need to use a special param in wsgiref.simple_server.make_server, which is `handler_class`. We can create a class inherits from wsgiref.simple_server.WSGIRequestHandler, and override its log_message or client_address method, thanks for the duck type of Python. The final solution for now is:
+
+{% highlight python linenos=table %}
+class CeiloWSGIRequestHandler(simple_server.WSGIRequestHandler):
+    def address_string(self):
+        return self.client_address[0]
+
+srv = simple_server.make_server(host, port, root,
+                                handler_class=CeiloWSGIRequestHandler)
+{% endhighlight %}
+
 materials:
 * [wsgiref should not be used in production enviroment and it doesn't support muti-thread](https://mail.python.org/pipermail/web-sig/2008-July/003518.html)
 * [wsgiref.simple_server will do reserve dns query](https://mail.python.org/pipermail/web-sig/2008-July/003519.html)

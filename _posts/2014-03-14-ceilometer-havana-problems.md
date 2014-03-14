@@ -16,7 +16,7 @@ There is a workaround which adds `sleep 5` statement before **/sbin/startproc -s
 Ceilometer 2013.2.3 on SLES 11 sp3 seems already fix this problem but I don't know how.
 
 ### agent-central fail when keystone is not available
-ceilometer-agent-central uses oslo.loopingcall, which will catch `Exception` raiseed by registed interval task and stop calling it. There is a chance when ceilometer-agent-central do its periodical task while keystone service is not available, then the ceilometer.agent.central.AgentManager.interval_task will fail to create keystoneclient object, which will raise an exception to upper caller. In such scenario, the periodical poll task will be stopped, while the ceilometer-agent-central process is still running.
+ceilometer-agent-central uses oslo.loopingcall, which will catch `Exception` raiseed by registed interval task and stop calling it. There is a chance when ceilometer-agent-central do its periodical task while keystone service is not available, then the ceilometer.central.manager.AgentManager.interval_task will fail to create keystoneclient object, which will raise an exception to upper caller. In such scenario, the periodical poll task will be stopped, while the ceilometer-agent-central process is still running.
 
 The workaround (actually it is a bug fix) is simple: catch that exception (or `Exception`) and just return directly, which means skip this particular period of poll task.
 
