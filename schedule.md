@@ -30,6 +30,7 @@ This page showes what I'm going to do, and what I've done in OpenStack project.
 * (doc) ceilometer mongodb data is overload
 
 # DONE
+* 2014.03.18 (fix) (openstack-manuals) [Correct swift proxy service name](https://review.openstack.org/#/c/81156/)
 * 2014.03.06 (fix) (nova) [Fix incorrect kwargs 'reason' for HTTPBadRequest](https://review.openstack.org/#/c/64264/)
 * 2014.03.05 (fix) (api-site) [Fix incorrect language specification](https://review.openstack.org/#/c/76920/)
 * 2014.03.04 (fix) (heat) [Remove redundant default value None for dict.get](https://review.openstack.org/#/c/75612/)
