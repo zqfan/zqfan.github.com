@@ -6,7 +6,6 @@ category: "openstack"
 tags: [schedule]
 ---
 {% include JB/setup %}
-
 This page showes what I'm going to do, and what I've done in OpenStack project.
 
 # TODO
@@ -21,15 +20,14 @@ This page showes what I'm going to do, and what I've done in OpenStack project.
 * (fix) (ceilometerclient) [Adjust Exception inheritance relationship](https://review.openstack.org/#/c/75428/)
 * (fix( (neutronclient) [Remove cliff-tablib from test-requirements](https://review.openstack.org/#/c/49886/)
 * (fix) (neutronclient) [Refactor tests/unit/test_shell.py](https://review.openstack.org/#/c/41615/)
-* (fix) (ceilometer) [Skip central agent interval_task when keystone fails](https://review.openstack.org/#/c/78079/)
-
 
 # WISH
 * nova server name is not injected to hostname
-* cinder-volumes is out of space while no volume is created
 * (doc) ceilometer mongodb data is overload
 
 # DONE
+* 2014.03.22 (fix) (ceilometer) [Skip central agent interval_task when keystone fails](https://review.openstack.org/#/c/78079/)
+* 2014.03.20 (exp) free cinder-volumes by remove unused logic volume
 * 2014.03.18 (fix) (openstack-manuals) [Correct swift proxy service name](https://review.openstack.org/#/c/81156/)
 * 2014.03.06 (fix) (nova) [Fix incorrect kwargs 'reason' for HTTPBadRequest](https://review.openstack.org/#/c/64264/)
 * 2014.03.05 (fix) (api-site) [Fix incorrect language specification](https://review.openstack.org/#/c/76920/)
