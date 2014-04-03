@@ -17,6 +17,10 @@ Information is coming from:
 * enovance blog: http://techs.enovance.com/
 * [ceilometer irc meeting record](http://eavesdrop.openstack.org/meetings/ceilometer/2014/)
 
+# week 13 (20140324-20140330)
+Mailing List:
+* nova uses gerrit for blueprint review process in juno, [原文](http://lists.openstack.org/pipermail/openstack-dev/2014-March/030576.html)
+
 # week 10
 Stackalytics:
 * Total commits: 67
