@@ -161,18 +161,11 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">notification_driver</td>
-<td align="left">DEFAULT</td>
-<td align="left">MultiStrOpt</td>
-<td align="left">N/A</td>
-<td align="left">Driver or drivers to handle sending notifications，推荐设置为messaging</td>
-</tr>
-<tr class="even">
-<td align="left">rpc_backend</td>
+<td align="left">notifier_strategy</td>
 <td align="left">DEFAULT</td>
 <td align="left">StrOpt</td>
-<td align="left">glance.openstack.common.rpc.impl_kombu</td>
-<td align="left">The messaging module to use, defaults to kombu.推荐设置为rabbit</td>
+<td align="left">default</td>
+<td align="left">通知策略,可以为logging, rabbit, qpid或者default, 默认为不发送通知.推荐设置为rabbit</td>
 </tr>
 </tbody>
 </table>
@@ -365,7 +358,7 @@ pipeline = healthcheck cache authtoken keystoneauth ceilometer proxy-server</cod
 <td align="left">DEFAULT</td>
 <td align="left">StrOpt</td>
 <td align="left">keystone</td>
-<td align="left">noauth or keystone</td>
+<td align="left">noauth or keystone. 身份验证策略，只能为noauth或者keystone。</td>
 </tr>
 <tr class="even">
 <td align="left">enable_v1_api</td>
@@ -1627,6 +1620,6 @@ pipeline = healthcheck cache authtoken keystoneauth ceilometer proxy-server</cod
 <noscript>
 Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
 </noscript>
-<p><a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a> <span class="math"><em>t</em><em>i</em><em>t</em><em>l</em><em>e</em></span></p>
+<p><a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a></p>
 </body>
 </html>

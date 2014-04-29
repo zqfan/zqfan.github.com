@@ -25,7 +25,7 @@ code > span.al { color: #ff0000; font-weight: bold; }
 code > span.fu { color: #06287e; }
 code > span.er { color: #ff0000; font-weight: bold; }
   </style>
-  <link rel="stylesheet" href="huawei.css" type="text/css" />
+  <link rel="stylesheet" href="./huawei.css" type="text/css" />
 </head>
 <body>
 <div id="header">
@@ -62,24 +62,29 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </thead>
 <tbody>
 <tr class="odd">
+<td align="left">2014-04-29</td>
+<td align="left">1、增加指标的说明</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
 <td align="left">2014-02-19</td>
 <td align="left">1、增加对请求uri中查询关键字取值value的说明；<br />2、修正对象模型的类型列；<br />3、修正若干错误。</td>
-<td align="left">f00253402</td>
-</tr>
-<tr class="even">
-<td align="left">2014-02-19</td>
-<td align="left">1、文档json示例按照模板编写；<br />2、修正若干错误。</td>
-<td align="left">f00253402</td>
+<td align="left"></td>
 </tr>
 <tr class="odd">
-<td align="left">2014-02-15</td>
-<td align="left">1、修正了描述错误的接口，获取指定meter的statistics，由POST改为了GET；<br />2、文档整体结构按照模板填写；<br />3、将模型中未定义的字段由-改为了N/A；<br />4、进一步改善正确性和可使用性。</td>
-<td align="left">f00253402</td>
+<td align="left">2014-02-19</td>
+<td align="left">1、文档json示例按照模板编写；<br />2、修正若干错误。</td>
+<td align="left"></td>
 </tr>
 <tr class="even">
+<td align="left">2014-02-15</td>
+<td align="left">1、修正了描述错误的接口，获取指定meter的statistics，由POST改为了GET；<br />2、文档整体结构按照模板填写；<br />3、将模型中未定义的字段由-改为了N/A；<br />4、进一步改善正确性和可使用性。</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
 <td align="left">2014-02-11</td>
 <td align="left">初稿</td>
-<td align="left">f00253402</td>
+<td align="left"></td>
 </tr>
 </tbody>
 </table>
@@ -274,6 +279,75 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tr>
 </tbody>
 </table>
+<p>当前, 有如下的指标, 粗体为周期性指标:</p>
+<ol style="list-style-type: decimal">
+<li>nova:
+<ul>
+<li><strong>instance</strong></li>
+<li><strong>instance:{flavor}</strong></li>
+<li>memory</li>
+<li><strong>cpu</strong></li>
+<li><strong>cpu_util</strong></li>
+<li>vcpus</li>
+<li><strong>disk.read.requests</strong></li>
+<li><strong>disk.write.requests</strong></li>
+<li><strong>disk.read.bytes</strong></li>
+<li><strong>disk.write.bytes</strong></li>
+<li>disk.root.size</li>
+<li>disk.ephemeral.size</li>
+<li><strong>network.incoming.bytes</strong></li>
+<li><strong>network.outgoing.bytes</strong></li>
+<li><strong>network.incoming.packets</strong></li>
+<li><strong>network.outgoing.packets</strong></li>
+</ul></li>
+<li>neutron:
+<ul>
+<li>network</li>
+<li>network.create</li>
+<li>network.update</li>
+<li>subnet</li>
+<li>subnet.create</li>
+<li>subnet.update</li>
+<li>port</li>
+<li>port.create</li>
+<li>port.update</li>
+<li>router</li>
+<li>router.create</li>
+<li>router.update</li>
+<li><strong>ip.floating</strong></li>
+<li>ip.floating.create</li>
+<li>ip.floating.update</li>
+</ul></li>
+<li>glance:
+<ul>
+<li><strong>image</strong></li>
+<li><strong>image.size</strong></li>
+<li>image.update</li>
+<li>image.upload</li>
+<li>image.delete</li>
+<li>image.download</li>
+<li>image.serve</li>
+</ul></li>
+<li>cinder:
+<ul>
+<li>volume</li>
+<li>volume.size</li>
+</ul></li>
+<li>swift:
+<ul>
+<li><strong>storage.objects</strong></li>
+<li><strong>storage.objects.size</strong></li>
+<li><strong>storage.objects.containers</strong></li>
+<li>storage.objects.incoming.bytes</li>
+<li>storage.objects.outgoing.bytes</li>
+<li>storage.api.request</li>
+</ul></li>
+<li>kwapi:
+<ul>
+<li><strong>energy</strong></li>
+<li><strong>power</strong></li>
+</ul></li>
+</ol>
 <ul>
 <li>type取值表</li>
 </ul>
