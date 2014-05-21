@@ -7,6 +7,8 @@ tags: [snapshot]
 ---
 {% include JB/setup %}
 
+# openstack虚拟机导出为镜像文件
+
 ## 流程
 
 ### 创建快照
@@ -56,6 +58,8 @@ Optional arguments:
 ```
 
 ## 测试
+
+测试环境: openstack 2013.2.3 on ubuntu 12.04
 
 ### 运行中虚拟机无挂载卷
 
