@@ -15,7 +15,7 @@ tags: [snapshot]
 
 注: 这一步在horizon上亦可完成
 
-```
+~~~ bash
 # nova help image-create
 usage: nova image-create [--poll] <server> <name>
 
@@ -28,13 +28,13 @@ Positional arguments:
 Optional arguments:
 
   --poll    Blocks while instance snapshots so progress can be reported.
-```
+~~~
 
 ### 查询镜像
 
-```
+~~~ bash
 # glance image-list --all-tenants
-```
+~~~
 
 注1: nova快照后的镜像无法在horizon上查询到, 控制台下glance image-list也无法查看到, 是因为创建时, 镜像的is_public属性为False. 你可以在后台使用glance image-update {image_id} --is-public True来使其公有化.
 
@@ -42,7 +42,7 @@ Optional arguments:
 
 ### 导出镜像
 
-```
+~~~ bash
 # glance help image-download
 usage: glance image-download [--file <FILE>] [--progress] <IMAGE>
 
@@ -55,7 +55,7 @@ Optional arguments:
   --file <FILE>  Local file to save downloaded image data to. If this is not
                  specified the image data will be written to stdout.
   --progress     Show download progress bar.
-```
+~~~
 
 ## 测试
 
@@ -63,7 +63,7 @@ Optional arguments:
 
 ### 运行中虚拟机无挂载卷
 
-```
+~~~ bash
 # nova boot --flavor 1 --image cirros0.3.1 --nic net-id=0733ad66-6fa2-4770-8fe5-904313a2644d running-without-volume
 # nova image-create running-without-volume running-without-volume-snapshot
 # glance image-list --all-tenants --name running-without-volume-snapshot
@@ -75,13 +75,13 @@ Optional arguments:
 # glance image-download 02123dd0-8706-4216-92d1-0d4d240b7a71 --file ./export.img
 # file export.img
 export.img: QEMU QCOW Image (v2), 1073741824 bytes
-```
+~~~
 
 ### 运行中虚拟机有挂载卷
 
 挂载卷并不会在快照时一同被快照, 你需要单独使用nova volume-snapshot-create来创建卷的快照
 
-```
+~~~ bash
 # cinder create 1 --display-name tiny-volume
 # cinder list --all-tenants --display-name tiny-volume
 +--------------------------------------+-----------+--------------+------+-------------+----------+-------------+
@@ -114,6 +114,6 @@ export.img: QEMU QCOW Image (v2), 1073741824 bytes
 # glance image-download 57409fef-4e12-4a7d-b062-3d73f05696d2 --file ./export.img
 # file export.img
 export.img: QEMU QCOW Image (v2), 1073741824 bytes
-```
+~~~
 
 License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)

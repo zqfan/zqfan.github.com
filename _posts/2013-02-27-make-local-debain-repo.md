@@ -6,11 +6,13 @@ category: linux
 tags: [apt-mirror, dpkg-scanpackages]
 ---
 {% include JB/setup %}
-#
+
 License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 ## using apt-mirror
+
 ### reference:
+
 1: http://ubuntuforums.org/archive/index.php/t-1512787.html
 
 ### install packages
@@ -36,7 +38,8 @@ License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
     clean http://archive.ubuntu.com/ubuntu
 
-note: 
+note:
+
 1. base_path is the files where to be stored, default is /var/spool/apt-mirror, you can set it to anywhere you want, just be sure it has more than 100G free disk space since all the files list in above config need 90G disk space
 2. nthreads is the number of wget thread, 20 seems no good for practice
 3. deb-i386 means to download 32bit deb packages
@@ -48,6 +51,7 @@ note:
 in this case, all files will be downloaded to $base_path/mirror/mirrors.163.com/ubuntu
 
 ### config apache2
+
 ubuntu source server is a http server, since apache2 is good for static files, i choose it to hold ubuntu source service
 
     # cd /var/www
@@ -56,15 +60,17 @@ ubuntu source server is a http server, since apache2 is good for static files, i
 ### sync with source mirror
 
     # vim /etc/cron.d/apt-mirror
-    
+
 remove the leading #
-    
+
     0 4 * * * apt-mirror /usr/bin/apt-mirror > /var/spool/apt-mirror/var/cron.log
 
 ### use local mirror
+
 edit your /etc/apt/sources.list, make the local source list before other to ensure fit first, the run apt-get update, enjoy yourself.
 
 ## using dpkg-scanpackages
+
 if you don't want to install packages from source code via make install, or your program just use apt to install packages and you don't want change it. However, you are offline and only have the packages downloaded, in this wired situation, you can use dpkg-scanpackages to make a local file system package source.
 
     # sudo apt-get install dpkg-dev gzip

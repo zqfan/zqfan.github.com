@@ -6,7 +6,7 @@ category: openstack
 tags: [openstack, vnc, xvpvnc]
 ---
 {% include JB/setup %}
-#
+
 License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 version 2012.1
@@ -24,6 +24,7 @@ and have no other response at all. the correct arguments are
 bug reported: https://bugs.launchpad.net/openstack-manuals/+bug/979054
 
 here are the complete steps:
+
 ## step 1:
 vim /etc/nova/nova.conf, add or overwrite the following line
 
@@ -36,6 +37,7 @@ vim /etc/nova/nova.conf, add or overwrite the following line
     @:make
 
 you will need java run time environment to complete the last command
+
 ## step 3:
 in the nova service host, type
 

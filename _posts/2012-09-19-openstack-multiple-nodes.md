@@ -6,11 +6,12 @@ category: openstack
 tags: [openstack, multi_host]
 ---
 {% include JB/setup %}
-#
+
 License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 when you install open-stack on a server and you want to expand a compute node,
 it is simple, just install nova-compute in the new machine and do some configure, then it done! following my steps:
+
 ## step 1:
 
     root@:apt-get install ntp bridge-utils

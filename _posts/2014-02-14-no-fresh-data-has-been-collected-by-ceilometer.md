@@ -14,21 +14,22 @@ ceilometer装起来后，进行了若干openstack资源操作，但是ceilometer
 * ceilometer版本：2013.2.2
 
 解决办法：
+
 * 治标：重启collector服务：`service openstack-ceilometer-collector restart`
 * 治本：确保mongodb服务可用后，再启动ceilometer各项服务。因为ceilometer的服务必须等mongdb可用后才可以启动，目前我还不知道怎么支持像sql或者amqp那种重连机制
 
 注意：尽管/etc/init.d/openstack-ceilometer-collector中指明了依赖，但是不知道为什么仍然出现这种问题，莫非mongodb虽然启动但在可用前collector就进行了连接尝试结果跪了？
 
-```
+~~~
 # Should-Start:      mysql postgresql mongodb openstack-nova-compute rabbitmq-server
 # Should-Stop:       mysql postgresql mongodb openstack-nova-compute rabbitmq-server
-```
+~~~
 
 细节：
 
 根据经验判定可能是数据没有入库，检查collector日志发现：
 
-```
+~~~
 ERROR ceilometer.openstack.common.rpc.amqp [req-010feed1-88b1-414a-8521-dce397bcfb6e None None] Exception during message handling
 TRACE ceilometer.openstack.common.rpc.amqp Traceback (most recent call last):
 TRACE ceilometer.openstack.common.rpc.amqp   File "/usr/lib64/python2.6/site-packages/ceilometer/openstack/common/rpc/amqp.py", line 461, in _process_data
@@ -40,18 +41,18 @@ TRACE ceilometer.openstack.common.rpc.amqp     data=data)
 TRACE ceilometer.openstack.common.rpc.amqp   File "/usr/lib64/python2.6/site-packages/stevedore/extension.py", line 137, in map
 TRACE ceilometer.openstack.common.rpc.amqp     raise RuntimeError('No %s extensions found' % self.namespace)
 TRACE ceilometer.openstack.common.rpc.amqp RuntimeError: No ceilometer.dispatcher extensions found
-```
+~~~
 
 而该项配置是有默认值database的，判定是数据库连接不正常导致的，由于日志已缺失（纳尼？），只好复现bug：
 
-```
+~~~
 service mongodb stop
 service openstack-ceilometer-collector restart
-```
+~~~
 
 进程启动后并没有退出，但是出现了异常：
 
-```
+~~~
 ERROR stevedore.extension [-] could not connect to controller:27017: [Errno 111] ECONNREFUSED
 TRACE stevedore.extension Traceback (most recent call last):
 TRACE stevedore.extension   File "/usr/lib64/python2.6/site-packages/stevedore/extension.py", line 89, in _load_plugins
@@ -75,7 +76,7 @@ TRACE stevedore.extension     raise ConnectionFailure(str(e))
 TRACE stevedore.extension ConnectionFailure: could not connect to controller:27017: [Errno 111] ECONNREFUSED
 TRACE stevedore.extension
 WARNING ceilometer.collector.service [-] Failed to load any dispatchers for ceilometer.dispatcher
-```
+~~~
 
 预想中的异常并没有被捕获，主动触发一个消息，`nova delete vm`删除了一个虚拟机，结果collector.log立刻捕获了预期异常，使用ceilometer命令，发现虚拟机的统计信息没有正确反映最新的变化，从而复现了问题。
 

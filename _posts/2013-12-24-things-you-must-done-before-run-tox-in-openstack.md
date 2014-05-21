@@ -62,9 +62,11 @@ sudo apt-get install mysql-server
 
 # Glance
 Dependency
+
 * psycopg2: libpq-dev
 
 Error message:
+
 * Error: pg_config executable not found
 
 Solution:

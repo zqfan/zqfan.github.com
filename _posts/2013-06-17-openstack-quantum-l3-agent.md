@@ -10,16 +10,20 @@ tags: [openstack, quantum, l3, python]
 License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 # quantum.agent.l3_agent
+
 ## L3PluginApi(proxy.RpcProxy)
+
 a wrapper of prc call, only support get_routers(...) and get_external_network_id(...)
 
 ## RouterInfo(object)
+
 * store infomation of whole l3, not for router only
 * it seems just hold a single router, the router's value is stored in self.router
 * _snat_action, according to current router info
 * iptables_manager
 
 ## L3NATAgent(manager.Manager)
+
 * cfg: external_network_bridge, interface_driver, metadata_port, send_arp_for_ha, use_namespaces, router_id, handle_internal_only_routers, gateway_external_network_id, enable_metadata_proxy
 * l3 will destroy all namespaces when init, unless router_id is set
 * the destroy work is done by self.driver.unplug(device.name)
@@ -42,7 +46,9 @@ a wrapper of prc call, only support get_routers(...) and get_external_network_id
 * routes_update(ri) will replace changed route and delete removed route
 
 ### why external network cannot use as internal network?
+
 internal_network_added() will get interface name from get_internal_device_name(port_id), however, external network has different device prefix, so it will plug a new device to driver, which can be wrong or fail? and the following driver.init_l3 and gratuitous arp packet may fail too
 
 ## L3NATAgentWithStateReport(L3NATAgent)
+
 a looping report wrapper of l3NatAgent

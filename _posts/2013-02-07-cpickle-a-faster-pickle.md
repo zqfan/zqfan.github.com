@@ -6,7 +6,7 @@ category: python
 tags: [pickle]
 ---
 {% include JB/setup %}
-#
+
 License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 when i read "wxPython Action", i find the cPickle module. from this
@@ -23,6 +23,7 @@ The pickle data stream produced by pickle and cPickle are identical, so it is po
 There are additional minor differences in API between cPickle and pickle, however for most applications, they are interchangeable. More documentation is provided in the pickle module documentation, which includes a list of the documented differences.
 
 the python help shows that:
+
 * dump(obj, file, protocol=0) -- Write an object in pickle format to the given file.
 * dumps(obj, protocol=0) -- Return a string containing an object in pickle format.
 * load(file) -- Load a pickle from the given file

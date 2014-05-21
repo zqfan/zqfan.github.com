@@ -9,7 +9,9 @@ tags: [linux]
 本文是个大杂烩，罗列一些Linux下遇到的中文问题，备份以供查询。
 
 ## ime
+
 ### rime
+
 [https://code.google.com/p/rimeime/wiki/RimeWithIBus](https://code.google.com/p/rimeime/wiki/RimeWithIBus)
 
 For Ubuntu 12.04 precise:
@@ -30,10 +32,12 @@ ibus-daemon -d
 Then click ibus icon and set Preference. Enter F4 to change rime setting.
 
 ## Character Encoding
+
 * iconv
 * convmv: conv file name instead of content.
 
 ## Rhythmbox Chinise Tag
+
 reference:[http://astroman.lamost.org/dbs/archives/10536](http://astroman.lamost.org/dbs/archives/10536)
 
     echo "export GST_ID3_TAG_ENCODING=GBK:UTF-8:GB18030" >> ~/.bashrc
@@ -43,7 +47,9 @@ reference:[http://astroman.lamost.org/dbs/archives/10536](http://astroman.lamost
 Restart Rhythmbox and reload all files, note that just simply restart Rhythmbox will not work, you must remove fils from list(not remove from disk -_-!) and import those files.
 
 ## tex
+
 ### 微软雅黑
+
 微软雅黑字体在编译latex文件时会把粗体字当常规字体用，跪了。注意这是个付费字体哦。我虽然解决了问题但是不知道是不是最优的办法，请酌情参考。解决办法：
 
 * 删除已安装的微软雅黑粗体字体，在我的机器上，安装时用的是font viewer，所以安装路径是~/.fonts，直接删除msyhbd.ttf即可

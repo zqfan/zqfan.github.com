@@ -7,7 +7,6 @@ tags: [python, argparse]
 ---
 {% include JB/setup %}
 
-
 License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 first, import it
@@ -42,7 +41,8 @@ parse arguments
 
 [official documents](http://docs.python.org/2/library/argparse)
 
-`class argparse.ArgumentParser(prog=None, usage=None, description=None, epilog=None, parents=[], formatter_class=argparse.HelpFormatter, prefix_chars='-', fromfile_prefix_chars=None, argument_default=None, conflict_handler='error', add_help=True)`
+~~~
+class argparse.ArgumentParser(prog=None, usage=None, description=None, epilog=None, parents=[], formatter_class=argparse.HelpFormatter, prefix_chars='-', fromfile_prefix_chars=None, argument_default=None, conflict_handler='error', add_help=True)
 
     description - Text to display before the argument help.
     epilog - Text to display after the argument help.
@@ -55,8 +55,10 @@ parse arguments
     conflict_handler - Usually unnecessary, defines strategy for resolving conflicting optionals.
     prog - The name of the program (default: sys.argv[0])
     usage - The string describing the program usage (default: generated)
+~~~
 
-`ArgumentParser.add_argument(name or flags...[, action][, nargs][, const][, default][, type][, choices][, required][, help][, metavar][, dest])`
+~~~
+ArgumentParser.add_argument(name or flags...[, action][, nargs][, const][, default][, type][, choices][, required][, help][, metavar][, dest])
 
     name or flags - Either a name or a list of option strings, e.g. foo or -f, --foo.
     action - The basic type of action to be taken when this argument is encountered at the command line.
@@ -69,6 +71,9 @@ parse arguments
     help - A brief description of what the argument does.
     metavar - A name for the argument in usage messages.
     dest - The name of the attribute to be added to the object returned by parse_args().
+~~~
 
+~~~
 ArgumentParser.parse_args(args=None, namespace=None)
     Convert argument strings to objects and assign them as attributes of the namespace. Return the populated namespace.
+~~~

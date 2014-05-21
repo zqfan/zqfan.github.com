@@ -6,30 +6,36 @@ category: openstack
 tags: [quantum, quantum-api, openstack, code-review]
 ---
 {% include JB/setup %}
-#
+
 License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 ## method
+
 * first, i checkout the api reference and api source code
 * then, i follow the api init work flow
 * finally, i down to the underlying to find how it process the req
 
 ## api reference
+
 it very simple and user friendly, from [openstack.org](http://docs.openstack.org/api/openstack-network/2.0/content/API_Operations.html)
 
 **networks**
+
 * {GET|POST} /networks
 * {GET|PUT|DELETE} /networks/{network_id}
 
 **subnets**
+
 * {GET|POST} /subnets
 * {GET|PUT|DELETE} /subnets/{subnet_id}
 
 **ports**
+
 * {GET|POST} /ports
 * {GET|PUT|DELETE} /ports/{port_id}
 
 **extensions**
+
 * resource extensions, new object classes
 * attribute extensions, add new attr to res
 * action extensions, new operation beyond HTTP verbs
@@ -37,27 +43,32 @@ it very simple and user friendly, from [openstack.org](http://docs.openstack.org
 * {GET} /extensions
 * {GET} /extensions/{ext_name}
 
-Layer-3 networking extensions introduces two new resources: 
+Layer-3 networking extensions introduces two new resources:
+
 * router
 * floatingip
 
 the l3 extenstion also adds the router:external attr to network resource.
 
 **routers**
+
 * {GET} /routers
 * {GET|PUT|DELETE} /routers/{router_id}
 * {PUT} /routers/{router_id}/add_router_interface
 * {PUT} /routers/{router_id}/remove_router_interface
 
 **floatingips**
+
 * {GET|POST} /floatingips
 * {GET|PUT|DELETE} /floatingips/{floatingip_id}
 
 **quota**
+
 * {GET} /quotas
 * {GET|PUT|DELETE} /quotas/{tenant_id}
 
 ## api source code
+
 `api_common.py` only has a class named QuantumController(object), it receive a var plugin as construct param, and has a private method _prepare_request_body(). I think this is used as a base class.
 
 `extension.py` has a lot of methods and class. i think the most important is ExtensionManager(object):
@@ -79,7 +90,7 @@ so from the _check_extension() i know a extension at least has functions:
     get_description()
     get_namespace()
     get_updated()
-    
+
 class ExtensionDescriptor(object) is base class for extension:
 
     class ExtensionDescriptor
@@ -124,7 +135,7 @@ Resources define new nouns, and are accessible through URLs. Actions are verbs c
         def update(self, request, id, body=None, **kwargs)
         def prepare_request_body(...)
 
-__init__() define an attribute named _plugin_handlers, which has {LIST|SHOW|CREATE|UPDATE|DELETE} action. __getattr__() only accept self._member_actions and return a inner function handler. create(), delete() and update() will invoke notifier_api.notify() and use policy
+__init__() define an attribute named _plugin_handlers, which has (LIST,SHOW,CREATE,UPDATE,DELETE) action. __getattr__() only accept self._member_actions and return a inner function handler. create(), delete() and update() will invoke notifier_api.notify() and use policy
 
 /v2/resource.py defines a function Resource(), it returns an inner function decorated by webob.dec.wsgify. the inner function named resource() gets "action" from `req.environ["wsgiorg.routing_args"]` then invokes controller.action
 
@@ -145,7 +156,9 @@ the __call__() will return resources items
 the APIRouter connect("index","/",controller=Index(RESOURCES)), and collection() each RESOURCES. controller is created by quantum.api.v2.base.create_resource().
 
 ## the api init workflow
+
 quantum includes 4 parts:
+
 * plugin-agent
 * l3-agent
 * dhcp-agent
@@ -186,6 +199,7 @@ from the /etc/quantum/api-paste.ini
     paste.app_factory = quantum.api.v2.router:APIRouter.factory
 
 ## from api to underlying
+
 image that if we want to create a network, so a post request to /networks is received. what happen's next ?
 
 from the APIRouter.__init__(), the post request is mapped to quantum.api.v2.base.Controller(collection="networks").create(),
@@ -200,6 +214,7 @@ so it just invoke plugin's method, which defines in the __init__() function, par
 so for other resources like subnets and ports, it all act like this way. however, resources created by extension's have no callback routines in OVSQuantumPluginV2, this is what i will dig next para.
 
 ## the extensions
+
 if i want to create a router, i will post /routers, then what will happen?
 
 from /etc/quantum/api-paste.ini i know that:
@@ -312,6 +327,7 @@ so if the req is a extension request, then extension controller is returned, els
 There is still a question: the extension app will directly return response, while the APIRouter will just return a wsgi app named dispatch, which need one more step to handle.
 
 ## conclusion
+
 * we start a wsgi app APIRouter
 * APIRouter is taken over by ExtensionMiddleware
 * core api is completed by plugin

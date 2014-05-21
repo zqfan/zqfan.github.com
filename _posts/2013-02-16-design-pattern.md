@@ -39,6 +39,7 @@ tags: [design pattern]
 ![结构](/resources/design-pattern-prototype.png)
 
 ## 责任型模式
+
 ### 单例模式
 确保某个类只有一个实例，并提供一个全局访问点。
 
@@ -52,6 +53,10 @@ public class Demo {
             instance = new Demo();
         }
         return instance;
+    }
+
+    // 私有是必要的
+    private Demo() {
     }
 
     public void greeting() {

@@ -42,6 +42,7 @@ Open /etc/sysconfig/SuSEfirewall2 and
 - set `FW_SERVICES_EXT_TCP` = "ftp 22"
 
 vsftp is a popular choice, we can install it via the following steps:
+
 1. download: `wget http://mirror.linux.or.id/sles11sp164/suse/x86_64/vsftpd-2.0.7-4.17.1.x86_64.rpm`
 2. install: `rpm -i vsftpd-2.0.7-4.17.1.x86_64.rpm`
 3. start: `/etc/init.d/vsftpd start`

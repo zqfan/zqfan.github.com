@@ -18,6 +18,7 @@ Sorry, I only provide Chinese Simplified version because this document is writte
 版本控制的定义是啥我早就忘光光了，还记得电影《三傻大闹宝莱坞》（Three Idiots）里男主对机械的定义吗（但凡节省物理劳动的皆可称为机械）？版本控制对我而言就是记录事物一切历史细节且可以任意控制它。
 
 对文档进行版本控制有两大特点吸引我
+
 * 精确详实的历史记录
 * 任意回退与提交而不用担心丢失任何内容
 
@@ -41,11 +42,13 @@ Sorry, I only provide Chinese Simplified version because this document is writte
 版本控制最初主要作用于代码，将文档以纯文本形式编写后，想要得到我们日常所见到的模样，你需要一点魔法，这个魔法和编程语言类似，叫标记语言。为了得到超越Word的水准，你需要更多的努力，但是我可以保证绝对物超所值。
 
 我们要编写一个程序，至少需要如下几个要素，具体我就不赘述了：
+
 * 编程语言
 * 编译器
 * 库文件
 
 文档也需要类似的一些要素：
+
 * 标记语言
 * 解释器
 * 第三方库
@@ -60,11 +63,13 @@ Sorry, I only provide Chinese Simplified version because this document is writte
 
 ### 文档版本控制的例子
 我常在OpenStack社区混，这里就以OpenStack的安装文档为例，提供一些链接，供大家观瞻：
+
 * [文档源文件](https://github.com/openstack/openstack-manuals/tree/master/doc/install-guide)
 * [HTML输出](http://docs.openstack.org/havana/install-guide/install/apt/content/)
 * [PDF输出](http://docs.openstack.org/havana/install-guide/install/apt/openstack-install-guide-apt-havana.pdf)
 
 以我日常的工作文档一篇为例，非常简单的例子，供大家吐槽：
+
 * [文档源文件](https://raw.github.com/zqfan/openstack/master/ceilometer/ceilometer-configuration-reference.md)
 * [HTML输出](http://zqfan.github.io/assets/doc/ceilometer-configuration-reference.html)
 * [CSS辅助输出](https://raw.github.com/zqfan/openstack/master/main.css)

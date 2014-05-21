@@ -14,28 +14,28 @@ All commands and operations are done by root.
 
 ### enable ceilometer access swift service
 
-```bash
+~~~ bash
 # roleid=$(keystone role-create --name=ResellerAdmin | awk '/ id / {print $4}')
 # keystone user-role-add --tenant service --user ceilometer --role $roleid
-```
+~~~
 
 ### monitor incoing and outgoing traffic
 
 Add these lines to the /etc/swift/proxy-server.conf file:
 
-```
+~~~
 [filter:ceilometer]
 use = egg:ceilometer#swift
-```
+~~~
 
 ### add ceilometer pipeline
 
 Add ceilometer to the pipeline parameter of the /etc/swift/proxy-server.conf file:
 
-```
+~~~
 [pipeline:main]
 pipeline = healthcheck cache authtoken keystoneauth ceilometer proxy-server
-```
+~~~
 
 note that the real pipeline may be different with this, you can keep that, and just add ceilometer filter right before proxy-server.
 
@@ -45,7 +45,7 @@ then you should restart swift-proxy service by run `service openstack-swift-prox
 
 ### correct the system user name
 
-```
+~~~
 # service openstack-swift-proxy restart
 Shutting down swift-proxy-server
 Starting swift-proxy-serverTraceback (most recent call last):
@@ -57,19 +57,19 @@ Starting swift-proxy-serverTraceback (most recent call last):
     os.setgid(user[3])
 OSError: [Errno 1] Operation not permitted
 startproc:  exit status of parent of /usr/bin/swift-proxy-server: 1
-```
+~~~
 
 The user which is running the service is hardcode as 'openstack-swift' in /etc/init.d/openstack-swift-proxy, but there may be no such user exists, only get user swift. this is caused by wrong configuration when install openstack environment. run
 
-```bash
+~~~bash
 sed -i 's/CHUSER="-u openstack-swift"/CHUSER="-u swift"' /etc/init.d/openstack-swift-proxy
-```
+~~~
 
 can solve this problem
 
 ### swift try to load ceilometer config file
 
-```bash
+~~~bash
 # service openstack-swift-proxy restart
 Shutting down swift-proxy-server
 Starting swift-proxy-serverTraceback (most recent call last):
@@ -97,26 +97,26 @@ Starting swift-proxy-serverTraceback (most recent call last):
     raise ConfigFilesNotFoundError(self._namespace.files_not_found)
 oslo.config.cfg.ConfigFilesNotFoundError: Failed to read some config files: /etc/ceilometer/ceilometer.conf
 startproc:  exit status of parent of /usr/bin/swift-proxy-server: 1
-```
+~~~
 
 the pipleline has defined the ceilometer filter, and it will read the ceilometer configuration file, however, the swift-proxy service is run by user swift now, and the privilege of /etc/ceilometer/ceilometer.conf is:
 
-```bash
+~~~bash
 # ls -l /etc | grep ceilometer
 drwxr-xr-x  2 root  root                  4096 Mar 11 01:00 ceilometer
 # ls -l /etc/ceilometer/ceilometer.conf
 -rw-r----- 1 root openstack-ceilometer 700 Mar 11 01:00 /etc/ceilometer/ceilometer.conf
-```
+~~~
 
 so we need to add user swift to openstack-ceilometer group:
 
-```bash
+~~~bash
 # usermod -A openstack-ceilometer swift
-```
+~~~
 
 ### swift try to write log file to ceilometer directory
 
-```bash
+~~~bash
 # service openstack-swift-proxy restart
 Shutting down swift-proxy-server
 Starting swift-proxy-serverTraceback (most recent call last):
@@ -152,21 +152,21 @@ Starting swift-proxy-serverTraceback (most recent call last):
     stream = open(self.baseFilename, self.mode)
 IOError: [Errno 13] Permission denied: '/var/log/ceilometer/swift-proxy-server.log'
 startproc:  exit status of parent of /usr/bin/swift-proxy-server: 1
-```
+~~~
 
 I think maybe it can be solved by setting corresponding configuration option in /etc/swift/proxy-server.conf, but here i just enable the write operation, this should be fixed as long as i figure out the particular option, may be logdir?
 
-```bash
+~~~bash
 # touch /var/log/ceilometer/swift-proxy-server.log
 # chown openstack-ceilometer:openstack-ceilometer /var/log/ceilometer/swift-proxy-server.log
 # chmod g+w /var/log/ceilometer/swift-proxy-server.log
-```
+~~~
 
 ### swift expects memcached listening on real ip
 
 open the /var/log/ceilometer/swift-proxy-server.log, I can only find lots of the following error:
 
-```
+~~~
 ERROR root [-] Error connecting to memcached: 172.30.250.118:11211
 TRACE root Traceback (most recent call last):
 TRACE root   File "/usr/lib64/python2.6/site-packages/swift/common/memcached.py", line 242, in _get_conns
@@ -182,14 +182,14 @@ TRACE root     socket_checkerr(fd)
 TRACE root   File "/usr/lib64/python2.6/site-packages/eventlet/greenio.py", line 46, in socket_checkerr
 TRACE root     raise socket.error(err, errno.errorcode[err])
 TRACE root error: [Errno 111] ECONNREFUSED
-```
+~~~
 
 This is caused by memcache is listening on 127.0.0.1 instead of real ip address:
 
-```
+~~~
 # ps aux | grep memcache
 114  7488  0.0  0.0  126652  888  ?  Ssl  23:46  0:00 /usr/sbin/memcached -d -l 127.0.0.1
-```
+~~~
 
 you need to modify the /etc/sysconfig/memcached to set memcached listen port by set MEMCACHED_PARAMS="-l 172.30.250.118" in /etc/sysconfig/memcached, or you can modify /etc/swift/proxy-server.conf to set the memcached_servers option to: memcache_servers = 127.0.0.1:11211, then restart the relative service
 
@@ -197,7 +197,7 @@ you need to modify the /etc/sysconfig/memcached to set memcached listen port by 
 
 open the /var/log/ceilometer/agent-central.log, it complains:
 
-```
+~~~
 INFO ceilometer.central.manager [-] Polling pollster storage.objects.size
 WARNING ceilometer.central.manager [-] Continue after error from storage.objects.size: Account HEAD failed: http://172.30.250.118:8080/v1/AUTH_57c96cf14e704845978e505d60166fb7 403 Forbidden
 ERROR ceilometer.central.manager [-] Account HEAD failed: http://172.30.250.118:8080/v1/AUTH_57c96cf14e704845978e505d60166fb7 403 Forbidden
@@ -214,7 +214,7 @@ TRACE ceilometer.central.manager   File "/usr/lib64/python2.6/site-packages/swif
 TRACE ceilometer.central.manager     http_response_content=body)
 TRACE ceilometer.central.manager ClientException: Account HEAD failed: http://172.30.250.118:8080/v1/AUTH_57c96cf14e704845978e505d60166fb7 403 Forbidden
 TRACE ceilometer.central.manager
-```
+~~~
 
 This is because the /etc/ceilometer/ceilometer.conf:service_credentials has set {os_username: admin, os_tenant_name: admin} instead of {os_username: ceilometer, os_tenant_name: service}, correct them and restart the ceilometer-agent-central service.
 
@@ -222,7 +222,7 @@ This is because the /etc/ceilometer/ceilometer.conf:service_credentials has set 
 
 open the /var/log/ceilometer/agent-central.log, it complains:
 
-```
+~~~
 WARNING ceilometer.central.manager [-] Continue after error from storage.objects: You are not authorized to perform the requested action, admin_required. (HTTP 403)
 ERROR ceilometer.central.manager [-] You are not authorized to perform the requested action, admin_required. (HTTP 403)
 TRACE ceilometer.central.manager Traceback (most recent call last):
@@ -246,13 +246,13 @@ TRACE ceilometer.central.manager   File "/usr/lib64/python2.6/site-packages/keys
 TRACE ceilometer.central.manager     raise exceptions.from_response(resp, method, url)
 TRACE ceilometer.central.manager Forbidden: You are not authorized to perform the requested action, admin_required. (HTTP 403)
 TRACE ceilometer.central.manager
-```
+~~~
 
 It seems the swift query operation needs admin role, I don't know why, but this fix can solve it:
 
-```
+~~~
 # keystone user-role-add --user ceilometer --tenant service --role admin
 # service openstack-ceilometer-agent-central restart
-```
+~~~
 
 License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)

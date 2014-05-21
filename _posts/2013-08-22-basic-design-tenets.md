@@ -10,6 +10,7 @@ tags: [openstack]
 License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 Basic Design Tenets
+
 1. Scalability and elasticity are our main goals
 2. Any feature that limits our main goals must be optional
 3. Everything should be asynchronous

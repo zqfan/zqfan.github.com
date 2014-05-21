@@ -10,6 +10,7 @@ tags: [openstack, quantum, router, external network, gateway]
 License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 # Details
+
 * rest api doesn't have router-gateway-{set,clear}
 * python-quantumclient.quantum.v2_0.router.SetGatewayRouter does the cli api
 * quantum_client.add_gateway_router does the actual job
@@ -25,17 +26,20 @@ License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 * so the quantum has a rest api /v2.0/routers/%(router_id)s.json and accept body={"router":{"external_gateway_info":{"network_id": ext_net_id, "enable_snat": false}}}
 
 ## external_gateway_added vs. internal_network_added
+
 * in agent.l3_agent
 * external_gateway_added(self, ri, ex_gw_port, interface_name, internal_cidrs)
 * internal_network_added(self, ri, network_id, port_id, internal_cidr, mac_address)
 
 external_gateway_added
+
 1. force device exists, self.driver.plug
 1. self.driver.init_l3
 1. _send_gratutious_arp_packets
 1. **ip netns qrouter-xxx route add default gw gw_ip**
 
 internal_network_added
+
 1. force device exists, self.driver.plug
 1. self.driver.init_l3
 1. _send_gratutious_arp_packets
@@ -46,6 +50,7 @@ internal_network_added
 routers_updated mainly invoke \_process_routers which just remove routers no longer exist
 
 ## `__router_added(router_id, router)`
+
 * add router info to cache: self.router\_info
 * create namespace if needed
 * handle metadata filter and nat rules
