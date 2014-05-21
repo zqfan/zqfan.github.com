@@ -17,6 +17,10 @@ Information is coming from:
 * enovance blog: http://techs.enovance.com/
 * [ceilometer irc meeting record](http://eavesdrop.openstack.org/meetings/ceilometer/2014/)
 
+# week 15 (20140407-20140413)
+Gerrit:
+* [reconnect to mongodb on connection failure](https://review.openstack.org/#/c/86609/) 但是只针对了启动连接的时候，运行时连接失败尚未处理。
+
 # week 13 (20140324-20140330)
 Mailing List:
 * nova uses gerrit for blueprint review process in juno, [原文](http://lists.openstack.org/pipermail/openstack-dev/2014-March/030576.html)
