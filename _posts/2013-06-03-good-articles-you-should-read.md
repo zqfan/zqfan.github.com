@@ -12,6 +12,7 @@ License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 # Blog
 
 * http://www.artima.com/weblogs/index.jsp?blogger=micheles
+* [http://lucumr.pocoo.org/](http://lucumr.pocoo.org/) by Armin Ronacher (flask author)
 
 # Article
 
@@ -23,6 +24,10 @@ License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 * [How To Ask Questions The Smart Way](http://catb.org/~esr/faqs/smart-questions.html) by Eric Steven Raymond
 
 ## python
+
+### datetime
+
+* [“Eppur si muove!”* – Dealing with Timezones in Python](http://lucumr.pocoo.org/2011/7/15/eppur-si-muove/) by Armin Ronacher (flask author)
 
 ### string
 
