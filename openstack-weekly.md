@@ -16,6 +16,7 @@ Information is coming from:
 * UnitedStack blog: http://www.ustack.com/blog/
 * enovance blog: http://techs.enovance.com/
 * [ceilometer irc meeting record](http://eavesdrop.openstack.org/meetings/ceilometer/2014/)
+* [openstack irc log](http://eavesdrop.openstack.org/irclogs/)
 
 # week 15 (20140407-20140413)
 Gerrit:
