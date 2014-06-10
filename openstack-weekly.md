@@ -18,6 +18,7 @@ Information is coming from:
 * enovance blog: http://techs.enovance.com/
 * [ceilometer irc meeting record](http://eavesdrop.openstack.org/meetings/ceilometer/2014/)
 * [openstack irc log](http://eavesdrop.openstack.org/irclogs/)
+* [Mark McLoughlin's blog](http://blogs.gnome.org/markmc/)
 
 # 2014/06/02-2014/06/08
 
