@@ -28,3 +28,5 @@ License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 then you can run python3.3 interpreter with:
 
     $ python3.3
+
+If you want to install other version of python, the steps are similiar. For python2.6, you need to run `./configure --prefix=/opt/python3.3 --with-zlib=/usr/include`, otherwise, you will get error when import zlib module.
