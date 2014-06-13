@@ -20,6 +20,28 @@ Information is coming from:
 * [openstack irc log](http://eavesdrop.openstack.org/irclogs/)
 * [Mark McLoughlin's blog](http://blogs.gnome.org/markmc/)
 
+# week 24 (20140609-20140615)
+
+Merged:
+
+* [https://review.openstack.org/#/c/95640/](https://review.openstack.org/#/c/95640/), bug [https://bugs.launchpad.net/python-ceilometerclient/+bug/1323480](https://bugs.launchpad.net/python-ceilometerclient/+bug/1323480)
+* [https://review.openstack.org/#/c/96699/](https://review.openstack.org/#/c/96699/)
+* [https://review.openstack.org/#/c/94324/](https://review.openstack.org/#/c/94324/), bug [https://bugs.launchpad.net/ceilometer/+bug/1320761](https://bugs.launchpad.net/ceilometer/+bug/1320761)
+* [https://review.openstack.org/#/c/95229/](https://review.openstack.org/#/c/95229/), bug [https://bugs.launchpad.net/ceilometer/+bug/1322111](https://bugs.launchpad.net/ceilometer/+bug/1322111)
+* [https://review.openstack.org/#/c/99546/](https://review.openstack.org/#/c/99546/), bug [https://launchpad.net/bugs/1323975](https://launchpad.net/bugs/1323975)
+
+Gerrit:
+
+* Ceilometer已在HBase中实现event相关接口，[https://review.openstack.org/91408](https://review.openstack.org/91408), MongoDB的接口正在开发中
+* Ceilometer已批准增加升级测试，以验证版本升级能正常工作，[https://review.openstack.org/98168](https://review.openstack.org/98168)
+* Ceilometer已批准在CeilometerClient中增加Keystone V3支持，[https://review.openstack.org/95270](https://review.openstack.org/95270)
+* Ceilometer目前遭遇严重的CI问题，[https://bugs.launchpad.net/ceilometer/+bug/1327344](https://bugs.launchpad.net/ceilometer/+bug/1327344), [https://bugs.launchpad.net/ceilometer/+bug/1323524](https://bugs.launchpad.net/ceilometer/+bug/1323524), 并在邮件列表里被点名，[http://lists.openstack.org/pipermail/openstack-dev/2014-June/037079.html](http://lists.openstack.org/pipermail/openstack-dev/2014-June/037079.html), 经过两次修正仍未解决问题，项目核心成员经过讨论没有分析出根因但提出了一些可能的解决办法，预计还会在未来一段时间造成影响
+
+Mailing List:
+
+* Horizon计划支持Ceilometer Alarm资源，[http://lists.openstack.org/pipermail/openstack-dev/2014-June/036627.html](http://lists.openstack.org/pipermail/openstack-dev/2014-June/036627.html)
+
+
 # 2014/06/02-2014/06/08
 
 Gerrit:
