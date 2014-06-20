@@ -20,6 +20,23 @@ Information is coming from:
 * [openstack irc log](http://eavesdrop.openstack.org/irclogs/)
 * [Mark McLoughlin's blog](http://blogs.gnome.org/markmc/)
 
+# week 25 (20140614-20140620)
+
+Merged:
+
+* 2014.06.19 (fix) (ceilometer) [Fix hacking rule 302 and enable it](https://review.openstack.org/101123)
+* 2014.06.18 (fix) (ceilometer) [Remove unused logging in tests](https://review.openstack.org/99245)
+* 2014.06.18 (fix) (ceilometer) [Clean up oslo.middleware.{audit,notifier}](https://review.openstack.org/99246)
+* 2014.06.17 (fix) (marconi) [remove default=None for config options](https://review.openstack.org/99545)
+* 2014.06.14 (fix) (ceilometer) [Fix incorrect trait initialization](https://review.openstack.org/97588) high
+* 2014.06.14 (fix) (ceilometerclient) [Fix hacking rules: H302,H305,H307,H402](https://review.openstack.org/99293)
+
+Gerrit:
+
+* Ceilometer CI高失败率问题已逐渐解决
+* 为实现alarm与meter分库存储，Ceilometer的数据库重构已经由Mehdi Abaakouk初步完成
+
+
 # week 24 (20140609-20140615)
 
 Merged:
