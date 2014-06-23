@@ -36,6 +36,15 @@ Gerrit:
 * Ceilometer CI高失败率问题已逐渐解决
 * 为实现alarm与meter分库存储，Ceilometer的数据库重构已经由Mehdi Abaakouk初步完成
 
+Mailing List:
+
+* **OpenStack Object Storage New Feature ‘Storage policies’**: Storage policies allow deployers to configure multiple object rings and expose them to end users on a per-container basis. Deployers can create policies based on hardware performance, regions, or other criteria and independently choose different replication factors on them. A policy is set on a Swift container at container creation time and cannot be changed. [Full docs](http://swift.openstack.org/overview_policies.html) and more details about the roadmap in [this message by John Dickinson](http://lists.openstack.org/pipermail/openstack-dev/2014-March/030937.html).
+
+Blogs:
+
+* By James Page: [How we scaled OpenStack to launch 168,000 cloud instances](http://javacruft.wordpress.com/2014/06/18/168k-instances/)
+* By Flavio Percoco: [Marconi to AMQP: See you later](http://blog.flaper87.com/post/53a09586d987d23f49c777bf/)
+
 
 # week 24 (20140609-20140615)
 
