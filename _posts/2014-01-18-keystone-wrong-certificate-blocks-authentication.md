@@ -8,11 +8,20 @@ tags: [Havana, Keystone]
 {% include JB/setup %}
 OpenStack now is deployed on various operating system, problems will come up even you've already configured it exactly as the manual tells you, they are paticular environment or operation problems rather than bugs.
 
-## CalledProcessError: Command 'openssl' returned non-zero exit status 4
-OpenStack Havana 2013.2.2dev on SLES SP3
+## Problem
 
-    # neutron net-list
-    Authentication required
+You will see the following error in particular service's log:
+
+~~~
+CalledProcessError: Command 'openssl' returned non-zero exit status 4
+~~~
+
+My environment is OpenStack Havana 2013.2.2dev on SLES SP3, and when I try to use neutron command, it fails:
+
+~~~
+# neutron net-list
+Authentication required
+~~~
 
 log in /var/log/neutron/neutron-server.log
 
@@ -35,7 +44,9 @@ log in /var/log/neutron/neutron-server.log
     TRACE keystoneclient.middleware.auth_token
     DEBUG keystoneclient.middleware.auth_token [-] Marking token 7828a6531a2ffb064f2bd2496e44c860 as unauthorized in memcache _cache_store_invalid /usr/lib64/python2.6/site-packages/keystoneclient/middleware/auth_token.py:1068
 
-### Solution: `rm /var/lib/neutron/keystone-signing/*`
+### Solution
+
+`rm /var/lib/neutron/keystone-signing/*`
 
 Keystone signs the information in auth token with a certificate that in most setups was generated for that instance of keystone. OpenStack service will use auth_token middleware to fetch the certificates of keystone so that it can verify that the tokens are correct. see [http://lists.openstack.org/pipermail/openstack/2013-October/002579.html](http://lists.openstack.org/pipermail/openstack/2013-October/002579.html)
 

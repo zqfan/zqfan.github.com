@@ -20,6 +20,12 @@ Information is coming from:
 * [openstack irc log](http://eavesdrop.openstack.org/irclogs/)
 * [Mark McLoughlin's blog](http://blogs.gnome.org/markmc/)
 
+# week 26 (20140621-20140628)
+
+Gerrit:
+
+* Mehdi Abaakouk fix a signature compare issue, [Use hmac.compare_digest to compare signature](https://review.openstack.org/#/c/101934/4), see also [A Lesson In Timing Attacks](http://codahale.com/a-lesson-in-timing-attacks/)
+
 # week 25 (20140614-20140620)
 
 Merged:
