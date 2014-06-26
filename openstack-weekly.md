@@ -20,11 +20,19 @@ Information is coming from:
 * [openstack irc log](http://eavesdrop.openstack.org/irclogs/)
 * [Mark McLoughlin's blog](http://blogs.gnome.org/markmc/)
 
-# week 26 (20140621-20140628)
+# week 26 (20140621-20140627)
+
+Merged:
+
+* 2014.06.25 (fix) (ceilometerclient) [Fix alarm-threshold-update --query option](https://review.openstack.org/90882)
 
 Gerrit:
 
 * Mehdi Abaakouk fix a signature compare issue, [Use hmac.compare_digest to compare signature](https://review.openstack.org/#/c/101934/4), see also [A Lesson In Timing Attacks](http://codahale.com/a-lesson-in-timing-attacks/)
+
+Mailing List:
+
+* Clint Byrum发起了基于ceilometer为heat提供基于通知的Alarm，以便资源状态发生变动时，heat能够及时得到反馈。有点类似于之前并未实现的特性[https://blueprints.launchpad.net/ceilometer/+spec/alarm-on-notification](https://blueprints.launchpad.net/ceilometer/+spec/alarm-on-notification)
 
 # week 25 (20140614-20140620)
 
