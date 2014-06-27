@@ -21,11 +21,11 @@ you need to read documents for flake8 and pep8, here I recommend two links:
 * [https://flake8.readthedocs.org](https://flake8.readthedocs.org)
 * [https://github.com/jcrocholl/pep8/blob/master/docs/developer.rst](https://github.com/jcrocholl/pep8/blob/master/docs/developer.rst)
 
-a new check should be numbered, and they are categoried by types, you'll find the category under hacking/checks direcotry, each file is a category, add your new check to properly file and give it a new hacking number.
+a new check should be numbered, for example, ``H101``, H means Hacking project, first number 1 means it belongs to a specific category (particularly, comments), the last two digits means the number in that category. you'll find the category under hacking/checks direcotry, each file is a category, add your new check to properly file and give it a new hacking number.
 
 hacking project mainly uses doc-test for unit test, so if you're writting function test, you can directly write test in docstring. for example:
 
-~~~
+~~~ python
 r"""Check for 'TODO()'.
 
 OpenStack HACKING guide recommendation for TODO:
@@ -45,6 +45,13 @@ if the check is a class or it cannot be tested via docstring, you will need add 
 
 for function test case, the arguments of funtion could be different, but their name is solid, here is the list:
 
+* ``physical_line``:
+  * Raw line of text from the input file
+* ``logical_line``:
+  * Multi-line statements converted to a single line
+  * Stripped left and right
+  * Contents of strings replaced with ``"xxx"`` of same length
+  * Comments removed
 * ``lines``: a list of the raw lines from the input file
 * ``tokens``: the tokens that contribute to this logical line
 * ``line_number``: line number in the input file
@@ -66,6 +73,31 @@ the tokens is a list of:
 and note that, since only one parameter of physical_line and logical_line can be used, you will need return (col, message) for physical_line or yield it for logical_line
 
 anything uncertain, read the [docs](https://github.com/jcrocholl/pep8/blob/master/docs/developer.rst) again
+
+here is a full demo:
+
+~~~ python
+@core.flake8ext
+def hacking_no_locals(logical_line, physical_line, tokens, noqa):
+    """Do not use locals() for string formatting.
+
+    Okay: 'locals()'
+    Okay: 'locals'
+    Okay: locals()
+    Okay: print(locals())
+    H501: print("%(something)" % locals())
+    Okay: print("%(something)" % locals()) # noqa
+    """
+    if noqa:
+        return
+    for_formatting = False
+    for token_type, text, start, _, _ in tokens:
+        if text == "%" and token_type == tokenize.OP:
+            for_formatting = True
+        if (for_formatting and token_type == tokenize.NAME and text ==
+                "locals" and "locals()" in logical_line):
+            yield (start[1], "H501: Do not use locals() for string formatting")
+~~~
 
 ### add check
 
