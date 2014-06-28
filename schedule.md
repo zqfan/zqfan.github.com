@@ -16,18 +16,46 @@ This page showes what I'm going to do, and what I've done in OpenStack project.
 * (exp) (havana) environment deployment to support experiment
 
 # WAIT
-* (bug) (ceilometer) [delete non-existent alarm return incorrect faultstring](https://bugs.launchpad.net/ceilometer/+bug/1280036)
-* (fix) (ceilometerclient) [Adjust Exception inheritance relationship](https://review.openstack.org/#/c/75428/)
-* (fix( (neutronclient) [Remove cliff-tablib from test-requirements](https://review.openstack.org/#/c/49886/)
-* (fix) (neutronclient) [Refactor tests/unit/test_shell.py](https://review.openstack.org/#/c/41615/)
 
 # WISH
 * nova server name is not injected to hostname
 * (doc) ceilometer mongodb data is overload
 
 # DONE
+* 2014.06.27 (fix) (ceilometer) [Avoid reading real config files in unit test](https://review.openstack.org/100054)
+* 2014.06.27 (post) [OpenStack Ceilometer Juno Development](http://zqfan.github.io/openstack/2014/06/27/openstack-ceilometer-juno-development)
+* 2014.06.26 (post) [How To Write OpenStack Hacking Rules](http://zqfan.github.io/openstack/2014/06/26/how-to-write-openstack-hacking-rules)
+* 2014.06.25 (fix) (ceilometerclient) [Fix alarm-threshold-update --query option](https://review.openstack.org/90882)
+* 2014.06.19 (fix) (ceilometer) [Fix hacking rule 302 and enable it](https://review.openstack.org/101123)
+* 2014.06.18 (fix) (ceilometer) [Remove unused logging in tests](https://review.openstack.org/99245)
+* 2014.06.18 (fix) (ceilometer) [Clean up oslo.middleware.{audit,notifier}](https://review.openstack.org/99246)
+* 2014.06.17 (fix) (marconi) [remove default=None for config options](https://review.openstack.org/99545)
+* 2014.06.14 (fix) (ceilometer) [Fix incorrect trait initialization](https://review.openstack.org/97588) high
+* 2014.06.14 (fix) (ceilometerclient) [Fix hacking rules: H302,H305,H307,H402](https://review.openstack.org/99293)
+* 2014.06.12 (fix) (barbican) [remove default=None for config options](https://review.openstack.org/99546)
+* 2014.06.11 (fix) (ceilometer) [Fix project authorization check](https://review.openstack.org/95229)
+* 2014.06.11 (fix) (ceilometer) [Update doc for sample config file issue](https://review.openstack.org/94324)
+* 2014.06.10 (fix) (ceilometerclient) [use mock instead of try...finally](https://review.openstack.org/96699)
+* 2014.06.10 (fix) (ceilometerclient) [Avoid unnecessary stderr message when run test](https://review.openstack.org/95640)
+* 2014.06.07 (fix) (ceilometer) [Align to openstack python package index mirror](https://review.openstack.org/83369)
+* 2014.05.31 (fix) (ceilometer) [Disable specifying alarm itself in combination rule](https://review.openstack.org/92048)
+* 2014.05.29 (fix) (ceilometer) [Ignore the generated file ceilometer.conf.sample](https://review.openstack.org/93878)
+* 2014.05.20 (fix) (devstack) [Add new configuration files for ceilometer](https://review.openstack.org/93873)
+* 2014.05.18 (fix) (nova) [Ignore etc/nova/nova.conf.sample](https://review.openstack.org/93893)
+* 2014.05.17 (fix) (ceilometerclient) [Remove out-dated exceptions](https://review.openstack.org/93852)
+* 2014.05.02 (fix) (ceilometerclient) [Avoid dead loop when token is string format](https://review.openstack.org/87577)
+* 2014.05.02 (fix) (ceilometer) [Allow alarm threshold value set to 0](https://review.openstack.org/90645)
+* 2014.04.29 (fix) (openstack-manuals) [Install openstack-dashboard-test package for suse](https://review.openstack.org/89226)
+* 2014.04.26 (fix) (devstack) [Replace DEFAULT section with service_credentials](https://review.openstack.org/87862)
+* 2014.04.23 (fix) (ceilometer) [Disable reverse dns lookup](https://review.openstack.org/79876)
+* 2014.04.18 (fix) (ceilometerclient) [Update v2.options docstring](https://review.openstack.org/87453)
+* 2014.04.17 (fix) (ceilometer) [Remove duplicate alarm from alarm_ids](https://review.openstack.org/86501)
+* 2014.04.13 (fix) (ceilometer) [Disable specifying alarm itself in combination rule](https://review.openstack.org/86181)
+* 2014.04.11 (fix) (ceilometer) [Remove unnecessary escape character in string format](https://review.openstack.org/86780)
+* 2014.04.01 (fix) (novaclient) [Avoid AttributeError in servers.Server.__repr__](https://review.openstack.org/82443)
+* 2014.03.28 (fix) (ceilometer) [Remove escape character in string format](https://review.openstack.org/83338)
+* 2014.03.28 (fix) (ceilometer) [Ensure the correct error message is displayed](https://review.openstack.org/78633)
 * 2014.03.22 (fix) (ceilometer) [Skip central agent interval_task when keystone fails](https://review.openstack.org/#/c/78079/)
-* 2014.03.20 (exp) free cinder-volumes by remove unused logic volume
 * 2014.03.18 (fix) (openstack-manuals) [Correct swift proxy service name](https://review.openstack.org/#/c/81156/)
 * 2014.03.06 (fix) (nova) [Fix incorrect kwargs 'reason' for HTTPBadRequest](https://review.openstack.org/#/c/64264/)
 * 2014.03.05 (fix) (api-site) [Fix incorrect language specification](https://review.openstack.org/#/c/76920/)

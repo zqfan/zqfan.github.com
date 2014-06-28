@@ -11,14 +11,16 @@ This page is a draft of OpenStack newsletter and process log of my contribution 
 Information is coming from:
 
 * OpenStack Developer Mailing List
-* https://launchpad.net/openstack
-* http://stackalytics.com/
-* Ceilometer PTL's blog: http://julien.danjou.info/blog/
-* UnitedStack blog: http://www.ustack.com/blog/
-* enovance blog: http://techs.enovance.com/
+* [http://stackalytics.com/](http://stackalytics.com/)
 * [ceilometer irc meeting record](http://eavesdrop.openstack.org/meetings/ceilometer/2014/)
 * [openstack irc log](http://eavesdrop.openstack.org/irclogs/)
+
+* [Julien Danjou's blog](http://julien.danjou.info/blog/)
 * [Mark McLoughlin's blog](http://blogs.gnome.org/markmc/)
+
+* [UnitedStack blog](http://www.ustack.com/blog/)
+* [enovance blog](http://techs.enovance.com/)
+* [mirantis blog](http://www.mirantis.com/blog/)
 
 # week 26 (20140621-20140627)
 
