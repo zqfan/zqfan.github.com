@@ -20,4 +20,14 @@ Ceilometer元老（也是之前的项目负责人）Julien Danjou（昵称jd）�
 * Alarm and logs improvements：会议讨论了优化alarm evaluator和日志两个系统
 * Epilogue：Ceilometer新的项目负责人Eoghan Glynn指出QA将是当前版本的主要关注点
 
+### Juno-1（已发布）
+
+* [Need to include state of an instance in resource metadata](https://blueprints.launchpad.net/ceilometer/+spec/ceilometer-instance-state-measurement)，[源代码](https://review.openstack.org/#/c/84438/)只改动了一行，总计改动4行，有没有被耍的感觉？
+* [Support for metering LoadBalancer as a Service](https://blueprints.launchpad.net/ceilometer/+spec/ceilometer-meter-lbaas)，增加对Neutron LBaaS的监测
+* [Enable event feature on HBase](https://blueprints.launchpad.net/ceilometer/+spec/hbase-events-feature)，增加HBase数据库对Event数据的支持
+* [Change api to use pipeline of filters declared in conf](https://blueprints.launchpad.net/ceilometer/+spec/declarative-filters)，API现在像其他项目一样可由配置文件控制
+* [Grenade Upgrade Testing](https://blueprints.launchpad.net/ceilometer/+spec/grenade-upgrade-testing)，增加从Havana到Icehouse，以及Icehouse到Juno的升级测试（CI）
+* [Switch to oslo.messaging](https://blueprints.launchpad.net/ceilometer/+spec/switch-to-oslo.messaging)，oslo.messaging已从孵化项目oslo-incubator毕业，ceilometer随之更新
+* [SQL backend to handle 'big data'](https://blueprints.launchpad.net/ceilometer/+spec/big-data-sql)，sql数据库对海量数据的支持，包含提升resource查询性能，支持多个collector服务，重构sql后台提升写性能
+
 License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
