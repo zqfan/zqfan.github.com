@@ -12,7 +12,7 @@ Firstly, you need a web server, apache is a good choice but not the only one.
 
 ~~~
 # apt-get install apache2
-# mkdir /oar/www/pypi
+# mkdir /var/www/pypi
 # cd /var/www/pypi
 # service apache2 restart
 ~~~
@@ -36,7 +36,7 @@ Now, you can download your packages from your own server, for example, in anothe
 # pip install --no-index --find-links http://your-server-ip/pypi oslo.config
 ~~~
 
-An advanced tip is that, you can write all your packages' name in a requires.txt, then use a script to download them all, you may need to run `apt-get install expect` to use the amazing expect command
+An advanced tip is that, you can write all your packages' name in a requires.txt, then use a script to download them all, note that, `pip install --no-install --download=/var/www/pypi --ignore-installed -r requires.txt` will stop to work if one of the listed package is fail to download, so a better choice may be downloading them one by one. Since pip needs interactive when it finds there is existent files in the download directory, which will block the script to automatically run, so you may need to run `apt-get install expect` which enables the amazing expect command to run the script.
 
 ~~~
 # pwd
