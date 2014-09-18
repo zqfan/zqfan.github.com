@@ -22,7 +22,7 @@ tags: []
 
 ### google-analytics无法访问
 
-暂无解决方法
+访问https://www.google.com.hk/analytics/作为替代
 
 ### gae不识别goagent证书
 
