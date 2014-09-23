@@ -47,7 +47,7 @@ here is possible message of stderr:
     Maybe forgot to specify a dependency?
     Could not find mongod command
 
-## solution
+**Solution**:
 
 {% highlight bash linenos=table %}
 sudo apt-get install libmysqlclient-dev python-dev libffi-dev libxml2-dev \
@@ -73,3 +73,24 @@ Solution:
 {% highlight bash linenos=table %}
 sudo apt-get install libpq-dev
 {% endhighlight %}
+
+# Docs
+
+When you want to generate document, you may run `tox -e docs --develop`, but sphinxcontrib has lots of sphinxcontrib-docbookrestapi extensions, some may requires binary packages in your operating system. Here is the list:
+
+* libtidy
+
+You may get the error message if you don't have all these packages:
+
+~~~
+Initializing sphinxcontrib.pecanwsme.rest
+error: None
+ERROR: InvocationError: '/home/sam/workspace/openstack/ceilometer/.tox/docs/bin/python setup.py build_sphinx'
+____________________ summary ____________________
+ERROR: docs: commands failed
+~~~
+
+**Solutions**:
+
+* RPM based: `yum install -y libtidy-devel`
+* APT based: `apt-get install libtidy-dev`
