@@ -22,6 +22,10 @@ Information is coming from:
 * [enovance blog](http://techs.enovance.com/)
 * [mirantis blog](http://www.mirantis.com/blog/)
 
+# 20140922-20140926
+
+* Quote to Gordon Chung: "There were inefficiencies in our model in the icehouse releases that we addressed. It's advisable to use Juno builds if you plan to use SQL backend." [see detail](https://bugs.launchpad.net/bugs/1373907)#3
+
 # week 26 (20140621-20140627)
 
 Merged:
