@@ -22,6 +22,10 @@ Information is coming from:
 * [enovance blog](http://techs.enovance.com/)
 * [mirantis blog](http://www.mirantis.com/blog/)
 
+# 20141124-20141130
+
+* [What is Ceilometer's Minimum Viable Product?](https://aptira.com/blog/112-what-is-ceilometer-s-minimum-viable-product)
+
 # 20140922-20140926
 
 * Quote to Gordon Chung: "There were inefficiencies in our model in the icehouse releases that we addressed. It's advisable to use Juno builds if you plan to use SQL backend." [see detail](https://bugs.launchpad.net/bugs/1373907)#3
