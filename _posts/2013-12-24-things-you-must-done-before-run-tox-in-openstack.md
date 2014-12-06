@@ -94,3 +94,9 @@ ERROR: docs: commands failed
 
 * RPM based: `yum install -y libtidy-devel`
 * APT based: `apt-get install libtidy-dev`
+
+# Nova
+
+* **No package 'libvirt' found**: `apt-get install libvirt-dev`
+
+
