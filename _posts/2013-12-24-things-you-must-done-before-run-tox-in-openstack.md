@@ -60,6 +60,17 @@ In my environment, mysql-server is already installed, so if you've not done this
 sudo apt-get install mysql-server
 {% endhighlight %}
 
+### NOTE
+
+On SLES 11, I have observed that local test always fail because "AutoReconnect: connection closed" or "AutoReconnect: [Errno 111] ECONNREFUSED". If you can get some MongoDB message, you will see:
+
+~~~
+# Fatal error in v8::Context::New()
+# V8 is no longer usable
+~~~
+
+This is because SLES set virtual memory to 6475920 kbytes by default, so MongoDB thread will be killed after run too many unit test cases. You can check ulimit by run `ulimit -a`, if the virtual memory is set to a low level, run `ulimit -v unlimited`, then it will work fine.
+
 # Glance
 Dependency
 
