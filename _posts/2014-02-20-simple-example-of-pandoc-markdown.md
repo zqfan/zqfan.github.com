@@ -60,7 +60,7 @@ pandoc --number-sections -o target.html source.md
 # 前言 {#perface}
 ~~~
 
-当没有手动指定时，会按照一定规则自动指定id。
+当没有手动指定时，会按照[一定规则](http://johnmacfarlane.net/pandoc/README.html#extension-auto_identifiers)自动指定id。
 
 ### Q：如何写一段话
 段落以空行区分，单纯的换行符会被忽略，你也可以使用跳脱符`\`强制换行，一般不需要这么做
