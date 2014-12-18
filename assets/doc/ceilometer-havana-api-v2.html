@@ -2668,7 +2668,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 <td align="left">string</td>
 <td align="left">N/A</td>
 <td align="left">YES</td>
-<td align="left">度量名称</td>
+<td align="left">指标名称</td>
 </tr>
 <tr class="even">
 <td align="left">threshold</td>
@@ -2682,14 +2682,14 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 <td align="left">int</td>
 <td align="left">N/A</td>
 <td align="left">NO</td>
-<td align="left">周期</td>
+<td align="left">周期长度</td>
 </tr>
 <tr class="even">
 <td align="left">evaluation_periods</td>
 <td align="left">int</td>
 <td align="left">N/A</td>
 <td align="left">NO</td>
-<td align="left">计算周期数</td>
+<td align="left">评估周期数</td>
 </tr>
 <tr class="odd">
 <td align="left">statistic</td>
@@ -2714,6 +2714,8 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 </tr>
 </tbody>
 </table>
+<p>注意：period的值应该要保证比指标采集周期要大，否则很容易出现insufficient data状态。原因是告警评估周期到来时，每个告警是从当前时间倒推(evaluation_periods+1)*period秒数，从中取出监控数据，如果period值比监控周期小，此时很可能取不到数据。</p>
+<p>提示：你可以在query字段添加过滤条件，限定取监控数据的范围，例如指定只监控resource id为a375caf9a73d4a49bb40321639003909的数据，CLI中可以通过指定--query &quot;resource_id=a375caf9a73d4a49bb40321639003909&quot;来过滤</p>
 <p>combination_rule结构体</p>
 <table>
 <thead>
