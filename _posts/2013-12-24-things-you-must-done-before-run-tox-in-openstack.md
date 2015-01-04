@@ -29,6 +29,7 @@ For now, Dec 24, 2013, ceilometer requires MySQL-python, xattr, lxml, and mongod
 * xattr: python-dev libffi-dev
 * lxml: libxml2-dev libxslt-dev
 * pymongo: mongodb
+* psycopg2: libpq-dev
 
 here is possible message of stderr:
 
@@ -51,7 +52,7 @@ here is possible message of stderr:
 
 {% highlight bash linenos=table %}
 sudo apt-get install libmysqlclient-dev python-dev libffi-dev libxml2-dev \
-                     libxslt-dev mongodb
+                     libxslt-dev mongodb libpq-dev
 {% endhighlight %}
 
 In my environment, mysql-server is already installed, so if you've not done this in operating system installation, you should better do
