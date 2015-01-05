@@ -1571,7 +1571,7 @@ state可选值表
 
 | REST VERB | URI | DESCRIPTION |
 |:----------|:----|:------------|
-| PUT | /v2/alarms/{alarm_id}/history | 获取指定alarm历史信息
+| GET | /v2/alarms/{alarm_id}/history | 获取指定alarm历史信息
 
 history是alarm的变动记录，对应模型AlarmChange，对应数据库表alarm_history。
 
