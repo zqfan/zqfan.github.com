@@ -43,6 +43,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><a href="#告警alarm"><span class="toc-section-number">3.1</span> 告警（Alarm）</a></li>
 <li><a href="#能力capabilities"><span class="toc-section-number">3.2</span> 能力（Capabilities）</a></li>
 <li><a href="#事件event"><span class="toc-section-number">3.3</span> 事件（Event）</a></li>
+<li><a href="#指标meter"><span class="toc-section-number">3.4</span> 指标（Meter）</a></li>
 </ul></li>
 <li><a href="#api通用信息"><span class="toc-section-number">4</span> API通用信息</a><ul>
 <li><a href="#获取token"><span class="toc-section-number">4.1</span> 获取token</a></li>
@@ -57,7 +58,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><a href="#删除告警delete-alarm"><span class="toc-section-number">5.1.5</span> 删除告警（Delete Alarm）</a></li>
 <li><a href="#查询告警状态get-alarm-state"><span class="toc-section-number">5.1.6</span> 查询告警状态（Get Alarm State）</a></li>
 <li><a href="#更新告警状态set-alarm-state"><span class="toc-section-number">5.1.7</span> 更新告警状态(Set Alarm State)</a></li>
-<li><a href="#查询告警历史信息show-alarm-history"><span class="toc-section-number">5.1.8</span> 查询告警历史信息(Show Alarm History)</a></li>
+<li><a href="#查询告警历史show-alarm-history"><span class="toc-section-number">5.1.8</span> 查询告警历史(Show Alarm History)</a></li>
 </ul></li>
 <li><a href="#能力capabilities-1"><span class="toc-section-number">5.2</span> 能力（Capabilities）</a><ul>
 <li><a href="#查询能力详情get-capabilities"><span class="toc-section-number">5.2.1</span> 查询能力详情（Get Capabilities）</a></li>
@@ -69,12 +70,17 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><a href="#查询特征描述list-traits-description"><span class="toc-section-number">5.3.4</span> 查询特征描述（List Traits Description）</a></li>
 <li><a href="#查询特征list-traits"><span class="toc-section-number">5.3.5</span> 查询特征（List Traits）</a></li>
 </ul></li>
-<li><a href="#复合查询query"><span class="toc-section-number">5.4</span> 复合查询（Query）</a><ul>
-<li><a href="#复合查询告警query-alarm"><span class="toc-section-number">5.4.1</span> 复合查询告警（Query Alarm）</a></li>
+<li><a href="#指标meter-1"><span class="toc-section-number">5.4</span> 指标（Meter）</a><ul>
+<li><a href="#查询指标list-meter"><span class="toc-section-number">5.4.1</span> 查询指标（List Meter）</a></li>
+<li><a href="#查询数据点list-sample"><span class="toc-section-number">5.4.2</span> 查询数据点（List Sample）</a></li>
 </ul></li>
 <li><a href="#资源resource"><span class="toc-section-number">5.5</span> 资源（Resource）</a><ul>
 <li><a href="#查询资源list-resources"><span class="toc-section-number">5.5.1</span> 查询资源（List Resources）</a></li>
 <li><a href="#查询资源详情show-resource"><span class="toc-section-number">5.5.2</span> 查询资源详情（Show Resource）</a></li>
+</ul></li>
+<li><a href="#复合查询query"><span class="toc-section-number">5.6</span> 复合查询（Query）</a><ul>
+<li><a href="#复合查询告警query-alarm"><span class="toc-section-number">5.6.1</span> 复合查询告警（Query Alarm）</a></li>
+<li><a href="#复合查询告警历史query-alarm-history"><span class="toc-section-number">5.6.2</span> 复合查询告警历史（Query Alarm History）</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -132,7 +138,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 </tbody>
 </table>
 <h1 id="对象模型object-model"><span class="header-section-number">3</span> 对象模型（Object Model）</h1>
-<p>注意：对象模型只是系统中对某种资源的建模，并不代表API输入输出时的字段信息。</p>
+<p><strong>注意：对象模型只是系统中对某种资源的建模，并不代表数据库中表或者字段信息。（各种类型的数据库的表和字段名称都不一样）</strong></p>
 <p>Ceilometer Juno API V2管理如下对象</p>
 <h2 id="告警alarm"><span class="header-section-number">3.1</span> 告警（Alarm）</h2>
 <p>在Juno版本中，通过配置，告警对象是可以单独存储在某个数据库中的。不论是分库还是不分库，告警都存储在alarm表中，告警历史信息存储在alarm_history表中。</p>
@@ -367,8 +373,9 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 </table>
 <h2 id="能力capabilities"><span class="header-section-number">3.2</span> 能力（Capabilities）</h2>
 <ul>
-<li>Capabilities属性表</li>
+<li>Capabilities模型</li>
 </ul>
+<p>Capabilities对象没有存储在数据库中，是写死在代码里的。</p>
 <table>
 <thead>
 <tr class="header">
@@ -404,7 +411,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 </table>
 <h2 id="事件event"><span class="header-section-number">3.3</span> 事件（Event）</h2>
 <ul>
-<li>Event属性表</li>
+<li>Event模型</li>
 </ul>
 <table>
 <thead>
@@ -453,7 +460,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 </tbody>
 </table>
 <ul>
-<li>TraitDescription属性表</li>
+<li>TraitDescription模型</li>
 </ul>
 <table>
 <thead>
@@ -486,7 +493,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 </tbody>
 </table>
 <ul>
-<li>Trait属性表</li>
+<li>Trait模型</li>
 </ul>
 <table>
 <thead>
@@ -523,6 +530,335 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <td align="left"></td>
 <td align="left"></td>
 <td align="left">特征的值</td>
+</tr>
+</tbody>
+</table>
+<h2 id="指标meter"><span class="header-section-number">3.4</span> 指标（Meter）</h2>
+<ul>
+<li>Meter模型</li>
+</ul>
+<p>Meter对象没有在MongoDB数据库中持久化存储，是从数据点中提取出来的。 Meter对象在MySQL数据库中对应meter表。</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">属性</th>
+<th align="left">类型</th>
+<th align="left">CRUD</th>
+<th align="left">默认值</th>
+<th align="left">约束</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">name</td>
+<td align="left">string</td>
+<td align="left">r</td>
+<td align="left">N/A</td>
+<td align="left">N/A</td>
+<td align="left">指标名称</td>
+</tr>
+<tr class="even">
+<td align="left">type</td>
+<td align="left">string</td>
+<td align="left">r</td>
+<td align="left">N/A</td>
+<td align="left">gauge、cumulative、delta之一</td>
+<td align="left">指标类型</td>
+</tr>
+<tr class="odd">
+<td align="left">unit</td>
+<td align="left">string</td>
+<td align="left">r</td>
+<td align="left">N/A</td>
+<td align="left">N/A</td>
+<td align="left">指标单位</td>
+</tr>
+<tr class="even">
+<td align="left">resource_id</td>
+<td align="left">string</td>
+<td align="left">r</td>
+<td align="left">N/A</td>
+<td align="left">N/A</td>
+<td align="left">资源唯一标识符（UUID）</td>
+</tr>
+<tr class="odd">
+<td align="left">project_id</td>
+<td align="left">string</td>
+<td align="left">r</td>
+<td align="left">N/A</td>
+<td align="left">N/A</td>
+<td align="left">资源所属租户</td>
+</tr>
+<tr class="even">
+<td align="left">user_id</td>
+<td align="left">string</td>
+<td align="left">r</td>
+<td align="left">N/A</td>
+<td align="left">N/A</td>
+<td align="left">资源所属用户</td>
+</tr>
+<tr class="odd">
+<td align="left">source</td>
+<td align="left">string</td>
+<td align="left">r</td>
+<td align="left">openstack</td>
+<td align="left">N/A</td>
+<td align="left">资源来源</td>
+</tr>
+<tr class="even">
+<td align="left">meter_id</td>
+<td align="left">string</td>
+<td align="left">r</td>
+<td align="left">N/A</td>
+<td align="left">N/A</td>
+<td align="left">指标唯一标示符</td>
+</tr>
+</tbody>
+</table>
+<p>meter_id并没有在哪里被用到，实际上被作为标识使用的只是name字段。</p>
+<p>gauge指的是跟时间无关的数值，例如cpu的核数，cpu的使用率，网卡流速等。 cumulative指的是随时间累加的数值，例如cpu使用时长，网卡总流量等，这种类型的数值在资源重启后，可能被清零重新开始计数。 delta指的是此次相对于上次的差值，这个在某些事件类型的指标中有时候会被用到，例如创建虚拟网络的事件。</p>
+<p>source默认是openstack，你可以通过修改配置项来修改这个默认值。</p>
+<ul>
+<li>OldSample模型</li>
+</ul>
+<p>OldSample对象在MySQL数据库中对应sample表。</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">属性</th>
+<th align="left">类型</th>
+<th align="left">CRUD</th>
+<th align="left">默认值</th>
+<th align="left">约束</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">counter_name</td>
+<td align="left">string</td>
+<td align="left">r</td>
+<td align="left">N/A</td>
+<td align="left">N/A</td>
+<td align="left">数据点所对应的指标名称</td>
+</tr>
+<tr class="even">
+<td align="left">counter_type</td>
+<td align="left">string</td>
+<td align="left">r</td>
+<td align="left">gauge、cumulative、delta之一</td>
+<td align="left">数据点所对应的指标类型</td>
+</tr>
+<tr class="odd">
+<td align="left">counter_unit</td>
+<td align="left">string</td>
+<td align="left">r</td>
+<td align="left">N/A</td>
+<td align="left">N/A</td>
+<td align="left">数据点所对应的指标单位</td>
+</tr>
+<tr class="even">
+<td align="left">counter_volume</td>
+<td align="left">float</td>
+<td align="left">r</td>
+<td align="left">N/A</td>
+<td align="left">N/A</td>
+<td align="left">数据点的值</td>
+</tr>
+<tr class="odd">
+<td align="left">source</td>
+<td align="left">string</td>
+<td align="left">r</td>
+<td align="left">N/A</td>
+<td align="left">N/A</td>
+<td align="left">数据点的来源</td>
+</tr>
+<tr class="even">
+<td align="left">resource_id</td>
+<td align="left">string</td>
+<td align="left">r</td>
+<td align="left">N/A</td>
+<td align="left">N/A</td>
+<td align="left">资源唯一标示符（UUID）</td>
+</tr>
+<tr class="odd">
+<td align="left">user_id</td>
+<td align="left">string</td>
+<td align="left">r</td>
+<td align="left">N/A</td>
+<td align="left">N/A</td>
+<td align="left">资源所属用户</td>
+</tr>
+<tr class="even">
+<td align="left">project_id</td>
+<td align="left">string</td>
+<td align="left">r</td>
+<td align="left">N/A</td>
+<td align="left">N/A</td>
+<td align="left">资源租户</td>
+</tr>
+<tr class="odd">
+<td align="left">timestamp</td>
+<td align="left">string</td>
+<td align="left">r</td>
+<td align="left">N/A</td>
+<td align="left">datetime格式</td>
+<td align="left">数据点创建的时间</td>
+</tr>
+<tr class="even">
+<td align="left">recorded_at</td>
+<td align="left">string</td>
+<td align="left">r</td>
+<td align="left">N/A</td>
+<td align="left">datetime格式</td>
+<td align="left">数据点保存的时间</td>
+</tr>
+<tr class="odd">
+<td align="left">resource_metadata</td>
+<td align="left">string</td>
+<td align="left">r</td>
+<td align="left">N/A</td>
+<td align="left">json dict</td>
+<td align="left">资源的元数据</td>
+</tr>
+<tr class="even">
+<td align="left">message_id</td>
+<td align="left">string</td>
+<td align="left">r</td>
+<td align="left">N/A</td>
+<td align="left">N/A</td>
+<td align="left">数据点唯一标识符（UUID）</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Statistics模型</li>
+</ul>
+<p>Statistic是计算出来的，并未在数据库中持久化存储。</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">属性</th>
+<th align="left">类型</th>
+<th align="left">CRUD</th>
+<th align="left">默认值</th>
+<th align="left">约束</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">groupby</td>
+<td align="left">dict</td>
+<td align="left">r</td>
+<td align="left">N/A</td>
+<td align="left">N/A</td>
+<td align="left">统计排序规则</td>
+</tr>
+<tr class="even">
+<td align="left">unit</td>
+<td align="left">string</td>
+<td align="left">r</td>
+<td align="left">N/A</td>
+<td align="left">N/A</td>
+<td align="left">统计单位</td>
+</tr>
+<tr class="odd">
+<td align="left">min</td>
+<td align="left">float</td>
+<td align="left">r</td>
+<td align="left">N/A</td>
+<td align="left">N/A</td>
+<td align="left">统计区间中的最小值</td>
+</tr>
+<tr class="even">
+<td align="left">max</td>
+<td align="left">float</td>
+<td align="left">r</td>
+<td align="left">N/A</td>
+<td align="left">N/A</td>
+<td align="left">统计区间中的最大值</td>
+</tr>
+<tr class="odd">
+<td align="left">avg</td>
+<td align="left">float</td>
+<td align="left">r</td>
+<td align="left">N/A</td>
+<td align="left">N/A</td>
+<td align="left">统计区间中的平均值</td>
+</tr>
+<tr class="even">
+<td align="left">sum</td>
+<td align="left">float</td>
+<td align="left">r</td>
+<td align="left">N/A</td>
+<td align="left">N/A</td>
+<td align="left">统计区间中的总和</td>
+</tr>
+<tr class="odd">
+<td align="left">count</td>
+<td align="left">int</td>
+<td align="left">r</td>
+<td align="left">N/A</td>
+<td align="left">N/A</td>
+<td align="left">统计区间中的数据点个数</td>
+</tr>
+<tr class="even">
+<td align="left">aggregate</td>
+<td align="left">dict</td>
+<td align="left">r</td>
+<td align="left">N/A</td>
+<td align="left">N/A</td>
+<td align="left">？？？</td>
+</tr>
+<tr class="odd">
+<td align="left">duration</td>
+<td align="left">float</td>
+<td align="left">r</td>
+<td align="left">N/A</td>
+<td align="left">N/A</td>
+<td align="left">统计区间中最早和最晚的数据点的时间差，单位秒</td>
+</tr>
+<tr class="even">
+<td align="left">duration_start</td>
+<td align="left">string</td>
+<td align="left">r</td>
+<td align="left">N/A</td>
+<td align="left">datetime</td>
+<td align="left">统计区间中最早的数据的时间，或者是指定的起始时间</td>
+</tr>
+<tr class="odd">
+<td align="left">duration_end</td>
+<td align="left">string</td>
+<td align="left">r</td>
+<td align="left">N/A</td>
+<td align="left">datetime</td>
+<td align="left">统计区间中最晚的数据的时间，或者是指定的结束时间</td>
+</tr>
+<tr class="even">
+<td align="left">period</td>
+<td align="left">integer</td>
+<td align="left">r</td>
+<td align="left">N/A</td>
+<td align="left">&gt;=0</td>
+<td align="left">统计区间的时间长度</td>
+</tr>
+<tr class="odd">
+<td align="left">period_start</td>
+<td align="left">string</td>
+<td align="left">r</td>
+<td align="left">N/A</td>
+<td align="left">datetime</td>
+<td align="left">统计区间的起始时间</td>
+</tr>
+<tr class="even">
+<td align="left">period_end</td>
+<td align="left">string</td>
+<td align="left">r</td>
+<td align="left">N/A</td>
+<td align="left">datetime</td>
+<td align="left">统计区间的结束时间</td>
 </tr>
 </tbody>
 </table>
@@ -904,7 +1240,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <ul>
 <li>response body参数</li>
 </ul>
-<p>参见<a href="#查询告警详情show-alarm">查询告警详情（Get Alarm）</a>章节</p>
+<p>详见响应示例。</p>
 <p>示例，一个完整的创建告警的请求如下，里面包含了定义threshold_rule参数，定义query，定义time_constraints，但是并没有覆盖所有字段：</p>
 <p>curl -i -X POST -H 'X-Auth-Token: 897de9edb774462ba5c3b875553f8087' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' -d '{&quot;threshold_rule&quot;: {&quot;meter_name&quot;: &quot;cpu_util&quot;, &quot;evaluation_periods&quot;: 3, &quot;period&quot;: 1800, &quot;statistic&quot;: &quot;min&quot;, &quot;threshold&quot;: 80.0, &quot;query&quot;: [{&quot;field&quot;: &quot;resource_id&quot;, &quot;type&quot;: &quot;&quot;, &quot;value&quot;: &quot;10e8216e-4b36-4f93-942f-19b9f09e84e5&quot;, &quot;op&quot;: &quot;eq&quot;}], &quot;comparison_operator&quot;: &quot;ge&quot;}, &quot;time_constraints&quot;: [{&quot;duration&quot;: &quot;10800&quot;, &quot;start&quot;: &quot;0 23 * * *&quot;, &quot;name&quot;: &quot;alarm-constraint-01&quot;}], &quot;type&quot;: &quot;threshold&quot;, &quot;name&quot;: &quot;cpu-alarm&quot;, &quot;repeat_actions&quot;: false}' http://172.128.231.201:8777/v2/alarms</p>
 <p>-d参数json格式化后为：</p>
@@ -1528,7 +1864,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <li>JSON响应样例</li>
 </ul>
 <pre class="sourceCode json"><code class="sourceCode json"><span class="er">&quot;ok&quot;</span></code></pre>
-<h3 id="查询告警历史信息show-alarm-history"><span class="header-section-number">5.1.8</span> 查询告警历史信息(Show Alarm History)</h3>
+<h3 id="查询告警历史show-alarm-history"><span class="header-section-number">5.1.8</span> 查询告警历史(Show Alarm History)</h3>
 <table>
 <thead>
 <tr class="header">
@@ -1541,7 +1877,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <tr class="odd">
 <td align="left">GET</td>
 <td align="left">/v2/alarms/{alarm_id}/history?q.field={field}&amp;q.op={operator}&amp;q.type={type}&amp;q.value={value}</td>
-<td align="left">获取指定告警的历史信息</td>
+<td align="left">获取指定告警的历史</td>
 </tr>
 </tbody>
 </table>
@@ -2101,9 +2437,8 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
         <span class="dt">&quot;value&quot;</span>: <span class="st">&quot;1&quot;</span>
     }
 ]</code></pre>
-<h2 id="复合查询query"><span class="header-section-number">5.4</span> 复合查询（Query）</h2>
-<p>复合查询使用POST方法，把查询条件放到了请求消息体中。body是一个字典，包含了filter，orderby，limit三个字段，详见<a href="#复合查询query">复合查询模型</a>。</p>
-<h3 id="复合查询告警query-alarm"><span class="header-section-number">5.4.1</span> 复合查询告警（Query Alarm）</h3>
+<h2 id="指标meter-1"><span class="header-section-number">5.4</span> 指标（Meter）</h2>
+<h3 id="查询指标list-meter"><span class="header-section-number">5.4.1</span> 查询指标（List Meter）</h3>
 <table>
 <thead>
 <tr class="header">
@@ -2114,20 +2449,15 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">POST</td>
-<td align="left">/v2/query/alarms</td>
-<td align="left">复合查询告警</td>
+<td align="left">GET</td>
+<td align="left">/v2/meters?q.field={field}&amp;q.op=eq&amp;q.type={type}&amp;q.value={value}</td>
+<td align="left">查询指标</td>
 </tr>
 </tbody>
 </table>
 <ul>
 <li>request filter参数</li>
 </ul>
-<p>无</p>
-<ul>
-<li>request body参数</li>
-</ul>
-<p>字符串，内容是json字典，包含三个字段</p>
 <table>
 <thead>
 <tr class="header">
@@ -2140,82 +2470,106 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">filter</td>
-<td align="left">dict</td>
-<td align="left"></td>
+<td align="left">q.field</td>
+<td align="left">string</td>
+<td align="left">见filed可选值表</td>
 <td align="left">NO</td>
-<td align="left">过滤条件</td>
+<td align="left">查询关键字</td>
 </tr>
 <tr class="even">
-<td align="left">orderby</td>
-<td align="left">list</td>
-<td align="left"></td>
+<td align="left">q.op</td>
+<td align="left">string</td>
+<td align="left">只能为eq</td>
 <td align="left">NO</td>
-<td align="left">返回的结果排序规则</td>
+<td align="left">操作符</td>
 </tr>
 <tr class="odd">
-<td align="left">limit</td>
-<td align="left">integer</td>
-<td align="left">正整数</td>
+<td align="left">q.type</td>
+<td align="left">string</td>
+<td align="left">未知</td>
 <td align="left">NO</td>
-<td align="left">返回的结果数量</td>
+<td align="left">可以不填，填了也没用，类型自动识别</td>
+</tr>
+<tr class="even">
+<td align="left">q.value</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">NO</td>
+<td align="left">值</td>
 </tr>
 </tbody>
 </table>
-<p>filter是对告警的过滤条件，是一个内容为json字典的字符串，格式是{complex_op: [{simple_op: {field_name: value}}]}，complex_op只能是and或者or，simple_op只能是['=', '!=', '&lt;', '&lt;=', '&gt;', '&gt;=']其中之一。注意field_name必须是所查询资源的直接属性。</p>
-<p>经过json格式化后形如：</p>
-<pre><code>{
-    &quot;and&quot;: [
-        {
-            &quot;and&quot;: [
-                {
-                    &quot;=&quot;: {
-                        &quot;project_id&quot;: &quot;9d26e147-7b0d-48b3-9641-bd831919fd71&quot;
-                    }
-                },
-                {
-                    &quot;=&quot;: {
-                        &quot;state&quot;: &quot;alarm&quot;
-                    }
-                },
-            ]
-        },
-        {
-            &quot;or&quot;: [
-                {
-                    &quot;and&quot;: [
-                        {
-                            &quot;&gt;&quot;: {
-                                &quot;state_timestamp&quot;: &quot;2013-12-01T18:00:00&quot;
-                            }
-                        },
-                        {
-                            &quot;&lt;&quot;: {
-                                &quot;state_timestamp&quot;: &quot;2013-12-01T18:15:00&quot;
-                            }
-                        }
-                    ]
-                },
-                {
-                    &quot;and&quot;: [
-                        {
-                            &quot;&gt;&quot;: {
-                                &quot;state_timestamp&quot;: &quot;2013-12-01T18:30:00&quot;
-                            }
-                        },
-                        {
-                            &quot;&lt;&quot;: {
-                                &quot;state_timestamp&quot;: &quot;2013-12-01T18:45:00&quot;
-                            }
-                        }
-                    ]
-                }
-            ]
-        }
-    ]
+<p>op设置为非eq的值，则返回400。</p>
+<p>field可选值表</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">可选值</th>
+<th align="left">Value类型</th>
+<th align="left">约束</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">resource</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">资源唯一标示符（UUID）</td>
+</tr>
+<tr class="even">
+<td align="left">project</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">项目唯一标示符（UUID）</td>
+</tr>
+<tr class="odd">
+<td align="left">user</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">用户唯一标示符（UUID）</td>
+</tr>
+<tr class="even">
+<td align="left">source</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">资源来源</td>
+</tr>
+<tr class="odd">
+<td align="left">metadata.{key}</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">使用metadata字段进行过滤，key可以是任意值</td>
+</tr>
+<tr class="even">
+<td align="left">pagination</td>
+<td align="left">int</td>
+<td align="left">N/A</td>
+<td align="left">未实现，使用这个字段将返回501错误</td>
+</tr>
+</tbody>
+</table>
+<p>注意：如果你错误的设置了一个不支持的field，例如/v2/meters?q.field=meta&amp;q.op=eq&amp;q.type=&amp;q.value=1，则会返回400，同时告知你有哪些field被支持，消息体经过json格式化后，形如：</p>
+<pre class="sourceCode json"><code class="sourceCode json">{
+    <span class="dt">&quot;error_message&quot;</span>: {
+        <span class="dt">&quot;debuginfo&quot;</span>: <span class="dv">null</span>,
+        <span class="dt">&quot;faultcode&quot;</span>: <span class="st">&quot;Client&quot;</span>,
+        <span class="dt">&quot;faultstring&quot;</span>: <span class="st">&quot;Unknown argument: \&quot;meta\&quot;: unrecognized field in query: [&lt;Query umeta eq u1 None&gt;], valid keys: [metaquery, pagination, project, resource, source, user]&quot;</span>
+    }
 }</code></pre>
-<p>它的意思是：过滤9d26e147-7b0d-48b3-9641-bd831919fd71租户下的状态为alarm的告警，并且这些告警是在2013-12-01T18:00:00到2013-12-01T18:15:00之间，或者在2013-12-01T18:30:00到2013-12-01T18:45:00之间被触发的。 在命令行中可以通过-f选项指定，例如：ceilometer -d query-alarms -f '{&quot;and&quot;: [{&quot;and&quot;: [{&quot;=&quot;: {&quot;project_id&quot;: &quot;9d26e147-7b0d-48b3-9641-bd831919fd71&quot;}}, {&quot;=&quot;: {&quot;state&quot;: &quot;alarm&quot;}}]}, {&quot;or&quot;: [{&quot;and&quot;: [{&quot;&gt;&quot;: {&quot;timestamp&quot;: &quot;2013-12-01T18:00:00&quot;}}, {&quot;&lt;&quot;: {&quot;timestamp&quot;: &quot;2013-12-01T18:15:00&quot;}}]}, {&quot;and&quot;: [{&quot;&gt;&quot;: {&quot;timestamp&quot;: &quot;2013-12-01T18:30:00&quot;}}, {&quot;&lt;&quot;: {&quot;timestamp&quot;: &quot;2013-12-01T18:45:00&quot;}}]}]}]}'</p>
-<p>orderby是一个字符串，内容是一个json列表，每个元素是一个{key: value}字典，key必须是所查询资源的的直接属性名称，value只能是asc、desc其中之一，不区分大小写。排在前面的key值享有优先排序权。 注意：虽然threshold_rule和combination_rule是告警的属性，但是在数据库中他们都统一为rule，因此，如果key指定为了threshold_rule或者combination_rule，会返回400错误，但是指定rule就没问题。 注意：告警属性只支持第一层属性，例如rule.threshold这种指定方式是不行的。</p>
+<p>此时如果你使用metaquery，例如/v2/meters?q.field=metaquery&amp;q.op=eq&amp;q.type=&amp;q.value=1，将会得到错误的输出：</p>
+<pre class="sourceCode json"><code class="sourceCode json">{
+    <span class="dt">&quot;error_message&quot;</span>: {
+        <span class="dt">&quot;debuginfo&quot;</span>: <span class="dv">null</span>,
+        <span class="dt">&quot;faultcode&quot;</span>: <span class="st">&quot;Server&quot;</span>,
+        <span class="dt">&quot;faultstring&quot;</span>: <span class="st">&quot;unicode object has no attribute iteritems&quot;</span>
+    }
+}</code></pre>
+<p>其实你应该使用metadata，例如/v2/meters?q.field=metadata.flavor_id&amp;q.op=eq&amp;q.type=&amp;q.value=1</p>
+<ul>
+<li>request body参数</li>
+</ul>
+<p>无</p>
 <ul>
 <li>response body参数</li>
 </ul>
@@ -2224,58 +2578,228 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <li><p>相关配置</p></li>
 <li><p>JSON请求样例</p></li>
 </ul>
-<p>ceilometer -d query-alarms -l 1 -o '[{&quot;timestamp&quot;: &quot;asc&quot;},{&quot;state&quot;: &quot;asc&quot;}]'</p>
-<p>curl -i -X POST -H 'X-Auth-Token: 400015cb3dbe424ba5db37ceb71e03c4' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' -d '{&quot;orderby&quot;: &quot;[{&quot;timestamp&quot;: &quot;asc&quot;},{&quot;state&quot;: &quot;asc&quot;}]&quot;, &quot;limit&quot;: &quot;1&quot;}' http://172.128.231.201:8777/v2/query/alarms</p>
-<p>请求体json格式化后为：</p>
-<pre class="sourceCode json"><code class="sourceCode json">{
-    <span class="dt">&quot;limit&quot;</span>: <span class="st">&quot;1&quot;</span>,
-    <span class="dt">&quot;orderby&quot;</span>: <span class="st">&quot;[{\&quot;timestamp\&quot;: \&quot;asc\&quot;},{\&quot;state\&quot;: \&quot;asc\&quot;}]&quot;</span>
-}</code></pre>
+<p>ceilometer -d meter-list -q &quot;resource=d950d166-4b1a-4d00-8572-c401ab4fb85c;user=2630d3c577df426bab9a4d9bfa986297&quot;</p>
+<p>curl -i -X GET -H 'X-Auth-Token: b1ae050d8789417c933f0fc62ceaf01c' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' http://172.128.231.201:8777/v2/meters?q.field=resource&amp;q.field=user&amp;q.op=eq&amp;q.op=eq&amp;q.type=&amp;q.type=&amp;q.value=d950d166-4b1a-4d00-8572-c401ab4fb85c&amp;q.value=2630d3c577df426bab9a4d9bfa986297</p>
 <ul>
 <li>JSON响应样例</li>
 </ul>
-<p>响应是个字符串，json格式化后为：</p>
+<p>响应消息体是字符串，json格式化后为：</p>
 <pre class="sourceCode json"><code class="sourceCode json">[
     {
-        <span class="dt">&quot;alarm_actions&quot;</span>: [],
-        <span class="dt">&quot;alarm_id&quot;</span>: <span class="st">&quot;623df1be-ca06-431e-87ae-ab46750e2c03&quot;</span>,
-        <span class="dt">&quot;description&quot;</span>: <span class="st">&quot;Alarm when cpu_util is ge a min of 80.0 over 1800 seconds&quot;</span>,
-        <span class="dt">&quot;enabled&quot;</span>: <span class="dv">true</span>,
-        <span class="dt">&quot;insufficient_data_actions&quot;</span>: [],
-        <span class="dt">&quot;name&quot;</span>: <span class="st">&quot;cpu-alarm&quot;</span>,
-        <span class="dt">&quot;ok_actions&quot;</span>: [],
+        <span class="dt">&quot;meter_id&quot;</span>: <span class="st">&quot;ZDk1MGQxNjYtNGIxYS00ZDAwLTg1NzItYzQwMWFiNGZiODVjK2ltYWdlLmRvd25sb2Fk\n&quot;</span>,
+        <span class="dt">&quot;name&quot;</span>: <span class="st">&quot;image.download&quot;</span>,
         <span class="dt">&quot;project_id&quot;</span>: <span class="st">&quot;d1578b5392f744b68dd8ad23412a8cd4&quot;</span>,
-        <span class="dt">&quot;repeat_actions&quot;</span>: <span class="dv">false</span>,
-        <span class="dt">&quot;state&quot;</span>: <span class="st">&quot;insufficient data&quot;</span>,
-        <span class="dt">&quot;state_timestamp&quot;</span>: <span class="st">&quot;2015-01-04T22:59:35.247432&quot;</span>,
-        <span class="dt">&quot;threshold_rule&quot;</span>: {
-            <span class="dt">&quot;comparison_operator&quot;</span>: <span class="st">&quot;ge&quot;</span>,
-            <span class="dt">&quot;evaluation_periods&quot;</span>: <span class="dv">3</span>,
-            <span class="dt">&quot;exclude_outliers&quot;</span>: <span class="dv">false</span>,
-            <span class="dt">&quot;meter_name&quot;</span>: <span class="st">&quot;cpu_util&quot;</span>,
-            <span class="dt">&quot;period&quot;</span>: <span class="dv">1800</span>,
-            <span class="dt">&quot;query&quot;</span>: [
-                {
-                    <span class="dt">&quot;field&quot;</span>: <span class="st">&quot;resource_id&quot;</span>,
-                    <span class="dt">&quot;op&quot;</span>: <span class="st">&quot;eq&quot;</span>,
-                    <span class="dt">&quot;type&quot;</span>: <span class="st">&quot;&quot;</span>,
-                    <span class="dt">&quot;value&quot;</span>: <span class="st">&quot;10e8216e-4b36-4f93-942f-19b9f09e84e5&quot;</span>
-                }
-            ],
-            <span class="dt">&quot;statistic&quot;</span>: <span class="st">&quot;min&quot;</span>,
-            <span class="dt">&quot;threshold&quot;</span>: <span class="fl">70.0</span>
+        <span class="dt">&quot;resource_id&quot;</span>: <span class="st">&quot;d950d166-4b1a-4d00-8572-c401ab4fb85c&quot;</span>,
+        <span class="dt">&quot;source&quot;</span>: <span class="st">&quot;openstack&quot;</span>,
+        <span class="dt">&quot;type&quot;</span>: <span class="st">&quot;delta&quot;</span>,
+        <span class="dt">&quot;unit&quot;</span>: <span class="st">&quot;B&quot;</span>,
+        <span class="dt">&quot;user_id&quot;</span>: <span class="st">&quot;2630d3c577df426bab9a4d9bfa986297&quot;</span>
+    }
+]</code></pre>
+<h3 id="查询数据点list-sample"><span class="header-section-number">5.4.2</span> 查询数据点（List Sample）</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">REST VERB</th>
+<th align="left">URI</th>
+<th align="left">DESCRIPTION</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">GET</td>
+<td align="left">/v2/meters/{meter_name}?limit={value}&amp;q.field={field}&amp;q.op=eq&amp;q.type={type}&amp;q.value={value}</td>
+<td align="left">查询数据点</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>request filter参数</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th align="left">参数名</th>
+<th align="left">参数类型</th>
+<th align="left">约束</th>
+<th align="left">必选</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">limit</td>
+<td align="left">integer</td>
+<td align="left">必须为非负数</td>
+<td align="left">NO</td>
+<td align="left">返回结果数</td>
+</tr>
+<tr class="even">
+<td align="left">q.field</td>
+<td align="left">string</td>
+<td align="left">见filed可选值表</td>
+<td align="left">NO</td>
+<td align="left">查询关键字</td>
+</tr>
+<tr class="odd">
+<td align="left">q.op</td>
+<td align="left">string</td>
+<td align="left">lt、le、eq、ne、ge、gt其中之一</td>
+<td align="left">NO</td>
+<td align="left">操作符</td>
+</tr>
+<tr class="even">
+<td align="left">q.type</td>
+<td align="left">string</td>
+<td align="left">未知</td>
+<td align="left">NO</td>
+<td align="left">可以不填，填了也没用，类型自动识别</td>
+</tr>
+<tr class="odd">
+<td align="left">q.value</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">NO</td>
+<td align="left">值</td>
+</tr>
+</tbody>
+</table>
+<p>field可选值表</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">可选值</th>
+<th align="left">类型</th>
+<th align="left">约束</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">message_id</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">数据点唯一标识符（UUUID）</td>
+</tr>
+<tr class="even">
+<td align="left">meter</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">数据点对应的指标名称</td>
+</tr>
+<tr class="odd">
+<td align="left">resource</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">资源唯一标识符（UUID）</td>
+</tr>
+<tr class="even">
+<td align="left">project</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">资源所属的项目</td>
+</tr>
+<tr class="odd">
+<td align="left">user</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">资源所属用户</td>
+</tr>
+<tr class="even">
+<td align="left">source</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">资源来源</td>
+</tr>
+<tr class="odd">
+<td align="left">metadata.{key}</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">使用metadata字段进行过滤，key可以是任意值</td>
+</tr>
+<tr class="even">
+<td align="left">start</td>
+<td align="left">string</td>
+<td align="left">datetime格式</td>
+<td align="left">起始时间</td>
+</tr>
+<tr class="odd">
+<td align="left">start_timestamp_op</td>
+<td align="left">string</td>
+<td align="left">只有gt、ge有效，其他值一律视为ge</td>
+<td align="left">起始时间比较符，默认ge</td>
+</tr>
+<tr class="even">
+<td align="left">end</td>
+<td align="left">string</td>
+<td align="left">datetime格式</td>
+<td align="left">结束时间</td>
+</tr>
+<tr class="odd">
+<td align="left">end_timestamp_op</td>
+<td align="left">string</td>
+<td align="left">只有lt、le有效，其他值一律视为le</td>
+<td align="left">起始时间比较符，默认le</td>
+</tr>
+</tbody>
+</table>
+<p>当field为project、user、type时，operator只能为eq，否则报400错误。</p>
+<p>注意：如果你错误的设置了一个不支持的field，例如/v2/meters/cpu?q.field=meta&amp;q.op=eq&amp;q.type=&amp;q.value=1，则会返回400，同时告知你有哪些field被支持，消息体经json格式化后，形如：</p>
+<pre class="sourceCode json"><code class="sourceCode json">{
+    <span class="dt">&quot;error_message&quot;</span>: {
+        <span class="dt">&quot;debuginfo&quot;</span>: <span class="dv">null</span>,
+        <span class="dt">&quot;faultcode&quot;</span>: <span class="st">&quot;Client&quot;</span>,
+        <span class="dt">&quot;faultstring&quot;</span>: <span class="st">&quot;Unknown argument: \&quot;meta\&quot;: unrecognized field in query: [&lt;Query umeta eq u1 None&gt;], valid keys: [metaquery, pagination, project, resource, source, user]&quot;</span>
+    }
+}</code></pre>
+<p>此时如果你使用metaquery，例如/v2/meters/cpu?q.field=metaquery&amp;q.op=eq&amp;q.type=&amp;q.value=1，将会得到错误的输出：</p>
+<pre class="sourceCode json"><code class="sourceCode json">{
+    <span class="dt">&quot;error_message&quot;</span>: {
+        <span class="dt">&quot;debuginfo&quot;</span>: <span class="dv">null</span>,
+        <span class="dt">&quot;faultcode&quot;</span>: <span class="st">&quot;Server&quot;</span>,
+        <span class="dt">&quot;faultstring&quot;</span>: <span class="st">&quot;unicode object has no attribute iteritems&quot;</span>
+    }
+}</code></pre>
+<p>其实你应该使用metadata，例如/v2/meters/cpu??q.field=metadata.flavor_id&amp;q.op=eq&amp;q.type=&amp;q.value=1</p>
+<ul>
+<li>request body参数</li>
+</ul>
+<p>无</p>
+<ul>
+<li>response body参数</li>
+</ul>
+<p>见响应示例</p>
+<ul>
+<li><p>相关配置</p></li>
+<li><p>JSON请求样例</p></li>
+</ul>
+<p>curl -i -X GET -H 'X-Auth-Token: 8f97d271942147f8b316133ac8267da1' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' http://172.128.231.201:8777/v2/meters/image.download</p>
+<ul>
+<li>JSON响应样例</li>
+</ul>
+<p>响应消息体是字符串，json格式化后为：</p>
+<pre class="sourceCode json"><code class="sourceCode json">[
+    {
+        <span class="dt">&quot;counter_name&quot;</span>: <span class="st">&quot;image.download&quot;</span>,
+        <span class="dt">&quot;counter_type&quot;</span>: <span class="st">&quot;delta&quot;</span>,
+        <span class="dt">&quot;counter_unit&quot;</span>: <span class="st">&quot;B&quot;</span>,
+        <span class="dt">&quot;counter_volume&quot;</span>: <span class="fl">13147648.0</span>,
+        <span class="dt">&quot;message_id&quot;</span>: <span class="st">&quot;f428d746-8ee1-11e4-b699-000c29fb0ff8&quot;</span>,
+        <span class="dt">&quot;project_id&quot;</span>: <span class="st">&quot;d1578b5392f744b68dd8ad23412a8cd4&quot;</span>,
+        <span class="dt">&quot;recorded_at&quot;</span>: <span class="st">&quot;2014-12-28T22:36:24.339882&quot;</span>,
+        <span class="dt">&quot;resource_id&quot;</span>: <span class="st">&quot;d950d166-4b1a-4d00-8572-c401ab4fb85c&quot;</span>,
+        <span class="dt">&quot;resource_metadata&quot;</span>: {
+            <span class="dt">&quot;bytes_sent&quot;</span>: <span class="st">&quot;13147648&quot;</span>,
+            <span class="dt">&quot;destination_ip&quot;</span>: <span class="st">&quot;172.128.231.201&quot;</span>,
+            <span class="dt">&quot;event_type&quot;</span>: <span class="st">&quot;image.send&quot;</span>,
+            <span class="dt">&quot;host&quot;</span>: <span class="st">&quot;image.localhost&quot;</span>,
+            <span class="dt">&quot;image_id&quot;</span>: <span class="st">&quot;d950d166-4b1a-4d00-8572-c401ab4fb85c&quot;</span>,
+            <span class="dt">&quot;owner_id&quot;</span>: <span class="st">&quot;d1578b5392f744b68dd8ad23412a8cd4&quot;</span>,
+            <span class="dt">&quot;receiver_tenant_id&quot;</span>: <span class="st">&quot;d1578b5392f744b68dd8ad23412a8cd4&quot;</span>,
+            <span class="dt">&quot;receiver_user_id&quot;</span>: <span class="st">&quot;2630d3c577df426bab9a4d9bfa986297&quot;</span>
         },
-        <span class="dt">&quot;time_constraints&quot;</span>: [
-            {
-                <span class="dt">&quot;description&quot;</span>: <span class="st">&quot;Time constraint at 0 23 * * * lasting for 10800 seconds&quot;</span>,
-                <span class="dt">&quot;duration&quot;</span>: <span class="dv">10800</span>,
-                <span class="dt">&quot;name&quot;</span>: <span class="st">&quot;alarm-constraint-01&quot;</span>,
-                <span class="dt">&quot;start&quot;</span>: <span class="st">&quot;0 23 * * *&quot;</span>,
-                <span class="dt">&quot;timezone&quot;</span>: <span class="st">&quot;&quot;</span>
-            }
-        ],
-        <span class="dt">&quot;timestamp&quot;</span>: <span class="st">&quot;2015-01-04T18:38:17.705821&quot;</span>,
-        <span class="dt">&quot;type&quot;</span>: <span class="st">&quot;threshold&quot;</span>,
+        <span class="dt">&quot;source&quot;</span>: <span class="st">&quot;openstack&quot;</span>,
+        <span class="dt">&quot;timestamp&quot;</span>: <span class="st">&quot;2014-12-28T22:36:24.259770&quot;</span>,
         <span class="dt">&quot;user_id&quot;</span>: <span class="st">&quot;2630d3c577df426bab9a4d9bfa986297&quot;</span>
     }
 ]</code></pre>
@@ -2643,6 +3167,252 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
     <span class="dt">&quot;source&quot;</span>: <span class="st">&quot;openstack&quot;</span>,
     <span class="dt">&quot;user_id&quot;</span>: <span class="dv">null</span>
 }</code></pre>
+<h2 id="复合查询query"><span class="header-section-number">5.6</span> 复合查询（Query）</h2>
+<p>复合查询使用POST方法，把查询条件放到了请求消息体中。</p>
+<h3 id="复合查询告警query-alarm"><span class="header-section-number">5.6.1</span> 复合查询告警（Query Alarm）</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">REST VERB</th>
+<th align="left">URI</th>
+<th align="left">DESCRIPTION</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">POST</td>
+<td align="left">/v2/query/alarms</td>
+<td align="left">复合查询告警</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>request filter参数</li>
+</ul>
+<p>无</p>
+<ul>
+<li>request body参数</li>
+</ul>
+<p>字符串，内容是json字典，包含三个字段</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">参数名</th>
+<th align="left">参数类型</th>
+<th align="left">约束</th>
+<th align="left">必选</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">filter</td>
+<td align="left">dict</td>
+<td align="left"></td>
+<td align="left">NO</td>
+<td align="left">过滤条件</td>
+</tr>
+<tr class="even">
+<td align="left">orderby</td>
+<td align="left">list</td>
+<td align="left"></td>
+<td align="left">NO</td>
+<td align="left">返回的结果排序规则</td>
+</tr>
+<tr class="odd">
+<td align="left">limit</td>
+<td align="left">integer</td>
+<td align="left">正整数</td>
+<td align="left">NO</td>
+<td align="left">返回的结果数量</td>
+</tr>
+</tbody>
+</table>
+<p>filter是对告警的过滤条件，是一个内容为json字典的字符串，格式是{complex_op: [{simple_op: {field_name: value}}]}，complex_op只能是and或者or，simple_op只能是['=', '!=', '&lt;', '&lt;=', '&gt;', '&gt;=', '=&lt;', '=&gt;']其中之一。注意field_name必须是所查询资源的直接属性。</p>
+<p>经过json格式化后形如：</p>
+<pre><code>{
+    &quot;and&quot;: [
+        {
+            &quot;and&quot;: [
+                {
+                    &quot;=&quot;: {
+                        &quot;project_id&quot;: &quot;9d26e147-7b0d-48b3-9641-bd831919fd71&quot;
+                    }
+                },
+                {
+                    &quot;=&quot;: {
+                        &quot;state&quot;: &quot;alarm&quot;
+                    }
+                },
+            ]
+        },
+        {
+            &quot;or&quot;: [
+                {
+                    &quot;and&quot;: [
+                        {
+                            &quot;&gt;&quot;: {
+                                &quot;state_timestamp&quot;: &quot;2013-12-01T18:00:00&quot;
+                            }
+                        },
+                        {
+                            &quot;&lt;&quot;: {
+                                &quot;state_timestamp&quot;: &quot;2013-12-01T18:15:00&quot;
+                            }
+                        }
+                    ]
+                },
+                {
+                    &quot;and&quot;: [
+                        {
+                            &quot;&gt;&quot;: {
+                                &quot;state_timestamp&quot;: &quot;2013-12-01T18:30:00&quot;
+                            }
+                        },
+                        {
+                            &quot;&lt;&quot;: {
+                                &quot;state_timestamp&quot;: &quot;2013-12-01T18:45:00&quot;
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}</code></pre>
+<p>它的意思是：过滤9d26e147-7b0d-48b3-9641-bd831919fd71租户下的状态为alarm的告警，并且这些告警是在2013-12-01T18:00:00到2013-12-01T18:15:00之间，或者在2013-12-01T18:30:00到2013-12-01T18:45:00之间被触发的。 在命令行中可以通过-f选项指定，例如：ceilometer -d query-alarms -f '{&quot;and&quot;: [{&quot;and&quot;: [{&quot;=&quot;: {&quot;project_id&quot;: &quot;9d26e147-7b0d-48b3-9641-bd831919fd71&quot;}}, {&quot;=&quot;: {&quot;state&quot;: &quot;alarm&quot;}}]}, {&quot;or&quot;: [{&quot;and&quot;: [{&quot;&gt;&quot;: {&quot;timestamp&quot;: &quot;2013-12-01T18:00:00&quot;}}, {&quot;&lt;&quot;: {&quot;timestamp&quot;: &quot;2013-12-01T18:15:00&quot;}}]}, {&quot;and&quot;: [{&quot;&gt;&quot;: {&quot;timestamp&quot;: &quot;2013-12-01T18:30:00&quot;}}, {&quot;&lt;&quot;: {&quot;timestamp&quot;: &quot;2013-12-01T18:45:00&quot;}}]}]}]}'</p>
+<p>orderby是一个字符串，内容是一个json列表，每个元素是一个{key: value}字典，key必须是所查询资源的的直接属性名称，value只能是asc、desc其中之一，不区分大小写。排在前面的key值享有优先排序权。 注意：虽然threshold_rule和combination_rule是告警的属性，但是在数据库中他们都统一为rule，因此，如果key指定为了threshold_rule或者combination_rule，会返回400错误，但是指定rule就没问题。 注意：告警属性只支持第一层属性，例如rule.threshold这种指定方式是不行的。</p>
+<ul>
+<li>response body参数</li>
+</ul>
+<p>见响应示例</p>
+<ul>
+<li><p>相关配置</p></li>
+<li><p>JSON请求样例</p></li>
+</ul>
+<p>ceilometer -d query-alarms -l 1 -o '[{&quot;timestamp&quot;: &quot;asc&quot;},{&quot;state&quot;: &quot;asc&quot;}]'</p>
+<p>curl -i -X POST -H 'X-Auth-Token: 400015cb3dbe424ba5db37ceb71e03c4' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' -d '{&quot;orderby&quot;: &quot;[{&quot;timestamp&quot;: &quot;asc&quot;},{&quot;state&quot;: &quot;asc&quot;}]&quot;, &quot;limit&quot;: &quot;1&quot;}' http://172.128.231.201:8777/v2/query/alarms</p>
+<p>请求体json格式化后为：</p>
+<pre class="sourceCode json"><code class="sourceCode json">{
+    <span class="dt">&quot;limit&quot;</span>: <span class="st">&quot;1&quot;</span>,
+    <span class="dt">&quot;orderby&quot;</span>: <span class="st">&quot;[{\&quot;timestamp\&quot;: \&quot;asc\&quot;},{\&quot;state\&quot;: \&quot;asc\&quot;}]&quot;</span>
+}</code></pre>
+<ul>
+<li>JSON响应样例</li>
+</ul>
+<p>响应是个字符串，json格式化后为：</p>
+<pre class="sourceCode json"><code class="sourceCode json">[
+    {
+        <span class="dt">&quot;alarm_actions&quot;</span>: [],
+        <span class="dt">&quot;alarm_id&quot;</span>: <span class="st">&quot;623df1be-ca06-431e-87ae-ab46750e2c03&quot;</span>,
+        <span class="dt">&quot;description&quot;</span>: <span class="st">&quot;Alarm when cpu_util is ge a min of 80.0 over 1800 seconds&quot;</span>,
+        <span class="dt">&quot;enabled&quot;</span>: <span class="dv">true</span>,
+        <span class="dt">&quot;insufficient_data_actions&quot;</span>: [],
+        <span class="dt">&quot;name&quot;</span>: <span class="st">&quot;cpu-alarm&quot;</span>,
+        <span class="dt">&quot;ok_actions&quot;</span>: [],
+        <span class="dt">&quot;project_id&quot;</span>: <span class="st">&quot;d1578b5392f744b68dd8ad23412a8cd4&quot;</span>,
+        <span class="dt">&quot;repeat_actions&quot;</span>: <span class="dv">false</span>,
+        <span class="dt">&quot;state&quot;</span>: <span class="st">&quot;insufficient data&quot;</span>,
+        <span class="dt">&quot;state_timestamp&quot;</span>: <span class="st">&quot;2015-01-04T22:59:35.247432&quot;</span>,
+        <span class="dt">&quot;threshold_rule&quot;</span>: {
+            <span class="dt">&quot;comparison_operator&quot;</span>: <span class="st">&quot;ge&quot;</span>,
+            <span class="dt">&quot;evaluation_periods&quot;</span>: <span class="dv">3</span>,
+            <span class="dt">&quot;exclude_outliers&quot;</span>: <span class="dv">false</span>,
+            <span class="dt">&quot;meter_name&quot;</span>: <span class="st">&quot;cpu_util&quot;</span>,
+            <span class="dt">&quot;period&quot;</span>: <span class="dv">1800</span>,
+            <span class="dt">&quot;query&quot;</span>: [
+                {
+                    <span class="dt">&quot;field&quot;</span>: <span class="st">&quot;resource_id&quot;</span>,
+                    <span class="dt">&quot;op&quot;</span>: <span class="st">&quot;eq&quot;</span>,
+                    <span class="dt">&quot;type&quot;</span>: <span class="st">&quot;&quot;</span>,
+                    <span class="dt">&quot;value&quot;</span>: <span class="st">&quot;10e8216e-4b36-4f93-942f-19b9f09e84e5&quot;</span>
+                }
+            ],
+            <span class="dt">&quot;statistic&quot;</span>: <span class="st">&quot;min&quot;</span>,
+            <span class="dt">&quot;threshold&quot;</span>: <span class="fl">70.0</span>
+        },
+        <span class="dt">&quot;time_constraints&quot;</span>: [
+            {
+                <span class="dt">&quot;description&quot;</span>: <span class="st">&quot;Time constraint at 0 23 * * * lasting for 10800 seconds&quot;</span>,
+                <span class="dt">&quot;duration&quot;</span>: <span class="dv">10800</span>,
+                <span class="dt">&quot;name&quot;</span>: <span class="st">&quot;alarm-constraint-01&quot;</span>,
+                <span class="dt">&quot;start&quot;</span>: <span class="st">&quot;0 23 * * *&quot;</span>,
+                <span class="dt">&quot;timezone&quot;</span>: <span class="st">&quot;&quot;</span>
+            }
+        ],
+        <span class="dt">&quot;timestamp&quot;</span>: <span class="st">&quot;2015-01-04T18:38:17.705821&quot;</span>,
+        <span class="dt">&quot;type&quot;</span>: <span class="st">&quot;threshold&quot;</span>,
+        <span class="dt">&quot;user_id&quot;</span>: <span class="st">&quot;2630d3c577df426bab9a4d9bfa986297&quot;</span>
+    }
+]</code></pre>
+<h3 id="复合查询告警历史query-alarm-history"><span class="header-section-number">5.6.2</span> 复合查询告警历史（Query Alarm History）</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">REST VERB</th>
+<th align="left">URI</th>
+<th align="left">DESCRIPTION</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">POST</td>
+<td align="left">/v2/query/alarms/history</td>
+<td align="left">复合查询告警历史</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>request filter参数</li>
+</ul>
+<p>无</p>
+<ul>
+<li>request body参数</li>
+</ul>
+<p>参见<a href="#复合查询告警query-alarm">复合查询告警</a></p>
+<ul>
+<li>response body参数</li>
+</ul>
+<p>见响应示例</p>
+<ul>
+<li><p>相关配置</p></li>
+<li><p>JSON请求样例</p></li>
+</ul>
+<p>例如，查找告警623df1be-ca06-431e-87ae-ab46750e2c03在2015-01-03T00:00:00到2015-01-04T20:00:00之间的变更记录，只查类型不为rule change的变更，结果按照时间戳降序、类型升序排序，只返回前10条。</p>
+<p>ceilometer -d query-alarm-history -l 10 -o '[{&quot;timestamp&quot;: &quot;desc&quot;}, {&quot;type&quot;: &quot;asc&quot;}]' -f '{&quot;and&quot;: [{&quot;&gt;&quot;: {&quot;timestamp&quot;: &quot;2015-01-03T00:00:00&quot;}}, {&quot;&lt;&quot;: {&quot;timestamp&quot;: &quot;2015-01-04T20:00:00&quot;}}, {&quot;=&quot;: {&quot;alarm_id&quot;: &quot;623df1be-ca06-431e-87ae-ab46750e2c03&quot;}}, {&quot;!=&quot;: {&quot;type&quot;: &quot;rule change&quot;}}]}'</p>
+<p>curl -i -X POST -H 'X-Auth-Token: be91fe144241402d87678e0a7a0d9100' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' -d '{&quot;filter&quot;: &quot;{&quot;and&quot;: [{&quot;&gt;&quot;: {&quot;timestamp&quot;: &quot;2015-01-03T00:00:00&quot;}}, {&quot;&lt;&quot;: {&quot;timestamp&quot;: &quot;2015-01-04T20:00:00&quot;}}, {&quot;=&quot;: {&quot;alarm_id&quot;: &quot;623df1be-ca06-431e-87ae-ab46750e2c03&quot;}}, {&quot;!=&quot;: {&quot;type&quot;: &quot;rule change&quot;}}]}&quot;, &quot;orderby&quot;: &quot;[{&quot;timestamp&quot;: &quot;desc&quot;}, {&quot;type&quot;: &quot;asc&quot;}]&quot;, &quot;limit&quot;: &quot;10&quot;}' http://172.128.231.201:8777/v2/query/alarms/history</p>
+<p>请求体经过json格式化后为：</p>
+<pre class="sourceCode json"><code class="sourceCode json">{
+    <span class="dt">&quot;filter&quot;</span>: <span class="st">&quot;{\&quot;and\&quot;: [{\&quot;&gt;\&quot;: {\&quot;timestamp\&quot;: \&quot;2015-01-03T00:00:00\&quot;}}, {\&quot;&lt;\&quot;: {\&quot;timestamp\&quot;: \&quot;2015-01-04T20:00:00\&quot;}}, {\&quot;=\&quot;: {\&quot;alarm_id\&quot;: \&quot;623df1be-ca06-431e-87ae-ab46750e2c03\&quot;}}, {\&quot;!=\&quot;: {\&quot;type\&quot;: \&quot;rule change\&quot;}}]}&quot;</span>,
+    <span class="dt">&quot;limit&quot;</span>: <span class="st">&quot;10&quot;</span>,
+    <span class="dt">&quot;orderby&quot;</span>: <span class="st">&quot;[{\&quot;timestamp\&quot;: \&quot;desc\&quot;}, {\&quot;type\&quot;: \&quot;asc\&quot;}]&quot;</span>
+}</code></pre>
+<ul>
+<li>JSON响应样例</li>
+</ul>
+<p>响应消息体是字符串，json格式化后为：</p>
+<pre class="sourceCode json"><code class="sourceCode json">[
+    {
+        <span class="dt">&quot;alarm_id&quot;</span>: <span class="st">&quot;623df1be-ca06-431e-87ae-ab46750e2c03&quot;</span>,
+        <span class="dt">&quot;detail&quot;</span>: <span class="st">&quot;{\&quot;state\&quot;: \&quot;ok\&quot;}&quot;</span>,
+        <span class="dt">&quot;event_id&quot;</span>: <span class="st">&quot;da9ce15a-7694-433c-a101-f9c6e3b03060&quot;</span>,
+        <span class="dt">&quot;on_behalf_of&quot;</span>: <span class="st">&quot;d1578b5392f744b68dd8ad23412a8cd4&quot;</span>,
+        <span class="dt">&quot;project_id&quot;</span>: <span class="st">&quot;d1578b5392f744b68dd8ad23412a8cd4&quot;</span>,
+        <span class="dt">&quot;timestamp&quot;</span>: <span class="st">&quot;2015-01-04T19:12:14.743806&quot;</span>,
+        <span class="dt">&quot;type&quot;</span>: <span class="st">&quot;state transition&quot;</span>,
+        <span class="dt">&quot;user_id&quot;</span>: <span class="st">&quot;2630d3c577df426bab9a4d9bfa986297&quot;</span>
+    },
+    {
+        <span class="dt">&quot;alarm_id&quot;</span>: <span class="st">&quot;623df1be-ca06-431e-87ae-ab46750e2c03&quot;</span>,
+        <span class="dt">&quot;detail&quot;</span>: <span class="st">&quot;{\&quot;alarm_actions\&quot;: [], \&quot;user_id\&quot;: \&quot;2630d3c577df426bab9a4d9bfa986297\&quot;, \&quot;name\&quot;: \&quot;cpu-alarm\&quot;, \&quot;state\&quot;: \&quot;insufficient data\&quot;, \&quot;timestamp\&quot;: \&quot;2015-01-04T02:25:44.216495\&quot;, \&quot;enabled\&quot;: true, \&quot;state_timestamp\&quot;: \&quot;2015-01-04T02:25:44.216495\&quot;, \&quot;rule\&quot;: {\&quot;meter_name\&quot;: \&quot;cpu_util\&quot;, \&quot;evaluation_periods\&quot;: 3, \&quot;period\&quot;: 1800, \&quot;statistic\&quot;: \&quot;min\&quot;, \&quot;threshold\&quot;: 80.0, \&quot;query\&quot;: [{\&quot;field\&quot;: \&quot;resource_id\&quot;, \&quot;type\&quot;: \&quot;\&quot;, \&quot;value\&quot;: \&quot;10e8216e-4b36-4f93-942f-19b9f09e84e5\&quot;, \&quot;op\&quot;: \&quot;eq\&quot;}], \&quot;comparison_operator\&quot;: \&quot;ge\&quot;, \&quot;exclude_outliers\&quot;: false}, \&quot;alarm_id\&quot;: \&quot;623df1be-ca06-431e-87ae-ab46750e2c03\&quot;, \&quot;time_constraints\&quot;: [{\&quot;duration\&quot;: 10800, \&quot;start\&quot;: \&quot;0 23 * * *\&quot;, \&quot;timezone\&quot;: \&quot;\&quot;, \&quot;name\&quot;: \&quot;alarm-constraint-01\&quot;, \&quot;description\&quot;: \&quot;Time constraint at 0 23 * * * lasting for 10800 seconds\&quot;}], \&quot;insufficient_data_actions\&quot;: [], \&quot;repeat_actions\&quot;: false, \&quot;ok_actions\&quot;: [], \&quot;project_id\&quot;: \&quot;d1578b5392f744b68dd8ad23412a8cd4\&quot;, \&quot;type\&quot;: \&quot;threshold\&quot;, \&quot;description\&quot;: \&quot;Alarm when cpu_util is ge a min of 80.0 over 1800 seconds\&quot;}&quot;</span>,
+        <span class="dt">&quot;event_id&quot;</span>: <span class="st">&quot;46bb9986-ea08-44b3-98d5-0558697adbc9&quot;</span>,
+        <span class="dt">&quot;on_behalf_of&quot;</span>: <span class="st">&quot;d1578b5392f744b68dd8ad23412a8cd4&quot;</span>,
+        <span class="dt">&quot;project_id&quot;</span>: <span class="st">&quot;d1578b5392f744b68dd8ad23412a8cd4&quot;</span>,
+        <span class="dt">&quot;timestamp&quot;</span>: <span class="st">&quot;2015-01-04T02:25:44.216495&quot;</span>,
+        <span class="dt">&quot;type&quot;</span>: <span class="st">&quot;creation&quot;</span>,
+        <span class="dt">&quot;user_id&quot;</span>: <span class="st">&quot;2630d3c577df426bab9a4d9bfa986297&quot;</span>
+    }
+]</code></pre>
 <script type="text/javascript" src="../jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="../jquery-ui-1.10.4.min.js"></script>
 <script type="text/javascript" src="../jquery.xlstablefilter-1.0.1.min.js"></script>

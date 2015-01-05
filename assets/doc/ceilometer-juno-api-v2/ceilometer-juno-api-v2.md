@@ -35,7 +35,7 @@ Author: ZhiQiang Fan <aji.zqfan@gmail.com>
 
 # 对象模型（Object Model）
 
-注意：对象模型只是系统中对某种资源的建模，并不代表API输入输出时的字段信息。
+**注意：对象模型只是系统中对某种资源的建模，并不代表数据库中表或者字段信息。（各种类型的数据库的表和字段名称都不一样）**
 
 Ceilometer Juno API V2管理如下对象
 
@@ -85,7 +85,9 @@ state_timestamp和timestamp为UTC时间，格式"YYYY-mm-ddTHH:MM:SS.f"，例如
 
 ## 能力（Capabilities）
 
-* Capabilities属性表
+* Capabilities模型
+
+Capabilities对象没有存储在数据库中，是写死在代码里的。
 
 | 属性 | 类型 | CRUD | 默认值 | 约束 | 备注 |
 |:-----|:-----|:-----|:-------|:-----|:-----|
@@ -95,7 +97,7 @@ state_timestamp和timestamp为UTC时间，格式"YYYY-mm-ddTHH:MM:SS.f"，例如
 
 ## 事件（Event）
 
-* Event属性表
+* Event模型
 
 | 属性 | 类型 | CRUD | 默认值 | 约束 | 备注 |
 |:-----|:-----|:-----|:-------|:-----|:-----|
@@ -104,20 +106,86 @@ state_timestamp和timestamp为UTC时间，格式"YYYY-mm-ddTHH:MM:SS.f"，例如
 | traits | list | r | | | Trait列表
 | generated | str | r | | | 生成事件
 
-* TraitDescription属性表
+* TraitDescription模型
 
 | 属性 | 类型 | CRUD | 默认值 | 约束 | 备注 |
 |:-----|:-----|:-----|:-------|:-----|:-----|
 | type | str | r | | | 特征类型，默认是string
 | name | str | r | | | 特征名称
 
-* Trait属性表
+* Trait模型
 
 | 属性 | 类型 | CRUD | 默认值 | 约束 | 备注 |
 |:-----|:-----|:-----|:-------|:-----|:-----|
 | type | str | r | | | 特征类型
 | name | str | r | | | 特征名称
 | value | str | r | | | 特征的值
+
+## 指标（Meter）
+
+* Meter模型
+
+Meter对象没有在MongoDB数据库中持久化存储，是从数据点中提取出来的。
+Meter对象在MySQL数据库中对应meter表。
+
+| 属性 | 类型 | CRUD | 默认值 | 约束 | 备注 |
+|:-----|:-----|:-----|:-------|:-----|:-----|
+| name | string | r | N/A | N/A | 指标名称
+| type | string | r | N/A | gauge、cumulative、delta之一 | 指标类型
+| unit | string | r | N/A | N/A | 指标单位
+| resource_id | string | r | N/A | N/A | 资源唯一标识符（UUID）
+| project_id | string | r | N/A | N/A | 资源所属租户
+| user_id | string | r | N/A | N/A | 资源所属用户
+| source | string | r | openstack | N/A | 资源来源
+| meter_id | string | r | N/A | N/A | 指标唯一标示符
+
+meter_id并没有在哪里被用到，实际上被作为标识使用的只是name字段。
+
+gauge指的是跟时间无关的数值，例如cpu的核数，cpu的使用率，网卡流速等。
+cumulative指的是随时间累加的数值，例如cpu使用时长，网卡总流量等，这种类型的数值在资源重启后，可能被清零重新开始计数。
+delta指的是此次相对于上次的差值，这个在某些事件类型的指标中有时候会被用到，例如创建虚拟网络的事件。
+
+source默认是openstack，你可以通过修改配置项来修改这个默认值。
+
+* OldSample模型
+
+OldSample对象在MySQL数据库中对应sample表。
+
+| 属性 | 类型 | CRUD | 默认值 | 约束 | 备注 |
+|:-----|:-----|:-----|:-------|:-----|:-----|
+| counter_name | string | r | N/A | N/A | 数据点所对应的指标名称
+| counter_type | string | r | gauge、cumulative、delta之一 | 数据点所对应的指标类型
+| counter_unit | string | r | N/A | N/A | 数据点所对应的指标单位
+| counter_volume | float | r | N/A | N/A | 数据点的值
+| source | string | r | N/A | N/A | 数据点的来源
+| resource_id | string | r | N/A | N/A | 资源唯一标示符（UUID）
+| user_id | string | r | N/A | N/A | 资源所属用户
+| project_id | string | r | N/A | N/A | 资源租户
+| timestamp | string | r | N/A | datetime格式 | 数据点创建的时间
+| recorded_at | string | r | N/A | datetime格式 | 数据点保存的时间
+| resource_metadata | string | r | N/A | json dict | 资源的元数据
+| message_id | string | r | N/A | N/A | 数据点唯一标识符（UUID）
+
+* Statistics模型
+
+Statistic是计算出来的，并未在数据库中持久化存储。
+
+| 属性 | 类型 | CRUD | 默认值 | 约束 | 备注 |
+|:-----|:-----|:-----|:-------|:-----|:-----|
+| groupby | dict | r | N/A | N/A | 统计排序规则
+| unit | string | r | N/A | N/A | 统计单位
+| min | float | r | N/A | N/A | 统计区间中的最小值
+| max | float | r | N/A | N/A | 统计区间中的最大值
+| avg | float | r | N/A | N/A | 统计区间中的平均值
+| sum | float | r | N/A | N/A | 统计区间中的总和
+| count | int | r | N/A | N/A | 统计区间中的数据点个数
+| aggregate | dict | r | N/A | N/A | ？？？
+| duration | float | r | N/A | N/A | 统计区间中最早和最晚的数据点的时间差，单位秒
+| duration_start | string | r | N/A | datetime | 统计区间中最早的数据的时间，或者是指定的起始时间
+| duration_end | string | r | N/A | datetime | 统计区间中最晚的数据的时间，或者是指定的结束时间
+| period | integer | r | N/A | >=0 | 统计区间的时间长度
+| period_start | string | r | N/A | datetime | 统计区间的起始时间
+| period_end | string | r | N/A | datetime | 统计区间的结束时间
 
 # API通用信息
 
@@ -261,7 +329,7 @@ time_constraints参数列表：
 
 * response body参数
 
-参见[查询告警详情（Get Alarm）](#查询告警详情show-alarm)章节
+详见响应示例。
 
 示例，一个完整的创建告警的请求如下，里面包含了定义threshold_rule参数，定义query，定义time_constraints，但是并没有覆盖所有字段：
 
@@ -752,11 +820,11 @@ curl -i -X PUT -H 'X-Auth-Token: cfd6f176d85043fcb1528aba734df3a4' -H 'Content-T
 "ok"
 ~~~
 
-### 查询告警历史信息(Show Alarm History)
+### 查询告警历史(Show Alarm History)
 
 | REST VERB | URI | DESCRIPTION |
 |:----------|:----|:------------|
-| GET | /v2/alarms/{alarm_id}/history?q.field={field}&q.op={operator}&q.type={type}&q.value={value} | 获取指定告警的历史信息
+| GET | /v2/alarms/{alarm_id}/history?q.field={field}&q.op={operator}&q.type={type}&q.value={value} | 获取指定告警的历史
 
 告警的历史记录有如下种类：creation、rule change、state transition、deletion，字段信息参见[告警模型](#告警alarm)中的告警变更模型。
 
@@ -1221,93 +1289,65 @@ curl -i -X GET -H 'X-Auth-Token: 1f9a3ec4845a49d8afa6faf48cd31300' -H 'Content-T
 ]
 ~~~
 
-## 复合查询（Query）
+## 指标（Meter）
 
-复合查询使用POST方法，把查询条件放到了请求消息体中。body是一个字典，包含了filter，orderby，limit三个字段，详见[复合查询模型](#复合查询query)。
-
-### 复合查询告警（Query Alarm）
+### 查询指标（List Meter）
 
 | REST VERB | URI | DESCRIPTION |
 |:----------|:----|:------------|
-| POST | /v2/query/alarms | 复合查询告警
+| GET | /v2/meters?q.field={field}&q.op=eq&q.type={type}&q.value={value} | 查询指标
 
 * request filter参数
 
-无
-
-* request body参数
-
-字符串，内容是json字典，包含三个字段
-
 | 参数名 | 参数类型 | 约束 | 必选 | 备注 |
 |:-------|:---------|:-----|:-----|:-----|
-| filter | dict | | NO | 过滤条件
-| orderby | list | | NO | 返回的结果排序规则
-| limit | integer | 正整数 | NO | 返回的结果数量
+| q.field | string | 见filed可选值表 | NO | 查询关键字
+| q.op | string | 只能为eq | NO | 操作符
+| q.type | string | 未知 | NO | 可以不填，填了也没用，类型自动识别
+| q.value | string | N/A | NO | 值
 
-filter是对告警的过滤条件，是一个内容为json字典的字符串，格式是{complex_op: [{simple_op: {field_name: value}}]}，complex_op只能是and或者or，simple_op只能是['=', '!=', '<', '<=', '>', '>=']其中之一。注意field_name必须是所查询资源的直接属性。
+op设置为非eq的值，则返回400。
 
-经过json格式化后形如：
+field可选值表
 
-~~~
+| 可选值 | Value类型 | 约束 | 备注
+|:-------|:----------|:-----|:-----|
+| resource | string | N/A | 资源唯一标示符（UUID）
+| project | string | N/A | 项目唯一标示符（UUID）
+| user | string | N/A | 用户唯一标示符（UUID）
+| source | string | N/A | 资源来源
+| metadata.{key} | string | N/A | 使用metadata字段进行过滤，key可以是任意值
+| pagination | int | N/A | 未实现，使用这个字段将返回501错误
+
+注意：如果你错误的设置了一个不支持的field，例如/v2/meters?q.field=meta&q.op=eq&q.type=&q.value=1，则会返回400，同时告知你有哪些field被支持，消息体经过json格式化后，形如：
+
+~~~json
 {
-    "and": [
-        {
-            "and": [
-                {
-                    "=": {
-                        "project_id": "9d26e147-7b0d-48b3-9641-bd831919fd71"
-                    }
-                },
-                {
-                    "=": {
-                        "state": "alarm"
-                    }
-                },
-            ]
-        },
-        {
-            "or": [
-                {
-                    "and": [
-                        {
-                            ">": {
-                                "state_timestamp": "2013-12-01T18:00:00"
-                            }
-                        },
-                        {
-                            "<": {
-                                "state_timestamp": "2013-12-01T18:15:00"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "and": [
-                        {
-                            ">": {
-                                "state_timestamp": "2013-12-01T18:30:00"
-                            }
-                        },
-                        {
-                            "<": {
-                                "state_timestamp": "2013-12-01T18:45:00"
-                            }
-                        }
-                    ]
-                }
-            ]
-        }
-    ]
+    "error_message": {
+        "debuginfo": null,
+        "faultcode": "Client",
+        "faultstring": "Unknown argument: \"meta\": unrecognized field in query: [<Query umeta eq u1 None>], valid keys: [metaquery, pagination, project, resource, source, user]"
+    }
 }
 ~~~
 
-它的意思是：过滤9d26e147-7b0d-48b3-9641-bd831919fd71租户下的状态为alarm的告警，并且这些告警是在2013-12-01T18:00:00到2013-12-01T18:15:00之间，或者在2013-12-01T18:30:00到2013-12-01T18:45:00之间被触发的。
-在命令行中可以通过-f选项指定，例如：ceilometer -d query-alarms -f '{"and": [{"and": [{"=": {"project_id": "9d26e147-7b0d-48b3-9641-bd831919fd71"}}, {"=": {"state": "alarm"}}]}, {"or": [{"and": [{">": {"timestamp": "2013-12-01T18:00:00"}}, {"<": {"timestamp": "2013-12-01T18:15:00"}}]}, {"and": [{">": {"timestamp": "2013-12-01T18:30:00"}}, {"<": {"timestamp": "2013-12-01T18:45:00"}}]}]}]}'
+此时如果你使用metaquery，例如/v2/meters?q.field=metaquery&q.op=eq&q.type=&q.value=1，将会得到错误的输出：
 
-orderby是一个字符串，内容是一个json列表，每个元素是一个{key: value}字典，key必须是所查询资源的的直接属性名称，value只能是asc、desc其中之一，不区分大小写。排在前面的key值享有优先排序权。
-注意：虽然threshold_rule和combination_rule是告警的属性，但是在数据库中他们都统一为rule，因此，如果key指定为了threshold_rule或者combination_rule，会返回400错误，但是指定rule就没问题。
-注意：告警属性只支持第一层属性，例如rule.threshold这种指定方式是不行的。
+~~~json
+{
+    "error_message": {
+        "debuginfo": null,
+        "faultcode": "Server",
+        "faultstring": "unicode object has no attribute iteritems"
+    }
+}
+~~~
+
+其实你应该使用metadata，例如/v2/meters?q.field=metadata.flavor_id&q.op=eq&q.type=&q.value=1
+
+* request body参数
+
+无
 
 * response body参数
 
@@ -1317,70 +1357,134 @@ orderby是一个字符串，内容是一个json列表，每个元素是一个{ke
 
 * JSON请求样例
 
-ceilometer -d query-alarms -l 1 -o '[{"timestamp": "asc"},{"state": "asc"}]'
+ceilometer -d meter-list -q "resource=d950d166-4b1a-4d00-8572-c401ab4fb85c;user=2630d3c577df426bab9a4d9bfa986297"
 
-curl -i -X POST -H 'X-Auth-Token: 400015cb3dbe424ba5db37ceb71e03c4' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' -d '{"orderby": "[{\"timestamp\": \"asc\"},{\"state\": \"asc\"}]", "limit": "1"}' http://172.128.231.201:8777/v2/query/alarms
-
-请求体json格式化后为：
-
-~~~json
-{
-    "limit": "1",
-    "orderby": "[{\"timestamp\": \"asc\"},{\"state\": \"asc\"}]"
-}
-~~~
+curl -i -X GET -H 'X-Auth-Token: b1ae050d8789417c933f0fc62ceaf01c' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' http://172.128.231.201:8777/v2/meters?q.field=resource&q.field=user&q.op=eq&q.op=eq&q.type=&q.type=&q.value=d950d166-4b1a-4d00-8572-c401ab4fb85c&q.value=2630d3c577df426bab9a4d9bfa986297
 
 * JSON响应样例
 
-响应是个字符串，json格式化后为：
+响应消息体是字符串，json格式化后为：
 
 ~~~json
 [
     {
-        "alarm_actions": [],
-        "alarm_id": "623df1be-ca06-431e-87ae-ab46750e2c03",
-        "description": "Alarm when cpu_util is ge a min of 80.0 over 1800 seconds",
-        "enabled": true,
-        "insufficient_data_actions": [],
-        "name": "cpu-alarm",
-        "ok_actions": [],
+        "meter_id": "ZDk1MGQxNjYtNGIxYS00ZDAwLTg1NzItYzQwMWFiNGZiODVjK2ltYWdlLmRvd25sb2Fk\n",
+        "name": "image.download",
         "project_id": "d1578b5392f744b68dd8ad23412a8cd4",
-        "repeat_actions": false,
-        "state": "insufficient data",
-        "state_timestamp": "2015-01-04T22:59:35.247432",
-        "threshold_rule": {
-            "comparison_operator": "ge",
-            "evaluation_periods": 3,
-            "exclude_outliers": false,
-            "meter_name": "cpu_util",
-            "period": 1800,
-            "query": [
-                {
-                    "field": "resource_id",
-                    "op": "eq",
-                    "type": "",
-                    "value": "10e8216e-4b36-4f93-942f-19b9f09e84e5"
-                }
-            ],
-            "statistic": "min",
-            "threshold": 70.0
-        },
-        "time_constraints": [
-            {
-                "description": "Time constraint at 0 23 * * * lasting for 10800 seconds",
-                "duration": 10800,
-                "name": "alarm-constraint-01",
-                "start": "0 23 * * *",
-                "timezone": ""
-            }
-        ],
-        "timestamp": "2015-01-04T18:38:17.705821",
-        "type": "threshold",
+        "resource_id": "d950d166-4b1a-4d00-8572-c401ab4fb85c",
+        "source": "openstack",
+        "type": "delta",
+        "unit": "B",
         "user_id": "2630d3c577df426bab9a4d9bfa986297"
     }
 ]
 ~~~
 
+### 查询数据点（List Sample）
+
+| REST VERB | URI | DESCRIPTION |
+|:----------|:----|:------------|
+| GET | /v2/meters/{meter_name}?limit={value}&q.field={field}&q.op=eq&q.type={type}&q.value={value} | 查询数据点
+
+* request filter参数
+
+| 参数名 | 参数类型 | 约束 | 必选 | 备注 |
+|:-------|:---------|:-----|:-----|:-----|
+| limit | integer | 必须为非负数 | NO | 返回结果数
+| q.field | string | 见filed可选值表 | NO | 查询关键字
+| q.op | string | lt、le、eq、ne、ge、gt其中之一| NO | 操作符
+| q.type | string | 未知 | NO | 可以不填，填了也没用，类型自动识别
+| q.value | string | N/A | NO | 值
+
+field可选值表
+
+| 可选值 | 类型 | 约束 | 备注|
+|:-------|:-----|:-----|:-----|
+| message_id | string | N/A | 数据点唯一标识符（UUUID）
+| meter | string | N/A | 数据点对应的指标名称
+| resource | string | N/A | 资源唯一标识符（UUID）
+| project | string | N/A | 资源所属的项目
+| user | string | N/A | 资源所属用户
+| source | string | N/A | 资源来源
+| metadata.{key} | string | N/A | 使用metadata字段进行过滤，key可以是任意值
+| start | string | datetime格式 | 起始时间
+| start_timestamp_op | string | 只有gt、ge有效，其他值一律视为ge | 起始时间比较符，默认ge
+| end | string | datetime格式 | 结束时间
+| end_timestamp_op | string | 只有lt、le有效，其他值一律视为le | 起始时间比较符，默认le
+
+当field为project、user、type时，operator只能为eq，否则报400错误。
+
+注意：如果你错误的设置了一个不支持的field，例如/v2/meters/cpu?q.field=meta&q.op=eq&q.type=&q.value=1，则会返回400，同时告知你有哪些field被支持，消息体经json格式化后，形如：
+
+~~~json
+{
+    "error_message": {
+        "debuginfo": null,
+        "faultcode": "Client",
+        "faultstring": "Unknown argument: \"meta\": unrecognized field in query: [<Query umeta eq u1 None>], valid keys: [metaquery, pagination, project, resource, source, user]"
+    }
+}
+~~~
+
+此时如果你使用metaquery，例如/v2/meters/cpu?q.field=metaquery&q.op=eq&q.type=&q.value=1，将会得到错误的输出：   
+
+~~~json
+{
+    "error_message": {
+        "debuginfo": null,
+        "faultcode": "Server",
+        "faultstring": "unicode object has no attribute iteritems"
+    }
+}
+~~~
+
+其实你应该使用metadata，例如/v2/meters/cpu??q.field=metadata.flavor_id&q.op=eq&q.type=&q.value=1
+
+* request body参数
+
+无
+
+* response body参数
+
+见响应示例
+
+* 相关配置
+
+* JSON请求样例
+
+curl -i -X GET -H 'X-Auth-Token: 8f97d271942147f8b316133ac8267da1' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' http://172.128.231.201:8777/v2/meters/image.download
+
+* JSON响应样例
+
+响应消息体是字符串，json格式化后为：
+
+~~~json
+[
+    {
+        "counter_name": "image.download",
+        "counter_type": "delta",
+        "counter_unit": "B",
+        "counter_volume": 13147648.0,
+        "message_id": "f428d746-8ee1-11e4-b699-000c29fb0ff8",
+        "project_id": "d1578b5392f744b68dd8ad23412a8cd4",
+        "recorded_at": "2014-12-28T22:36:24.339882",
+        "resource_id": "d950d166-4b1a-4d00-8572-c401ab4fb85c",
+        "resource_metadata": {
+            "bytes_sent": "13147648",
+            "destination_ip": "172.128.231.201",
+            "event_type": "image.send",
+            "host": "image.localhost",
+            "image_id": "d950d166-4b1a-4d00-8572-c401ab4fb85c",
+            "owner_id": "d1578b5392f744b68dd8ad23412a8cd4",
+            "receiver_tenant_id": "d1578b5392f744b68dd8ad23412a8cd4",
+            "receiver_user_id": "2630d3c577df426bab9a4d9bfa986297"
+        },
+        "source": "openstack",
+        "timestamp": "2014-12-28T22:36:24.259770",
+        "user_id": "2630d3c577df426bab9a4d9bfa986297"
+    }
+]
+~~~
 
 ## 资源（Resource）
 
@@ -1644,4 +1748,231 @@ curl -i -X GET -H 'User-Agent: python-ceilometerclient' -H 'Content-Type: applic
     "source": "openstack",
     "user_id": null
 }
+~~~
+
+## 复合查询（Query）
+
+复合查询使用POST方法，把查询条件放到了请求消息体中。
+
+### 复合查询告警（Query Alarm）
+
+| REST VERB | URI | DESCRIPTION |
+|:----------|:----|:------------|
+| POST | /v2/query/alarms | 复合查询告警
+
+* request filter参数
+
+无
+
+* request body参数
+
+字符串，内容是json字典，包含三个字段
+
+| 参数名 | 参数类型 | 约束 | 必选 | 备注 |
+|:-------|:---------|:-----|:-----|:-----|
+| filter | dict | | NO | 过滤条件
+| orderby | list | | NO | 返回的结果排序规则
+| limit | integer | 正整数 | NO | 返回的结果数量
+
+filter是对告警的过滤条件，是一个内容为json字典的字符串，格式是{complex_op: [{simple_op: {field_name: value}}]}，complex_op只能是and或者or，simple_op只能是['=', '!=', '<', '<=', '>', '>=', '=<', '=>']其中之一。注意field_name必须是所查询资源的直接属性。
+
+经过json格式化后形如：
+
+~~~
+{
+    "and": [
+        {
+            "and": [
+                {
+                    "=": {
+                        "project_id": "9d26e147-7b0d-48b3-9641-bd831919fd71"
+                    }
+                },
+                {
+                    "=": {
+                        "state": "alarm"
+                    }
+                },
+            ]
+        },
+        {
+            "or": [
+                {
+                    "and": [
+                        {
+                            ">": {
+                                "state_timestamp": "2013-12-01T18:00:00"
+                            }
+                        },
+                        {
+                            "<": {
+                                "state_timestamp": "2013-12-01T18:15:00"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "and": [
+                        {
+                            ">": {
+                                "state_timestamp": "2013-12-01T18:30:00"
+                            }
+                        },
+                        {
+                            "<": {
+                                "state_timestamp": "2013-12-01T18:45:00"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+~~~
+
+它的意思是：过滤9d26e147-7b0d-48b3-9641-bd831919fd71租户下的状态为alarm的告警，并且这些告警是在2013-12-01T18:00:00到2013-12-01T18:15:00之间，或者在2013-12-01T18:30:00到2013-12-01T18:45:00之间被触发的。
+在命令行中可以通过-f选项指定，例如：ceilometer -d query-alarms -f '{"and": [{"and": [{"=": {"project_id": "9d26e147-7b0d-48b3-9641-bd831919fd71"}}, {"=": {"state": "alarm"}}]}, {"or": [{"and": [{">": {"timestamp": "2013-12-01T18:00:00"}}, {"<": {"timestamp": "2013-12-01T18:15:00"}}]}, {"and": [{">": {"timestamp": "2013-12-01T18:30:00"}}, {"<": {"timestamp": "2013-12-01T18:45:00"}}]}]}]}'
+
+orderby是一个字符串，内容是一个json列表，每个元素是一个{key: value}字典，key必须是所查询资源的的直接属性名称，value只能是asc、desc其中之一，不区分大小写。排在前面的key值享有优先排序权。
+注意：虽然threshold_rule和combination_rule是告警的属性，但是在数据库中他们都统一为rule，因此，如果key指定为了threshold_rule或者combination_rule，会返回400错误，但是指定rule就没问题。
+注意：告警属性只支持第一层属性，例如rule.threshold这种指定方式是不行的。
+
+* response body参数
+
+见响应示例
+
+* 相关配置
+
+* JSON请求样例
+
+ceilometer -d query-alarms -l 1 -o '[{"timestamp": "asc"},{"state": "asc"}]'
+
+curl -i -X POST -H 'X-Auth-Token: 400015cb3dbe424ba5db37ceb71e03c4' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' -d '{"orderby": "[{\"timestamp\": \"asc\"},{\"state\": \"asc\"}]", "limit": "1"}' http://172.128.231.201:8777/v2/query/alarms
+
+请求体json格式化后为：
+
+~~~json
+{
+    "limit": "1",
+    "orderby": "[{\"timestamp\": \"asc\"},{\"state\": \"asc\"}]"
+}
+~~~
+
+* JSON响应样例
+
+响应是个字符串，json格式化后为：
+
+~~~json
+[
+    {
+        "alarm_actions": [],
+        "alarm_id": "623df1be-ca06-431e-87ae-ab46750e2c03",
+        "description": "Alarm when cpu_util is ge a min of 80.0 over 1800 seconds",
+        "enabled": true,
+        "insufficient_data_actions": [],
+        "name": "cpu-alarm",
+        "ok_actions": [],
+        "project_id": "d1578b5392f744b68dd8ad23412a8cd4",
+        "repeat_actions": false,
+        "state": "insufficient data",
+        "state_timestamp": "2015-01-04T22:59:35.247432",
+        "threshold_rule": {
+            "comparison_operator": "ge",
+            "evaluation_periods": 3,
+            "exclude_outliers": false,
+            "meter_name": "cpu_util",
+            "period": 1800,
+            "query": [
+                {
+                    "field": "resource_id",
+                    "op": "eq",
+                    "type": "",
+                    "value": "10e8216e-4b36-4f93-942f-19b9f09e84e5"
+                }
+            ],
+            "statistic": "min",
+            "threshold": 70.0
+        },
+        "time_constraints": [
+            {
+                "description": "Time constraint at 0 23 * * * lasting for 10800 seconds",
+                "duration": 10800,
+                "name": "alarm-constraint-01",
+                "start": "0 23 * * *",
+                "timezone": ""
+            }
+        ],
+        "timestamp": "2015-01-04T18:38:17.705821",
+        "type": "threshold",
+        "user_id": "2630d3c577df426bab9a4d9bfa986297"
+    }
+]
+~~~
+
+### 复合查询告警历史（Query Alarm History）
+
+| REST VERB | URI | DESCRIPTION |
+|:----------|:----|:------------|
+| POST | /v2/query/alarms/history | 复合查询告警历史
+
+* request filter参数
+
+无
+
+* request body参数
+
+参见[复合查询告警](#复合查询告警query-alarm)
+
+* response body参数
+
+见响应示例
+
+* 相关配置
+
+* JSON请求样例
+
+例如，查找告警623df1be-ca06-431e-87ae-ab46750e2c03在2015-01-03T00:00:00到2015-01-04T20:00:00之间的变更记录，只查类型不为rule change的变更，结果按照时间戳降序、类型升序排序，只返回前10条。
+
+ceilometer -d query-alarm-history -l 10 -o '[{"timestamp": "desc"}, {"type": "asc"}]' -f '{"and": [{">": {"timestamp": "2015-01-03T00:00:00"}}, {"<": {"timestamp": "2015-01-04T20:00:00"}}, {"=": {"alarm_id": "623df1be-ca06-431e-87ae-ab46750e2c03"}}, {"!=": {"type": "rule change"}}]}'
+
+curl -i -X POST -H 'X-Auth-Token: be91fe144241402d87678e0a7a0d9100' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' -d '{"filter": "{\"and\": [{\">\": {\"timestamp\": \"2015-01-03T00:00:00\"}}, {\"<\": {\"timestamp\": \"2015-01-04T20:00:00\"}}, {\"=\": {\"alarm_id\": \"623df1be-ca06-431e-87ae-ab46750e2c03\"}}, {\"!=\": {\"type\": \"rule change\"}}]}", "orderby": "[{\"timestamp\": \"desc\"}, {\"type\": \"asc\"}]", "limit": "10"}' http://172.128.231.201:8777/v2/query/alarms/history
+
+请求体经过json格式化后为：
+
+~~~json
+{
+    "filter": "{\"and\": [{\">\": {\"timestamp\": \"2015-01-03T00:00:00\"}}, {\"<\": {\"timestamp\": \"2015-01-04T20:00:00\"}}, {\"=\": {\"alarm_id\": \"623df1be-ca06-431e-87ae-ab46750e2c03\"}}, {\"!=\": {\"type\": \"rule change\"}}]}",
+    "limit": "10",
+    "orderby": "[{\"timestamp\": \"desc\"}, {\"type\": \"asc\"}]"
+}
+~~~
+
+* JSON响应样例
+
+响应消息体是字符串，json格式化后为：
+
+~~~json
+[
+    {
+        "alarm_id": "623df1be-ca06-431e-87ae-ab46750e2c03",
+        "detail": "{\"state\": \"ok\"}",
+        "event_id": "da9ce15a-7694-433c-a101-f9c6e3b03060",
+        "on_behalf_of": "d1578b5392f744b68dd8ad23412a8cd4",
+        "project_id": "d1578b5392f744b68dd8ad23412a8cd4",
+        "timestamp": "2015-01-04T19:12:14.743806",
+        "type": "state transition",
+        "user_id": "2630d3c577df426bab9a4d9bfa986297"
+    },
+    {
+        "alarm_id": "623df1be-ca06-431e-87ae-ab46750e2c03",
+        "detail": "{\"alarm_actions\": [], \"user_id\": \"2630d3c577df426bab9a4d9bfa986297\", \"name\": \"cpu-alarm\", \"state\": \"insufficient data\", \"timestamp\": \"2015-01-04T02:25:44.216495\", \"enabled\": true, \"state_timestamp\": \"2015-01-04T02:25:44.216495\", \"rule\": {\"meter_name\": \"cpu_util\", \"evaluation_periods\": 3, \"period\": 1800, \"statistic\": \"min\", \"threshold\": 80.0, \"query\": [{\"field\": \"resource_id\", \"type\": \"\", \"value\": \"10e8216e-4b36-4f93-942f-19b9f09e84e5\", \"op\": \"eq\"}], \"comparison_operator\": \"ge\", \"exclude_outliers\": false}, \"alarm_id\": \"623df1be-ca06-431e-87ae-ab46750e2c03\", \"time_constraints\": [{\"duration\": 10800, \"start\": \"0 23 * * *\", \"timezone\": \"\", \"name\": \"alarm-constraint-01\", \"description\": \"Time constraint at 0 23 * * * lasting for 10800 seconds\"}], \"insufficient_data_actions\": [], \"repeat_actions\": false, \"ok_actions\": [], \"project_id\": \"d1578b5392f744b68dd8ad23412a8cd4\", \"type\": \"threshold\", \"description\": \"Alarm when cpu_util is ge a min of 80.0 over 1800 seconds\"}",
+        "event_id": "46bb9986-ea08-44b3-98d5-0558697adbc9",
+        "on_behalf_of": "d1578b5392f744b68dd8ad23412a8cd4",
+        "project_id": "d1578b5392f744b68dd8ad23412a8cd4",
+        "timestamp": "2015-01-04T02:25:44.216495",
+        "type": "creation",
+        "user_id": "2630d3c577df426bab9a4d9bfa986297"
+    }
+]
 ~~~
