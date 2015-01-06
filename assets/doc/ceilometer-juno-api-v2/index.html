@@ -73,14 +73,21 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><a href="#指标meter-1"><span class="toc-section-number">5.4</span> 指标（Meter）</a><ul>
 <li><a href="#查询指标list-meter"><span class="toc-section-number">5.4.1</span> 查询指标（List Meter）</a></li>
 <li><a href="#查询数据点list-sample"><span class="toc-section-number">5.4.2</span> 查询数据点（List Sample）</a></li>
+<li><a href="#查询统计list-statistics"><span class="toc-section-number">5.4.3</span> 查询统计（List Statistics）</a></li>
+<li><a href="#创建数据点create-sample"><span class="toc-section-number">5.4.4</span> 创建数据点（Create Sample）</a></li>
 </ul></li>
 <li><a href="#资源resource"><span class="toc-section-number">5.5</span> 资源（Resource）</a><ul>
 <li><a href="#查询资源list-resources"><span class="toc-section-number">5.5.1</span> 查询资源（List Resources）</a></li>
 <li><a href="#查询资源详情show-resource"><span class="toc-section-number">5.5.2</span> 查询资源详情（Show Resource）</a></li>
 </ul></li>
 <li><a href="#复合查询query"><span class="toc-section-number">5.6</span> 复合查询（Query）</a><ul>
-<li><a href="#复合查询告警query-alarm"><span class="toc-section-number">5.6.1</span> 复合查询告警（Query Alarm）</a></li>
+<li><a href="#复合查询告警query-alarms"><span class="toc-section-number">5.6.1</span> 复合查询告警（Query Alarms）</a></li>
 <li><a href="#复合查询告警历史query-alarm-history"><span class="toc-section-number">5.6.2</span> 复合查询告警历史（Query Alarm History）</a></li>
+<li><a href="#复合查询数据点query-samples"><span class="toc-section-number">5.6.3</span> 复合查询数据点（Query Samples）</a></li>
+</ul></li>
+<li><a href="#数据点sample"><span class="toc-section-number">5.7</span> 数据点（Sample）</a><ul>
+<li><a href="#查询数据点get-samples"><span class="toc-section-number">5.7.1</span> 查询数据点（Get Samples）</a></li>
+<li><a href="#查询数据点详情show-sample"><span class="toc-section-number">5.7.2</span> 查询数据点详情（Show Sample）</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -1114,24 +1121,28 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <td align="left">evaluation_periods</td>
 <td align="left">int</td>
 <td align="left">&gt;=1</td>
+<td align="left">NO</td>
 <td align="left">时间窗口数量，默认1</td>
 </tr>
 <tr class="even">
 <td align="left">comparison_operator</td>
 <td align="left">string</td>
 <td align="left">只能为['lt', 'le', 'eq', 'ne', 'ge', 'gt']其中之一</td>
+<td align="left">NO</td>
 <td align="left">比较操作符，默认为eq</td>
 </tr>
 <tr class="odd">
 <td align="left">statistic</td>
 <td align="left">string</td>
 <td align="left">只能为['max', 'min', 'avg', 'sum', 'count']其中之一</td>
+<td align="left">NO</td>
 <td align="left">统计维度，默认为avg</td>
 </tr>
 <tr class="even">
 <td align="left">exclude_outliers</td>
 <td align="left">bool</td>
 <td align="left">N/A</td>
+<td align="left">NO</td>
 <td align="left">是否排除在标准差范围外的数据，默认False，不排除</td>
 </tr>
 </tbody>
@@ -1241,6 +1252,10 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <li>response body参数</li>
 </ul>
 <p>详见响应示例。</p>
+<ul>
+<li><p>相关配置</p></li>
+<li><p>JSON请求样例</p></li>
+</ul>
 <p>示例，一个完整的创建告警的请求如下，里面包含了定义threshold_rule参数，定义query，定义time_constraints，但是并没有覆盖所有字段：</p>
 <p>curl -i -X POST -H 'X-Auth-Token: 897de9edb774462ba5c3b875553f8087' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' -d '{&quot;threshold_rule&quot;: {&quot;meter_name&quot;: &quot;cpu_util&quot;, &quot;evaluation_periods&quot;: 3, &quot;period&quot;: 1800, &quot;statistic&quot;: &quot;min&quot;, &quot;threshold&quot;: 80.0, &quot;query&quot;: [{&quot;field&quot;: &quot;resource_id&quot;, &quot;type&quot;: &quot;&quot;, &quot;value&quot;: &quot;10e8216e-4b36-4f93-942f-19b9f09e84e5&quot;, &quot;op&quot;: &quot;eq&quot;}], &quot;comparison_operator&quot;: &quot;ge&quot;}, &quot;time_constraints&quot;: [{&quot;duration&quot;: &quot;10800&quot;, &quot;start&quot;: &quot;0 23 * * *&quot;, &quot;name&quot;: &quot;alarm-constraint-01&quot;}], &quot;type&quot;: &quot;threshold&quot;, &quot;name&quot;: &quot;cpu-alarm&quot;, &quot;repeat_actions&quot;: false}' http://172.128.231.201:8777/v2/alarms</p>
 <p>-d参数json格式化后为：</p>
@@ -1272,9 +1287,10 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
     ],
     <span class="dt">&quot;type&quot;</span>: <span class="st">&quot;threshold&quot;</span>
 }</code></pre>
-<p>得到的响应是：</p>
-<p>{&quot;alarm_actions&quot;: [], &quot;ok_actions&quot;: [], &quot;name&quot;: &quot;cpu-alarm&quot;, &quot;timestamp&quot;: &quot;2015-01-04T02:25:44.216495&quot;, &quot;enabled&quot;: true, &quot;state&quot;: &quot;insufficient data&quot;, &quot;state_timestamp&quot;: &quot;2015-01-04T02:25:44.216495&quot;, &quot;threshold_rule&quot;: {&quot;meter_name&quot;: &quot;cpu_util&quot;, &quot;evaluation_periods&quot;: 3, &quot;period&quot;: 1800, &quot;statistic&quot;: &quot;min&quot;, &quot;threshold&quot;: 80.0, &quot;query&quot;: [{&quot;field&quot;: &quot;resource_id&quot;, &quot;type&quot;: &quot;&quot;, &quot;value&quot;: &quot;10e8216e-4b36-4f93-942f-19b9f09e84e5&quot;, &quot;op&quot;: &quot;eq&quot;}], &quot;comparison_operator&quot;: &quot;ge&quot;, &quot;exclude_outliers&quot;: false}, &quot;alarm_id&quot;: &quot;623df1be-ca06-431e-87ae-ab46750e2c03&quot;, &quot;time_constraints&quot;: [{&quot;duration&quot;: 10800, &quot;start&quot;: &quot;0 23 * * <em>&quot;, &quot;timezone&quot;: &quot;&quot;, &quot;name&quot;: &quot;alarm-constraint-01&quot;, &quot;description&quot;: &quot;Time constraint at 0 23 </em> * * lasting for 10800 seconds&quot;}], &quot;insufficient_data_actions&quot;: [], &quot;repeat_actions&quot;: false, &quot;user_id&quot;: &quot;2630d3c577df426bab9a4d9bfa986297&quot;, &quot;project_id&quot;: &quot;d1578b5392f744b68dd8ad23412a8cd4&quot;, &quot;type&quot;: &quot;threshold&quot;, &quot;description&quot;: &quot;Alarm when cpu_util is ge a min of 80.0 over 1800 seconds&quot;}</p>
-<p>json格式化后为：</p>
+<ul>
+<li>JSON响应样例</li>
+</ul>
+<p>响应消息体是字符串，json格式化后为：</p>
 <pre class="sourceCode json"><code class="sourceCode json">{
     <span class="dt">&quot;alarm_actions&quot;</span>: [],
     <span class="dt">&quot;alarm_id&quot;</span>: <span class="st">&quot;623df1be-ca06-431e-87ae-ab46750e2c03&quot;</span>,
@@ -2040,7 +2056,26 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 </tr>
 </tbody>
 </table>
+<ul>
+<li>request filter参数</li>
+</ul>
+<p>无</p>
+<ul>
+<li>request body参数</li>
+</ul>
+<p>无</p>
+<ul>
+<li>response body参数</li>
+</ul>
+<p>参见响应样例</p>
+<ul>
+<li><p>相关配置</p></li>
+<li><p>JSON请求样例</p></li>
+</ul>
 <p>curl -i -X GET -H 'User-Agent: python-ceilometerclient' -H 'Content-Type: application/json' -H &quot;X-Auth-Token: $(keystone token-get | awk 'NR==5{print $4}')&quot; -k &quot;https://metering.localdomain.com:8777/v2/capabilities&quot;</p>
+<ul>
+<li>JSON响应样例</li>
+</ul>
 <pre class="sourceCode json"><code class="sourceCode json">{
     <span class="dt">&quot;alarm_storage&quot;</span>: {
         <span class="dt">&quot;storage:production_ready&quot;</span>: <span class="dv">true</span>
@@ -2100,14 +2135,32 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 </tr>
 </tbody>
 </table>
+<ul>
+<li>request filter参数</li>
+</ul>
 <p>添加过滤条件，格式为q.field={field}&amp;q.op={operator}&amp;q.type={type}&amp;q.value={value}</p>
 <p>field原则上没有任何限制，可以随便填。 如果它的值是['event_type', 'message_id', 'start_time', 'end_time']其中之一，则会把这个过滤条件施加到Event表上，此时operator，type将不会起作用。 如果不在这4个值里，则会把过滤条件施加到Trait表上。当field施加在Trait表上时，operator会起作用，默认值是eq, 只能为['lt', 'le', 'eq', 'ne', 'ge', 'gt']其中之一，类型（type）只能是['integer', 'float', 'string', 'datetime']其中之一；如果field不是一个已知的Trait，则返回结果将是空，而不是报错，这是预期的行为。</p>
 <p>例如/v2/events?q.field=event_type&amp;q.op=eq&amp;q.type=string&amp;q.value=compute.instance.update 这个过滤条件的意思是获取类型为compute.instance.update的事件。</p>
 <p>例如/v2/events?q.field=state&amp;q.op=eq&amp;q.type=string&amp;q.value=deleted这个过滤条件的意思是获取特征（trait）中状态（state）为已删除（deleted）的事件。</p>
 <p>注意，由于bug: <a href="https://bugs.launchpad.net/ceilometer/+bug/1407374">https://bugs.launchpad.net/ceilometer/+bug/1407374</a>导致了当type没有指定时会报500错误，你必须显示指定type才可以规避这个bug，这个bug存在于2014.2以及2014.2.1中。例如/v2/events?q.field=state&amp;q.op=eq&amp;q.type=&amp;q.value=deleted这样写就会触发bug。</p>
 <p>你可以同时指定多个过滤条件，也可以一个也不指定，为了API能够快速响应，同时也为了减小系统压力，请尽量使用过滤条件进行精确查询。注意，不建议使用message_id过滤，当你想只获取某个Event时，建议使用专门的Get Event接口，message_id是唯一的，使用专门的接口显得你很专业，也可以避免不必要的服务器负担。</p>
+<ul>
+<li>request body参数</li>
+</ul>
+<p>无</p>
+<ul>
+<li>response body参数</li>
+</ul>
+<p>参见响应示例</p>
+<ul>
+<li><p>相关配置</p></li>
+<li><p>JSON请求样例</p></li>
+</ul>
 <p>示例：查询系统上事件类型为compute.instance.delete.start的事件，为了方便举例，此处仅截取了响应体列表的一个元素，且对该元素进行了json格式化，实际返回的是纯文本。</p>
 <p>curl -i -X GET -H 'X-Auth-Token: 56c50f283bb84ee28d29d77f35a3714d' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' 'http://172.128.231.201:8777/v2/events?q.field=event_type&amp;q.op=eq&amp;q.type=&amp;q.value=compute.instance.delete.start'</p>
+<ul>
+<li>JSON响应样例</li>
+</ul>
 <pre class="sourceCode json"><code class="sourceCode json">[
     {
         <span class="dt">&quot;event_type&quot;</span>: <span class="st">&quot;compute.instance.delete.start&quot;</span>,
@@ -2210,8 +2263,27 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 </tbody>
 </table>
 <p>注意，查询单个事件并不能比查询事件列表获取更详细的信息，但是有助于提高性能，减轻系统压力。</p>
-<p>示例：为了方便举例，对响应体进行了json格式化，实际返回的是纯文本。</p>
+<ul>
+<li>request filter参数</li>
+</ul>
+<p>无</p>
+<ul>
+<li>request body参数</li>
+</ul>
+<p>无</p>
+<ul>
+<li>response body参数</li>
+</ul>
+<p>见响应示例</p>
+<ul>
+<li><p>相关配置</p></li>
+<li><p>JSON请求样例</p></li>
+</ul>
 <p>curl -i -X GET -H 'X-Auth-Token: d980626ab92c4a17b1fb69f1e6eddc06' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' http://172.128.231.201:8777/v2/events/a25935cb-9d74-4f2f-9c5e-5a162f022095</p>
+<ul>
+<li>JSON响应样例</li>
+</ul>
+<p>为了方便举例，对响应体进行了json格式化，实际返回的是纯文本。</p>
 <pre class="sourceCode json"><code class="sourceCode json">{
     <span class="dt">&quot;event_type&quot;</span>: <span class="st">&quot;compute.instance.delete.start&quot;</span>,
     <span class="dt">&quot;generated&quot;</span>: <span class="st">&quot;2014-12-28T22:50:53.113282&quot;</span>,
@@ -2318,8 +2390,27 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <li>compute.instance.exists</li>
 </ul>
 <p>通过修改/etc/ceilometer/event_definitions.yaml并重启ceilometer-agent-notification服务可以增加新的事件类型。</p>
-<p>示例：为了方便举例，此处仅截取了响应体列表的若干个元素（删除虚拟机的动作导致的事件），且对该元素进行了json格式化，实际返回的是纯文本。</p>
+<ul>
+<li>request filter参数</li>
+</ul>
+<p>无</p>
+<ul>
+<li>request body参数</li>
+</ul>
+<p>无</p>
+<ul>
+<li>response body参数</li>
+</ul>
+<p>参见响应样例</p>
+<ul>
+<li><p>相关配置</p></li>
+<li><p>JSON请求样例</p></li>
+</ul>
 <p>curl -i -X GET -H 'X-Auth-Token: 5f113ec0cb3249219d8e5300321c2282' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' http://172.128.231.201:8777/v2/event_types/</p>
+<ul>
+<li>JSON响应样例</li>
+</ul>
+<p>为了方便举例，此处仅截取了响应体列表的若干个元素（删除虚拟机的动作导致的事件），且对该元素进行了json格式化，实际返回的是纯文本。</p>
 <pre class="sourceCode json"><code class="sourceCode json">[
     <span class="st">&quot;compute.instance.delete.end&quot;</span>,
     <span class="st">&quot;compute.instance.delete.start&quot;</span>,
@@ -2346,8 +2437,27 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 </tbody>
 </table>
 <p>注意：如果event_type输入的是一个不存在的的类型，该接口不会报错，只会返回一个空列表。这是预期的行为。</p>
-<p>示例：为了方便举例，对响应体进行了json格式化，实际返回的是纯文本。</p>
+<ul>
+<li>request filter参数</li>
+</ul>
+<p>无</p>
+<ul>
+<li>request body参数</li>
+</ul>
+<p>无</p>
+<ul>
+<li>response body参数</li>
+</ul>
+<p>参见响应样例</p>
+<ul>
+<li><p>相关配置</p></li>
+<li><p>JSON请求样例</p></li>
+</ul>
 <p>curl -i -X GET -H 'X-Auth-Token: 1f9a3ec4845a49d8afa6faf48cd31300' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' http://172.128.231.201:8777/v2/event_types/compute.instance.delete.start/traits</p>
+<ul>
+<li>JSON响应样例</li>
+</ul>
+<p>为了方便举例，对响应体进行了json格式化，实际返回的是纯文本。</p>
 <pre class="sourceCode json"><code class="sourceCode json">[
     {
         <span class="dt">&quot;name&quot;</span>: <span class="st">&quot;disk_gb&quot;</span>,
@@ -2428,8 +2538,27 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 </tbody>
 </table>
 <p>注意：如果event_type输入的是一个不存在的的类型，该接口不会报错，只会返回一个空列表。如果trait_name输入的是不存在的特征，该接口不会报错，只会返回一个空列表。这是预期的行为。</p>
-<p>示例：为了方便举例，对响应体进行了json格式化，实际返回的是纯文本。</p>
+<ul>
+<li>request filter参数</li>
+</ul>
+<p>无</p>
+<ul>
+<li>request body参数</li>
+</ul>
+<p>无</p>
+<ul>
+<li>response body参数</li>
+</ul>
+<p>参见响应样例</p>
+<ul>
+<li><p>相关配置</p></li>
+<li><p>JSON请求样例</p></li>
+</ul>
 <p>curl -i -X GET -H 'X-Auth-Token: 1f9a3ec4845a49d8afa6faf48cd31300' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' http://172.128.231.201:8777/v2/event_types/compute.instance.delete.start/traits/vcpus</p>
+<ul>
+<li>JSON响应样例</li>
+</ul>
+<p>为了方便举例，对响应体进行了json格式化，实际返回的是纯文本。</p>
 <pre class="sourceCode json"><code class="sourceCode json">[
     {
         <span class="dt">&quot;name&quot;</span>: <span class="st">&quot;vcpus&quot;</span>,
@@ -2608,7 +2737,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <tbody>
 <tr class="odd">
 <td align="left">GET</td>
-<td align="left">/v2/meters/{meter_name}?limit={value}&amp;q.field={field}&amp;q.op=eq&amp;q.type={type}&amp;q.value={value}</td>
+<td align="left">/v2/meters/{meter_name}?limit={value}&amp;q.field={field}&amp;q.op={operator}&amp;q.type={type}&amp;q.value={value}</td>
 <td align="left">查询数据点</td>
 </tr>
 </tbody>
@@ -2799,6 +2928,375 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
             <span class="dt">&quot;receiver_user_id&quot;</span>: <span class="st">&quot;2630d3c577df426bab9a4d9bfa986297&quot;</span>
         },
         <span class="dt">&quot;source&quot;</span>: <span class="st">&quot;openstack&quot;</span>,
+        <span class="dt">&quot;timestamp&quot;</span>: <span class="st">&quot;2014-12-28T22:36:24.259770&quot;</span>,
+        <span class="dt">&quot;user_id&quot;</span>: <span class="st">&quot;2630d3c577df426bab9a4d9bfa986297&quot;</span>
+    }
+]</code></pre>
+<h3 id="查询统计list-statistics"><span class="header-section-number">5.4.3</span> 查询统计（List Statistics）</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">REST VERB</th>
+<th align="left">URI</th>
+<th align="left">DESCRIPTION</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">GET</td>
+<td align="left">/v2/meters/{meter_name}/statistics?period={period}&amp;groupby={groupby}&amp;aggregate={aggregate}&amp;q.field={field}&amp;q.op={operator}&amp;q.type={type}&amp;q.value={value}</td>
+<td align="left">获取某个指标的统计信息</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>request filter参数</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th align="left">参数名</th>
+<th align="left">参数类型</th>
+<th align="left">约束</th>
+<th align="left">必选</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">period</td>
+<td align="left">integer</td>
+<td align="left">&gt;=0</td>
+<td align="left">NO</td>
+<td align="left">统计区间时间长度</td>
+</tr>
+<tr class="even">
+<td align="left">groupby</td>
+<td align="left">string</td>
+<td align="left">依据数据库不同有所不同</td>
+<td align="left">NO</td>
+<td align="left">统计结果排序项，</td>
+</tr>
+<tr class="odd">
+<td align="left">aggregate</td>
+<td align="left">string</td>
+<td align="left">???</td>
+<td align="left">NO</td>
+<td align="left">???</td>
+</tr>
+<tr class="even">
+<td align="left">q.field</td>
+<td align="left">string</td>
+<td align="left">见filed可选值表</td>
+<td align="left">NO</td>
+<td align="left">过滤关键字</td>
+</tr>
+<tr class="odd">
+<td align="left">q.op</td>
+<td align="left">string</td>
+<td align="left">依据q.field不同而有所不同</td>
+<td align="left">NO</td>
+<td align="left">过滤操作符</td>
+</tr>
+<tr class="even">
+<td align="left">q.type</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">NO</td>
+<td align="left">过滤值的类型，不填，填了也不会生效</td>
+</tr>
+<tr class="odd">
+<td align="left">q.value</td>
+<td align="left">string</td>
+<td align="left">如果field为时间则需要为时间格式</td>
+<td align="left">NO</td>
+<td align="left">过滤值</td>
+</tr>
+<tr class="even">
+<td align="left">q.field</td>
+<td align="left">string</td>
+<td align="left">见filed可选值表</td>
+<td align="left">NO</td>
+<td align="left">过滤关键字</td>
+</tr>
+</tbody>
+</table>
+<p>groupby在MySQL中仅支持'user_id', 'project_id', 'resource_id'三个选项，其他值将返回501错误。</p>
+<p>q.op当field为timestamp时，合法的值是lt, le, ge, gt，当field为其他值是，仅eq是合法值。</p>
+<p>field可选值表</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">可选值</th>
+<th align="left">类型</th>
+<th align="left">约束</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">resource</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">资源唯一标识符（UUID）</td>
+</tr>
+<tr class="even">
+<td align="left">project</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">资源所属项目唯一标识符（UUID）</td>
+</tr>
+<tr class="odd">
+<td align="left">user</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">资源所属用户唯一标识符（UUID）</td>
+</tr>
+<tr class="even">
+<td align="left">source</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">资源来源</td>
+</tr>
+<tr class="odd">
+<td align="left">timestamp</td>
+<td align="left">string</td>
+<td align="left">datetime格式</td>
+<td align="left">统计时间，当op为le,lt时指定的是结束时间，当op为ge,gt时指定的是开始时间</td>
+</tr>
+<tr class="even">
+<td align="left">start</td>
+<td align="left">string</td>
+<td align="left">datetime格式</td>
+<td align="left">起始时间</td>
+</tr>
+<tr class="odd">
+<td align="left">start_timestamp_op</td>
+<td align="left">string</td>
+<td align="left">只有gt、ge有效，其他值一律视为ge</td>
+<td align="left">起始时间比较符，默认ge</td>
+</tr>
+<tr class="even">
+<td align="left">end</td>
+<td align="left">string</td>
+<td align="left">datetime格式</td>
+<td align="left">结束时间</td>
+</tr>
+<tr class="odd">
+<td align="left">end_timestamp_op</td>
+<td align="left">string</td>
+<td align="left">只有lt、le有效，其他值一律视为le</td>
+<td align="left">起始时间比较符，默认le</td>
+</tr>
+<tr class="even">
+<td align="left">metadata.{key}</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">资源的元数据，形如metadata.{key}，key取值无限制</td>
+</tr>
+<tr class="odd">
+<td align="left">message_id</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">数据点所对应的消息唯一标识符（UUID）</td>
+</tr>
+<tr class="even">
+<td align="left">meter</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">不填，无效</td>
+</tr>
+</tbody>
+</table>
+<p>注意：不要使用message_id进行过滤，因为那样只会查到一个数据点，进行统计没有实际意义。</p>
+<ul>
+<li>request body参数</li>
+</ul>
+<p>无</p>
+<ul>
+<li>response body参数</li>
+</ul>
+<p>见响应示例</p>
+<ul>
+<li><p>相关配置</p></li>
+<li><p>JSON请求样例</p></li>
+</ul>
+<p>ceilometer -d statistics -m image.download -q resource=d950d166-4b1a-4d00-8572-c401ab4fb85c -g project_id</p>
+<p>curl -i -X GET -H 'X-Auth-Token: 38d2cc8fc4aa4a8bae02b96c79a507db' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' 'http://172.128.231.201:8777/v2/meters/image.download/statistics?q.field=resource&amp;q.op=eq&amp;q.type=&amp;q.value=d950d166-4b1a-4d00-8572-c401ab4fb85c&amp;groupby=project_id'</p>
+<ul>
+<li>JSON响应样例</li>
+</ul>
+<p>响应消息体是字符串，json格式化后为：</p>
+<pre class="sourceCode json"><code class="sourceCode json">[
+    {
+        <span class="dt">&quot;avg&quot;</span>: <span class="fl">13147648.0</span>,
+        <span class="dt">&quot;count&quot;</span>: <span class="dv">1</span>,
+        <span class="dt">&quot;duration&quot;</span>: <span class="fl">0.0</span>,
+        <span class="dt">&quot;duration_end&quot;</span>: <span class="st">&quot;2014-12-28T22:36:24.259770&quot;</span>,
+        <span class="dt">&quot;duration_start&quot;</span>: <span class="st">&quot;2014-12-28T22:36:24.259770&quot;</span>,
+        <span class="dt">&quot;groupby&quot;</span>: {
+            <span class="dt">&quot;project_id&quot;</span>: <span class="st">&quot;d1578b5392f744b68dd8ad23412a8cd4&quot;</span>
+        },
+        <span class="dt">&quot;max&quot;</span>: <span class="fl">13147648.0</span>,
+        <span class="dt">&quot;min&quot;</span>: <span class="fl">13147648.0</span>,
+        <span class="dt">&quot;period&quot;</span>: <span class="dv">0</span>,
+        <span class="dt">&quot;period_end&quot;</span>: <span class="st">&quot;2014-12-28T22:36:24.259770&quot;</span>,
+        <span class="dt">&quot;period_start&quot;</span>: <span class="st">&quot;2014-12-28T22:36:24.259770&quot;</span>,
+        <span class="dt">&quot;sum&quot;</span>: <span class="fl">13147648.0</span>,
+        <span class="dt">&quot;unit&quot;</span>: <span class="st">&quot;B&quot;</span>
+    }
+]</code></pre>
+<h3 id="创建数据点create-sample"><span class="header-section-number">5.4.4</span> 创建数据点（Create Sample）</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">REST VERB</th>
+<th align="left">URI</th>
+<th align="left">DESCRIPTION</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">POST</td>
+<td align="left">/v2/meters/{meter_name}</td>
+<td align="left">创建数据点</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>request filter参数</li>
+</ul>
+<p>无</p>
+<ul>
+<li>request body参数</li>
+</ul>
+<p>body消息体是字符串，内容是json列表，列表中的元素是字典，代表一个数据点，字段信息如下：</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">参数名</th>
+<th align="left">参数类型</th>
+<th align="left">约束</th>
+<th align="left">必选</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">counter_name</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">YES</td>
+<td align="left">数据点对应的指标名称</td>
+</tr>
+<tr class="even">
+<td align="left">counter_type</td>
+<td align="left">string</td>
+<td align="left">只能为gauge、cumulative、delta之一</td>
+<td align="left">YES</td>
+<td align="left">数据点对应的指标类型</td>
+</tr>
+<tr class="odd">
+<td align="left">counter_unit</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">YES</td>
+<td align="left">数据点对应的指标单位</td>
+</tr>
+<tr class="even">
+<td align="left">counter_volume</td>
+<td align="left">float</td>
+<td align="left">N/A</td>
+<td align="left">YES</td>
+<td align="left">值，可以取负数！</td>
+</tr>
+<tr class="odd">
+<td align="left">resource_id</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">YES</td>
+<td align="left">资源唯一标识符（UUID）</td>
+</tr>
+<tr class="even">
+<td align="left">project_id</td>
+<td align="left">string</td>
+<td align="left">仅admin可指定非自身</td>
+<td align="left">NO</td>
+<td align="left">资源所属租户唯一标识符（UUID）</td>
+</tr>
+<tr class="odd">
+<td align="left">user_id</td>
+<td align="left">string</td>
+<td align="left">仅admin可指定非自身</td>
+<td align="left">NO</td>
+<td align="left">资源所属用户唯一标识符（UUID）</td>
+</tr>
+<tr class="even">
+<td align="left">resource_metadata</td>
+<td align="left">string</td>
+<td align="left">json dict</td>
+<td align="left">NO</td>
+<td align="left">资源元数据</td>
+</tr>
+<tr class="odd">
+<td align="left">timestamp</td>
+<td align="left">string</td>
+<td align="left">datetime</td>
+<td align="left">NO</td>
+<td align="left">时间戳</td>
+</tr>
+<tr class="even">
+<td align="left">message_signature</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">NO</td>
+<td align="left">消息签名，不填，可以设置但没有效果</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>response body参数</li>
+</ul>
+<p>见响应示例</p>
+<ul>
+<li><p>相关配置</p></li>
+<li><p>JSON请求样例</p></li>
+</ul>
+<p>ceilometer -d sample-create --project-id d1578b5392f744b68dd8ad23412a8cd4 --user-id 2630d3c577df426bab9a4d9bfa986297 -r d950d166-4b1a-4d00-8572-c401ab4fb85c -m image.download --meter-unit B --meter-type delta --sample-volume 10086 --timestamp '2014-12-28T22:36:24.259770' --resource-metadata '{&quot;status&quot;: &quot;bad&quot;}'</p>
+<p>curl -i -X POST -H 'X-Auth-Token: da9aec1e13644bcdb1fd703cfb386fe3' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' -d '[{&quot;counter_name&quot;: &quot;image.download&quot;, &quot;user_id&quot;: &quot;2630d3c577df426bab9a4d9bfa986297&quot;, &quot;resource_id&quot;: &quot;d950d166-4b1a-4d00-8572-c401ab4fb85c&quot;, &quot;timestamp&quot;: &quot;2014-12-28T22:36:24.259770&quot;, &quot;counter_unit&quot;: &quot;B&quot;, &quot;counter_volume&quot;: &quot;10086&quot;, &quot;project_id&quot;: &quot;d1578b5392f744b68dd8ad23412a8cd4&quot;, &quot;resource_metadata&quot;: {&quot;status&quot;: &quot;bad&quot;}, &quot;counter_type&quot;: &quot;delta&quot;}]' http://172.128.231.201:8777/v2/meters/image.download</p>
+<p>请求体经过json格式化后为：</p>
+<pre class="sourceCode json"><code class="sourceCode json">[
+    {
+        <span class="dt">&quot;counter_name&quot;</span>: <span class="st">&quot;image.download&quot;</span>,
+        <span class="dt">&quot;counter_type&quot;</span>: <span class="st">&quot;delta&quot;</span>,
+        <span class="dt">&quot;counter_unit&quot;</span>: <span class="st">&quot;B&quot;</span>,
+        <span class="dt">&quot;counter_volume&quot;</span>: <span class="st">&quot;10086&quot;</span>,
+        <span class="dt">&quot;project_id&quot;</span>: <span class="st">&quot;d1578b5392f744b68dd8ad23412a8cd4&quot;</span>,
+        <span class="dt">&quot;resource_id&quot;</span>: <span class="st">&quot;d950d166-4b1a-4d00-8572-c401ab4fb85c&quot;</span>,
+        <span class="dt">&quot;resource_metadata&quot;</span>: {
+            <span class="dt">&quot;status&quot;</span>: <span class="st">&quot;bad&quot;</span>
+        },
+        <span class="dt">&quot;timestamp&quot;</span>: <span class="st">&quot;2014-12-28T22:36:24.259770&quot;</span>,
+        <span class="dt">&quot;user_id&quot;</span>: <span class="st">&quot;2630d3c577df426bab9a4d9bfa986297&quot;</span>
+    }
+]</code></pre>
+<ul>
+<li>JSON响应样例</li>
+</ul>
+<p>响应消息体是字符串，经过json格式化后为：</p>
+<pre class="sourceCode json"><code class="sourceCode json">[
+    {
+        <span class="dt">&quot;counter_name&quot;</span>: <span class="st">&quot;image.download&quot;</span>,
+        <span class="dt">&quot;counter_type&quot;</span>: <span class="st">&quot;delta&quot;</span>,
+        <span class="dt">&quot;counter_unit&quot;</span>: <span class="st">&quot;B&quot;</span>,
+        <span class="dt">&quot;counter_volume&quot;</span>: <span class="fl">10086.0</span>,
+        <span class="dt">&quot;message_id&quot;</span>: <span class="st">&quot;9ed9413e-950f-11e4-bf95-000c29fb0ff8&quot;</span>,
+        <span class="dt">&quot;project_id&quot;</span>: <span class="st">&quot;d1578b5392f744b68dd8ad23412a8cd4&quot;</span>,
+        <span class="dt">&quot;resource_id&quot;</span>: <span class="st">&quot;d950d166-4b1a-4d00-8572-c401ab4fb85c&quot;</span>,
+        <span class="dt">&quot;resource_metadata&quot;</span>: {
+            <span class="dt">&quot;status&quot;</span>: <span class="st">&quot;bad&quot;</span>
+        },
+        <span class="dt">&quot;source&quot;</span>: <span class="st">&quot;d1578b5392f744b68dd8ad23412a8cd4:openstack&quot;</span>,
         <span class="dt">&quot;timestamp&quot;</span>: <span class="st">&quot;2014-12-28T22:36:24.259770&quot;</span>,
         <span class="dt">&quot;user_id&quot;</span>: <span class="st">&quot;2630d3c577df426bab9a4d9bfa986297&quot;</span>
     }
@@ -3169,7 +3667,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 }</code></pre>
 <h2 id="复合查询query"><span class="header-section-number">5.6</span> 复合查询（Query）</h2>
 <p>复合查询使用POST方法，把查询条件放到了请求消息体中。</p>
-<h3 id="复合查询告警query-alarm"><span class="header-section-number">5.6.1</span> 复合查询告警（Query Alarm）</h3>
+<h3 id="复合查询告警query-alarms"><span class="header-section-number">5.6.1</span> 复合查询告警（Query Alarms）</h3>
 <table>
 <thead>
 <tr class="header">
@@ -3369,7 +3867,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <ul>
 <li>request body参数</li>
 </ul>
-<p>参见<a href="#复合查询告警query-alarm">复合查询告警</a></p>
+<p>参见<a href="#复合查询告警query-alarms">复合查询告警</a></p>
 <ul>
 <li>response body参数</li>
 </ul>
@@ -3413,6 +3911,384 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
         <span class="dt">&quot;user_id&quot;</span>: <span class="st">&quot;2630d3c577df426bab9a4d9bfa986297&quot;</span>
     }
 ]</code></pre>
+<h3 id="复合查询数据点query-samples"><span class="header-section-number">5.6.3</span> 复合查询数据点（Query Samples）</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">REST VERB</th>
+<th align="left">URI</th>
+<th align="left">DESCRIPTION</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">POST</td>
+<td align="left">/v2/query/samples</td>
+<td align="left">复合查询数据点</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>request filter参数</li>
+</ul>
+<p>无</p>
+<ul>
+<li>request body参数</li>
+</ul>
+<p>参见<a href="#复合查询告警query-alarms">复合查询告警</a></p>
+<ul>
+<li>response body参数</li>
+</ul>
+<p>见响应示例</p>
+<ul>
+<li><p>相关配置</p></li>
+<li><p>JSON请求样例</p></li>
+</ul>
+<p>例如，查询在2014-12-28T20:00:00到2014-12-28T21:00:00之间的，指标为memory的数据点，仅返回一条：</p>
+<p>ceilometer -d query-samples -f '{&quot;and&quot;: [{&quot;&gt;&quot;: {&quot;timestamp&quot;: &quot;2014-12-28T20:00:00&quot;}}, {&quot;&lt;&quot;: {&quot;timestamp&quot;: &quot;2014-12-28T21:00:00&quot;}}, {&quot;=&quot;: {&quot;meter&quot;: &quot;memory&quot;}}]}' -l 1</p>
+<p>curl -i -X POST -H 'X-Auth-Token: bb41b48c1dfa414aa807fe1886d77bc3' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' -d '{&quot;filter&quot;: &quot;{&quot;and&quot;: [{&quot;&gt;&quot;: {&quot;timestamp&quot;: &quot;2014-12-28T20:00:00&quot;}}, {&quot;&lt;&quot;: {&quot;timestamp&quot;: &quot;2014-12-28T21:00:00&quot;}}, {&quot;=&quot;: {&quot;meter&quot;: &quot;memory&quot;}}]}&quot;, &quot;limit&quot;: &quot;1&quot;}' http://172.128.231.201:8777/v2/query/samples</p>
+<p>请求体经json格式化后为：</p>
+<pre class="sourceCode json"><code class="sourceCode json">{
+    <span class="dt">&quot;filter&quot;</span>: <span class="st">&quot;{\&quot;and\&quot;: [{\&quot;&gt;\&quot;: {\&quot;timestamp\&quot;: \&quot;2014-12-28T20:00:00\&quot;}}, {\&quot;&lt;\&quot;: {\&quot;timestamp\&quot;: \&quot;2014-12-28T21:00:00\&quot;}}, {\&quot;=\&quot;: {\&quot;meter\&quot;: \&quot;memory\&quot;}}]}&quot;</span>,
+    <span class="dt">&quot;limit&quot;</span>: <span class="st">&quot;1&quot;</span>
+}</code></pre>
+<ul>
+<li>JSON响应样例</li>
+</ul>
+<p>响应消息体是字符串，经过json格式化后为：</p>
+<pre class="sourceCode json"><code class="sourceCode json">[
+    {
+        <span class="dt">&quot;id&quot;</span>: <span class="st">&quot;10ad185a-8ed3-11e4-b699-000c29fb0ff8&quot;</span>,
+        <span class="dt">&quot;metadata&quot;</span>: {
+            <span class="dt">&quot;access_ip_v4&quot;</span>: <span class="st">&quot;None&quot;</span>,
+            <span class="dt">&quot;access_ip_v6&quot;</span>: <span class="st">&quot;None&quot;</span>,
+            <span class="dt">&quot;architecture&quot;</span>: <span class="st">&quot;None&quot;</span>,
+            <span class="dt">&quot;availability_zone&quot;</span>: <span class="st">&quot;None&quot;</span>,
+            <span class="dt">&quot;cell_name&quot;</span>: <span class="st">&quot;&quot;</span>,
+            <span class="dt">&quot;created_at&quot;</span>: <span class="st">&quot;2014-12-28 20:11:51+00:00&quot;</span>,
+            <span class="dt">&quot;deleted_at&quot;</span>: <span class="st">&quot;2014-12-28T20:49:49.573885&quot;</span>,
+            <span class="dt">&quot;disk_gb&quot;</span>: <span class="st">&quot;1&quot;</span>,
+            <span class="dt">&quot;display_name&quot;</span>: <span class="st">&quot;vm-01&quot;</span>,
+            <span class="dt">&quot;ephemeral_gb&quot;</span>: <span class="st">&quot;0&quot;</span>,
+            <span class="dt">&quot;event_type&quot;</span>: <span class="st">&quot;compute.instance.delete.end&quot;</span>,
+            <span class="dt">&quot;host&quot;</span>: <span class="st">&quot;compute.openstack&quot;</span>,
+            <span class="dt">&quot;hostname&quot;</span>: <span class="st">&quot;vm-01&quot;</span>,
+            <span class="dt">&quot;image_meta.base_image_ref&quot;</span>: <span class="st">&quot;d950d166-4b1a-4d00-8572-c401ab4fb85c&quot;</span>,
+            <span class="dt">&quot;image_meta.container_format&quot;</span>: <span class="st">&quot;bare&quot;</span>,
+            <span class="dt">&quot;image_meta.disk_format&quot;</span>: <span class="st">&quot;qcow2&quot;</span>,
+            <span class="dt">&quot;image_meta.min_disk&quot;</span>: <span class="st">&quot;1&quot;</span>,
+            <span class="dt">&quot;image_meta.min_ram&quot;</span>: <span class="st">&quot;0&quot;</span>,
+            <span class="dt">&quot;image_ref_url&quot;</span>: <span class="st">&quot;http://172.128.231.201:9292/images/d950d166-4b1a-4d00-8572-c401ab4fb85c&quot;</span>,
+            <span class="dt">&quot;instance_flavor_id&quot;</span>: <span class="st">&quot;1&quot;</span>,
+            <span class="dt">&quot;instance_id&quot;</span>: <span class="st">&quot;9e5c1931-eb85-42dd-ae7c-a12224dfd3c4&quot;</span>,
+            <span class="dt">&quot;instance_type&quot;</span>: <span class="st">&quot;m1.tiny&quot;</span>,
+            <span class="dt">&quot;instance_type_id&quot;</span>: <span class="st">&quot;2&quot;</span>,
+            <span class="dt">&quot;kernel_id&quot;</span>: <span class="st">&quot;&quot;</span>,
+            <span class="dt">&quot;launched_at&quot;</span>: <span class="st">&quot;&quot;</span>,
+            <span class="dt">&quot;memory_mb&quot;</span>: <span class="st">&quot;512&quot;</span>,
+            <span class="dt">&quot;node&quot;</span>: <span class="st">&quot;None&quot;</span>,
+            <span class="dt">&quot;os_type&quot;</span>: <span class="st">&quot;None&quot;</span>,
+            <span class="dt">&quot;progress&quot;</span>: <span class="st">&quot;&quot;</span>,
+            <span class="dt">&quot;ramdisk_id&quot;</span>: <span class="st">&quot;&quot;</span>,
+            <span class="dt">&quot;reservation_id&quot;</span>: <span class="st">&quot;r-wqs6rw81&quot;</span>,
+            <span class="dt">&quot;root_gb&quot;</span>: <span class="st">&quot;1&quot;</span>,
+            <span class="dt">&quot;state&quot;</span>: <span class="st">&quot;error&quot;</span>,
+            <span class="dt">&quot;state_description&quot;</span>: <span class="st">&quot;deleting&quot;</span>,
+            <span class="dt">&quot;tenant_id&quot;</span>: <span class="st">&quot;d1578b5392f744b68dd8ad23412a8cd4&quot;</span>,
+            <span class="dt">&quot;terminated_at&quot;</span>: <span class="st">&quot;&quot;</span>,
+            <span class="dt">&quot;user_id&quot;</span>: <span class="st">&quot;2630d3c577df426bab9a4d9bfa986297&quot;</span>,
+            <span class="dt">&quot;vcpus&quot;</span>: <span class="st">&quot;1&quot;</span>
+        },
+        <span class="dt">&quot;meter&quot;</span>: <span class="st">&quot;memory&quot;</span>,
+        <span class="dt">&quot;project_id&quot;</span>: <span class="st">&quot;d1578b5392f744b68dd8ad23412a8cd4&quot;</span>,
+        <span class="dt">&quot;recorded_at&quot;</span>: <span class="st">&quot;2014-12-28T20:49:49.770677&quot;</span>,
+        <span class="dt">&quot;resource_id&quot;</span>: <span class="st">&quot;9e5c1931-eb85-42dd-ae7c-a12224dfd3c4&quot;</span>,
+        <span class="dt">&quot;source&quot;</span>: <span class="st">&quot;openstack&quot;</span>,
+        <span class="dt">&quot;timestamp&quot;</span>: <span class="st">&quot;2014-12-28T20:49:49.600004&quot;</span>,
+        <span class="dt">&quot;type&quot;</span>: <span class="st">&quot;gauge&quot;</span>,
+        <span class="dt">&quot;unit&quot;</span>: <span class="st">&quot;MB&quot;</span>,
+        <span class="dt">&quot;user_id&quot;</span>: <span class="st">&quot;2630d3c577df426bab9a4d9bfa986297&quot;</span>,
+        <span class="dt">&quot;volume&quot;</span>: <span class="fl">512.0</span>
+    }
+]</code></pre>
+<h2 id="数据点sample"><span class="header-section-number">5.7</span> 数据点（Sample）</h2>
+<h3 id="查询数据点get-samples"><span class="header-section-number">5.7.1</span> 查询数据点（Get Samples）</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">REST VERB</th>
+<th align="left">URI</th>
+<th align="left">DESCRIPTION</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">GET</td>
+<td align="left">/v2/samples?limit={limit}&amp;q.field={field}&amp;q.op={operator}&amp;q.type={type}&amp;q.value={value}</td>
+<td align="left">查询数据点</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>request filter参数</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th align="left">参数名</th>
+<th align="left">参数类型</th>
+<th align="left">约束</th>
+<th align="left">必选</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">limit</td>
+<td align="left">integer</td>
+<td align="left">&gt;=0</td>
+<td align="left">NO</td>
+<td align="left">返回数量</td>
+</tr>
+<tr class="even">
+<td align="left">q.field</td>
+<td align="left">string</td>
+<td align="left">见filed可选值表</td>
+<td align="left">NO</td>
+<td align="left">查询关键字</td>
+</tr>
+<tr class="odd">
+<td align="left">q.op</td>
+<td align="left">string</td>
+<td align="left">只能为lt、le、eq、ne、ge、gt其中之一</td>
+<td align="left">NO</td>
+<td align="left">操作符</td>
+</tr>
+<tr class="even">
+<td align="left">q.type</td>
+<td align="left">string</td>
+<td align="left">未知</td>
+<td align="left">NO</td>
+<td align="left">不填，填了也没用</td>
+</tr>
+<tr class="odd">
+<td align="left">q.value</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">NO</td>
+<td align="left">值</td>
+</tr>
+</tbody>
+</table>
+<p>field可选值表</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">可选值</th>
+<th align="left">类型</th>
+<th align="left">约束</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">可选值</td>
+<td align="left">类型</td>
+<td align="left">约束</td>
+<td align="left">备注</td>
+</tr>
+<tr class="even">
+<td align="left">:-------</td>
+<td align="left">:-----</td>
+<td align="left">:-----</td>
+<td align="left">:-----</td>
+</tr>
+<tr class="odd">
+<td align="left">message_id</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">数据点唯一标识符（UUUID）</td>
+</tr>
+<tr class="even">
+<td align="left">meter</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">数据点对应的指标名称</td>
+</tr>
+<tr class="odd">
+<td align="left">resource</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">资源唯一标识符（UUID）</td>
+</tr>
+<tr class="even">
+<td align="left">project</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">资源所属的项目</td>
+</tr>
+<tr class="odd">
+<td align="left">user</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">资源所属用户</td>
+</tr>
+<tr class="even">
+<td align="left">source</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">资源来源</td>
+</tr>
+<tr class="odd">
+<td align="left">metadata.{key}</td>
+<td align="left">string</td>
+<td align="left">N/A</td>
+<td align="left">使用metadata字段进行过滤，key可以是任意值</td>
+</tr>
+<tr class="even">
+<td align="left">start</td>
+<td align="left">string</td>
+<td align="left">datetime格式</td>
+<td align="left">起始时间</td>
+</tr>
+<tr class="odd">
+<td align="left">start_timestamp_op</td>
+<td align="left">string</td>
+<td align="left">只有gt、ge有效，其他值一律视为ge</td>
+<td align="left">起始时间比较符，默认ge</td>
+</tr>
+<tr class="even">
+<td align="left">end</td>
+<td align="left">string</td>
+<td align="left">datetime格式</td>
+<td align="left">结束时间</td>
+</tr>
+<tr class="odd">
+<td align="left">end_timestamp_op</td>
+<td align="left">string</td>
+<td align="left">只有lt、le有效，其他值一律视为le</td>
+<td align="left">起始时间比较符，默认le</td>
+</tr>
+</tbody>
+</table>
+<p>当field为project、user、type时，operator只能为eq，否则报400错误。</p>
+<ul>
+<li>request body参数</li>
+</ul>
+<p>无</p>
+<ul>
+<li>response body参数</li>
+</ul>
+<p>见响应示例</p>
+<ul>
+<li><p>相关配置</p></li>
+<li><p>JSON请求样例</p></li>
+</ul>
+<p>curl -i -X GET -H 'X-Auth-Token: 949eb857896347d19c4323c6bc4c1b3b' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' 'http://172.128.231.201:8777/v2/samples?limit=1'</p>
+<ul>
+<li>JSON响应样例</li>
+</ul>
+<p>响应消息体是字符串，json格式化后为：</p>
+<pre class="sourceCode json"><code class="sourceCode json">[
+    {
+        <span class="dt">&quot;id&quot;</span>: <span class="st">&quot;965aa632-908d-11e4-88e3-000c29fb0ff8&quot;</span>,
+        <span class="dt">&quot;metadata&quot;</span>: {
+            <span class="dt">&quot;checksum&quot;</span>: <span class="st">&quot;d972013792949d0d3ba628fbe8685bce&quot;</span>,
+            <span class="dt">&quot;container_format&quot;</span>: <span class="st">&quot;bare&quot;</span>,
+            <span class="dt">&quot;created_at&quot;</span>: <span class="st">&quot;2014-11-04T17:44:13&quot;</span>,
+            <span class="dt">&quot;deleted&quot;</span>: <span class="st">&quot;False&quot;</span>,
+            <span class="dt">&quot;deleted_at&quot;</span>: <span class="st">&quot;None&quot;</span>,
+            <span class="dt">&quot;disk_format&quot;</span>: <span class="st">&quot;qcow2&quot;</span>,
+            <span class="dt">&quot;is_public&quot;</span>: <span class="st">&quot;False&quot;</span>,
+            <span class="dt">&quot;min_disk&quot;</span>: <span class="st">&quot;0&quot;</span>,
+            <span class="dt">&quot;min_ram&quot;</span>: <span class="st">&quot;0&quot;</span>,
+            <span class="dt">&quot;name&quot;</span>: <span class="st">&quot;myImage&quot;</span>,
+            <span class="dt">&quot;protected&quot;</span>: <span class="st">&quot;False&quot;</span>,
+            <span class="dt">&quot;size&quot;</span>: <span class="st">&quot;13147648&quot;</span>,
+            <span class="dt">&quot;status&quot;</span>: <span class="st">&quot;active&quot;</span>,
+            <span class="dt">&quot;updated_at&quot;</span>: <span class="st">&quot;2014-11-04T17:44:13&quot;</span>
+        },
+        <span class="dt">&quot;meter&quot;</span>: <span class="st">&quot;image&quot;</span>,
+        <span class="dt">&quot;project_id&quot;</span>: <span class="st">&quot;d1578b5392f744b68dd8ad23412a8cd4&quot;</span>,
+        <span class="dt">&quot;recorded_at&quot;</span>: <span class="st">&quot;2014-12-31T01:37:31.546006&quot;</span>,
+        <span class="dt">&quot;resource_id&quot;</span>: <span class="st">&quot;d950d166-4b1a-4d00-8572-c401ab4fb85c&quot;</span>,
+        <span class="dt">&quot;source&quot;</span>: <span class="st">&quot;openstack&quot;</span>,
+        <span class="dt">&quot;timestamp&quot;</span>: <span class="st">&quot;2014-12-31T01:37:31&quot;</span>,
+        <span class="dt">&quot;type&quot;</span>: <span class="st">&quot;gauge&quot;</span>,
+        <span class="dt">&quot;unit&quot;</span>: <span class="st">&quot;image&quot;</span>,
+        <span class="dt">&quot;user_id&quot;</span>: <span class="dv">null</span>,
+        <span class="dt">&quot;volume&quot;</span>: <span class="fl">1.0</span>
+    }
+]</code></pre>
+<h3 id="查询数据点详情show-sample"><span class="header-section-number">5.7.2</span> 查询数据点详情（Show Sample）</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">REST VERB</th>
+<th align="left">URI</th>
+<th align="left">DESCRIPTION</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">GET</td>
+<td align="left">/v2/samples/{id}</td>
+<td align="left">查询数据点详情</td>
+</tr>
+</tbody>
+</table>
+<p>注意：id是数据点的id，和message_id并不一致。</p>
+<p>注意：此接口返回的字段并不比列表中的字段更多。使用此接口是方便查询单个的时候提高性能。</p>
+<ul>
+<li>request filter参数</li>
+</ul>
+<p>无</p>
+<ul>
+<li>request body参数</li>
+</ul>
+<p>无</p>
+<ul>
+<li>response body参数</li>
+</ul>
+<p>见响应示例</p>
+<ul>
+<li><p>相关配置</p></li>
+<li><p>JSON请求样例</p></li>
+</ul>
+<p>curl -i -X GET -H 'X-Auth-Token: 949eb857896347d19c4323c6bc4c1b3b' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' 'http://172.128.231.201:8777/v2/samples/965aa632-908d-11e4-88e3-000c29fb0ff8'</p>
+<ul>
+<li>JSON响应样例</li>
+</ul>
+<p>响应消息体是字符串，json格式化后为：</p>
+<pre class="sourceCode json"><code class="sourceCode json">{
+    <span class="dt">&quot;id&quot;</span>: <span class="st">&quot;965aa632-908d-11e4-88e3-000c29fb0ff8&quot;</span>,
+    <span class="dt">&quot;metadata&quot;</span>: {
+        <span class="dt">&quot;checksum&quot;</span>: <span class="st">&quot;d972013792949d0d3ba628fbe8685bce&quot;</span>,
+        <span class="dt">&quot;container_format&quot;</span>: <span class="st">&quot;bare&quot;</span>,
+        <span class="dt">&quot;created_at&quot;</span>: <span class="st">&quot;2014-11-04T17:44:13&quot;</span>,
+        <span class="dt">&quot;deleted&quot;</span>: <span class="st">&quot;False&quot;</span>,
+        <span class="dt">&quot;deleted_at&quot;</span>: <span class="st">&quot;None&quot;</span>,
+        <span class="dt">&quot;disk_format&quot;</span>: <span class="st">&quot;qcow2&quot;</span>,
+        <span class="dt">&quot;is_public&quot;</span>: <span class="st">&quot;False&quot;</span>,
+        <span class="dt">&quot;min_disk&quot;</span>: <span class="st">&quot;0&quot;</span>,
+        <span class="dt">&quot;min_ram&quot;</span>: <span class="st">&quot;0&quot;</span>,
+        <span class="dt">&quot;name&quot;</span>: <span class="st">&quot;myImage&quot;</span>,
+        <span class="dt">&quot;protected&quot;</span>: <span class="st">&quot;False&quot;</span>,
+        <span class="dt">&quot;size&quot;</span>: <span class="st">&quot;13147648&quot;</span>,
+        <span class="dt">&quot;status&quot;</span>: <span class="st">&quot;active&quot;</span>,
+        <span class="dt">&quot;updated_at&quot;</span>: <span class="st">&quot;2014-11-04T17:44:13&quot;</span>
+    },
+    <span class="dt">&quot;meter&quot;</span>: <span class="st">&quot;image&quot;</span>,
+    <span class="dt">&quot;project_id&quot;</span>: <span class="st">&quot;d1578b5392f744b68dd8ad23412a8cd4&quot;</span>,
+    <span class="dt">&quot;recorded_at&quot;</span>: <span class="st">&quot;2014-12-31T01:37:31.546006&quot;</span>,
+    <span class="dt">&quot;resource_id&quot;</span>: <span class="st">&quot;d950d166-4b1a-4d00-8572-c401ab4fb85c&quot;</span>,
+    <span class="dt">&quot;source&quot;</span>: <span class="st">&quot;openstack&quot;</span>,
+    <span class="dt">&quot;timestamp&quot;</span>: <span class="st">&quot;2014-12-31T01:37:31&quot;</span>,
+    <span class="dt">&quot;type&quot;</span>: <span class="st">&quot;gauge&quot;</span>,
+    <span class="dt">&quot;unit&quot;</span>: <span class="st">&quot;image&quot;</span>,
+    <span class="dt">&quot;user_id&quot;</span>: <span class="dv">null</span>,
+    <span class="dt">&quot;volume&quot;</span>: <span class="fl">1.0</span>
+}</code></pre>
 <script type="text/javascript" src="../jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="../jquery-ui-1.10.4.min.js"></script>
 <script type="text/javascript" src="../jquery.xlstablefilter-1.0.1.min.js"></script>

@@ -272,10 +272,10 @@ threshold_rule会被用于评估阈值告警（threshold alarm）时从Statistic
 | threshold | float | N/A | YES | 告警阈值
 | query | list | N/A | NO | 过滤条件
 | period | int | >=1 | NO | 时间窗口长度，单位秒，默认60秒
-| evaluation_periods | int | >=1 | 时间窗口数量，默认1
-| comparison_operator | string | 只能为['lt', 'le', 'eq', 'ne', 'ge', 'gt']其中之一 | 比较操作符，默认为eq
-| statistic | string | 只能为['max', 'min', 'avg', 'sum', 'count']其中之一 | 统计维度，默认为avg
-| exclude_outliers | bool | N/A | 是否排除在标准差范围外的数据，默认False，不排除
+| evaluation_periods | int | >=1 | NO | 时间窗口数量，默认1
+| comparison_operator | string | 只能为['lt', 'le', 'eq', 'ne', 'ge', 'gt']其中之一 | NO | 比较操作符，默认为eq
+| statistic | string | 只能为['max', 'min', 'avg', 'sum', 'count']其中之一 | NO | 统计维度，默认为avg
+| exclude_outliers | bool | N/A | NO | 是否排除在标准差范围外的数据，默认False，不排除
 
 注意：period的值应该要保证比指标采集周期要大，否则很容易出现insufficient data状态。原因是告警评估周期到来时，每个告警是从当前时间倒推(evaluation_periods+1)*period秒数，从中取出监控数据，如果period值比监控周期小，此时很可能取不到数据。
 
@@ -331,6 +331,10 @@ time_constraints参数列表：
 
 详见响应示例。
 
+* 相关配置
+
+* JSON请求样例
+
 示例，一个完整的创建告警的请求如下，里面包含了定义threshold_rule参数，定义query，定义time_constraints，但是并没有覆盖所有字段：
 
 curl -i -X POST -H 'X-Auth-Token: 897de9edb774462ba5c3b875553f8087' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' -d '{"threshold_rule": {"meter_name": "cpu_util", "evaluation_periods": 3, "period": 1800, "statistic": "min", "threshold": 80.0, "query": [{"field": "resource_id", "type": "", "value": "10e8216e-4b36-4f93-942f-19b9f09e84e5", "op": "eq"}], "comparison_operator": "ge"}, "time_constraints": [{"duration": "10800", "start": "0 23 * * *", "name": "alarm-constraint-01"}], "type": "threshold", "name": "cpu-alarm", "repeat_actions": false}' http://172.128.231.201:8777/v2/alarms
@@ -368,11 +372,9 @@ curl -i -X POST -H 'X-Auth-Token: 897de9edb774462ba5c3b875553f8087' -H 'Content-
 }
 ~~~
 
-得到的响应是：
+* JSON响应样例
 
-{"alarm_actions": [], "ok_actions": [], "name": "cpu-alarm", "timestamp": "2015-01-04T02:25:44.216495", "enabled": true, "state": "insufficient data", "state_timestamp": "2015-01-04T02:25:44.216495", "threshold_rule": {"meter_name": "cpu_util", "evaluation_periods": 3, "period": 1800, "statistic": "min", "threshold": 80.0, "query": [{"field": "resource_id", "type": "", "value": "10e8216e-4b36-4f93-942f-19b9f09e84e5", "op": "eq"}], "comparison_operator": "ge", "exclude_outliers": false}, "alarm_id": "623df1be-ca06-431e-87ae-ab46750e2c03", "time_constraints": [{"duration": 10800, "start": "0 23 * * *", "timezone": "", "name": "alarm-constraint-01", "description": "Time constraint at 0 23 * * * lasting for 10800 seconds"}], "insufficient_data_actions": [], "repeat_actions": false, "user_id": "2630d3c577df426bab9a4d9bfa986297", "project_id": "d1578b5392f744b68dd8ad23412a8cd4", "type": "threshold", "description": "Alarm when cpu_util is ge a min of 80.0 over 1800 seconds"}
-
-json格式化后为：
+响应消息体是字符串，json格式化后为：
 
 ~~~json
 {
@@ -904,7 +906,25 @@ curl -i -X GET -H 'X-Auth-Token: a4010a1c024f47a8917b60fb7167cdfb' -H 'Content-T
 |:----------|:----|:------------|
 | GET | /v2/capabilities | 查询能力列表（查询当前版本的能力，例如分页查询是否支持等。）
 
+* request filter参数
+
+无
+
+* request body参数
+
+无
+
+* response body参数
+
+参见响应样例
+
+* 相关配置
+
+* JSON请求样例
+
 curl -i -X GET -H 'User-Agent: python-ceilometerclient' -H 'Content-Type: application/json'  -H "X-Auth-Token: $(keystone token-get | awk 'NR==5{print $4}')" -k "https://metering.localdomain.com:8777/v2/capabilities"
+
+* JSON响应样例
 
 ~~~json
 {
@@ -958,6 +978,8 @@ curl -i -X GET -H 'User-Agent: python-ceilometerclient' -H 'Content-Type: applic
 |:----------|:----|:------------|
 | GET | /v2/events?q.field={field}&q.op={operator}&q.type={type}&q.value={value} | 查询事件列表
 
+* request filter参数
+
 添加过滤条件，格式为q.field={field}&q.op={operator}&q.type={type}&q.value={value}
 
 field原则上没有任何限制，可以随便填。
@@ -972,9 +994,23 @@ field原则上没有任何限制，可以随便填。
 
 你可以同时指定多个过滤条件，也可以一个也不指定，为了API能够快速响应，同时也为了减小系统压力，请尽量使用过滤条件进行精确查询。注意，不建议使用message_id过滤，当你想只获取某个Event时，建议使用专门的Get Event接口，message_id是唯一的，使用专门的接口显得你很专业，也可以避免不必要的服务器负担。
 
+* request body参数
+
+无
+
+* response body参数
+
+参见响应示例
+
+* 相关配置
+
+* JSON请求样例
+
 示例：查询系统上事件类型为compute.instance.delete.start的事件，为了方便举例，此处仅截取了响应体列表的一个元素，且对该元素进行了json格式化，实际返回的是纯文本。
 
 curl -i -X GET -H 'X-Auth-Token: 56c50f283bb84ee28d29d77f35a3714d' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' 'http://172.128.231.201:8777/v2/events?q.field=event_type&q.op=eq&q.type=&q.value=compute.instance.delete.start'
+
+* JSON响应样例
 
 ~~~json
 [
@@ -1071,9 +1107,27 @@ curl -i -X GET -H 'X-Auth-Token: 56c50f283bb84ee28d29d77f35a3714d' -H 'Content-T
 
 注意，查询单个事件并不能比查询事件列表获取更详细的信息，但是有助于提高性能，减轻系统压力。
 
-示例：为了方便举例，对响应体进行了json格式化，实际返回的是纯文本。
+* request filter参数
+
+无
+
+* request body参数
+
+无
+
+* response body参数
+
+见响应示例
+
+* 相关配置
+
+* JSON请求样例
 
 curl -i -X GET -H 'X-Auth-Token: d980626ab92c4a17b1fb69f1e6eddc06' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' http://172.128.231.201:8777/v2/events/a25935cb-9d74-4f2f-9c5e-5a162f022095
+
+* JSON响应样例
+
+为了方便举例，对响应体进行了json格式化，实际返回的是纯文本。
 
 ~~~json
 {
@@ -1175,9 +1229,27 @@ Ceilometer Juno默认有的事件类型有：
 
 通过修改/etc/ceilometer/event_definitions.yaml并重启ceilometer-agent-notification服务可以增加新的事件类型。
 
-示例：为了方便举例，此处仅截取了响应体列表的若干个元素（删除虚拟机的动作导致的事件），且对该元素进行了json格式化，实际返回的是纯文本。
+* request filter参数
+
+无
+
+* request body参数
+
+无
+
+* response body参数
+
+参见响应样例
+
+* 相关配置
+
+* JSON请求样例
 
 curl -i -X GET -H 'X-Auth-Token: 5f113ec0cb3249219d8e5300321c2282' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' http://172.128.231.201:8777/v2/event_types/
+
+* JSON响应样例
+
+为了方便举例，此处仅截取了响应体列表的若干个元素（删除虚拟机的动作导致的事件），且对该元素进行了json格式化，实际返回的是纯文本。
 
 ~~~json
 [
@@ -1198,9 +1270,27 @@ curl -i -X GET -H 'X-Auth-Token: 5f113ec0cb3249219d8e5300321c2282' -H 'Content-T
 
 注意：如果event_type输入的是一个不存在的的类型，该接口不会报错，只会返回一个空列表。这是预期的行为。
 
-示例：为了方便举例，对响应体进行了json格式化，实际返回的是纯文本。
+* request filter参数
+
+无
+
+* request body参数
+
+无
+
+* response body参数
+
+参见响应样例
+
+* 相关配置
+
+* JSON请求样例
 
 curl -i -X GET -H 'X-Auth-Token: 1f9a3ec4845a49d8afa6faf48cd31300' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' http://172.128.231.201:8777/v2/event_types/compute.instance.delete.start/traits
+
+* JSON响应样例
+
+为了方便举例，对响应体进行了json格式化，实际返回的是纯文本。
 
 ~~~json
 [
@@ -1275,9 +1365,27 @@ curl -i -X GET -H 'X-Auth-Token: 1f9a3ec4845a49d8afa6faf48cd31300' -H 'Content-T
 
 注意：如果event_type输入的是一个不存在的的类型，该接口不会报错，只会返回一个空列表。如果trait_name输入的是不存在的特征，该接口不会报错，只会返回一个空列表。这是预期的行为。
 
-示例：为了方便举例，对响应体进行了json格式化，实际返回的是纯文本。
+* request filter参数
+
+无
+
+* request body参数
+
+无
+
+* response body参数
+
+参见响应样例
+
+* 相关配置
+
+* JSON请求样例
 
 curl -i -X GET -H 'X-Auth-Token: 1f9a3ec4845a49d8afa6faf48cd31300' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' http://172.128.231.201:8777/v2/event_types/compute.instance.delete.start/traits/vcpus
+
+* JSON响应样例
+
+为了方便举例，对响应体进行了json格式化，实际返回的是纯文本。
 
 ~~~json
 [
@@ -1384,7 +1492,7 @@ curl -i -X GET -H 'X-Auth-Token: b1ae050d8789417c933f0fc62ceaf01c' -H 'Content-T
 
 | REST VERB | URI | DESCRIPTION |
 |:----------|:----|:------------|
-| GET | /v2/meters/{meter_name}?limit={value}&q.field={field}&q.op=eq&q.type={type}&q.value={value} | 查询数据点
+| GET | /v2/meters/{meter_name}?limit={value}&q.field={field}&q.op={operator}&q.type={type}&q.value={value} | 查询数据点
 
 * request filter参数
 
@@ -1486,6 +1594,173 @@ curl -i -X GET -H 'X-Auth-Token: 8f97d271942147f8b316133ac8267da1' -H 'Content-T
 ]
 ~~~
 
+### 查询统计（List Statistics）
+
+| REST VERB | URI | DESCRIPTION |
+|:----------|:----|:------------|
+| GET | /v2/meters/{meter_name}/statistics?period={period}&groupby={groupby}&aggregate={aggregate}&q.field={field}&q.op={operator}&q.type={type}&q.value={value} | 获取某个指标的统计信息
+
+* request filter参数
+
+| 参数名 | 参数类型 | 约束 | 必选 | 备注 |
+|:-------|:---------|:-----|:-----|:-----|
+| period | integer | >=0 | NO | 统计区间时间长度
+| groupby | string | 依据数据库不同有所不同 | NO | 统计结果排序项，
+| aggregate | string | ??? | NO | ???
+| q.field | string | 见filed可选值表 | NO | 过滤关键字
+| q.op | string | 依据q.field不同而有所不同 | NO | 过滤操作符
+| q.type | string | N/A | NO | 过滤值的类型，不填，填了也不会生效
+| q.value | string | 如果field为时间则需要为时间格式 | NO | 过滤值
+| q.field | string | 见filed可选值表 | NO | 过滤关键字
+
+groupby在MySQL中仅支持'user_id', 'project_id', 'resource_id'三个选项，其他值将返回501错误。
+
+q.op当field为timestamp时，合法的值是lt, le, ge, gt，当field为其他值是，仅eq是合法值。
+
+field可选值表
+
+| 可选值 | 类型 | 约束 | 备注|
+|:-------|:-----|:-----|:-----|
+| resource | string | N/A | 资源唯一标识符（UUID）
+| project | string | N/A | 资源所属项目唯一标识符（UUID）
+| user | string | N/A | 资源所属用户唯一标识符（UUID）
+| source | string | N/A | 资源来源
+| timestamp | string | datetime格式 | 统计时间，当op为le,lt时指定的是结束时间，当op为ge,gt时指定的是开始时间
+| start | string | datetime格式 | 起始时间
+| start_timestamp_op | string | 只有gt、ge有效，其他值一律视为ge | 起始时间比较符，默认ge
+| end | string | datetime格式 | 结束时间
+| end_timestamp_op | string | 只有lt、le有效，其他值一律视为le | 起始时间比较符，默认le
+| metadata.{key} | string | N/A | 资源的元数据，形如metadata.{key}，key取值无限制
+| message_id | string | N/A | 数据点所对应的消息唯一标识符（UUID）
+| meter | string | N/A | 不填，无效
+
+注意：不要使用message_id进行过滤，因为那样只会查到一个数据点，进行统计没有实际意义。
+
+* request body参数
+
+无
+
+* response body参数
+
+见响应示例
+
+* 相关配置
+
+* JSON请求样例
+
+ceilometer -d statistics -m image.download -q resource=d950d166-4b1a-4d00-8572-c401ab4fb85c -g project_id
+
+curl -i -X GET -H 'X-Auth-Token: 38d2cc8fc4aa4a8bae02b96c79a507db' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' 'http://172.128.231.201:8777/v2/meters/image.download/statistics?q.field=resource&q.op=eq&q.type=&q.value=d950d166-4b1a-4d00-8572-c401ab4fb85c&groupby=project_id'
+
+* JSON响应样例
+
+响应消息体是字符串，json格式化后为：
+
+~~~json
+[
+    {
+        "avg": 13147648.0,
+        "count": 1,
+        "duration": 0.0,
+        "duration_end": "2014-12-28T22:36:24.259770",
+        "duration_start": "2014-12-28T22:36:24.259770",
+        "groupby": {
+            "project_id": "d1578b5392f744b68dd8ad23412a8cd4"
+        },
+        "max": 13147648.0,
+        "min": 13147648.0,
+        "period": 0,
+        "period_end": "2014-12-28T22:36:24.259770",
+        "period_start": "2014-12-28T22:36:24.259770",
+        "sum": 13147648.0,
+        "unit": "B"
+    }
+]
+~~~
+
+### 创建数据点（Create Sample）
+
+| REST VERB | URI | DESCRIPTION |
+|:----------|:----|:------------|
+| POST | /v2/meters/{meter_name} | 创建数据点
+
+* request filter参数
+
+无
+
+* request body参数
+
+body消息体是字符串，内容是json列表，列表中的元素是字典，代表一个数据点，字段信息如下：
+
+| 参数名 | 参数类型 | 约束 | 必选 | 备注 |
+|:-------|:---------|:-----|:-----|:-----|
+| counter_name | string | N/A | YES | 数据点对应的指标名称
+| counter_type | string | 只能为gauge、cumulative、delta之一 | YES | 数据点对应的指标类型
+| counter_unit | string | N/A | YES | 数据点对应的指标单位
+| counter_volume | float | N/A | YES | 值，可以取负数！
+| resource_id | string | N/A | YES | 资源唯一标识符（UUID）
+| project_id | string | 仅admin可指定非自身 | NO | 资源所属租户唯一标识符（UUID）
+| user_id | string | 仅admin可指定非自身 | NO | 资源所属用户唯一标识符（UUID）
+| resource_metadata | string | json dict | NO | 资源元数据
+| timestamp | string | datetime | NO | 时间戳
+| message_signature | string | N/A | NO | 消息签名，不填，可以设置但没有效果
+
+* response body参数
+
+见响应示例
+
+* 相关配置
+
+* JSON请求样例
+
+ceilometer -d sample-create --project-id d1578b5392f744b68dd8ad23412a8cd4 --user-id 2630d3c577df426bab9a4d9bfa986297 -r d950d166-4b1a-4d00-8572-c401ab4fb85c -m image.download --meter-unit B --meter-type delta --sample-volume 10086 --timestamp '2014-12-28T22:36:24.259770' --resource-metadata '{"status": "bad"}'
+
+curl -i -X POST -H 'X-Auth-Token: da9aec1e13644bcdb1fd703cfb386fe3' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' -d '[{"counter_name": "image.download", "user_id": "2630d3c577df426bab9a4d9bfa986297", "resource_id": "d950d166-4b1a-4d00-8572-c401ab4fb85c", "timestamp": "2014-12-28T22:36:24.259770", "counter_unit": "B", "counter_volume": "10086", "project_id": "d1578b5392f744b68dd8ad23412a8cd4", "resource_metadata": {"status": "bad"}, "counter_type": "delta"}]' http://172.128.231.201:8777/v2/meters/image.download
+
+请求体经过json格式化后为：
+
+~~~json
+[
+    {
+        "counter_name": "image.download",
+        "counter_type": "delta",
+        "counter_unit": "B",
+        "counter_volume": "10086",
+        "project_id": "d1578b5392f744b68dd8ad23412a8cd4",
+        "resource_id": "d950d166-4b1a-4d00-8572-c401ab4fb85c",
+        "resource_metadata": {
+            "status": "bad"
+        },
+        "timestamp": "2014-12-28T22:36:24.259770",
+        "user_id": "2630d3c577df426bab9a4d9bfa986297"
+    }
+]
+~~~
+
+* JSON响应样例
+
+响应消息体是字符串，经过json格式化后为：
+
+~~~json
+[
+    {
+        "counter_name": "image.download",
+        "counter_type": "delta",
+        "counter_unit": "B",
+        "counter_volume": 10086.0,
+        "message_id": "9ed9413e-950f-11e4-bf95-000c29fb0ff8",
+        "project_id": "d1578b5392f744b68dd8ad23412a8cd4",
+        "resource_id": "d950d166-4b1a-4d00-8572-c401ab4fb85c",
+        "resource_metadata": {
+            "status": "bad"
+        },
+        "source": "d1578b5392f744b68dd8ad23412a8cd4:openstack",
+        "timestamp": "2014-12-28T22:36:24.259770",
+        "user_id": "2630d3c577df426bab9a4d9bfa986297"
+    }
+]
+~~~
+
 ## 资源（Resource）
 
 ### 查询资源（List Resources）
@@ -1509,8 +1784,8 @@ t, true, on, y, yes, 1转化为True， 大小写不敏感。 其他则取值为F
 
 field可选值表
 
-| 可选值 | 类型 | 约束 | 备注
-|:-------|:----------|:-----|:-----|
+| 可选值 | 类型 | 约束 | 备注 |
+|:-------|:-----|:-----|:-----|
 | resource | string | N/A | 资源唯一标示符
 | project | string | N/A | 资源所属项目
 | user | string | N/A | 资源所属用户
@@ -1754,7 +2029,7 @@ curl -i -X GET -H 'User-Agent: python-ceilometerclient' -H 'Content-Type: applic
 
 复合查询使用POST方法，把查询条件放到了请求消息体中。
 
-### 复合查询告警（Query Alarm）
+### 复合查询告警（Query Alarms）
 
 | REST VERB | URI | DESCRIPTION |
 |:----------|:----|:------------|
@@ -1922,7 +2197,7 @@ curl -i -X POST -H 'X-Auth-Token: 400015cb3dbe424ba5db37ceb71e03c4' -H 'Content-
 
 * request body参数
 
-参见[复合查询告警](#复合查询告警query-alarm)
+参见[复合查询告警](#复合查询告警query-alarms)
 
 * response body参数
 
@@ -1975,4 +2250,257 @@ curl -i -X POST -H 'X-Auth-Token: be91fe144241402d87678e0a7a0d9100' -H 'Content-
         "user_id": "2630d3c577df426bab9a4d9bfa986297"
     }
 ]
+~~~
+
+### 复合查询数据点（Query Samples）
+
+| REST VERB | URI | DESCRIPTION |
+|:----------|:----|:------------|
+| POST | /v2/query/samples | 复合查询数据点
+
+* request filter参数
+
+无
+
+* request body参数
+
+参见[复合查询告警](#复合查询告警query-alarms)
+
+* response body参数
+
+见响应示例
+
+* 相关配置
+
+* JSON请求样例
+
+例如，查询在2014-12-28T20:00:00到2014-12-28T21:00:00之间的，指标为memory的数据点，仅返回一条：
+
+ceilometer -d query-samples -f '{"and": [{">": {"timestamp": "2014-12-28T20:00:00"}}, {"<": {"timestamp": "2014-12-28T21:00:00"}}, {"=": {"meter": "memory"}}]}' -l 1
+
+curl -i -X POST -H 'X-Auth-Token: bb41b48c1dfa414aa807fe1886d77bc3' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' -d '{"filter": "{\"and\": [{\">\": {\"timestamp\": \"2014-12-28T20:00:00\"}}, {\"<\": {\"timestamp\": \"2014-12-28T21:00:00\"}}, {\"=\": {\"meter\": \"memory\"}}]}", "limit": "1"}' http://172.128.231.201:8777/v2/query/samples
+
+请求体经json格式化后为：
+
+~~~json
+{
+    "filter": "{\"and\": [{\">\": {\"timestamp\": \"2014-12-28T20:00:00\"}}, {\"<\": {\"timestamp\": \"2014-12-28T21:00:00\"}}, {\"=\": {\"meter\": \"memory\"}}]}",
+    "limit": "1"
+}
+~~~
+
+* JSON响应样例
+
+响应消息体是字符串，经过json格式化后为：
+
+~~~json
+[
+    {
+        "id": "10ad185a-8ed3-11e4-b699-000c29fb0ff8",
+        "metadata": {
+            "access_ip_v4": "None",
+            "access_ip_v6": "None",
+            "architecture": "None",
+            "availability_zone": "None",
+            "cell_name": "",
+            "created_at": "2014-12-28 20:11:51+00:00",
+            "deleted_at": "2014-12-28T20:49:49.573885",
+            "disk_gb": "1",
+            "display_name": "vm-01",
+            "ephemeral_gb": "0",
+            "event_type": "compute.instance.delete.end",
+            "host": "compute.openstack",
+            "hostname": "vm-01",
+            "image_meta.base_image_ref": "d950d166-4b1a-4d00-8572-c401ab4fb85c",
+            "image_meta.container_format": "bare",
+            "image_meta.disk_format": "qcow2",
+            "image_meta.min_disk": "1",
+            "image_meta.min_ram": "0",
+            "image_ref_url": "http://172.128.231.201:9292/images/d950d166-4b1a-4d00-8572-c401ab4fb85c",
+            "instance_flavor_id": "1",
+            "instance_id": "9e5c1931-eb85-42dd-ae7c-a12224dfd3c4",
+            "instance_type": "m1.tiny",
+            "instance_type_id": "2",
+            "kernel_id": "",
+            "launched_at": "",
+            "memory_mb": "512",
+            "node": "None",
+            "os_type": "None",
+            "progress": "",
+            "ramdisk_id": "",
+            "reservation_id": "r-wqs6rw81",
+            "root_gb": "1",
+            "state": "error",
+            "state_description": "deleting",
+            "tenant_id": "d1578b5392f744b68dd8ad23412a8cd4",
+            "terminated_at": "",
+            "user_id": "2630d3c577df426bab9a4d9bfa986297",
+            "vcpus": "1"
+        },
+        "meter": "memory",
+        "project_id": "d1578b5392f744b68dd8ad23412a8cd4",
+        "recorded_at": "2014-12-28T20:49:49.770677",
+        "resource_id": "9e5c1931-eb85-42dd-ae7c-a12224dfd3c4",
+        "source": "openstack",
+        "timestamp": "2014-12-28T20:49:49.600004",
+        "type": "gauge",
+        "unit": "MB",
+        "user_id": "2630d3c577df426bab9a4d9bfa986297",
+        "volume": 512.0
+    }
+]
+~~~
+
+## 数据点（Sample）
+
+### 查询数据点（Get Samples）
+
+| REST VERB | URI | DESCRIPTION |
+|:----------|:----|:------------|
+| GET | /v2/samples?limit={limit}&q.field={field}&q.op={operator}&q.type={type}&q.value={value} | 查询数据点
+
+* request filter参数
+
+| 参数名 | 参数类型 | 约束 | 必选 | 备注 |
+|:-------|:---------|:-----|:-----|:-----|
+| limit | integer | >=0 | NO | 返回数量
+| q.field | string | 见filed可选值表 | NO | 查询关键字
+| q.op | string | 只能为lt、le、eq、ne、ge、gt其中之一 | NO | 操作符
+| q.type | string | 未知 | NO | 不填，填了也没用
+| q.value | string | N/A | NO | 值
+
+field可选值表
+
+| 可选值 | 类型 | 约束 | 备注 |
+|:-------|:-----|:-----|:-----|
+| 可选值 | 类型 | 约束 | 备注|
+|:-------|:-----|:-----|:-----|
+| message_id | string | N/A | 数据点唯一标识符（UUUID）
+| meter | string | N/A | 数据点对应的指标名称
+| resource | string | N/A | 资源唯一标识符（UUID）
+| project | string | N/A | 资源所属的项目
+| user | string | N/A | 资源所属用户
+| source | string | N/A | 资源来源
+| metadata.{key} | string | N/A | 使用metadata字段进行过滤，key可以是任意值
+| start | string | datetime格式 | 起始时间
+| start_timestamp_op | string | 只有gt、ge有效，其他值一律视为ge | 起始时间比较符，默认ge
+| end | string | datetime格式 | 结束时间
+| end_timestamp_op | string | 只有lt、le有效，其他值一律视为le | 起始时间比较符，默认le
+
+当field为project、user、type时，operator只能为eq，否则报400错误。
+
+* request body参数
+
+无
+
+* response body参数
+
+见响应示例
+
+* 相关配置
+
+* JSON请求样例
+
+curl -i -X GET -H 'X-Auth-Token: 949eb857896347d19c4323c6bc4c1b3b' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' 'http://172.128.231.201:8777/v2/samples?limit=1'
+
+* JSON响应样例
+
+响应消息体是字符串，json格式化后为：
+
+~~~json
+[
+    {
+        "id": "965aa632-908d-11e4-88e3-000c29fb0ff8",
+        "metadata": {
+            "checksum": "d972013792949d0d3ba628fbe8685bce",
+            "container_format": "bare",
+            "created_at": "2014-11-04T17:44:13",
+            "deleted": "False",
+            "deleted_at": "None",
+            "disk_format": "qcow2",
+            "is_public": "False",
+            "min_disk": "0",
+            "min_ram": "0",
+            "name": "myImage",
+            "protected": "False",
+            "size": "13147648",
+            "status": "active",
+            "updated_at": "2014-11-04T17:44:13"
+        },
+        "meter": "image",
+        "project_id": "d1578b5392f744b68dd8ad23412a8cd4",
+        "recorded_at": "2014-12-31T01:37:31.546006",
+        "resource_id": "d950d166-4b1a-4d00-8572-c401ab4fb85c",
+        "source": "openstack",
+        "timestamp": "2014-12-31T01:37:31",
+        "type": "gauge",
+        "unit": "image",
+        "user_id": null,
+        "volume": 1.0
+    }
+]
+~~~
+
+### 查询数据点详情（Show Sample）
+
+| REST VERB | URI | DESCRIPTION |
+|:----------|:----|:------------|
+| GET | /v2/samples/{id} | 查询数据点详情
+
+注意：id是数据点的id，和message_id并不一致。
+
+注意：此接口返回的字段并不比列表中的字段更多。使用此接口是方便查询单个的时候提高性能。
+
+* request filter参数
+
+无
+
+* request body参数
+
+无
+
+* response body参数
+
+见响应示例
+
+* 相关配置
+
+* JSON请求样例
+
+curl -i -X GET -H 'X-Auth-Token: 949eb857896347d19c4323c6bc4c1b3b' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' 'http://172.128.231.201:8777/v2/samples/965aa632-908d-11e4-88e3-000c29fb0ff8'
+
+* JSON响应样例
+
+响应消息体是字符串，json格式化后为：
+
+~~~json
+{
+    "id": "965aa632-908d-11e4-88e3-000c29fb0ff8",
+    "metadata": {
+        "checksum": "d972013792949d0d3ba628fbe8685bce",
+        "container_format": "bare",
+        "created_at": "2014-11-04T17:44:13",
+        "deleted": "False",
+        "deleted_at": "None",
+        "disk_format": "qcow2",
+        "is_public": "False",
+        "min_disk": "0",
+        "min_ram": "0",
+        "name": "myImage",
+        "protected": "False",
+        "size": "13147648",
+        "status": "active",
+        "updated_at": "2014-11-04T17:44:13"
+    },
+    "meter": "image",
+    "project_id": "d1578b5392f744b68dd8ad23412a8cd4",
+    "recorded_at": "2014-12-31T01:37:31.546006",
+    "resource_id": "d950d166-4b1a-4d00-8572-c401ab4fb85c",
+    "source": "openstack",
+    "timestamp": "2014-12-31T01:37:31",
+    "type": "gauge",
+    "unit": "image",
+    "user_id": null,
+    "volume": 1.0
+}
 ~~~

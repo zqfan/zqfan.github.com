@@ -799,7 +799,7 @@ HTTP POST成功一般会返回CODE 201 CREATED，此处ceilometer返回200也是
 
 | REST VERB | URI | DESCRIPTION |
 |:----------|:----|:------------|
-| GET | /v2/meters/{meter_name}/statistics?period={value}& q.op=eq&q.value={value}&q.field={field}&groupby={value} | 获取指定meter的统计信息
+| GET | /v2/meters/{meter_name}/statistics?period={value}&q.op=eq&q.value={value}&q.field={field}&groupby={value} | 获取指定meter的统计信息
 
 * request filter参数
 
