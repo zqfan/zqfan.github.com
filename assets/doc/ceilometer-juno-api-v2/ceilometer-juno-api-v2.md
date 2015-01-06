@@ -97,6 +97,8 @@ Capabilities对象没有存储在数据库中，是写死在代码里的。
 
 ## 事件（Event）
 
+OpenStack各服务在运行过程中，会往notifications（默认、可配置）消息队列发送通知，通知通常是描述一个资源上发生的事情。哪些通知可以被生成事件（event）由配置文件指定，trait就是这个资源的一些特征，哪些特征需要记录下来，也由配置文件指定。目前只有notifications.info通知会被Ceilometer消费。事件的配置文件默认位于/etc/ceilometer/event_definitions.yaml。Juno版本默认的配置文件的内容参见[event_definitions.yaml](https://github.com/openstack/ceilometer/blob/stable/juno/etc/ceilometer/event_definitions.yaml)
+
 * Event模型
 
 | 属性 | 类型 | CRUD | 默认值 | 约束 | 备注 |
@@ -104,7 +106,7 @@ Capabilities对象没有存储在数据库中，是写死在代码里的。
 | message_id | str | r | | | 消息ID
 | event_type | str | r | | | 事件类型
 | traits | list | r | | | Trait列表
-| generated | str | r | | | 生成事件
+| generated | str | r | | | 生成事件的时间戳
 
 * TraitDescription模型
 
@@ -985,6 +987,10 @@ curl -i -X GET -H 'User-Agent: python-ceilometerclient' -H 'Content-Type: applic
 field原则上没有任何限制，可以随便填。
 如果它的值是['event_type', 'message_id', 'start_time', 'end_time']其中之一，则会把这个过滤条件施加到Event表上，此时operator，type将不会起作用。
 如果不在这4个值里，则会把过滤条件施加到Trait表上。当field施加在Trait表上时，operator会起作用，默认值是eq, 只能为['lt', 'le', 'eq', 'ne', 'ge', 'gt']其中之一，类型（type）只能是['integer', 'float', 'string', 'datetime']其中之一；如果field不是一个已知的Trait，则返回结果将是空，而不是报错，这是预期的行为。
+
+message_id（整个OpenStack项目里的大部分资源的唯一标示符UUID）都是随机的，没有顺序，它的比较操作符只能是eq，也不支持ne。
+
+注意start_time和end_time被指定后，是与event的generated字段进行比较，start_time的比较操作符默认就是>=，end_time的比较操作符默认就是<=，你无法指定其他的操作符。最终过滤的结果就是start_time <= generated <= end_time。
 
 例如/v2/events?q.field=event_type&q.op=eq&q.type=string&q.value=compute.instance.update 这个过滤条件的意思是获取类型为compute.instance.update的事件。
 
