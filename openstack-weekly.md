@@ -22,6 +22,10 @@ Information is coming from:
 * [enovance blog](http://techs.enovance.com/)
 * [mirantis blog](http://www.mirantis.com/blog/)
 
+# 20150108
+
+https://etherpad.openstack.org/p/galway-jan-2014-ceilometer-sprint
+
 # 20141124-20141130
 
 * [What is Ceilometer's Minimum Viable Product?](https://aptira.com/blog/112-what-is-ceilometer-s-minimum-viable-product)
