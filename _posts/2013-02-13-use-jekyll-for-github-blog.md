@@ -33,7 +33,27 @@ you should create a repo on your github account, which should in the format of U
 if you receive an error, you may need run `git pull` first and then run `git push origin master`. there may be some README.md conflict, but you can ignore just as what i've done :)
 
 # install jekyll in your system
-this is used for your local check, you can type http://localhost:4000 on your browser to preview your blog before push to github.
+
+This is used for your local check, you can type http://localhost:4000 on your browser to preview your blog before push to github.
+
+See guidelines: [http://jekyllrb.com/docs/installation/](http://jekyllrb.com/docs/installation/), [Installing Node.js via package manager](https://github.com/joyent/node/wiki/installing-node.js-via-package-manager)
+
+For Ubuntu 14.04 system, you can run the following commands:
+
+~~~bash
+sudo apt-get install -y ruby ruby-dev
+sudo gem install -VV rubygems-update
+sudo update_rubygems
+sudo gem install -VV jekyll
+sudo gem install -VV rake
+curl -sL https://deb.nodesource.com/setup | sudo bash -
+sudo apt-get install -y nodejs
+~~~
+
+Then you can cd to your directory and run `jekyll serve`, if jekyll is running, open your browser and type `localhost:4000`, then your will see your blog.
+
+The rest of this section is an old way to install jekyll, but not sure if it can work any more:
+
 NOTE, you may need to run `echo 'insecure' >> ~/.curlrc` befor you do the following steps because of some ca problem which waste a lot of time of mine.
 
     $ curl https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer | bash -s stable
@@ -48,11 +68,6 @@ and run the command rvm tells you todo, particularly, install the ruby dependenc
     $ gem install jekyll
 
 you can now disable insecure mode of curl by delete insecure line in ~/.curlrc.
-
-    $ cd USERNAME.github.com
-    $ jekyll serve
-
-if jekyll is running, open your browser and type `localhost:4000` your will see your blog :)
 
 # write post
 
