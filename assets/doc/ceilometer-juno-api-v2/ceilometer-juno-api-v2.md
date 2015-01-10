@@ -208,6 +208,73 @@ Ceilometer中大部分对象都具有租户属性，如果是资源相关的对�
 
 # API操作
 
+## 版本信息（Version)
+
+### 查询版本信息（List Versions）
+
+| REST VERB | URI | DESCRIPTION |
+|:----------|:----|:------------|
+| GET | / | 查询版本信息
+
+注意：至少在2014.2.1和2014.2版本，由于BUG [https://bugs.launchpad.net/ceilometer/+bug/1350076](https://bugs.launchpad.net/ceilometer/+bug/1350076) 导致了你必须以某个用户的身份才可以查询版本信息。OpenStack其他服务并不需要任何用户信息即可查询各服务的API版本信息。
+
+* request filter参数
+
+无
+
+* request body参数
+
+无
+
+* response body参数
+
+详见响应示例。
+
+* 相关配置
+
+* JSON请求样例
+
+curl -i -X 'GET' 'http://127.0.0.1:8777/' -H 'User-Agent: ceilometerclient.openstack.common.apiclient' -H 'X-Auth-Token: 775c6fe49bd045ac9969849099d4b08a'
+
+* JSON响应样例
+
+响应体是字符串，JSON格式化后为：
+
+~~~json
+{
+    "versions": {
+        "values": [
+            {
+                "id": "v2",
+                "links": [
+                    {
+                        "href": "http://127.0.0.1:8777/v2",
+                        "rel": "self"
+                    },
+                    {
+                        "href": "http://docs.openstack.org/",
+                        "rel": "describedby",
+                        "type": "text/html"
+                    }
+                ],
+                "media-types": [
+                    {
+                        "base": "application/json",
+                        "type": "application/vnd.openstack.telemetry-v2+json"
+                    },
+                    {
+                        "base": "application/xml",
+                        "type": "application/vnd.openstack.telemetry-v2+xml"
+                    }
+                ],
+                "status": "stable",
+                "updated": "2013-02-13T00:00:00Z"
+            }
+        ]
+    }
+}
+~~~
+
 ## 告警（Alarm）
 
 ### 创建告警（Create Alarm）
