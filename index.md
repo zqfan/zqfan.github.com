@@ -6,6 +6,7 @@ layout: page
 <h3>Documentations</h3>
 <ul>
   <li><a href="./assets/doc/ceilometer-havana-api-v2.html">OpenStack Ceilometer Havana API V2</a></li>
+  <li><a href="./assets/doc/ceilometer-juno-api-v2">OpenStack Ceilometer Juno API V2</a></li>
 </ul>
 
 <h3>New Posts</h3>
