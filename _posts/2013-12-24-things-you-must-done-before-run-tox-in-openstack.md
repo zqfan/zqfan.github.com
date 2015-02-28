@@ -110,5 +110,3 @@ ERROR: docs: commands failed
 # Nova
 
 * **No package 'libvirt' found**: `apt-get install libvirt-dev`
-
-
