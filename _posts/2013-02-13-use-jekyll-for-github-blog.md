@@ -8,10 +8,10 @@ tags: [jekyll, github-proxy, github-blog]
 {% include JB/setup %}
 License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
-# use proxy
+# 0 use proxy
 since github is blocked by GFW, you must use proxy or vpn to access it, and i recommand *goagent*, just google it.
 
-# set proxy for git
+# 1 set proxy for git
 here is a solution from [my sina blog](http://blog.sina.com.cn/s/blog_a712a4590101ggp1.html), please note that simply `export http_proxy` does not work for my case, i'm not sure the reason, and if you know, please mail to aji.zqfan@gmail.com or just leave your comment here.
 
     $ sudo mkdir /usr/share/ca-certificates/github.com/
@@ -22,7 +22,7 @@ here is a solution from [my sina blog](http://blog.sina.com.cn/s/blog_a712a45901
     $ git config --global http.proxy 127.0.0.1:8087
     NOTE: you should check your firewall for port 8087
 
-# init jekyll on github
+# 2 init jekyll on github
 you should create a repo on your github account, which should in the format of USERNAME.github.com, in my case, is zqfan.github.com. github will treat it as a blog and you can upload your html files even without jekyll :) but i recommand that a simple tool is better than bare hands.
 
     $ git clone https://github.com/plusjade/jekyll-bootstrap.git USERNAME.github.com
@@ -32,25 +32,35 @@ you should create a repo on your github account, which should in the format of U
 
 if you receive an error, you may need run `git pull` first and then run `git push origin master`. there may be some README.md conflict, but you can ignore just as what i've done :)
 
-# install jekyll in your system
+# 3 install jekyll in your system
 
 This is used for your local check, you can type http://localhost:4000 on your browser to preview your blog before push to github.
 
 See guidelines: [http://jekyllrb.com/docs/installation/](http://jekyllrb.com/docs/installation/), [Installing Node.js via package manager](https://github.com/joyent/node/wiki/installing-node.js-via-package-manager)
 
-For Ubuntu 14.04 system, you can run the following commands:
+## 3.1 Ubuntu 14.04 Desktop 64 bits
 
 ~~~bash
 sudo apt-get install -y ruby ruby-dev
 sudo gem install -VV rubygems-update
 sudo update_rubygems
+sudo gem install -VV rdoc --pre
 sudo gem install -VV jekyll
 sudo gem install -VV rake
 curl -sL https://deb.nodesource.com/setup | sudo bash -
 sudo apt-get install -y nodejs
 ~~~
 
+The `gem install rdoc --pre` is required when you come across:
+
+~~~
+unable to convert "\xE9" from ASCII-8BIT to UTF-8 for vendor/pygments-main/tests/examplefiles/example.cpp, skipping
+undefined method `name' for #<RDoc::RubyToken::TkLPAREN:0x0000000498a3b0>
+~~~
+
 Then you can cd to your directory and run `jekyll serve`, if jekyll is running, open your browser and type `localhost:4000`, then your will see your blog.
+
+## 3.2 Other
 
 The rest of this section is an old way to install jekyll, but not sure if it can work any more:
 
@@ -69,7 +79,7 @@ and run the command rvm tells you todo, particularly, install the ruby dependenc
 
 you can now disable insecure mode of curl by delete insecure line in ~/.curlrc.
 
-# write post
+# 4 write post
 
     $ rake post title="Use Jekyll For Github Blog" date="2013-02-13"
     $ rake page name="about.md"
@@ -77,7 +87,7 @@ you can now disable insecure mode of curl by delete insecure line in ~/.curlrc.
 
 the last command will create ./page/about/index.html
 
-## customize rake post content
+## 4.1 customize rake post content
 `rake post` will create a very basical file, but if you want add some addtional content, you can edit Rakefile in the first level directory, locate the lines:
 
     desc "Begin a new post in #{CONFIG['posts']}"
@@ -85,10 +95,10 @@ the last command will create ./page/about/index.html
 
 and add `post.puts` in this function, suit yourself.
 
-## add google analytics
+## 4.2 add google analytics
 set the `tracking_id` in `_config.yml` to what you get from [google analytics](https://www.google.com/analytics/), [this article](http://truongtx.me/2013/04/05/google-analytics-for-jekyll-bootstrap/) provides more detail although it is a little outdated
 
-## highlight
+## 4.3 highlight
 edit `_includes/themes/theme-name/default.html` and add the following lines:
 
     <link rel="stylesheet" href="styles/default.css">
@@ -131,10 +141,10 @@ now you can use syntax highlight statement as following example, you can replace
 
 note, linenos=table can enable copy source code without line numbers, read [jekyll guide for posts](http://jekyllrb.com/docs/posts/) and [stackoverflow answer](http://stackoverflow.com/questions/11093241/how-to-support-line-number-when-using-pygments-with-jekyll) for more details
 
-## disqus
+## 4.4 disqus
 Edit `_config.yml` and set `disqus_shortname` to your own instead of jekyllbootstrap.
 
-## trouble shoot
+## 4.5 trouble shoot
 
-### REXML could not parse this XML/HTML
+### 4.5.1 REXML could not parse this XML/HTML
 **solution**: your post title may include `&` character, remove it

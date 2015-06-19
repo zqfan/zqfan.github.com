@@ -38,7 +38,7 @@ I don't know why, maybe some sort of firewall? using gerrit http password can so
 3. choose `HTTP Password` (on the left navigator)
 4. click `Generate Password` (if you already have one, skip this step)
 
-Assume your username is `{username}`, and password is `{password}`, and your current working project is `{project}`, then enter that project's working directory, and type `git remote set-url gerrit https://{username}:{password}@review.openstack.org/openstack/{project}.git`. For example, `git remote set-url gerrit https://aji-zqfan:f**kGFW@review.openstack.org/openstack/ceilometer.git`. Note you should encode special keys in url, here is the map, [see stackoverflow](http://stackoverflow.com/questions/6172719/escape-character-in-git-proxy-password):
+Assume your username is `{username}`, and password is `{password}`, and your current working project is `{project}`, then enter that project's working directory, and type `git remote set-url gerrit https://{username}:{password}@review.openstack.org/openstack/{project}.git`. (If gerrit is not set before, you should use `git remote add` instead of `git remote set-url`.) For example, `git remote set-url gerrit https://aji-zqfan:f**kGFW@review.openstack.org/openstack/ceilometer.git`. Note you should encode special keys in url, here is the map, [see stackoverflow](http://stackoverflow.com/questions/6172719/escape-character-in-git-proxy-password):
 
 ~~~
 !   #   $    &   '   (   )   *   +   ,   /   :   ;   =   ?   @   [   ]
