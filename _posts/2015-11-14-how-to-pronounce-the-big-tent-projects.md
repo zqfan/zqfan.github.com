@@ -11,7 +11,7 @@ Project list: [https://github.com/openstack/governance/blob/master/reference/pro
 
 * aodh:
 * barbican: [\[ 'bɑ:bɪkən \]](http://res.iciba.com/resource/amp3/1/0/92/3b/923b3cefc3439b9a63a350da2ff1206c.mp3)
-* bandit: [\[ ˈbændɪt \](http://res.iciba.com/resource/amp3/1/0/23/d4/23d45b337ff85d0a326a79082f7c6f50.mp3)
+* bandit: [\[ ˈbændɪt \]](http://res.iciba.com/resource/amp3/1/0/23/d4/23d45b337ff85d0a326a79082f7c6f50.mp3)
 * bifrost:
 * ceilometer: [\[ sɪ'lɒmətə \]](http://res-tts.iciba.com/4/1/6/4161ff0e1519a6226d1117b428fc831a.mp3)
 * cinder: [\[ ˈsɪndɚ \]](http://res.iciba.com/resource/amp3/1/0/8f/79/8f795e66db9f792f7eb19a8b4e39b2bc.mp3)
