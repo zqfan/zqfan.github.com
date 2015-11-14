@@ -7,6 +7,7 @@
   <title>OpenStack Ceilometer Juno API V2</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
+div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
 table.sourceCode { width: 100%; line-height: 100%; }
@@ -1242,7 +1243,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 </tbody>
 </table>
 <p>示例，注意，此处为了方便举例把json string格式化了。</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
     <span class="fu">{</span>
         <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Time constraint at 0 23 * * * lasting for 10800 seconds&quot;</span><span class="fu">,</span>
         <span class="dt">&quot;duration&quot;</span><span class="fu">:</span> <span class="dv">10800</span><span class="fu">,</span>
@@ -1250,7 +1251,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
         <span class="dt">&quot;start&quot;</span><span class="fu">:</span> <span class="st">&quot;0 23 * * *&quot;</span><span class="fu">,</span>
         <span class="dt">&quot;timezone&quot;</span><span class="fu">:</span> <span class="st">&quot;Europe/Ljubljana&quot;</span>
     <span class="fu">}</span>
-<span class="ot">]</span></code></pre>
+<span class="ot">]</span></code></pre></div>
 <ul>
 <li>response body参数</li>
 </ul>
@@ -1262,7 +1263,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <p>示例，一个完整的创建告警的请求如下，里面包含了定义threshold_rule参数，定义query，定义time_constraints，但是并没有覆盖所有字段：</p>
 <p>curl -i -X POST -H 'X-Auth-Token: 897de9edb774462ba5c3b875553f8087' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' -d '{&quot;threshold_rule&quot;: {&quot;meter_name&quot;: &quot;cpu_util&quot;, &quot;evaluation_periods&quot;: 3, &quot;period&quot;: 1800, &quot;statistic&quot;: &quot;min&quot;, &quot;threshold&quot;: 80.0, &quot;query&quot;: [{&quot;field&quot;: &quot;resource_id&quot;, &quot;type&quot;: &quot;&quot;, &quot;value&quot;: &quot;10e8216e-4b36-4f93-942f-19b9f09e84e5&quot;, &quot;op&quot;: &quot;eq&quot;}], &quot;comparison_operator&quot;: &quot;ge&quot;}, &quot;time_constraints&quot;: [{&quot;duration&quot;: &quot;10800&quot;, &quot;start&quot;: &quot;0 23 * * *&quot;, &quot;name&quot;: &quot;alarm-constraint-01&quot;}], &quot;type&quot;: &quot;threshold&quot;, &quot;name&quot;: &quot;cpu-alarm&quot;, &quot;repeat_actions&quot;: false}' http://172.128.231.201:8777/v2/alarms</p>
 <p>-d参数json格式化后为：</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
     <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;cpu-alarm&quot;</span><span class="fu">,</span>
     <span class="dt">&quot;repeat_actions&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span>
     <span class="dt">&quot;threshold_rule&quot;</span><span class="fu">:</span> <span class="fu">{</span>
@@ -1289,12 +1290,12 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
         <span class="fu">}</span>
     <span class="ot">]</span><span class="fu">,</span>
     <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;threshold&quot;</span>
-<span class="fu">}</span></code></pre>
+<span class="fu">}</span></code></pre></div>
 <ul>
 <li>JSON响应样例</li>
 </ul>
 <p>响应消息体是字符串，json格式化后为：</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
     <span class="dt">&quot;alarm_actions&quot;</span><span class="fu">:</span> <span class="ot">[]</span><span class="fu">,</span>
     <span class="dt">&quot;alarm_id&quot;</span><span class="fu">:</span> <span class="st">&quot;623df1be-ca06-431e-87ae-ab46750e2c03&quot;</span><span class="fu">,</span>
     <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Alarm when cpu_util is ge a min of 80.0 over 1800 seconds&quot;</span><span class="fu">,</span>
@@ -1335,7 +1336,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
     <span class="dt">&quot;timestamp&quot;</span><span class="fu">:</span> <span class="st">&quot;2015-01-04T02:25:44.216495&quot;</span><span class="fu">,</span>
     <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;threshold&quot;</span><span class="fu">,</span>
     <span class="dt">&quot;user_id&quot;</span><span class="fu">:</span> <span class="st">&quot;2630d3c577df426bab9a4d9bfa986297&quot;</span>
-<span class="fu">}</span></code></pre>
+<span class="fu">}</span></code></pre></div>
 <h3 id="查询告警list-alarms"><span class="header-section-number">5.1.2</span> 查询告警（List Alarms）</h3>
 <table>
 <thead>
@@ -1497,7 +1498,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <li>JSON响应样例</li>
 </ul>
 <p>响应body为字符串，json格式化后为</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
     <span class="fu">{</span>
         <span class="dt">&quot;alarm_actions&quot;</span><span class="fu">:</span> <span class="ot">[]</span><span class="fu">,</span>
         <span class="dt">&quot;alarm_id&quot;</span><span class="fu">:</span> <span class="st">&quot;623df1be-ca06-431e-87ae-ab46750e2c03&quot;</span><span class="fu">,</span>
@@ -1540,7 +1541,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
         <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;threshold&quot;</span><span class="fu">,</span>
         <span class="dt">&quot;user_id&quot;</span><span class="fu">:</span> <span class="st">&quot;2630d3c577df426bab9a4d9bfa986297&quot;</span>
     <span class="fu">}</span>
-<span class="ot">]</span></code></pre>
+<span class="ot">]</span></code></pre></div>
 <h3 id="查询告警详情show-alarm"><span class="header-section-number">5.1.3</span> 查询告警详情（Show Alarm）</h3>
 <table>
 <thead>
@@ -1580,7 +1581,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <li>JSON响应样例</li>
 </ul>
 <p>响应体是字符串，json格式化后为</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
     <span class="dt">&quot;alarm_actions&quot;</span><span class="fu">:</span> <span class="ot">[]</span><span class="fu">,</span>
     <span class="dt">&quot;alarm_id&quot;</span><span class="fu">:</span> <span class="st">&quot;623df1be-ca06-431e-87ae-ab46750e2c03&quot;</span><span class="fu">,</span>
     <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Alarm when cpu_util is ge a min of 80.0 over 1800 seconds&quot;</span><span class="fu">,</span>
@@ -1621,7 +1622,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
     <span class="dt">&quot;timestamp&quot;</span><span class="fu">:</span> <span class="st">&quot;2015-01-04T02:25:44.216495&quot;</span><span class="fu">,</span>
     <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;threshold&quot;</span><span class="fu">,</span>
     <span class="dt">&quot;user_id&quot;</span><span class="fu">:</span> <span class="st">&quot;2630d3c577df426bab9a4d9bfa986297&quot;</span>
-<span class="fu">}</span></code></pre>
+<span class="fu">}</span></code></pre></div>
 <h3 id="更新告警update-alarm"><span class="header-section-number">5.1.4</span> 更新告警（Update Alarm）</h3>
 <table>
 <thead>
@@ -1657,7 +1658,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 </ul>
 <p>curl -i -X PUT -H 'X-Auth-Token: 8c0bb261eb424cd7806256275ad1fb26' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' -d '{&quot;alarm_actions&quot;: [], &quot;ok_actions&quot;: [], &quot;name&quot;: &quot;cpu-alarm&quot;, &quot;state&quot;: &quot;insufficient data&quot;, &quot;timestamp&quot;: &quot;2015-01-04T02:25:44.216495&quot;, &quot;enabled&quot;: true, &quot;state_timestamp&quot;: &quot;2015-01-04T02:25:44.216495&quot;, &quot;threshold_rule&quot;: {&quot;meter_name&quot;: &quot;cpu_util&quot;, &quot;evaluation_periods&quot;: 3, &quot;period&quot;: 1800, &quot;statistic&quot;: &quot;min&quot;, &quot;threshold&quot;: 70.0, &quot;query&quot;: [{&quot;field&quot;: &quot;resource_id&quot;, &quot;type&quot;: &quot;&quot;, &quot;value&quot;: &quot;10e8216e-4b36-4f93-942f-19b9f09e84e5&quot;, &quot;op&quot;: &quot;eq&quot;}], &quot;comparison_operator&quot;: &quot;ge&quot;, &quot;exclude_outliers&quot;: false}, &quot;alarm_id&quot;: &quot;623df1be-ca06-431e-87ae-ab46750e2c03&quot;, &quot;time_constraints&quot;: [{&quot;duration&quot;: 10800, &quot;start&quot;: &quot;0 23 * * <em>&quot;, &quot;description&quot;: &quot;Time constraint at 0 23 </em> * * lasting for 10800 seconds&quot;, &quot;name&quot;: &quot;alarm-constraint-01&quot;, &quot;timezone&quot;: &quot;&quot;}], &quot;insufficient_data_actions&quot;: [], &quot;repeat_actions&quot;: false, &quot;user_id&quot;: &quot;2630d3c577df426bab9a4d9bfa986297&quot;, &quot;project_id&quot;: &quot;d1578b5392f744b68dd8ad23412a8cd4&quot;, &quot;type&quot;: &quot;threshold&quot;, &quot;description&quot;: &quot;Alarm when cpu_util is ge a min of 80.0 over 1800 seconds&quot;}' http://172.128.231.201:8777/v2/alarms/623df1be-ca06-431e-87ae-ab46750e2c03</p>
 <p>请求体json格式化后为：</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
     <span class="dt">&quot;alarm_actions&quot;</span><span class="fu">:</span> <span class="ot">[]</span><span class="fu">,</span>
     <span class="dt">&quot;alarm_id&quot;</span><span class="fu">:</span> <span class="st">&quot;623df1be-ca06-431e-87ae-ab46750e2c03&quot;</span><span class="fu">,</span>
     <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Alarm when cpu_util is ge a min of 80.0 over 1800 seconds&quot;</span><span class="fu">,</span>
@@ -1698,12 +1699,12 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
     <span class="dt">&quot;timestamp&quot;</span><span class="fu">:</span> <span class="st">&quot;2015-01-04T02:25:44.216495&quot;</span><span class="fu">,</span>
     <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;threshold&quot;</span><span class="fu">,</span>
     <span class="dt">&quot;user_id&quot;</span><span class="fu">:</span> <span class="st">&quot;2630d3c577df426bab9a4d9bfa986297&quot;</span>
-<span class="fu">}</span></code></pre>
+<span class="fu">}</span></code></pre></div>
 <ul>
 <li>JSON响应样例</li>
 </ul>
 <p>响应体为字符串，json格式化后为：</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
     <span class="dt">&quot;alarm_actions&quot;</span><span class="fu">:</span> <span class="ot">[]</span><span class="fu">,</span>
     <span class="dt">&quot;alarm_id&quot;</span><span class="fu">:</span> <span class="st">&quot;623df1be-ca06-431e-87ae-ab46750e2c03&quot;</span><span class="fu">,</span>
     <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Alarm when cpu_util is ge a min of 80.0 over 1800 seconds&quot;</span><span class="fu">,</span>
@@ -1744,7 +1745,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
     <span class="dt">&quot;timestamp&quot;</span><span class="fu">:</span> <span class="st">&quot;2015-01-04T18:38:17.705821&quot;</span><span class="fu">,</span>
     <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;threshold&quot;</span><span class="fu">,</span>
     <span class="dt">&quot;user_id&quot;</span><span class="fu">:</span> <span class="st">&quot;2630d3c577df426bab9a4d9bfa986297&quot;</span>
-<span class="fu">}</span></code></pre>
+<span class="fu">}</span></code></pre></div>
 <h3 id="删除告警delete-alarm"><span class="header-section-number">5.1.5</span> 删除告警（Delete Alarm）</h3>
 <table>
 <thead>
@@ -1836,7 +1837,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <ul>
 <li>JSON响应样例</li>
 </ul>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="er">&quot;insufficient</span> <span class="er">data&quot;</span></code></pre>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="er">&quot;insufficient</span> <span class="er">data&quot;</span></code></pre></div>
 <h3 id="更新告警状态set-alarm-state"><span class="header-section-number">5.1.7</span> 更新告警状态(Set Alarm State)</h3>
 <table>
 <thead>
@@ -1867,13 +1868,13 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 </ul>
 <p>字符串，内容和request body中的内容保持一致</p>
 <p>示例，错误的状态值将返回：</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
     <span class="dt">&quot;error_message&quot;</span><span class="fu">:</span> <span class="fu">{</span>
         <span class="dt">&quot;debuginfo&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span>
         <span class="dt">&quot;faultcode&quot;</span><span class="fu">:</span> <span class="st">&quot;Client&quot;</span><span class="fu">,</span>
         <span class="dt">&quot;faultstring&quot;</span><span class="fu">:</span> <span class="st">&quot;state invalid&quot;</span>
     <span class="fu">}</span>
-<span class="fu">}</span></code></pre>
+<span class="fu">}</span></code></pre></div>
 <ul>
 <li><p>相关配置</p></li>
 <li><p>JSON请求样例</p></li>
@@ -1882,7 +1883,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <ul>
 <li>JSON响应样例</li>
 </ul>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="er">&quot;ok&quot;</span></code></pre>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="er">&quot;ok&quot;</span></code></pre></div>
 <h3 id="查询告警历史show-alarm-history"><span class="header-section-number">5.1.8</span> 查询告警历史(Show Alarm History)</h3>
 <table>
 <thead>
@@ -2019,7 +2020,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <li>JSON响应样例</li>
 </ul>
 <p>响应体是字符串，json格式化后为：</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
     <span class="fu">{</span>
         <span class="dt">&quot;alarm_id&quot;</span><span class="fu">:</span> <span class="st">&quot;623df1be-ca06-431e-87ae-ab46750e2c03&quot;</span><span class="fu">,</span>
         <span class="dt">&quot;detail&quot;</span><span class="fu">:</span> <span class="st">&quot;{</span><span class="ch">\&quot;</span><span class="st">state</span><span class="ch">\&quot;</span><span class="st">: </span><span class="ch">\&quot;</span><span class="st">ok</span><span class="ch">\&quot;</span><span class="st">}&quot;</span><span class="fu">,</span>
@@ -2040,7 +2041,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
         <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;creation&quot;</span><span class="fu">,</span>
         <span class="dt">&quot;user_id&quot;</span><span class="fu">:</span> <span class="st">&quot;2630d3c577df426bab9a4d9bfa986297&quot;</span>
     <span class="fu">}</span>
-<span class="ot">]</span></code></pre>
+<span class="ot">]</span></code></pre></div>
 <h2 id="能力capabilities-1"><span class="header-section-number">5.2</span> 能力（Capabilities）</h2>
 <h3 id="查询能力详情get-capabilities"><span class="header-section-number">5.2.1</span> 查询能力详情（Get Capabilities）</h3>
 <table>
@@ -2079,7 +2080,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <ul>
 <li>JSON响应样例</li>
 </ul>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
     <span class="dt">&quot;alarm_storage&quot;</span><span class="fu">:</span> <span class="fu">{</span>
         <span class="dt">&quot;storage:production_ready&quot;</span><span class="fu">:</span> <span class="kw">true</span>
     <span class="fu">},</span>
@@ -2119,7 +2120,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
     <span class="dt">&quot;storage&quot;</span><span class="fu">:</span> <span class="fu">{</span>
         <span class="dt">&quot;storage:production_ready&quot;</span><span class="fu">:</span> <span class="kw">true</span>
     <span class="fu">}</span>
-<span class="fu">}</span></code></pre>
+<span class="fu">}</span></code></pre></div>
 <h2 id="事件event-1"><span class="header-section-number">5.3</span> 事件（Event）</h2>
 <h3 id="查询事件list-events"><span class="header-section-number">5.3.1</span> 查询事件（List Events）</h3>
 <table>
@@ -2166,7 +2167,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <ul>
 <li>JSON响应样例</li>
 </ul>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
     <span class="fu">{</span>
         <span class="dt">&quot;event_type&quot;</span><span class="fu">:</span> <span class="st">&quot;compute.instance.delete.start&quot;</span><span class="fu">,</span>
         <span class="dt">&quot;generated&quot;</span><span class="fu">:</span> <span class="st">&quot;2014-12-28T22:50:53.113282&quot;</span><span class="fu">,</span>
@@ -2249,7 +2250,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
             <span class="fu">}</span>
         <span class="ot">]</span>
     <span class="fu">}</span>
-<span class="ot">]</span></code></pre>
+<span class="ot">]</span></code></pre></div>
 <h3 id="查询事件详情show-event"><span class="header-section-number">5.3.2</span> 查询事件详情（Show Event）</h3>
 <table>
 <thead>
@@ -2289,7 +2290,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <li>JSON响应样例</li>
 </ul>
 <p>为了方便举例，对响应体进行了json格式化，实际返回的是纯文本。</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
     <span class="dt">&quot;event_type&quot;</span><span class="fu">:</span> <span class="st">&quot;compute.instance.delete.start&quot;</span><span class="fu">,</span>
     <span class="dt">&quot;generated&quot;</span><span class="fu">:</span> <span class="st">&quot;2014-12-28T22:50:53.113282&quot;</span><span class="fu">,</span>
     <span class="dt">&quot;message_id&quot;</span><span class="fu">:</span> <span class="st">&quot;a25935cb-9d74-4f2f-9c5e-5a162f022095&quot;</span><span class="fu">,</span>
@@ -2370,7 +2371,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
             <span class="dt">&quot;value&quot;</span><span class="fu">:</span> <span class="st">&quot;2014-12-28T22:36:27&quot;</span>
         <span class="fu">}</span>
     <span class="ot">]</span>
-<span class="fu">}</span></code></pre>
+<span class="fu">}</span></code></pre></div>
 <h3 id="查询事件类型list-event-types"><span class="header-section-number">5.3.3</span> 查询事件类型（List Event Types）</h3>
 <table>
 <thead>
@@ -2416,14 +2417,14 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <li>JSON响应样例</li>
 </ul>
 <p>为了方便举例，此处仅截取了响应体列表的若干个元素（删除虚拟机的动作导致的事件），且对该元素进行了json格式化，实际返回的是纯文本。</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
     <span class="st">&quot;compute.instance.delete.end&quot;</span><span class="ot">,</span>
     <span class="st">&quot;compute.instance.delete.start&quot;</span><span class="ot">,</span>
     <span class="st">&quot;compute.instance.exists&quot;</span><span class="ot">,</span>
     <span class="st">&quot;compute.instance.shutdown.end&quot;</span><span class="ot">,</span>
     <span class="st">&quot;compute.instance.shutdown.start&quot;</span><span class="ot">,</span>
     <span class="st">&quot;compute.instance.update&quot;</span>
-<span class="ot">]</span></code></pre>
+<span class="ot">]</span></code></pre></div>
 <h3 id="查询特征描述list-traits-description"><span class="header-section-number">5.3.4</span> 查询特征描述（List Traits Description）</h3>
 <table>
 <thead>
@@ -2463,7 +2464,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <li>JSON响应样例</li>
 </ul>
 <p>为了方便举例，对响应体进行了json格式化，实际返回的是纯文本。</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
     <span class="fu">{</span>
         <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;disk_gb&quot;</span><span class="fu">,</span>
         <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;integer&quot;</span>
@@ -2524,7 +2525,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
         <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;vcpus&quot;</span><span class="fu">,</span>
         <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;integer&quot;</span>
     <span class="fu">}</span>
-<span class="ot">]</span></code></pre>
+<span class="ot">]</span></code></pre></div>
 <h3 id="查询特征list-traits"><span class="header-section-number">5.3.5</span> 查询特征（List Traits）</h3>
 <table>
 <thead>
@@ -2564,13 +2565,13 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <li>JSON响应样例</li>
 </ul>
 <p>为了方便举例，对响应体进行了json格式化，实际返回的是纯文本。</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
     <span class="fu">{</span>
         <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;vcpus&quot;</span><span class="fu">,</span>
         <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;integer&quot;</span><span class="fu">,</span>
         <span class="dt">&quot;value&quot;</span><span class="fu">:</span> <span class="st">&quot;1&quot;</span>
     <span class="fu">}</span>
-<span class="ot">]</span></code></pre>
+<span class="ot">]</span></code></pre></div>
 <h2 id="指标meter-1"><span class="header-section-number">5.4</span> 指标（Meter）</h2>
 <h3 id="查询指标list-meter"><span class="header-section-number">5.4.1</span> 查询指标（List Meter）</h3>
 <table>
@@ -2684,21 +2685,21 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 </tbody>
 </table>
 <p>注意：如果你错误的设置了一个不支持的field，例如/v2/meters?q.field=meta&amp;q.op=eq&amp;q.type=&amp;q.value=1，则会返回400，同时告知你有哪些field被支持，消息体经过json格式化后，形如：</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
     <span class="dt">&quot;error_message&quot;</span><span class="fu">:</span> <span class="fu">{</span>
         <span class="dt">&quot;debuginfo&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span>
         <span class="dt">&quot;faultcode&quot;</span><span class="fu">:</span> <span class="st">&quot;Client&quot;</span><span class="fu">,</span>
         <span class="dt">&quot;faultstring&quot;</span><span class="fu">:</span> <span class="st">&quot;Unknown argument: </span><span class="ch">\&quot;</span><span class="st">meta</span><span class="ch">\&quot;</span><span class="st">: unrecognized field in query: [&lt;Query umeta eq u1 None&gt;], valid keys: [metaquery, pagination, project, resource, source, user]&quot;</span>
     <span class="fu">}</span>
-<span class="fu">}</span></code></pre>
+<span class="fu">}</span></code></pre></div>
 <p>此时如果你使用metaquery，例如/v2/meters?q.field=metaquery&amp;q.op=eq&amp;q.type=&amp;q.value=1，将会得到错误的输出：</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
     <span class="dt">&quot;error_message&quot;</span><span class="fu">:</span> <span class="fu">{</span>
         <span class="dt">&quot;debuginfo&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span>
         <span class="dt">&quot;faultcode&quot;</span><span class="fu">:</span> <span class="st">&quot;Server&quot;</span><span class="fu">,</span>
         <span class="dt">&quot;faultstring&quot;</span><span class="fu">:</span> <span class="st">&quot;unicode object has no attribute iteritems&quot;</span>
     <span class="fu">}</span>
-<span class="fu">}</span></code></pre>
+<span class="fu">}</span></code></pre></div>
 <p>其实你应该使用metadata，例如/v2/meters?q.field=metadata.flavor_id&amp;q.op=eq&amp;q.type=&amp;q.value=1</p>
 <ul>
 <li>request body参数</li>
@@ -2718,7 +2719,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <li>JSON响应样例</li>
 </ul>
 <p>响应消息体是字符串，json格式化后为：</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
     <span class="fu">{</span>
         <span class="dt">&quot;meter_id&quot;</span><span class="fu">:</span> <span class="st">&quot;ZDk1MGQxNjYtNGIxYS00ZDAwLTg1NzItYzQwMWFiNGZiODVjK2ltYWdlLmRvd25sb2Fk</span><span class="ch">\n</span><span class="st">&quot;</span><span class="fu">,</span>
         <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;image.download&quot;</span><span class="fu">,</span>
@@ -2729,7 +2730,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
         <span class="dt">&quot;unit&quot;</span><span class="fu">:</span> <span class="st">&quot;B&quot;</span><span class="fu">,</span>
         <span class="dt">&quot;user_id&quot;</span><span class="fu">:</span> <span class="st">&quot;2630d3c577df426bab9a4d9bfa986297&quot;</span>
     <span class="fu">}</span>
-<span class="ot">]</span></code></pre>
+<span class="ot">]</span></code></pre></div>
 <h3 id="查询数据点list-sample"><span class="header-section-number">5.4.2</span> 查询数据点（List Sample）</h3>
 <table>
 <thead>
@@ -2879,21 +2880,21 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 </table>
 <p>当field为project、user、type时，operator只能为eq，否则报400错误。</p>
 <p>注意：如果你错误的设置了一个不支持的field，例如/v2/meters/cpu?q.field=meta&amp;q.op=eq&amp;q.type=&amp;q.value=1，则会返回400，同时告知你有哪些field被支持，消息体经json格式化后，形如：</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
     <span class="dt">&quot;error_message&quot;</span><span class="fu">:</span> <span class="fu">{</span>
         <span class="dt">&quot;debuginfo&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span>
         <span class="dt">&quot;faultcode&quot;</span><span class="fu">:</span> <span class="st">&quot;Client&quot;</span><span class="fu">,</span>
         <span class="dt">&quot;faultstring&quot;</span><span class="fu">:</span> <span class="st">&quot;Unknown argument: </span><span class="ch">\&quot;</span><span class="st">meta</span><span class="ch">\&quot;</span><span class="st">: unrecognized field in query: [&lt;Query umeta eq u1 None&gt;], valid keys: [metaquery, pagination, project, resource, source, user]&quot;</span>
     <span class="fu">}</span>
-<span class="fu">}</span></code></pre>
+<span class="fu">}</span></code></pre></div>
 <p>此时如果你使用metaquery，例如/v2/meters/cpu?q.field=metaquery&amp;q.op=eq&amp;q.type=&amp;q.value=1，将会得到错误的输出：</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
     <span class="dt">&quot;error_message&quot;</span><span class="fu">:</span> <span class="fu">{</span>
         <span class="dt">&quot;debuginfo&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span>
         <span class="dt">&quot;faultcode&quot;</span><span class="fu">:</span> <span class="st">&quot;Server&quot;</span><span class="fu">,</span>
         <span class="dt">&quot;faultstring&quot;</span><span class="fu">:</span> <span class="st">&quot;unicode object has no attribute iteritems&quot;</span>
     <span class="fu">}</span>
-<span class="fu">}</span></code></pre>
+<span class="fu">}</span></code></pre></div>
 <p>其实你应该使用metadata，例如/v2/meters/cpu??q.field=metadata.flavor_id&amp;q.op=eq&amp;q.type=&amp;q.value=1</p>
 <ul>
 <li>request body参数</li>
@@ -2912,7 +2913,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <li>JSON响应样例</li>
 </ul>
 <p>响应消息体是字符串，json格式化后为：</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
     <span class="fu">{</span>
         <span class="dt">&quot;counter_name&quot;</span><span class="fu">:</span> <span class="st">&quot;image.download&quot;</span><span class="fu">,</span>
         <span class="dt">&quot;counter_type&quot;</span><span class="fu">:</span> <span class="st">&quot;delta&quot;</span><span class="fu">,</span>
@@ -2936,7 +2937,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
         <span class="dt">&quot;timestamp&quot;</span><span class="fu">:</span> <span class="st">&quot;2014-12-28T22:36:24.259770&quot;</span><span class="fu">,</span>
         <span class="dt">&quot;user_id&quot;</span><span class="fu">:</span> <span class="st">&quot;2630d3c577df426bab9a4d9bfa986297&quot;</span>
     <span class="fu">}</span>
-<span class="ot">]</span></code></pre>
+<span class="ot">]</span></code></pre></div>
 <h3 id="查询统计list-statistics"><span class="header-section-number">5.4.3</span> 查询统计（List Statistics）</h3>
 <table>
 <thead>
@@ -2973,7 +2974,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <td align="left">integer</td>
 <td align="left">&gt;=0</td>
 <td align="left">NO</td>
-<td align="left">统计区间时间长度</td>
+<td align="left">统计区间时间长度，单位秒</td>
 </tr>
 <tr class="even">
 <td align="left">groupby</td>
@@ -3028,6 +3029,18 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 </table>
 <p>groupby在MySQL中仅支持'user_id', 'project_id', 'resource_id'三个选项，其他值将返回501错误。</p>
 <p>q.op当field为timestamp时，合法的值是lt, le, ge, gt，当field为其他值是，仅eq是合法值。</p>
+<p>如果没有指定任何时间段，则统计是从有记录以来到最近的一次的全部统计。</p>
+<p>period参数指定了统计区间的时间长度，默认为0，即只有一个统计区间。 如果指定了，例如86400，即一天，则会按照86400秒对时间进行分段，每段内单独进行统计。</p>
+<p>如果没有指定起始时间，则第一个period的起始时间和第一个sample的时间戳一致。 如果指定了起始时间，则和指定的起始时间保持一致。</p>
+<p>例如：</p>
+<pre><code>ceilometer -d statistics -m image -p 86400 -q start=2015-02-01T12:34:56
++--------+---------------------+---------------------+-----+-----+-----+-------+-------+----------+---------------------+---------------------+
+| Period | Period Start        | Period End          | Max | Min | Avg | Sum   | Count | Duration | Duration Start      | Duration End        |
++--------+---------------------+---------------------+-----+-----+-----+-------+-------+----------+---------------------+---------------------+
+| 86400  | 2015-02-01T12:34:56 | 2015-02-02T12:34:56 | 1.0 | 1.0 | 1.0 | 144.0 | 144   | 85800.0  | 2015-02-01T12:43:53 | 2015-02-02T12:33:53 |
+| 86400  | 2015-02-02T12:34:56 | 2015-02-03T12:34:56 | 1.0 | 1.0 | 1.0 | 39.0  | 39    | 22801.0  | 2015-02-02T12:43:53 | 2015-02-02T19:03:54 |
++--------+---------------------+---------------------+-----+-----+-----+-------+-------+----------+---------------------+---------------------+</code></pre>
+<p>duration是指统计区间内，第一个出现的sample和最后一个出现的sample的时间的差。 duration的起始时间就是第一个sample出现的时间，duration的结束时间就是最后一个sample出现的时间。</p>
 <p>field可选值表</p>
 <table>
 <thead>
@@ -3132,7 +3145,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <li>JSON响应样例</li>
 </ul>
 <p>响应消息体是字符串，json格式化后为：</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
     <span class="fu">{</span>
         <span class="dt">&quot;avg&quot;</span><span class="fu">:</span> <span class="fl">13147648.0</span><span class="fu">,</span>
         <span class="dt">&quot;count&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span>
@@ -3150,7 +3163,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
         <span class="dt">&quot;sum&quot;</span><span class="fu">:</span> <span class="fl">13147648.0</span><span class="fu">,</span>
         <span class="dt">&quot;unit&quot;</span><span class="fu">:</span> <span class="st">&quot;B&quot;</span>
     <span class="fu">}</span>
-<span class="ot">]</span></code></pre>
+<span class="ot">]</span></code></pre></div>
 <h3 id="创建数据点create-sample"><span class="header-section-number">5.4.4</span> 创建数据点（Create Sample）</h3>
 <table>
 <thead>
@@ -3270,7 +3283,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <p>ceilometer -d sample-create --project-id d1578b5392f744b68dd8ad23412a8cd4 --user-id 2630d3c577df426bab9a4d9bfa986297 -r d950d166-4b1a-4d00-8572-c401ab4fb85c -m image.download --meter-unit B --meter-type delta --sample-volume 10086 --timestamp '2014-12-28T22:36:24.259770' --resource-metadata '{&quot;status&quot;: &quot;bad&quot;}'</p>
 <p>curl -i -X POST -H 'X-Auth-Token: da9aec1e13644bcdb1fd703cfb386fe3' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' -d '[{&quot;counter_name&quot;: &quot;image.download&quot;, &quot;user_id&quot;: &quot;2630d3c577df426bab9a4d9bfa986297&quot;, &quot;resource_id&quot;: &quot;d950d166-4b1a-4d00-8572-c401ab4fb85c&quot;, &quot;timestamp&quot;: &quot;2014-12-28T22:36:24.259770&quot;, &quot;counter_unit&quot;: &quot;B&quot;, &quot;counter_volume&quot;: &quot;10086&quot;, &quot;project_id&quot;: &quot;d1578b5392f744b68dd8ad23412a8cd4&quot;, &quot;resource_metadata&quot;: {&quot;status&quot;: &quot;bad&quot;}, &quot;counter_type&quot;: &quot;delta&quot;}]' http://172.128.231.201:8777/v2/meters/image.download</p>
 <p>请求体经过json格式化后为：</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
     <span class="fu">{</span>
         <span class="dt">&quot;counter_name&quot;</span><span class="fu">:</span> <span class="st">&quot;image.download&quot;</span><span class="fu">,</span>
         <span class="dt">&quot;counter_type&quot;</span><span class="fu">:</span> <span class="st">&quot;delta&quot;</span><span class="fu">,</span>
@@ -3284,12 +3297,12 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
         <span class="dt">&quot;timestamp&quot;</span><span class="fu">:</span> <span class="st">&quot;2014-12-28T22:36:24.259770&quot;</span><span class="fu">,</span>
         <span class="dt">&quot;user_id&quot;</span><span class="fu">:</span> <span class="st">&quot;2630d3c577df426bab9a4d9bfa986297&quot;</span>
     <span class="fu">}</span>
-<span class="ot">]</span></code></pre>
+<span class="ot">]</span></code></pre></div>
 <ul>
 <li>JSON响应样例</li>
 </ul>
 <p>响应消息体是字符串，经过json格式化后为：</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
     <span class="fu">{</span>
         <span class="dt">&quot;counter_name&quot;</span><span class="fu">:</span> <span class="st">&quot;image.download&quot;</span><span class="fu">,</span>
         <span class="dt">&quot;counter_type&quot;</span><span class="fu">:</span> <span class="st">&quot;delta&quot;</span><span class="fu">,</span>
@@ -3305,7 +3318,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
         <span class="dt">&quot;timestamp&quot;</span><span class="fu">:</span> <span class="st">&quot;2014-12-28T22:36:24.259770&quot;</span><span class="fu">,</span>
         <span class="dt">&quot;user_id&quot;</span><span class="fu">:</span> <span class="st">&quot;2630d3c577df426bab9a4d9bfa986297&quot;</span>
     <span class="fu">}</span>
-<span class="ot">]</span></code></pre>
+<span class="ot">]</span></code></pre></div>
 <h2 id="资源resource"><span class="header-section-number">5.5</span> 资源（Resource）</h2>
 <h3 id="查询资源list-resources"><span class="header-section-number">5.5.1</span> 查询资源（List Resources）</h3>
 <table>
@@ -3449,23 +3462,24 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 </tr>
 </tbody>
 </table>
+<p>注意：resource在有些数据库中是没有timestamp字段的（例如MySQL），API返回的first_sample_timestamp和last_sample_timestamp是临时计算的。 过滤字段里的start_timestamp和end_timestamp针对的是sample而言的，在数据库里查询时与sample的timestamp字段匹配。</p>
 <p>注意：如果你想获取单个资源的信息，不建议使用resource进行过滤，推荐使用专门的<a href="#查询资源详情show-resource">查询资源详情</a>接口。使用专门的接口显得您更专业，而且可以提高响应速度。</p>
 <p>注意：如果你错误的设置了一个不支持的field，例如/v2/resources?q.field=meta&amp;q.op=eq&amp;q.type=&amp;q.value=False，则会返回400，同时告知你有哪些field被支持，消息体经过json格式化后，形如：</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
     <span class="dt">&quot;error_message&quot;</span><span class="fu">:</span> <span class="fu">{</span>
         <span class="dt">&quot;debuginfo&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span>
         <span class="dt">&quot;faultcode&quot;</span><span class="fu">:</span> <span class="st">&quot;Client&quot;</span><span class="fu">,</span>
         <span class="dt">&quot;faultstring&quot;</span><span class="fu">:</span> <span class="st">&quot;Unknown argument: </span><span class="ch">\&quot;</span><span class="st">meta</span><span class="ch">\&quot;</span><span class="st">: unrecognized field in query: [&lt;Query umeta eq u1 None&gt;], valid keys: [end_timestamp, end_timestamp_op, metaquery, pagination, project, resource, source, start_timestamp, start_timestamp_op, user]&quot;</span>
     <span class="fu">}</span>
-<span class="fu">}</span></code></pre>
+<span class="fu">}</span></code></pre></div>
 <p>此时如果你使用metaquery，例如/v2/resources?q.field=metaquery&amp;q.op=eq&amp;q.type=&amp;q.value=False，将会得到错误的输出：</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
     <span class="dt">&quot;error_message&quot;</span><span class="fu">:</span> <span class="fu">{</span>
         <span class="dt">&quot;debuginfo&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span>
         <span class="dt">&quot;faultcode&quot;</span><span class="fu">:</span> <span class="st">&quot;Server&quot;</span><span class="fu">,</span>
         <span class="dt">&quot;faultstring&quot;</span><span class="fu">:</span> <span class="st">&quot;unicode object has no attribute iteritems&quot;</span>
     <span class="fu">}</span>
-<span class="fu">}</span></code></pre>
+<span class="fu">}</span></code></pre></div>
 <p>其实你应该使用metadata，例如/v2/resources?q.field=metadata.protected&amp;q.op=eq&amp;q.type=&amp;q.value=False</p>
 <ul>
 <li>request body参数</li>
@@ -3484,7 +3498,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <li>JSON响应样例</li>
 </ul>
 <p>响应消息体是字符串，json格式化后为：</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
     <span class="fu">{</span>
         <span class="dt">&quot;first_sample_timestamp&quot;</span><span class="fu">:</span> <span class="st">&quot;2014-12-04T03:10:42.402000&quot;</span><span class="fu">,</span>
         <span class="dt">&quot;last_sample_timestamp&quot;</span><span class="fu">:</span> <span class="st">&quot;2014-12-15T00:16:40&quot;</span><span class="fu">,</span>
@@ -3593,7 +3607,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
         <span class="dt">&quot;source&quot;</span><span class="fu">:</span> <span class="st">&quot;openstack&quot;</span><span class="fu">,</span>
         <span class="dt">&quot;user_id&quot;</span><span class="fu">:</span> <span class="st">&quot;db3b71f5e5f346d9b4d53a55a10a33f9&quot;</span>
     <span class="fu">}</span>
-<span class="ot">]</span></code></pre>
+<span class="ot">]</span></code></pre></div>
 <h3 id="查询资源详情show-resource"><span class="header-section-number">5.5.2</span> 查询资源详情（Show Resource）</h3>
 <table>
 <thead>
@@ -3632,7 +3646,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <li>JSON响应样例</li>
 </ul>
 <p>响应消息体是字符串，json格式化后为：</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
     <span class="dt">&quot;first_sample_timestamp&quot;</span><span class="fu">:</span> <span class="st">&quot;2014-12-04T02:27:59&quot;</span><span class="fu">,</span>
     <span class="dt">&quot;last_sample_timestamp&quot;</span><span class="fu">:</span> <span class="st">&quot;2014-12-15T00:22:08&quot;</span><span class="fu">,</span>
     <span class="dt">&quot;links&quot;</span><span class="fu">:</span> <span class="ot">[</span>
@@ -3669,7 +3683,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
     <span class="dt">&quot;resource_id&quot;</span><span class="fu">:</span> <span class="st">&quot;2ff58fab-ee6c-40ee-90b7-299452ef5b92&quot;</span><span class="fu">,</span>
     <span class="dt">&quot;source&quot;</span><span class="fu">:</span> <span class="st">&quot;openstack&quot;</span><span class="fu">,</span>
     <span class="dt">&quot;user_id&quot;</span><span class="fu">:</span> <span class="kw">null</span>
-<span class="fu">}</span></code></pre>
+<span class="fu">}</span></code></pre></div>
 <h2 id="复合查询query"><span class="header-section-number">5.6</span> 复合查询（Query）</h2>
 <p>复合查询使用POST方法，把查询条件放到了请求消息体中。</p>
 <h3 id="复合查询告警query-alarms"><span class="header-section-number">5.6.1</span> 复合查询告警（Query Alarms）</h3>
@@ -3796,15 +3810,15 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <p>ceilometer -d query-alarms -l 1 -o '[{&quot;timestamp&quot;: &quot;asc&quot;},{&quot;state&quot;: &quot;asc&quot;}]'</p>
 <p>curl -i -X POST -H 'X-Auth-Token: 400015cb3dbe424ba5db37ceb71e03c4' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' -d '{&quot;orderby&quot;: &quot;[{&quot;timestamp&quot;: &quot;asc&quot;},{&quot;state&quot;: &quot;asc&quot;}]&quot;, &quot;limit&quot;: &quot;1&quot;}' http://172.128.231.201:8777/v2/query/alarms</p>
 <p>请求体json格式化后为：</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
     <span class="dt">&quot;limit&quot;</span><span class="fu">:</span> <span class="st">&quot;1&quot;</span><span class="fu">,</span>
     <span class="dt">&quot;orderby&quot;</span><span class="fu">:</span> <span class="st">&quot;[{</span><span class="ch">\&quot;</span><span class="st">timestamp</span><span class="ch">\&quot;</span><span class="st">: </span><span class="ch">\&quot;</span><span class="st">asc</span><span class="ch">\&quot;</span><span class="st">},{</span><span class="ch">\&quot;</span><span class="st">state</span><span class="ch">\&quot;</span><span class="st">: </span><span class="ch">\&quot;</span><span class="st">asc</span><span class="ch">\&quot;</span><span class="st">}]&quot;</span>
-<span class="fu">}</span></code></pre>
+<span class="fu">}</span></code></pre></div>
 <ul>
 <li>JSON响应样例</li>
 </ul>
 <p>响应是个字符串，json格式化后为：</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
     <span class="fu">{</span>
         <span class="dt">&quot;alarm_actions&quot;</span><span class="fu">:</span> <span class="ot">[]</span><span class="fu">,</span>
         <span class="dt">&quot;alarm_id&quot;</span><span class="fu">:</span> <span class="st">&quot;623df1be-ca06-431e-87ae-ab46750e2c03&quot;</span><span class="fu">,</span>
@@ -3847,7 +3861,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
         <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;threshold&quot;</span><span class="fu">,</span>
         <span class="dt">&quot;user_id&quot;</span><span class="fu">:</span> <span class="st">&quot;2630d3c577df426bab9a4d9bfa986297&quot;</span>
     <span class="fu">}</span>
-<span class="ot">]</span></code></pre>
+<span class="ot">]</span></code></pre></div>
 <h3 id="复合查询告警历史query-alarm-history"><span class="header-section-number">5.6.2</span> 复合查询告警历史（Query Alarm History）</h3>
 <table>
 <thead>
@@ -3885,16 +3899,16 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <p>ceilometer -d query-alarm-history -l 10 -o '[{&quot;timestamp&quot;: &quot;desc&quot;}, {&quot;type&quot;: &quot;asc&quot;}]' -f '{&quot;and&quot;: [{&quot;&gt;&quot;: {&quot;timestamp&quot;: &quot;2015-01-03T00:00:00&quot;}}, {&quot;&lt;&quot;: {&quot;timestamp&quot;: &quot;2015-01-04T20:00:00&quot;}}, {&quot;=&quot;: {&quot;alarm_id&quot;: &quot;623df1be-ca06-431e-87ae-ab46750e2c03&quot;}}, {&quot;!=&quot;: {&quot;type&quot;: &quot;rule change&quot;}}]}'</p>
 <p>curl -i -X POST -H 'X-Auth-Token: be91fe144241402d87678e0a7a0d9100' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' -d '{&quot;filter&quot;: &quot;{&quot;and&quot;: [{&quot;&gt;&quot;: {&quot;timestamp&quot;: &quot;2015-01-03T00:00:00&quot;}}, {&quot;&lt;&quot;: {&quot;timestamp&quot;: &quot;2015-01-04T20:00:00&quot;}}, {&quot;=&quot;: {&quot;alarm_id&quot;: &quot;623df1be-ca06-431e-87ae-ab46750e2c03&quot;}}, {&quot;!=&quot;: {&quot;type&quot;: &quot;rule change&quot;}}]}&quot;, &quot;orderby&quot;: &quot;[{&quot;timestamp&quot;: &quot;desc&quot;}, {&quot;type&quot;: &quot;asc&quot;}]&quot;, &quot;limit&quot;: &quot;10&quot;}' http://172.128.231.201:8777/v2/query/alarms/history</p>
 <p>请求体经过json格式化后为：</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
     <span class="dt">&quot;filter&quot;</span><span class="fu">:</span> <span class="st">&quot;{</span><span class="ch">\&quot;</span><span class="st">and</span><span class="ch">\&quot;</span><span class="st">: [{</span><span class="ch">\&quot;</span><span class="st">&gt;</span><span class="ch">\&quot;</span><span class="st">: {</span><span class="ch">\&quot;</span><span class="st">timestamp</span><span class="ch">\&quot;</span><span class="st">: </span><span class="ch">\&quot;</span><span class="st">2015-01-03T00:00:00</span><span class="ch">\&quot;</span><span class="st">}}, {</span><span class="ch">\&quot;</span><span class="st">&lt;</span><span class="ch">\&quot;</span><span class="st">: {</span><span class="ch">\&quot;</span><span class="st">timestamp</span><span class="ch">\&quot;</span><span class="st">: </span><span class="ch">\&quot;</span><span class="st">2015-01-04T20:00:00</span><span class="ch">\&quot;</span><span class="st">}}, {</span><span class="ch">\&quot;</span><span class="st">=</span><span class="ch">\&quot;</span><span class="st">: {</span><span class="ch">\&quot;</span><span class="st">alarm_id</span><span class="ch">\&quot;</span><span class="st">: </span><span class="ch">\&quot;</span><span class="st">623df1be-ca06-431e-87ae-ab46750e2c03</span><span class="ch">\&quot;</span><span class="st">}}, {</span><span class="ch">\&quot;</span><span class="st">!=</span><span class="ch">\&quot;</span><span class="st">: {</span><span class="ch">\&quot;</span><span class="st">type</span><span class="ch">\&quot;</span><span class="st">: </span><span class="ch">\&quot;</span><span class="st">rule change</span><span class="ch">\&quot;</span><span class="st">}}]}&quot;</span><span class="fu">,</span>
     <span class="dt">&quot;limit&quot;</span><span class="fu">:</span> <span class="st">&quot;10&quot;</span><span class="fu">,</span>
     <span class="dt">&quot;orderby&quot;</span><span class="fu">:</span> <span class="st">&quot;[{</span><span class="ch">\&quot;</span><span class="st">timestamp</span><span class="ch">\&quot;</span><span class="st">: </span><span class="ch">\&quot;</span><span class="st">desc</span><span class="ch">\&quot;</span><span class="st">}, {</span><span class="ch">\&quot;</span><span class="st">type</span><span class="ch">\&quot;</span><span class="st">: </span><span class="ch">\&quot;</span><span class="st">asc</span><span class="ch">\&quot;</span><span class="st">}]&quot;</span>
-<span class="fu">}</span></code></pre>
+<span class="fu">}</span></code></pre></div>
 <ul>
 <li>JSON响应样例</li>
 </ul>
 <p>响应消息体是字符串，json格式化后为：</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
     <span class="fu">{</span>
         <span class="dt">&quot;alarm_id&quot;</span><span class="fu">:</span> <span class="st">&quot;623df1be-ca06-431e-87ae-ab46750e2c03&quot;</span><span class="fu">,</span>
         <span class="dt">&quot;detail&quot;</span><span class="fu">:</span> <span class="st">&quot;{</span><span class="ch">\&quot;</span><span class="st">state</span><span class="ch">\&quot;</span><span class="st">: </span><span class="ch">\&quot;</span><span class="st">ok</span><span class="ch">\&quot;</span><span class="st">}&quot;</span><span class="fu">,</span>
@@ -3915,7 +3929,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
         <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;creation&quot;</span><span class="fu">,</span>
         <span class="dt">&quot;user_id&quot;</span><span class="fu">:</span> <span class="st">&quot;2630d3c577df426bab9a4d9bfa986297&quot;</span>
     <span class="fu">}</span>
-<span class="ot">]</span></code></pre>
+<span class="ot">]</span></code></pre></div>
 <h3 id="复合查询数据点query-samples"><span class="header-section-number">5.6.3</span> 复合查询数据点（Query Samples）</h3>
 <table>
 <thead>
@@ -3953,15 +3967,15 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <p>ceilometer -d query-samples -f '{&quot;and&quot;: [{&quot;&gt;&quot;: {&quot;timestamp&quot;: &quot;2014-12-28T20:00:00&quot;}}, {&quot;&lt;&quot;: {&quot;timestamp&quot;: &quot;2014-12-28T21:00:00&quot;}}, {&quot;=&quot;: {&quot;meter&quot;: &quot;memory&quot;}}]}' -l 1</p>
 <p>curl -i -X POST -H 'X-Auth-Token: bb41b48c1dfa414aa807fe1886d77bc3' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'User-Agent: python-ceilometerclient' -d '{&quot;filter&quot;: &quot;{&quot;and&quot;: [{&quot;&gt;&quot;: {&quot;timestamp&quot;: &quot;2014-12-28T20:00:00&quot;}}, {&quot;&lt;&quot;: {&quot;timestamp&quot;: &quot;2014-12-28T21:00:00&quot;}}, {&quot;=&quot;: {&quot;meter&quot;: &quot;memory&quot;}}]}&quot;, &quot;limit&quot;: &quot;1&quot;}' http://172.128.231.201:8777/v2/query/samples</p>
 <p>请求体经json格式化后为：</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
     <span class="dt">&quot;filter&quot;</span><span class="fu">:</span> <span class="st">&quot;{</span><span class="ch">\&quot;</span><span class="st">and</span><span class="ch">\&quot;</span><span class="st">: [{</span><span class="ch">\&quot;</span><span class="st">&gt;</span><span class="ch">\&quot;</span><span class="st">: {</span><span class="ch">\&quot;</span><span class="st">timestamp</span><span class="ch">\&quot;</span><span class="st">: </span><span class="ch">\&quot;</span><span class="st">2014-12-28T20:00:00</span><span class="ch">\&quot;</span><span class="st">}}, {</span><span class="ch">\&quot;</span><span class="st">&lt;</span><span class="ch">\&quot;</span><span class="st">: {</span><span class="ch">\&quot;</span><span class="st">timestamp</span><span class="ch">\&quot;</span><span class="st">: </span><span class="ch">\&quot;</span><span class="st">2014-12-28T21:00:00</span><span class="ch">\&quot;</span><span class="st">}}, {</span><span class="ch">\&quot;</span><span class="st">=</span><span class="ch">\&quot;</span><span class="st">: {</span><span class="ch">\&quot;</span><span class="st">meter</span><span class="ch">\&quot;</span><span class="st">: </span><span class="ch">\&quot;</span><span class="st">memory</span><span class="ch">\&quot;</span><span class="st">}}]}&quot;</span><span class="fu">,</span>
     <span class="dt">&quot;limit&quot;</span><span class="fu">:</span> <span class="st">&quot;1&quot;</span>
-<span class="fu">}</span></code></pre>
+<span class="fu">}</span></code></pre></div>
 <ul>
 <li>JSON响应样例</li>
 </ul>
 <p>响应消息体是字符串，经过json格式化后为：</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
     <span class="fu">{</span>
         <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;10ad185a-8ed3-11e4-b699-000c29fb0ff8&quot;</span><span class="fu">,</span>
         <span class="dt">&quot;metadata&quot;</span><span class="fu">:</span> <span class="fu">{</span>
@@ -4015,7 +4029,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
         <span class="dt">&quot;user_id&quot;</span><span class="fu">:</span> <span class="st">&quot;2630d3c577df426bab9a4d9bfa986297&quot;</span><span class="fu">,</span>
         <span class="dt">&quot;volume&quot;</span><span class="fu">:</span> <span class="fl">512.0</span>
     <span class="fu">}</span>
-<span class="ot">]</span></code></pre>
+<span class="ot">]</span></code></pre></div>
 <h2 id="数据点sample"><span class="header-section-number">5.7</span> 数据点（Sample）</h2>
 <h3 id="查询数据点get-samples"><span class="header-section-number">5.7.1</span> 查询数据点（Get Samples）</h3>
 <table>
@@ -4194,7 +4208,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <li>JSON响应样例</li>
 </ul>
 <p>响应消息体是字符串，json格式化后为：</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
     <span class="fu">{</span>
         <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;965aa632-908d-11e4-88e3-000c29fb0ff8&quot;</span><span class="fu">,</span>
         <span class="dt">&quot;metadata&quot;</span><span class="fu">:</span> <span class="fu">{</span>
@@ -4224,7 +4238,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
         <span class="dt">&quot;user_id&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span>
         <span class="dt">&quot;volume&quot;</span><span class="fu">:</span> <span class="fl">1.0</span>
     <span class="fu">}</span>
-<span class="ot">]</span></code></pre>
+<span class="ot">]</span></code></pre></div>
 <h3 id="查询数据点详情show-sample"><span class="header-section-number">5.7.2</span> 查询数据点详情（Show Sample）</h3>
 <table>
 <thead>
@@ -4242,7 +4256,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 </tr>
 </tbody>
 </table>
-<p>注意：id是数据点的id，和message_id并不一致。</p>
+<p><del>注意：id是数据点的id，和message_id并不一致。</del></p>
 <p>注意：此接口返回的字段并不比列表中的字段更多。使用此接口是方便查询单个的时候提高性能。</p>
 <ul>
 <li>request filter参数</li>
@@ -4265,7 +4279,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
 <li>JSON响应样例</li>
 </ul>
 <p>响应消息体是字符串，json格式化后为：</p>
-<pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
     <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;965aa632-908d-11e4-88e3-000c29fb0ff8&quot;</span><span class="fu">,</span>
     <span class="dt">&quot;metadata&quot;</span><span class="fu">:</span> <span class="fu">{</span>
         <span class="dt">&quot;checksum&quot;</span><span class="fu">:</span> <span class="st">&quot;d972013792949d0d3ba628fbe8685bce&quot;</span><span class="fu">,</span>
@@ -4293,7 +4307,7 @@ Author: ZhiQiang Fan &lt;aji.zqfan@gmail.com&gt;</code></pre>
     <span class="dt">&quot;unit&quot;</span><span class="fu">:</span> <span class="st">&quot;image&quot;</span><span class="fu">,</span>
     <span class="dt">&quot;user_id&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span>
     <span class="dt">&quot;volume&quot;</span><span class="fu">:</span> <span class="fl">1.0</span>
-<span class="fu">}</span></code></pre>
+<span class="fu">}</span></code></pre></div>
 <script type="text/javascript">
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-45606410-1']);
