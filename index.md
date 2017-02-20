@@ -1,7 +1,7 @@
 ---
 layout: page
 ---
-# What man is a man who doesn't make the world better
+# ZhiQiang Fan's Blog
 
 <h3>Documentations</h3>
 <ul>
