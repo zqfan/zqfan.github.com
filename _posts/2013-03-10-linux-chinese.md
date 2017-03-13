@@ -81,5 +81,9 @@ Restart Rhythmbox and reload all files, note that just simply restart Rhythmbox 
 * 小初号 36pt 12.65mm
 * 初号 42pt 14.76mm
 
+### font list
+
+获取中文字体列表：``fc-list :lang=zh``
+
 License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
