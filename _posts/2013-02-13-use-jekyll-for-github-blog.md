@@ -47,7 +47,7 @@ sudo update_rubygems
 sudo gem install -VV rdoc --pre
 sudo gem install -VV jekyll
 sudo gem install -VV rake
-curl -sL https://deb.nodesource.com/setup | sudo bash -
+curl -sL https://deb.nodesource.com/setup_4.x | sudo bash -
 sudo apt-get install -y nodejs
 ~~~
 
@@ -59,6 +59,24 @@ undefined method `name' for #<RDoc::RubyToken::TkLPAREN:0x0000000498a3b0>
 ~~~
 
 Then you can cd to your directory and run `jekyll serve`, if jekyll is running, open your browser and type `localhost:4000`, then your will see your blog.
+
+## 3.2 Ubuntu 16.04 Server
+
+~~~bash
+sudo apt install -y ruby-full
+sudo apt install -y rubygems
+sudo gem update --system --verbose
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+sudo apt-get install -y nodejs
+sudo gem install jekyll
+sudo gem install bundler
+sudo bundler update --verbose
+sudo gem install public_suffix --version=2.0.5
+sudo gem uninstall public_suffix --version=3.0.0
+sudo gem install kramdown --version=1.14.0
+sudo gem uninstall kramdown --version=1.15.0
+sudo gem install rake
+~~~
 
 ## 3.2 Other
 
