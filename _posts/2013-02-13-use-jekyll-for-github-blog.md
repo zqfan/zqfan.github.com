@@ -63,19 +63,35 @@ Then you can cd to your directory and run `jekyll serve`, if jekyll is running, 
 ## 3.2 Ubuntu 16.04 Server
 
 ~~~bash
-sudo apt install -y ruby-full
-sudo apt install -y rubygems
+sudo apt-get install --yes jekyll
+sudo apt-get install --yes zlib1g-dev
+sudo gem install --verbose github-pages
+~~~
+
+if it doesn't work, try the following steps
+
+please note that if you are behind a proxy, you will need to use --http-proxy for `gem install` and `gem update`.
+or you can use `sudo visudo` command and add `http_proxy https_proxy` to env_keep variable.
+
+~~~bash
+sudo apt install --yes ruby-full
 sudo gem update --system --verbose
+# this line fix a warning in previous command
+sudo gem pristine --verbose rake
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-sudo apt-get install -y nodejs
-sudo gem install jekyll
-sudo gem install bundler
-sudo bundler update --verbose
-sudo gem install public_suffix --version=2.0.5
-sudo gem uninstall public_suffix --version=3.0.0
-sudo gem install kramdown --version=1.14.0
-sudo gem uninstall kramdown --version=1.15.0
-sudo gem install rake
+sudo apt-get install --yes nodejs
+# this line is required by next command when build ffi lib
+sudo apt-get install --yes build-essential
+sudo gem install --verbose jekyll
+sudo apt-get install --yes zlib1g-dev
+sudo gem install --verbose github-pages
+# fix version conflict
+sudo gem uninstall --verbose public_suffix --version=3.0.0
+sudo gem install --verbose public_suffix --version=2.0.5
+sudo gem uninstall --verbose listen --version=3.0.8
+sudo gem install --verbose listen --version=3.0.6
+sudo gem uninstall --verbose kramdown --version=1.15.0
+sudo gem install --verbose kramdown --version=1.14.0
 ~~~
 
 ## 3.2 Other
