@@ -14,15 +14,23 @@ License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 here is an example:
 
-    import logging
-    format = "%(asctime)s - %(name)s[%(process)d][%(thread)d] - %(levelname)s - %(message)s"
-    logging.basicConfig(level=logging.INFO, filename="log", format=format)
-    log = logging.getLogger(__name__)
-    try:
-        import coloredlogs
-        FMT = '%(asctime)s %(name)s[%(process)d] %(levelname)s %(message)s'
-        coloredlogs.install(level='INFO', logger=log, fmt=FMT)
-    except Exception as e:
-        log.info("coloredlogs is not found, using default log: %s", e)
+```
+import logging
+import logging.handlers
 
-NOTE(aji): if you set log level via logging.basicConfig(), other module may print some logging data to your log file, i.e. requests lib's request INFO and DEBUG, currently, i don't know why.
+FMT = '%(asctime)s %(process)d %(filename)s L%(lineno)s %(levelname)s %(message)s'
+gb = 1024 * 1024 * 1024
+handler = logging.handlers.RotatingFileHandler("example.log", maxBytes=gb, backupCount=10)
+handler.setFormatter(logging.Formatter(FMT))
+log = logging.getLogger(__name__)
+log.setLevel(logging.INFO)
+log.addHandler(handler)
+# not required, only for nice console output
+try:
+    import coloredlogs
+    coloredlogs.install(level='INFO', logger=log, fmt=FMT)
+except Exception as e:
+    log.info("coloredlogs is not found, using default log: %s", e)
+```
+
+NOTE(aji): if you set log level via logging.basicConfig(), other module may print some logging data to your log file, i.e. requests.
