@@ -35,7 +35,8 @@ A useful message should contain at least the following information.
 * How: optional, what the user should do to fix the problem, if the program can tell.
 
 Always consider the resource limit, since now you're deploying your code in a real machine, additional to CPU & memory usage, you should consider how much disk space your log files can be used, and set the upper limit to your log files.
-By default, there is no limit in log itself, you can use [logrotate](https://github.com/logrotate/logrotate) service, or use the feature provided in python logging. Remember, if your code is performing a very busy (even just potentially), RotatingFileHandler is better then TimeRotatingFileHandler, because split log file by day is not safe to constraint the disk space limit.
+By default, there is no limit in log itself, you can use [logrotate](https://github.com/logrotate/logrotate) service, or use the feature provided in python logging.
+Remember, if your code is performing a very busy (even just potentially) service, RotatingFileHandler is better than TimeRotatingFileHandler, because splitting log files by day is not safe to constraint the disk space limit, all disk space might be consumed by a single file.
 
 here is an example:
 
