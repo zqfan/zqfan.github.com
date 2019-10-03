@@ -9,8 +9,7 @@ tags: [log, logging, python]
 #
 License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
-## python
-[http://docs.python.org/2/howto/logging.html](http://docs.python.org/2/howto/logging.html)
+python official doc: [http://docs.python.org/2/howto/logging.html](http://docs.python.org/2/howto/logging.html)
 
 Instead of printing message on console, log to disk file and analyse it after problem occurs is a better way.
 If you are implementing a backgroud service, or a GUI application, or anything you cannot monitor the console, `print` should not be used.
@@ -61,7 +60,7 @@ except Exception as e:
 
 NOTE(aji): if you set log level via logging.basicConfig(), other module may print some logging data to your log file, i.e. requests.
 
-If you want to print message in console nicely for the same time, considering to use coloredlogs.
+If you want to print message in console nicely for the same time, consider to use coloredlogs.
 
 ```
 ...
