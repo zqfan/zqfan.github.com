@@ -62,6 +62,44 @@ Then you can cd to your directory and run `jekyll serve`, if jekyll is running, 
 
 ## 3.2 Ubuntu 16.04 Server
 
+### 3.2.1 Current Way
+
+#### 3.2.1.1 Install Ruby>=2.4.0
+
+* [https://www.ruby-lang.org/en/documentation/installation/](https://www.ruby-lang.org/en/documentation/installation/)
+* [http://rvm.io/](http://rvm.io/)
+
+```
+sudo apt-get update
+sudo apt-get remove ruby*
+gpg2 --keyserver-options http-proxy=http://PROXY_HOST:PROXY_PORT --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+\curl -sSL https://get.rvm.io | bash -s stable --ruby
+ruby -v
+gem -v
+```
+
+If your are behind a proxy, you need to specify the proxy for gpg2: [https://unix.stackexchange.com/questions/361213/unable-to-add-gpg-key-with-apt-key-behind-a-proxy](https://unix.stackexchange.com/questions/361213/unable-to-add-gpg-key-with-apt-key-behind-a-proxy)
+
+#### 3.2.1.2 Install Jekyll
+
+~~~bash
+sudo apt-get install build-essential zlib1g-dev
+gem install jekyll bundler
+~~~
+
+Ruby has been installed, the guide in [https://jekyllrb.com/docs/installation/ubuntu/](https://jekyllrb.com/docs/installation/ubuntu/) is conflict with rvm, no need to run `sudo apt-get install ruby-full`.
+
+`bundle exec jekyll serve` might fail with message:
+
+```
+Could not find concurrent-ruby-1.0.5 in any of the sources
+Run `bundle install` to install missing gems.
+```
+
+However, `~/.bundle` directory is created by `root` account, hence you need to run `sudo chown zqfan:zqfan /home/zqfan/.bundle/ -R` to change the owner to yourself, and then run `bundle install`.
+
+### 3.2.2 Old ways
+
 ~~~bash
 sudo apt-get install --yes jekyll
 sudo apt-get install --yes zlib1g-dev
