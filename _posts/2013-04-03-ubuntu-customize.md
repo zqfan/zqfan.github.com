@@ -5,7 +5,6 @@ description: ""
 category: linux
 tags: [ubuntu, desktop, interface]
 ---
-{% include JB/setup %}
 There always will be some problem when I use Ubuntu, so I record them here and hope it can help someone else.
 
 ## gnome

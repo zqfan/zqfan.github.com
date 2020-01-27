@@ -5,7 +5,6 @@ description: ""
 category: "openstack"
 tags: []
 ---
-{% include JB/setup %}
 Ceilometer supports posting http requests when alarm is triggered. If requests listener is deployed outside system boundary, it may require https connection and identify post request invoker. Ceilometer trust+https notifier can satisfy such need, but current implementation has performance issue in large scale system, which leading to Keystone crash.
 
 Started by Heat use cases, trust+https notifier is the only way to provide identify information for alarms. trust, for a simple explanation, is user A specifies user B has some roles in project P. User A should create trust for user B before B creates token using trust id. Here is an article written by Michael McCune from RedHat, [Delegating Keystone trusts through the ReST API][1]

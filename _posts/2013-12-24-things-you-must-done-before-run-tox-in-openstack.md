@@ -5,7 +5,6 @@ description: ""
 category: "openstack"
 tags: [unit test, tox]
 ---
-{% include JB/setup %}
 All OpenStack projects require unit test, almost all of them use tox to run unit test code. It is very convenient to run whole suite of unit test by one single command: `tox`, configuration and option details are already done for you. But perfect is just a day dream, you still need to do something when you just setup a fresh environment. This post aims at providing pre-condition of tox for some openstack project on Ubuntu 12.04 (precise).
 
 License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)

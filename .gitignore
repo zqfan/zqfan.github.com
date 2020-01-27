@@ -11,3 +11,12 @@ Thumbs.db
 Gemfile.lock
 .jekyll-metadata
 .rake_tasks~
+
+_site/
+*.swp
+*.~vsd
+\#*\#
+*~
+.DS_Store
+Gemfile.lock
+.vscode/

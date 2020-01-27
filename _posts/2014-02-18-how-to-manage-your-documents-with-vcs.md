@@ -5,7 +5,6 @@ description: ""
 category: "linux"
 tags: [git]
 ---
-{% include JB/setup %}
 VCS (Version Control System) is really powerful in programming, and furthermore, all the documents including design, manual, FAQ, and etc can be versioned too. This post introduces a basic solution for such purpose.
 
 Sorry, I only provide Chinese Simplified version because this document is written for my workmate.

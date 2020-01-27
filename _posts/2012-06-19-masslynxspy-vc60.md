@@ -5,7 +5,6 @@ description: ""
 category: c
 tags: [C++, vc6.0, mfc]
 ---
-{% include JB/setup %}
 
 License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 

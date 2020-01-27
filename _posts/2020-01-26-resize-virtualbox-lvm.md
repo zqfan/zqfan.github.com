@@ -5,7 +5,6 @@ description: ""
 category: 
 tags: []
 ---
-{% include JB/setup %}
 
 When you launch a virtual machine with VirtualBox, the disk space may be far more enough at that time, let's say 20 GB. But after a long time, too many softwares are installed, it may become short. So you have to resize the disk space, if you do not want to deploy a new one and start it over. This article discuss how to do it for a guest linux operating system with LVM storage.
 

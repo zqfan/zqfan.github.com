@@ -1,0 +1,7 @@
+- name: example
+  url: http://example.org
+  src: life
+
+- name: example
+  url: http://www.example.com
+  src: www

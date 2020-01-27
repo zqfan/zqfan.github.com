@@ -5,7 +5,6 @@ description: ""
 category: "openstack"
 tags: []
 ---
-{% include JB/setup %}
 OpenStack现在的API文档写得并不尽善尽美，有时候官方的例子也许有错误或者不完善，你可以google得到你想要的答案或者到社区求助，或者如果你手头刚好有个部署好的环境，你也可以**打开cli接口的--debug选项，运行cli命令时就会把http交互过程打印出来**
 
 以我同事遇到的问题为例，他在看Nova创建虚拟机的接口时，对于http://api.openstack.org/api-ref-compute.html#compute_servers中`POST /v2/{tenant_id}/servers`请求参数中的属性server的类型'csapi:ServerForCreate'的含义不理解，而且想知道在Horizon界面上批量创建虚拟机是如何对应到Rest接口的，所以我写了这篇水文阐述一下。

@@ -5,7 +5,6 @@ description: ""
 category: "openstack"
 tags: [ceilometer]
 ---
-{% include JB/setup %}
 本文简略介绍Ceilometer项目Juno版本开发进度
 
 Ceilometer元老（也是之前的项目负责人）Julien Danjou（昵称jd）在亚特兰大峯会后撰写了一篇博文[OpenStack Design Summit Juno, from a Ceilometer point of view](http://techs.enovance.com/6994/openstack-design-summit-juno-from-a-ceilometer-point-of-view)，从他亲身参与的会议中描述了接下来的开发计划，包括：

@@ -5,7 +5,6 @@ description: ""
 category: "other"
 tags: [open-source, irc]
 ---
-{% include JB/setup %}
 
 # IRC不靠谱攻略
 

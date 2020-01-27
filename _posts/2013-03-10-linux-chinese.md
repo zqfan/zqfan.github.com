@@ -5,7 +5,6 @@ description: ""
 category: linux
 tags: [linux]
 ---
-{% include JB/setup %}
 本文是个大杂烩，罗列一些Linux下遇到的中文问题，备份以供查询。
 
 ## ime

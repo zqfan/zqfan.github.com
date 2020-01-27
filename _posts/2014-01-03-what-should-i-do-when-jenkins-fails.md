@@ -5,7 +5,6 @@ description: ""
 category: "openstack"
 tags: []
 ---
-{% include JB/setup %}
 As an OpenStack code contributor, one of the most common issues will be jenkins failure. You should use `recheck bug ${real_bug_number}` or `recheck no bug` to notify jenkins to restart gate job when patch is in the status of 'Review In Progress', or **`revirify bug ${real_bug_number}`** when 'Approved'.
 
 When jenkins failed, it will append a comment on your patch with a [guide][1] and a list of results of test. You should read that [guide][1] carefully and follow its instructions. And there is a post written by [Chmouel Boudjnah][3] discusses [The life of an OpenStack contributor checking for Jenkins failures][2], which is funny with lots of dynamic pictures.

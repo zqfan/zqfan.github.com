@@ -5,7 +5,6 @@ description: ""
 category: "openstack"
 tags: [openstack, ceilometer, havana]
 ---
-{% include JB/setup %}
 This post records some entries for Ceilometer Havana problems and bugs. They mostly are on SLES 11 SP3 and Ubuntu 12.04.
 
 ### Ceilometer fail when boot

@@ -5,7 +5,6 @@ description: ""
 category: linux
 tags: [linux, python, bash, system service]
 ---
-{% include JB/setup %}
 
 License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 

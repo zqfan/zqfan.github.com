@@ -5,7 +5,6 @@ description: ""
 category: "openstack"
 tags: [openstack, ceilometer, wsgiref]
 ---
-{% include JB/setup %}
 The ceilometer-api serves its application via wsgiref.simple_server module, which depends on BaseHTTPServer, which will do a reverse DNS query when log message. In some network environment, it will cause around 10 seconds useless latency. Patch BaseHTTPServer.BaseHTTPRequestHandler.address_string will solve this issue.
 
 My workmate complains that it always consume 10 extra seconds to get http response when test ceilometer havana rest api, I check my test environment and find that it is affected too. But nova, neutron and other openstack service is ok. so I think it may be the wsgiref problem, since this is the significant difference for ceilometer-api.

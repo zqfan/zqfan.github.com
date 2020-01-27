@@ -5,7 +5,6 @@ description: ""
 category: "openstack"
 tags: []
 ---
-{% include JB/setup %}
 
 ### Network is unreachable
 

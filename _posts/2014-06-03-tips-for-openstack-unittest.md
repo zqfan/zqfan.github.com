@@ -5,7 +5,6 @@ description: ""
 category: "openstack"
 tags: [python, openstack, unittest]
 ---
-{% include JB/setup %}
 
 1. no assertEquals (deprecated in py3), use assertEqual
 1. assertEqual(expect, actual), order of params makes sense when fail

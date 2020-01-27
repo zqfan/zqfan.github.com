@@ -5,7 +5,6 @@ description: "OpenStack Havana problems"
 category: "openstack"
 tags: [Havana, Keystone]
 ---
-{% include JB/setup %}
 OpenStack now is deployed on various operating system, problems will come up even you've already configured it exactly as the manual tells you, they are paticular environment or operation problems rather than bugs.
 
 ## Problem

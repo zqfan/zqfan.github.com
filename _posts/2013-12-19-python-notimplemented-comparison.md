@@ -5,7 +5,6 @@ description: ""
 category: python
 tags: []
 ---
-{% include JB/setup %}
 NotImplemented is a special singleton class in python, it will be returned when comparison doesn't know how to deal with current compared objects, then a futher operation can be taken by invoker.
 
 License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)

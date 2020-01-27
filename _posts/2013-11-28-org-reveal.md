@@ -5,7 +5,6 @@ description: ""
 category: "other"
 tags: []
 ---
-{% include JB/setup %}
 [The org-reveal user guide](https://github.com/yjwen/org-reveal/blob/master/Readme.org) is already very good, but here you may meet some problems which i have already solved, so you can directly try it!
 
 # Installation

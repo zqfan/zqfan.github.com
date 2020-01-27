@@ -5,7 +5,6 @@ description: ""
 category: "linux"
 tags: [markdown, pandoc]
 ---
-{% include JB/setup %}
 MarkDown is an excellent mark up language, and Pandoc is famous as swiss-army knife in file format convertion field. This post introduces the basic usage of Pandoc with MarkDown extensions, which can be used for software document generation.
 
 Sorry, this post only provides Chinese Simplified version since it is written for my workmate.

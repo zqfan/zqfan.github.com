@@ -5,7 +5,6 @@ description: ""
 category: "openstack"
 tags: [snapshot]
 ---
-{% include JB/setup %}
 
 # openstack虚拟机导出为镜像文件
 

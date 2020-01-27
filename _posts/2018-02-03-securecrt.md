@@ -5,7 +5,6 @@ description: ""
 category: 
 tags: []
 ---
-{% include JB/setup %}
 License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 如果你是使用 SecureCRT 登录到远程机器上，你可能会遇到使用 vim 等编辑器编辑文件后，文件内容依旧保留在屏幕上没有被清除的问题。

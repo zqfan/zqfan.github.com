@@ -5,7 +5,6 @@ description: ""
 category: "openstack"
 tags: [hacking, pep8]
 ---
-{% include JB/setup %}
 Some OpenStack contributors may be asked to write new hacking rule when they try to fix bugs, this post introduces basic knowlege for it.
 
 ### register a new bug

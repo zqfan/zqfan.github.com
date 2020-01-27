@@ -5,7 +5,6 @@ description: ""
 category: openstack
 tags: [openstack]
 ---
-{% include JB/setup %}
 
 Project list: [https://github.com/openstack/governance/blob/master/reference/projects.yaml](https://github.com/openstack/governance/blob/master/reference/projects.yaml)
 

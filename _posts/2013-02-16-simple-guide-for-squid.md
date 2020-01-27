@@ -5,7 +5,6 @@ description: ""
 category: linux
 tags: [linux, squid]
 ---
-{% include JB/setup %}
 ## references
 main link:
 

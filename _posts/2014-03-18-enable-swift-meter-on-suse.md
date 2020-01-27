@@ -5,7 +5,6 @@ description: ""
 category: "openstack"
 tags: [openstack, swift, ceilometer, suse]
 ---
-{% include JB/setup %}
 The official guide which named openstack-manuals has poor content for ceilometer installation, see [http://docs.openstack.org/havana/install-guide/install/zypper/content/ceilometer-install-swift.html](http://docs.openstack.org/havana/install-guide/install/zypper/content/ceilometer-install-swift.html), here I record my experience of enabling monitor swift meter on sles 11 sp3 for openstack havana.
 
 All commands and operations are done by root.

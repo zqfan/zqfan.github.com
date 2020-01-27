@@ -5,7 +5,6 @@ description: ""
 category: "python"
 tags: [six]
 ---
-{% include JB/setup %}
 Six is a Python 2 and 3 compatibility library. It provides utility functions for smoothing over the differences between the Python versions with the goal of writing Python code that is compatible on both Python versions. Six supports every Python version since 2.5. [0][0]
 
 The name, “six”, comes from the fact that 2\*3 equals 6. Why not addition? Multiplication is more powerful, and, anyway, “five” has already been snatched away by the Zope Five project. [1][1]

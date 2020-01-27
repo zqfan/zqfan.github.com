@@ -5,7 +5,6 @@ description: ""
 category: "openstack"
 tags: [openstack, glance, ceilometer]
 ---
-{% include JB/setup %}
 Ceilometer listens on notifications topic of rabbitmq by default, if glance sets its rabbit_notification_topic to something else, the ceilometer-collector will not able to consume the message, which leads to no sample data will be found for image operations. This post records how I find this issue.
 
 One of my workmate complains that no image operation is monitored in his openstack havana environment, so i log into his environment and do some test:

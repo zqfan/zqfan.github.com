@@ -5,7 +5,6 @@ description: ""
 category: "other"
 tags: []
 ---
-{% include JB/setup %}
 
 ## 大局域网相关
 

@@ -5,7 +5,6 @@ description: ""
 category: "linux"
 tags: []
 ---
-{% include JB/setup %}
 If https://pypi.python.org/simple is slow or forbidden, you can use mirrors, if mirror is down or forbidden, then you can setup a local source. This post provides an example on Ubuntu Precise.
 
 Firstly, you need a web server, apache is a good choice but not the only one.

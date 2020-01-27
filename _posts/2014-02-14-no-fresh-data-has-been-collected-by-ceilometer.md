@@ -5,7 +5,6 @@ description: ""
 category: "openstack"
 tags: [ceilometer]
 ---
-{% include JB/setup %}
 If you're using SLES 11 SP3 to install Ceilometer Havana with mongodb as storage backend, there may be a problem that ceilometer-collector cannot store received data. It is because ceilometer-collector couldn't connect to mongodb, restart the collector service will temporarily solve the problem, but ensure mongodb is available before ceilometer-collector start is very important at the system boot time.
 
 ceilometer装起来后，进行了若干openstack资源操作，但是ceilometer没有相应数据，各配置项与关键进程都正常。

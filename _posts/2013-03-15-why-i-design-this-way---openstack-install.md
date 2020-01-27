@@ -5,7 +5,6 @@ description: ""
 category: openstack
 tags: [openstack, fixed_range_v4]
 ---
-{% include JB/setup %}
 
 License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 

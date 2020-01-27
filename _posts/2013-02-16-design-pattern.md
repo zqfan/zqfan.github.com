@@ -5,7 +5,6 @@ description: ""
 category: other
 tags: [design pattern]
 ---
-{% include JB/setup %}
 我也不知道为什么有这个博文，看起来好水，那么，继续水一下吧。这些图片忘了从哪儿裁（chao）剪（xi）的了，没法子更新了，抱歉。
 
 1. 针对接口编程，而不是对实现编程
