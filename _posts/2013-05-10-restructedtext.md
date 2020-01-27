@@ -2,7 +2,7 @@
 layout: post
 title: "RestructedText"
 description: ""
-category: linux
+category: Linux
 tags: []
 ---
 

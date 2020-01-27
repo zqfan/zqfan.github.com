@@ -2,11 +2,9 @@
 layout: post
 title: "Python module: requests"
 description: ""
-category: python
+category: Python
 tags: [requests]
 ---
-
-License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 ## sslerror
 behavior: requests.exceptions.SSLError:\[Errno 1\] \_ssl.c:504: error:14090086:SSL routines:SSL3\_GET\_SERVER\_CERTIFICATE:certificate verify failed
@@ -26,3 +24,5 @@ here we directly modify the requests logging level, which is not so simple. [ref
 
 ## disable redirect
 if the page set redirect, requests will auto get the new location, which may not be what you expected, you can simply set allow_redirects=False to disable it.
+
+License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)

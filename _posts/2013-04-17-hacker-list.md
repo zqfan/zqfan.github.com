@@ -2,7 +2,7 @@
 layout: post
 title: "Hacker List"
 description: ""
-category: linux
+category: Linux
 tags: []
 ---
 

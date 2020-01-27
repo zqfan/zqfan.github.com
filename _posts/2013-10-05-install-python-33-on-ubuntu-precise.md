@@ -2,11 +2,9 @@
 layout: post
 title: "Install Python Multiple Versions"
 description: ""
-category: python
+category: Python
 tags: [py33]
 ---
-
-License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 # Install Python3.3 on Ubuntu Precise
 
@@ -44,3 +42,5 @@ make
 sudo make install
 export PATH=$PATH:/opt/python3.6/bin
 ~~~
+
+License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)

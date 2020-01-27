@@ -6,9 +6,8 @@ category: other
 tags: [web service, axis]
 ---
 
-License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
-
 # install
+
 Firstly, `sudo apt-get install openjdk-7-jdk`, then check the version with `java -version`, the major version should be 1.7:
 
     java version "1.7.0_25"
@@ -33,3 +32,5 @@ You can run `echo 'export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-i386/' >> ~/.bas
     unzip apache-ant-1.9.2-bin.zip
 
 then you can build you own web service codes, put the class files under axis/repository/services then change working directory to axis/webapp
+
+License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)

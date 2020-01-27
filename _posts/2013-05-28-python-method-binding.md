@@ -2,7 +2,7 @@
 layout: post
 title: "Python Method Binding"
 description: ""
-category: python
+category: Python
 tags: [python]
 ---
 

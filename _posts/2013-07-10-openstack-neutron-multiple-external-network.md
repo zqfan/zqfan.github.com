@@ -5,13 +5,8 @@ description: ""
 category: openstack
 tags: [openstack, neutron, l3-agent]
 ---
-
-License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
-
-# Reference
-1. [https://review.openstack.org/#/c/34192/](https://review.openstack.org/#/c/34192/)
-
 # Status
+
 In reference [1](https://review.openstack.org/#/c/34192/), Robert Kukura said:
 
 I'm suggesting fixing l3-agent so that a single l3-agent can host multiple routers using different external networks, as long as external_network_bridge is unset (overriding the default of 'br-ex') and the external networks are proper provider networks (with the external flag set).
@@ -28,3 +23,7 @@ to override the default of 'br-ex'.
 
 So my suggestion is to eliminate the need to configure gateway_external_network_id when their are multiple external networks.
 
+# Reference
+1. [https://review.openstack.org/#/c/34192/](https://review.openstack.org/#/c/34192/)
+
+License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)

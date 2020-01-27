@@ -2,7 +2,7 @@
 layout: post
 title: "Python Libraries"
 description: ""
-category: python
+category: Python
 tags: [python, python library]
 ---
 

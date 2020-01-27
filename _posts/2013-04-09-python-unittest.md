@@ -2,7 +2,7 @@
 layout: post
 title: "Python unittest"
 description: ""
-category: python
+category: Python
 tags: [python, unittest]
 ---
 #

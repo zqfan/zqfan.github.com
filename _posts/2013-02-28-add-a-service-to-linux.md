@@ -2,7 +2,7 @@
 layout: post
 title: "Add A Service To Linux"
 description: ""
-category: linux
+category: Linux
 tags: [linux, python, bash, system service]
 ---
 

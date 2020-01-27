@@ -2,7 +2,7 @@
 layout: post
 title: "Python Descriptor"
 description: ""
-category: python
+category: Python
 tags: [python, descriptor]
 ---
 

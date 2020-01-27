@@ -2,7 +2,7 @@
 layout: post
 title: "Linux Chinese"
 description: ""
-category: linux
+category: Linux
 tags: [linux]
 ---
 本文是个大杂烩，罗列一些Linux下遇到的中文问题，备份以供查询。

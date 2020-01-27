@@ -2,7 +2,7 @@
 layout: post
 title: "Linux Software"
 description: ""
-category: linux
+category: Linux
 tags: [linux, free software]
 ---
 #

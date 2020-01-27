@@ -2,7 +2,7 @@
 layout: post
 title: "Linux evince PDF Doesn't Display Chinese Characers"
 description: ""
-category: linux
+category: Linux
 tags: [evince, pdf]
 ---
 

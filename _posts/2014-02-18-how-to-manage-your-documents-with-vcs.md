@@ -2,7 +2,7 @@
 layout: post
 title: "How to Manage Your Documents With VCS"
 description: ""
-category: "linux"
+category: Linux
 tags: [git]
 ---
 VCS (Version Control System) is really powerful in programming, and furthermore, all the documents including design, manual, FAQ, and etc can be versioned too. This post introduces a basic solution for such purpose.

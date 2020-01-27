@@ -2,7 +2,7 @@
 layout: post
 title: "Python Cliff"
 description: ""
-category: python
+category: Python
 tags: [python, cliff]
 ---
 

@@ -7,7 +7,6 @@ tags: []
 ---
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 
-License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 # 1 Introduction
 
@@ -83,3 +82,4 @@ Cocktail party problem algorithm, in ``Octave``:
 How to represent h ? \\(h_θ(x) = Θ_0 + Θ_1x\\)
 
 
+License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)

@@ -2,7 +2,7 @@
 layout: post
 title: "APT-GET"
 description: ""
-category: linux
+category: Linux
 tags: [apt-get, linux]
 ---
 #

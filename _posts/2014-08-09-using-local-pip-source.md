@@ -2,7 +2,7 @@
 layout: post
 title: "using local pip source"
 description: ""
-category: "linux"
+category: Linux
 tags: []
 ---
 If https://pypi.python.org/simple is slow or forbidden, you can use mirrors, if mirror is down or forbidden, then you can setup a local source. This post provides an example on Ubuntu Precise.

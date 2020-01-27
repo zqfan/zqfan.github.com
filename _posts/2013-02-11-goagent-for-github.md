@@ -2,7 +2,7 @@
 layout: post
 title: "Goagent For Github"
 description: ""
-category: linux
+category: Linux
 tags: [goagent, github]
 ---
 

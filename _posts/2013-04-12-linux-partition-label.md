@@ -2,7 +2,7 @@
 layout: post
 title: "Linux Partition Label"
 description: ""
-category: linux
+category: Linux
 tags: [linux, partition, blkid, e2label, tune2fs]
 ---
 

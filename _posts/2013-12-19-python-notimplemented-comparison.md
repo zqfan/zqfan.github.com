@@ -2,7 +2,7 @@
 layout: post
 title: "Python NotImplemented Comparison"
 description: ""
-category: python
+category: Python
 tags: []
 ---
 NotImplemented is a special singleton class in python, it will be returned when comparison doesn't know how to deal with current compared objects, then a futher operation can be taken by invoker.

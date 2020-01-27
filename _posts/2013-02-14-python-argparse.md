@@ -2,7 +2,7 @@
 layout: post
 title: "Python Argparse"
 description: ""
-category: python
+category: Python
 tags: [python, argparse]
 ---
 

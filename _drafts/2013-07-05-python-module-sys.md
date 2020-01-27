@@ -2,7 +2,7 @@
 layout: post
 title: "Python Module: sys"
 description: ""
-category: python
+category: Python
 tags: [sys]
 ---
 

@@ -2,7 +2,7 @@
 layout: post
 title: "cPickle A faster pickle"
 description: ""
-category: python
+category: Python
 tags: [pickle]
 ---
 

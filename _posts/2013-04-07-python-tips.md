@@ -2,7 +2,7 @@
 layout: post
 title: "Python Tips"
 description: ""
-category: python
+category: Python
 tags: [python]
 ---
 

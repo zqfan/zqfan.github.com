@@ -2,7 +2,7 @@
 layout: post
 title: "Python Challenge"
 description: ""
-category: python
+category: Python
 tags: [python, python challenge]
 ---
 

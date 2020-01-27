@@ -2,11 +2,9 @@
 layout: post
 title: "SuSE Configuration"
 description: ""
-category: linux
+category: Linux
 tags: [suse]
 ---
-
-License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
 # network
 Sample in /etc/sysconfig/network/ifcfg-eth0
@@ -46,3 +44,5 @@ vsftp is a popular choice, we can install it via the following steps:
 2. install: `rpm -i vsftpd-2.0.7-4.17.1.x86_64.rpm`
 3. start: `/etc/init.d/vsftpd start`
 4. set as system service: `chkconfig vsftpd on`
+
+License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)

@@ -2,7 +2,7 @@
 layout: post
 title: "Python Log"
 description: ""
-category: python
+category: Python
 tags: [log, logging, python]
 ---
 #

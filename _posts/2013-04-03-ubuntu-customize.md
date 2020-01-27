@@ -2,7 +2,7 @@
 layout: post
 title: "Ubuntu Customize"
 description: ""
-category: linux
+category: Linux
 tags: [ubuntu, desktop, interface]
 ---
 There always will be some problem when I use Ubuntu, so I record them here and hope it can help someone else.

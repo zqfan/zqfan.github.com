@@ -5,12 +5,6 @@ description: ""
 category: openstack
 tags: [design pattern, openstack, python]
 ---
-
-License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
-
-# Reference
-* [wikipedia](http://en.wikipedia.org/wiki/Design_Patterns)
-
 # Creational
 Creational patterns are ones that create objects for you, rather than having you instantiate objects directly. This gives your program more flexibility in deciding which objects need to be created for a given case.
 
@@ -139,3 +133,9 @@ method defines the skeleton of an algorithm as an abstract class, allowing its s
 separates an algorithm from an object structure by moving the hierarchy of methods into one object.
 
 * ?
+
+# Reference
+
+* [wikipedia](http://en.wikipedia.org/wiki/Design_Patterns)
+
+License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)

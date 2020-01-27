@@ -2,7 +2,7 @@
 layout: post
 title: "Bootable Live USB Driver"
 description: ""
-category: linux
+category: Linux
 tags: [usb, linux]
 ---
 #

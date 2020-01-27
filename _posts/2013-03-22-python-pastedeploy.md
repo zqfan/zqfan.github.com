@@ -2,7 +2,7 @@
 layout: post
 title: "Python paste.deploy"
 description: ""
-category: python
+category: Python
 tags: [python, paste, deploy]
 ---
 #

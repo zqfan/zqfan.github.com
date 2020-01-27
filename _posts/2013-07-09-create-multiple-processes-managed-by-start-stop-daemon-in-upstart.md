@@ -2,17 +2,10 @@
 layout: post
 title: "Create Multiple Processes Managed by Start stop daemon in UpStart"
 description: ""
-category: linux
+category: Linux
 tags: [upstart, start-stop-daemon]
 ---
 
-License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
-
-# Reference
-* [http://upstart.ubuntu.com/cookbook](http://upstart.ubuntu.com/cookbook)
-* [start-stop-daemon to create multiple instances of executable through upstart](http://datum-bits.blogspot.com/2011/09/start-stop-daemon-to-create-multiple.html)
-
-# How to
 In reference [start-stop-daemon to create multiple instances of executable through upstart](http://datum-bits.blogspot.com/2011/09/start-stop-daemon-to-create-multiple.html), the author Atul Dambalkar mentioned a way to start multiple instances via start-stop-daemon, which is by specify the `--name` option.
 
     start-stop-daemon --start --quiet --chuid myuser --name myapp1 \
@@ -30,3 +23,10 @@ The fix is simple, just let the start-stop-daemon run in background by append th
 
     start-stop-daemon --start --quiet --chuid myuser --name myapp2 \
                       --exec /usr/bin/myapp -- --config /etc/someapp-configfile2
+
+## Reference
+* [http://upstart.ubuntu.com/cookbook](http://upstart.ubuntu.com/cookbook)
+* [start-stop-daemon to create multiple instances of executable through upstart](http://datum-bits.blogspot.com/2011/09/start-stop-daemon-to-create-multiple.html)
+
+License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
+

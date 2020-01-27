@@ -2,7 +2,7 @@
 layout: post
 title: "Python gevent"
 description: ""
-category: python
+category: Python
 tags: [python, gevent, thread]
 ---
 #

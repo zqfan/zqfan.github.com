@@ -2,7 +2,7 @@
 layout: post
 title: "Make Local Debain Repo"
 description: ""
-category: linux
+category: Linux
 tags: [apt-mirror, dpkg-scanpackages]
 ---
 

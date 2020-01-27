@@ -2,7 +2,7 @@
 layout: post
 title: "Simple Example of Pandoc MarkDown"
 description: ""
-category: "linux"
+category: Linux
 tags: [markdown, pandoc]
 ---
 MarkDown is an excellent mark up language, and Pandoc is famous as swiss-army knife in file format convertion field. This post introduces the basic usage of Pandoc with MarkDown extensions, which can be used for software document generation.

@@ -2,7 +2,7 @@
 layout: post
 title: "Simple Guide for Squid"
 description: ""
-category: linux
+category: Linux
 tags: [linux, squid]
 ---
 ## references

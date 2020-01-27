@@ -2,7 +2,7 @@
 layout: post
 title: "Conky On Ubuntu 12.04 With Gnome 3"
 description: ""
-category: linux
+category: Linux
 tags: [conky]
 ---
 #

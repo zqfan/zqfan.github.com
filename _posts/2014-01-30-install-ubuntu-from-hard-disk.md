@@ -2,7 +2,7 @@
 layout: post
 title: "Install Ubuntu From Hard Disk"
 description: ""
-category: "linux"
+category: Linux
 tags: []
 ---
 If you don't have (or don't want to use) USB device or RW-CD-ROM to install operating system, you can do that via hard disk. This post introduces a way to install OS by grub which is verified on Ubuntu Precise.

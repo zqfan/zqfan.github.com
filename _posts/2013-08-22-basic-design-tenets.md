@@ -6,8 +6,6 @@ category: openstack
 tags: [openstack]
 ---
 
-License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
-
 Basic Design Tenets
 
 1. Scalability and elasticity are our main goals
@@ -22,3 +20,5 @@ Basic Design Tenets
 7. Accept eventual consistency and use it where it is appropriate.
 8. Test everything.
     a) We require tests with submitted code. (We will help you if you need it)
+
+License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
