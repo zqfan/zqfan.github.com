@@ -61,7 +61,11 @@ subscribe_rss: /feed.xml
 markdown: kramdown
 kramdown:
     input: GFM
+    syntax_highlighter_opts:
+        span:
+            disable: true
 highlighter: rouge
+highlight_theme: github
 paginate: 10
 lsi: false
 quiet: false
