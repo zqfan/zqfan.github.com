@@ -68,7 +68,8 @@ Notice that this command cannot prints plugin's dependency tree, neither do `mvn
 [INFO]     Plugin Dependency Resolved: logback-classic-1.1.2.jar
 ```
 
-Since I cannot find the proper command, I just remove all the plugins, and add them back one by one, finally it turns out that the nexus-staging-maven-plugin requirs xstream package. It is strange because even when I only run `mvn compile`, which should not trigger staging plugin, xstream will be downloaded anyway.
+Since I cannot find the proper command, I just remove all the plugins, and add them back one by one, finally it turns out that the nexus-staging-maven-plugin requires xstream package.
+It is strange because even when I only run `mvn compile`, which should not trigger staging plugin, xstream will be downloaded anyway.
 
 I've checked the source code of nexus-staging-maven-plugin 1.6.7, [https://github.com/sonatype/nexus-maven-plugins/blob/nexus-maven-plugins-1.6.7/staging/maven-plugin/pom.xml](https://github.com/sonatype/nexus-maven-plugins/blob/nexus-maven-plugins-1.6.7/staging/maven-plugin/pom.xml).
 It is unlucky because this source code cannot run `mvn dependency:tree` directly, it's broken.
@@ -78,7 +79,7 @@ nexus-client-core has tagged 3.30.1-01 in its source repo [https://github.com/so
 PS: The test scope packge org.sonatype.sisu.litmus:litmus-testsupport requires xstream indirectly, via org.powermock:powermock-classloading-xstream.
 But it is ok because the information in maven central repo shows that powermock packages are all excluded, [https://search.maven.org/artifact/org.sonatype.plugins/nexus-staging-maven-plugin/1.6.7/maven-plugin](https://search.maven.org/artifact/org.sonatype.plugins/nexus-staging-maven-plugin/1.6.7/maven-plugin), and litmus-testsupport is in test scope.
 
-So what we need to do is explicitly upgrading xstream to 1.4.17 (also nexus-staging-maven-plugin to its latest 1.6.8, but not necessary) in plugin dependencies section, like:
+So what we need to do is explicitly upgrading xstream to 1.4.17 (also upgrade nexus-staging-maven-plugin to its latest 1.6.8, but not necessary) in plugin dependencies section, like:
 
 ```
   <build>
@@ -103,11 +104,11 @@ So what we need to do is explicitly upgrading xstream to 1.4.17 (also nexus-stag
       </plugin>
 ```
 
-Unfortunately, xstream 1.4.7 => 1.4.17 is incompatible, even though according to its sematic version, it is just a bug fix version.
-When running `mvn deploy` command, it will fail with error: `XPP3 pull parser library not present. Specify another driver. For example: new XStream(new DomDriver())`
-After searching on web for a long time, it seems that there is no need to modify nexus-client-core source code (and they are still struggling to choose either removing xstream or upgrading it in master branch), just add the missing xpp3 package will resolve it.
+Unfortunately, xstream 1.4.7 => 1.4.17 is incompatible, even though according to its semantic version number, it is just a bug fix version.
+When running `mvn deploy` command, it will fail with an error: `XPP3 pull parser library not present. Specify another driver. For example: new XStream(new DomDriver())`
+After searching on web for a long time, it seems that there is no need to modify nexus-client-core source code (and in master branch they are still struggling to choose either removing xstream or upgrading it), just adding the missing xpp3 package will resolve it.
 I don't know why but I think it might be that 1.4.17 or lower version just changed the default behavior, and leave the choice to user, hence the dependency is broken.
-But xpp3 is a very old package which seems no update since 2007, I'm not sure if it will introduce new potential problems, but at least `mvn deploy` can success for now.
+xpp3 is a very old package which seems no update since 2007, and I'm not sure if it will introduce new potential problems, but at least `mvn deploy` can success for now.
 
 So the full settings of the new plugin is like (also upgrade nexus-client-core but might not be neccessary):
 
