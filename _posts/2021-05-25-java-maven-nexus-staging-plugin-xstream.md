@@ -6,6 +6,8 @@ description:
 keywords:
 ---
 
+Maven is a build automation tool used primarily for Java projects. Sometimes the indirectly dependency package might be conflicted or need to upgrade for security issues, we need to configure it manually by ourself instead of automatically resolved by maven. And this will happen in build plugins too.
+
 ## Conclusion
 
 use `dependencies` tag in `plugin` section to specify the direct or indirect dependencies for a plugin, like:
