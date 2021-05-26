@@ -6,9 +6,38 @@ description:
 keywords:
 ---
 
-Xstream has officially announced a high security fix version 1.4.17, to fix [CVE-2021-29505](https://x-stream.github.io/CVE-2021-29505.html), which can execution of a local command on the server.
+## Conclusion
 
-Unfortunately, I find out that the Tencent Cloud official SDK project [tencentcloud-sdk-java](https://github.com/TencentCloud/tencentcloud-sdk-java) will somehow download xstream 1.4.7 while compiling. However, this project doesn't depend that package directly. We can use command `mvn dependency:tree -Dverbose` to investigate dependency tree.
+use `dependencies` tag in `plugin` section to specify the direct or indirect dependencies for a plugin, like:
+
+```
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>{plugin group id}</groupId>
+        <artifactId>{plugin artifact id}</artifactId>
+        <dependencies>
+          <dependency>
+            <groupId>{dependency group id}</groupId>
+            <artifactId>{depedency artifact id}</artifactId>
+            <version>{the wanted version}</version>
+          </dependency>
+        </dependencies>
+        ...
+      </plugin>
+      ...
+    </plugins>
+    ...
+  </build>
+```
+
+## Real Case
+
+Xstream has officially announced a high security fix version 1.4.17, to fix [CVE-2021-29505](https://x-stream.github.io/CVE-2021-29505.html), which can "result in execution of a local command on the server".
+
+Unfortunately, I find out that the Tencent Cloud official SDK project [tencentcloud-sdk-java](https://github.com/TencentCloud/tencentcloud-sdk-java) will somehow download xstream 1.4.7 while compiling.
+However, this project doesn't depend that package directly.
+We can use command `mvn dependency:tree -Dverbose` to investigate its dependency tree.
 
 ```
 # mvn dependency:tree -Dverbose
@@ -24,7 +53,7 @@ Unfortunately, I find out that the Tencent Cloud official SDK project [tencentcl
 [INFO]    \- (com.squareup.okhttp:okhttp:jar:2.7.5:compile - omitted for conflict with 2.5.0)
 ```
 
-We can notice that this command cannot prints plugin dependency tree, neither do `mvn dependency:analyze` and `mvn dependency:resolve`. The command `mvn dependency:resolve-plugins` only prints first level dependency, for example, the nexus-staging-maven-plugin output like:
+Notice that this command cannot prints plugin's dependency tree, neither do `mvn dependency:analyze` nor `mvn dependency:resolve`. The command `mvn dependency:resolve-plugins` only prints first level dependency, for example, the nexus-staging-maven-plugin output like:
 
 ```
 [INFO] Plugin Resolved: nexus-staging-maven-plugin-1.6.7.jar
@@ -39,16 +68,17 @@ We can notice that this command cannot prints plugin dependency tree, neither do
 [INFO]     Plugin Dependency Resolved: logback-classic-1.1.2.jar
 ```
 
-Since I cannot find the proper command, I just remove all the plugins, and add them back one by one, finally it turns out that is nexus-staging-maven-plugin requiring xstream package. It is strange because even when I only run `mvn compile`, which should not trigger staging plugin, xstream will be downloaded anyway.
+Since I cannot find the proper command, I just remove all the plugins, and add them back one by one, finally it turns out that the nexus-staging-maven-plugin requirs xstream package. It is strange because even when I only run `mvn compile`, which should not trigger staging plugin, xstream will be downloaded anyway.
 
-I've checked nexus-staging-maven-plugin 1.6.7 source code, [https://github.com/sonatype/nexus-maven-plugins/blob/nexus-maven-plugins-1.6.7/staging/maven-plugin/pom.xml](https://github.com/sonatype/nexus-maven-plugins/blob/nexus-maven-plugins-1.6.7/staging/maven-plugin/pom.xml).
+I've checked the source code of nexus-staging-maven-plugin 1.6.7, [https://github.com/sonatype/nexus-maven-plugins/blob/nexus-maven-plugins-1.6.7/staging/maven-plugin/pom.xml](https://github.com/sonatype/nexus-maven-plugins/blob/nexus-maven-plugins-1.6.7/staging/maven-plugin/pom.xml).
 It is unlucky because this source code cannot run `mvn dependency:tree` directly, it's broken.
-After fixing it by remove the broken dependency com.sonatype.nexus.plugins:nexus-staging-client, it shows that its dependency org.sonatype.nexus:nexus-client-core package depends xstream 1.4.7.
-nexus-client-core has tagged 3.30.1-01 but not released in maven central repo, the latest available version is 2.14.20-02, which still requires xstream 1.4.7.
-And the test scope packge org.sonatype.sisu.litmus:litmus-testsupport requires xstream indirectly, via org.powermock:powermock-classloading-xstream.
+After fixing it by removing the broken dependency com.sonatype.nexus.plugins:nexus-staging-client, it shows that its dependency org.sonatype.nexus:nexus-client-core package requires xstream 1.4.7.
+nexus-client-core has tagged 3.30.1-01 in its source repo [https://github.com/sonatype/nexus-public](https://github.com/sonatype/nexus-public), but not released in maven central repo, the latest available version is [2.14.20-02](https://search.maven.org/artifact/org.sonatype.nexus/nexus-client-core) for now, which still requires xstream 1.4.7.
+
+PS: The test scope packge org.sonatype.sisu.litmus:litmus-testsupport requires xstream indirectly, via org.powermock:powermock-classloading-xstream.
 But it is ok because the information in maven central repo shows that powermock packages are all excluded, [https://search.maven.org/artifact/org.sonatype.plugins/nexus-staging-maven-plugin/1.6.7/maven-plugin](https://search.maven.org/artifact/org.sonatype.plugins/nexus-staging-maven-plugin/1.6.7/maven-plugin), and litmus-testsupport is in test scope.
 
-So what we need to do is explicitly upgrading xstream to 1.4.17 (also nexus-staging-maven-plugin to its latest 1.6.8) in plugin dependencies section, like:
+So what we need to do is explicitly upgrading xstream to 1.4.17 (also nexus-staging-maven-plugin to its latest 1.6.8, but not necessary) in plugin dependencies section, like:
 
 ```
   <build>
@@ -75,10 +105,11 @@ So what we need to do is explicitly upgrading xstream to 1.4.17 (also nexus-stag
 
 Unfortunately, xstream 1.4.7 => 1.4.17 is incompatible, even though according to its sematic version, it is just a bug fix version.
 When running `mvn deploy` command, it will fail with error: `XPP3 pull parser library not present. Specify another driver. For example: new XStream(new DomDriver())`
-After searching on web for a long time, it seems that there is no need to modify nexus-client-core source code (and they are still struggling to choose either removing xstream or upgrading it), just add the missing xpp3 package will resolve it.
-I don't know why but I think it might be that 1.4.17 or lower version just change default behavior, and leave the choice to user, hence the dependency is broken.
-But xpp3 is a very old package which seems no update since 2007.
-So the full version of new pom is like (also upgrade nexus-client-core but might not be neccessary):
+After searching on web for a long time, it seems that there is no need to modify nexus-client-core source code (and they are still struggling to choose either removing xstream or upgrading it in master branch), just add the missing xpp3 package will resolve it.
+I don't know why but I think it might be that 1.4.17 or lower version just changed the default behavior, and leave the choice to user, hence the dependency is broken.
+But xpp3 is a very old package which seems no update since 2007, I'm not sure if it will introduce new potential problems, but at least `mvn deploy` can success for now.
+
+So the full settings of the new plugin is like (also upgrade nexus-client-core but might not be neccessary):
 
 ```
   <build>
