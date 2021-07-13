@@ -41,6 +41,19 @@ sudo apt-get purge libssl-dev
 sudo apt-get install libssl1.0 libssl-dev
 ```
 
+On Ubuntu 18.04, it is a bit different, because its default version is openssl1.1, and cmake requires libcurl4 which requires libssl1.1. We install both version:
+
+```
+sudo apt-get install libss1.0
+# it will remove cmake
+sudo apt-get install libcurl-openssl1.0-dev libcurl3
+sudo apt-get install cmake libcurl4
+```
+
+NOTE: DO NOT remove openssl because it is fundamental which will remove many packages and may not easy to recover.
+
+and specify absolute path in CMakeList.txt `-luuid /usr/lib/x86_64-linux-gnu/libcurl-gnutls.so.3 /usr/lib/x86_64-linux-gnu/libcrypto.so.1.0.0`
+
 ## gcc version incompatible
 
 The example code cannot build successfully even linked to the right library.
