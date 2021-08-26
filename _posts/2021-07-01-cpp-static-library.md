@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Share Static Library From CentOS To Ubuntu
-categories: linux
+categories: Linux
 description:
 keywords: linux
 ---

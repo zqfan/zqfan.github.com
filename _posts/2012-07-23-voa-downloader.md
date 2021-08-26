@@ -2,7 +2,7 @@
 layout: post
 title: "VOA Downloader"
 description: ""
-category: JAVA
+category: Java
 tags: [ova, java]
 ---
 
