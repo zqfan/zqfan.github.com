@@ -147,4 +147,15 @@ So the full settings of the new plugin is like (also upgrade nexus-client-core b
       </plugin>
 ```
 
+update: do not upgrade xtream to it latest 1.4.18 because it breaks nexus-staging-maven-plugin 1.6.7. [https://github.com/x-stream/xstream/issues/263](https://github.com/x-stream/xstream/issues/263)
+
+```
+[ERROR] Failed to execute goal org.sonatype.plugins:nexus-staging-maven-plugin:1.6.8:deploy
+(injected-nexus-deploy) on project tencentcloud-sdk-java: Execution
+injected-nexus-deploy of goal org.sonatype.plugins:nexus-staging-maven-plugin:1.6.8:deploy
+failed: Nexus connection problem to URL [https://oss.sonatype.org/ ]:
+org.sonatype.nexus.rest.model.StatusResourceResponse -> [Help 1]
+```
+
+
 License: [(CC 4.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/4.0/)
