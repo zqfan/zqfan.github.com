@@ -26,13 +26,13 @@ Capacity:       20000 MBytes
 Encryption:     disabled
 ```
 
-Run command `VBoxManage.exe modifyhd <UUID> --resize <new size in MB>` to resize it. (Note that using `Location` instead of `UUID` might fail with message `vboxmanage.exe: error: Could not get the storage format of the medium <Location> (VERR_NOT_SUPPORTED)`.) You have to specify a value large than current `Capacity`, because VirtualBox can only increase disk space. For instance, `VBoxManage.exe modifyhd b889a3a4-b6d4-4109-be18-d17c5f7f883e --resize 500000`
+Run command `VBoxManage.exe modifyhd <UUID> --resize <new size in MB>` to resize it. (Note that using `Location` instead of `UUID` might fail with message `vboxmanage.exe: error: Could not get the storage format of the medium <Location> (VERR_NOT_SUPPORTED)`.) You have to specify a value large than current `Capacity`, because VirtualBox can only increase disk space. For instance, `VBoxManage.exe modifyhd b889a3a4-b6d4-4109-be18-d17c5f7f883e --resize 50000`, which means upgrade to 50000 MB, around 49 GB.
 
 Now you can check your virtual machine's storage in VirtualBox panel, if it doesn't change, close and open VirtualBox again.
 
 ## Resize LVM
 
-After boot your virtual machine and log into it, you might notice that your disk is still out of space.
+After boot your virtual machine and log into it, you might notice that your root disk `/` is still out of space.
 
 ```
 root@ubuntu:/home/zqfan# df -lh
@@ -76,6 +76,8 @@ Units: sectors of 1 * 512 = 512 bytes
 Sector size (logical/physical): 512 bytes / 512 bytes
 I/O size (minimum/optimal): 512 bytes / 512 bytes
 ```
+
+Notice that we have a bigger /dev/sda up to 48.8 GB.
 
 ### Partition Disk
 
@@ -198,7 +200,7 @@ root@ubuntu:/home/zqfan# pvscan
 
 Note, if it fail with message `Device /dev/sda3 not found (or ignored by filtering).`, you will need to `reboot` your virtual machice.
 
-Now extend it to your volume group via `vgextend ubuntu-vg /dev/sda3`:
+Now extend it to your volume group via `vgextend ubuntu-vg /dev/sda3`, the name `ubuntu-vg` must use the one printed in `pvscan` output:
 
 ```
 root@ubuntu:/home/zqfan# vgextend ubuntu-vg /dev/sda3
@@ -209,7 +211,7 @@ root@ubuntu:/home/zqfan# pvscan
   Total: 2 [48.35 GiB] / in use: 2 [48.35 GiB] / in no VG: 0 [0   ]
 ```
 
-Modify your logic volume via `lvextend -l +100%FREE /dev/mapper/ubuntu--vg-root`:
+Modify your logic volume via `lvextend -l +100%FREE /dev/mapper/ubuntu--vg-root`, the name `/dev/mapper/ubuntu--vg-root` might different in your system but must strictly same as the value printed in `df -lh` output:
 
 ```
 root@ubuntu:/home/zqfan# lvextend -l +100%FREE /dev/mapper/ubuntu--vg-root
