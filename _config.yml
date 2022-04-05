@@ -5,7 +5,7 @@ baseurl:
 url: https://zqfan.github.io
 date_format: "ordinal"
 title: zqfan's blog
-subtitle: "Cloud Computing Architecture, Solutions & Code"
+subtitle: "Cloud Computing Expert for Architecture, Solutions & Code"
 description: "zqfan's blog for cloud computing, solutions & code"
 keywords: zqfan, cloud computing, api, python, openstack, linux, open source
 timezone: Asia/HongKong
