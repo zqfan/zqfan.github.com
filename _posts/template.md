@@ -1,9 +1,9 @@
 ---
 layout: post
 title:
-categories:
-description:
-keywords:
+categories: OpenStack
+description: not working
+keywords: foo, bar
 ---
 
-[阅读原文](https://zqfan.github.io/) License: [(CC 4.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/4.0/)
+[原文](https://zqfan.github.io/) 由 [zqfan (zhiqiangfan@tencent.com)](https://github.com/zqfan) 发表。版权声明（License）: (CC 4.0) BY-NC-SA
