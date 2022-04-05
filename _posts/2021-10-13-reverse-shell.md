@@ -67,4 +67,4 @@ Bind Shell 过程：
 - https://resources.infosecinstitute.com/topic/icmp-reverse-shell/
 - https://www.netsparker.com/blog/web-security/understanding-reverse-shells
 
-License: [(CC 4.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/4.0/)
+[阅读原文][https://zqfan.github.io/2021/10/13/reverse-shell/] License: [(CC 4.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/4.0/)

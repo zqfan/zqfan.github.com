@@ -2,7 +2,7 @@
 layout: post
 title: "Use Jekyll For Github Blog"
 description: ""
-category: github
+category: GitHub
 tags: [jekyll, github-proxy, github-blog]
 ---
 License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)

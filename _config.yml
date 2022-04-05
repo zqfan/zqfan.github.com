@@ -4,10 +4,10 @@
 baseurl:
 url: https://zqfan.github.io
 date_format: "ordinal"
-title: ZhiQiang Fan's Blog
-subtitle: "You Reap What You Sow"
-description: "ZhiQiang Fan's Blog"
-keywords: zqfan, ZhiQiang Fan,
+title: zqfan's blog
+subtitle: "Cloud Computing Architecture, Solutions & Code"
+description: "zqfan's blog for cloud computing, solutions & code"
+keywords: zqfan, cloud computing, api, python, openstack, linux, open source
 timezone: Asia/HongKong
 encoding: "utf-8"
 side_bar_repo_limit: 1
@@ -16,7 +16,7 @@ side_bar_repo_limit: 1
 #      Author      #
 # ---------------- #
 author: ZhiQiang Fan
-organization: 
+organization: Tencent
 organization_url: 
 github_username: zqfan
 location: China
