@@ -1,12 +1,12 @@
 ---
 layout: post
-title: CentOS 7 Using Gradle to Publish AAR to Maven
+title: CentOS 7 Using Gradle to Publish Android AAR to Maven
 categories: Linux
 description: not working
 keywords: centos, gradle, maven, aar, android
 ---
 
-虽然在 Android Studio 中也可直接发布 AAR 文件到 Maven 中央仓库，但大型项目通常需要在专门的构建机器上完成打包和发布。本文简要介绍如何在 CentOS 7 操作系统上，使用 Gradle 发布 Android SDK AAR 文件到 Maven 中烟仓库。
+虽然在 Android Studio 中也可直接发布 AAR 文件到 Maven 中央仓库，但大型项目通常需要在专门的构建机器上完成打包和发布。本文简要介绍如何在 CentOS 7 操作系统上，使用 Gradle 发布 Android SDK AAR 文件到 Maven 中央仓库。
 
 ### 安装 Java 11
 
@@ -27,19 +27,19 @@ Enter to keep the current selection[+], or type selection number:
 
 ### 安装 Android SDK
 
-在 Android 官网找到下载页面，例如 [https://developer.android.com/studio#downloads](https://developer.android.com/studio#downloads)，找到 "Command line tools only" 章节，Platform 选择 Linux 栏，点击下载链接，拉到弹窗页面底部，勾选同意协议，右键下载链接，复制链接地址，例如 [https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip](https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip)，打开 CentOS 终端命令行，执行以下命令：
+在 Android 官网找到下载页面，例如 [https://developer.android.com/studio#downloads](https://developer.android.com/studio#downloads)，找到 "Command line tools only" 章节，Platform 选择 Linux 栏，点击下载链接，拉到弹窗页面底部，勾选同意协议，右键下载按钮，复制链接地址，例如 [https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip](https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip)，打开 CentOS 终端命令行，执行以下命令：
 
 ```
 # cd /opt
 # mkdir android
-# cd andriod
+# cd android
 # wget https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
 # unzip commandlinetools-linux-8092744_latest.zip
 ```
 
 ### 安装 Android SDK 插件
 
-此时如果我们直接在 Android 源码目录下执行 `./gradlew build` 命令，可能会得到报错：
+此时如果我们直接在 Android 项目仓库根目录下执行 `./gradlew build` 命令，可能会得到报错：
 
 ```
 # ./gradlew build
@@ -88,11 +88,11 @@ GPG 密钥信息可以使用 gpg2 工具生成，并上传公钥到服务器。�
 /root/.gnupg/secring.gpg
 ------------------------
 sec   2048R/12345678 2018-06-13
-uid                  tencentcloudapi (tencentcloud api) <tencentcloudapi@tencent.com>
+uid                  zqfan (zhiqiangfan) <zhiqiangfan@tencent.com>
 ssb   2048R/******** 2018-06-1
 ```
 
-`signing.keyId` 取值为此例中打印的 12345678 八位字符, `signing.secretKeyRingFile` 取值为此例中打印的 `/root/.gnupg/secring.gpg`，`signing.password` 密码真实值不会打印，联系当初创建密钥者获取，或者 使用命令 `gpg2 gen-key` 重新生成。
+`signing.keyId` 取值为此例中打印的 12345678 八位字符, `signing.secretKeyRingFile` 取值为此例中打印的 `/root/.gnupg/secring.gpg`，`signing.password` 密码真实值不会打印，需联系当初创建密钥者获取，或者 使用命令 `gpg2 gen-key` 重新生成。
 
 ### Grable Build 脚本
 
@@ -116,6 +116,8 @@ ssb   2048R/******** 2018-06-1
         }
 ```
 
+这里主要是设置 credentials 中的 username 和 password 字段。注意，这里必须如示例原文填写 "$mavenUser" 和 "$mavenPassword"，不要填写真实账号密码，因为此文件需要上传到 Git 仓库中。
+
 ### 发布到 Maven
 
 在 Android 项目仓库根目录执行命令：
@@ -124,6 +126,6 @@ ssb   2048R/******** 2018-06-1
 ./gradlew clean build publish
 ```
 
-执行成功后，到 [Nexus Repository Manager](https://oss.sonatype.org/#stagingRepositories) 网站上登录后，在左侧功能导航栏选择 `Staging Repositories`，选择要发布的 AAR 文件，名称为 Android 项目指定的 GroupId 加数字编号，点击 `Close` 按钮，弹窗选择 `Confirm`，在页面下方选择 `Activity` 标签页观察进度，等待几分钟后如果没有报错，点击上方 `Refresh` 按钮，出现 `Release` 按钮，点击后弹窗确认，完成发布。
+执行成功后，到 [Nexus Repository Manager](https://oss.sonatype.org/#stagingRepositories) 网站上登录后，在左侧功能导航栏选择 `Staging Repositories`，选择刚上传的 AAR 文件，点击 `Close` 按钮，弹窗选择 `Confirm`，在页面下方选择 `Activity` 标签页观察进度，等待几分钟后如果没有报错，点击上方 `Refresh` 按钮，出现 `Release` 按钮，点击后弹窗确认，完成发布。
 
 [原文](https://zqfan.github.io/2022/04/07/centos-gradle-publish-aar-to-maven) 由 [zqfan (zhiqiangfan@tencent.com)](https://github.com/zqfan) 发表。版权声明（License）: (CC 4.0) BY-NC-SA
