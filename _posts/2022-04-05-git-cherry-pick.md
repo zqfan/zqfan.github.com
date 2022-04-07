@@ -10,7 +10,7 @@ keywords: git, cherry-pick, sync code, sync commit, 同步代码, 同步社区
 
 大多数情况下，使用合并（`git merge`）操作即可将目标代码合入分支。但有时候我们可能并不需要所有的代码，而只需要特定的代码。一个典型的场景，OpenStack 项目中稳定分支（stable branch）不再接受新特性，但是需要移植（backport）主干（master）的重大缺陷补丁（critical bug fix）或者安全补丁（security fix）。OpenStack 社区推荐的做法就是使用 `git cherry-pick`，该命令允许指定一个（或多个，或一系列）提交（commit）追加到当前分支（更准确地说是当前工作头部（HEAD）），可以解决 `git merge` 无法满足的场景。cherry 本意是樱桃，车厘子。剑桥词典对 cherry-pick 的解释："to choose only the best or most suitable from a group of people or things"，即取其精华的意思。
 
-考虑一种常见的场景：1）我们从某知名开源仓库拉取主干最新代码（甚至都不是某个稳定版本）到本地；2）我们进行大量自主研发（甚至直接在主干而不是在内部分支上）；3）公司不允许内部研发的代码贡献到开源社区；4）社区也不愿接受不够规范的代码，所以我们不得不继续在本地仓库中维护代码。
+工作中一种不罕见的场景：1）我们从某知名开源仓库拉取主干最新代码（甚至都不是某个稳定版本）到本地；2）我们进行大量自主研发（甚至直接在主干而不是在内部分支上）；3）公司不允许内部研发的代码贡献到开源社区；4）社区也不愿接受这些代码，我们不得不继续在本地仓库中维护。
 
 好了，现在社区有了重大更新，客户点名需要这个功能，而我们本地已经很久没有同步社区最新代码了。我们如何从社区同步目标功能代码，又尽量保证现有的代码正常工作呢？zqfan 见到过如下几种方式：
 
@@ -53,7 +53,7 @@ a - b - c - d - e - f - g     upstream
             h - i - j - f'    local
 ```
 
-为什么是 f'（哈希值844e381）呢？因为尽管内容一样，但这是一个新的提交，这是和 `git merge` 显著的差异。追加 `-x` 参数是为了记录 f 的哈希值以便事后追溯，这会在 `git commit message` 底部记录一行文本：`(cherry picked from commit 33cdf7a)`。追加 `-s` 参数是为了记录操作者签名信息，这会在 `git commit message` 底部记录一行文本：`Signed-off-by: zhiqiangfan <zhiqiangfan@tencent.com>`。如果希望对原始的 git commit message 进行修改，可以追加 `-e` 选项。
+为什么是 f'（哈希值844e381）呢？因为尽管内容一样，但这是一个新的提交，这是和 `git merge` 显著的差异。追加 `-x` 参数是为了记录 f 的哈希值以便事后追溯，这会在 `git commit message` 底部记录一行文本：`(cherry picked from commit 63ffba7)`。追加 `-s` 参数是为了记录操作者签名信息，这会在 `git commit message` 底部记录一行文本：`Signed-off-by: zhiqiangfan <zhiqiangfan@tencent.com>`。如果希望对原始的 git commit message 进行修改，可以追加 `-e` 选项。
 
 运气好的话，此时就可以收工了。
 
@@ -70,7 +70,8 @@ hint: and commit the result with 'git commit'
 此时需要使用 `git status` 命令观察输出：
 
 ```
-# On branch dev/zqfan/test
+~/github/openstack/nova$ git status
+# On branch local
 # You are currently cherry-picking.
 #   (fix conflicts and run "git commit")
 #
@@ -84,17 +85,16 @@ hint: and commit the result with 'git commit'
 #   (use "git add <file>..." to mark resolution)
 #
 #       both modified:      nova/compute/manager.py
-#
 ```
 
 "Unmerged paths" 下列出的是需要我们解决冲突的文件，除了例子中的 "both modified" 外，可能还有 "both deleted" 和 "both added"。编辑文件，搜索 "====" 通常就能定位到冲突的位置，例如：
 
 ```
 <<<<<<< HEAD
-                                      source_bdms=source_bdmsxxx)
+    source_bdms=source_bdmsxxx)
 =======
-                                      source_bdms=source_bdms,
-                                      pre_live_migration=True)
+    source_bdms=source_bdms,
+    pre_live_migration=True)
 >>>>>>> 63ffba7... Fix pre_live_migration rollback
 ```
 
@@ -118,7 +118,7 @@ Date:   Tue Dec 7 17:39:58 2021 -0300
 
 可以注意到提交信息里还记录了此次冲突的文件（Conflicts）。
 
-除了挑选合入单个提交，我们还可以指定多个提交，例如 `git cherry-pick <SHA-1> <SHA-2>`，但 zqfan 更推荐逐个挑选合入。此外还可以指定一系列提交，例如 `git cherry-pick <SHA-1>..<SHA-2>`（注意，你无法指定一整个分支合并，因为此时 cherry-pick 选择的是该分支名下最新的那次提交），但当你想这么做的时候，其实就该考虑 `git merge` 了，因为随之而来的空提交、Merge 节点（需要手动 -m 指定父分支）以及 Merge Conflict 等问题带来的痛苦将指数上升直到被迫放弃。如果你确实想亲身体验下，那么熟练掌握以下命令将可能有所帮助：
+除了挑选合入单个提交，我们还可以指定多个提交，例如 `git cherry-pick <SHA-1> <SHA-2>`，但 zqfan 更推荐逐个挑选合入。此外还可以指定一系列提交，例如 `git cherry-pick <SHA-1>..<SHA-2>`。甚至指定整个分支，例如 `git cherry-pick ..upstream` （注意，如果仅指定分支名，没有 `..`，此时 cherry-pick 选择的是该分支名下最新的那次提交），但当你想这么做的时候，其实就该考虑 `git merge` 了，因为随之而来的空提交（需要指定 `--allow-empty` 解决）、Merge 节点（需要参数 `-m [1|2...]` 指定父分支）以及 Merge Conflict 等问题带来的痛苦将指数上升直到被迫放弃。如果你确实想亲身体验下，那么熟练掌握以下命令将可能有所帮助：
 
 - `git cherry-pick --continue` 继续执行
 - `git cherry-pick --abort` 放弃执行回滚到初始状态
