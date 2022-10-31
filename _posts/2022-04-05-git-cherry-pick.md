@@ -40,7 +40,7 @@ a - b - c - d - e - f - g    upstream
 ```
 $ git remote add upstream https://github.com/openstack/nova
 $ git fetch upstream master
-# git log upstream/master # 观察提交哈希值
+# git log upstream/master --graph --format="%C(auto) %h %s" # 观察提交哈希值
 $ git checkout local
 $ git cherry-pick -x -s 63ffba7
 ```

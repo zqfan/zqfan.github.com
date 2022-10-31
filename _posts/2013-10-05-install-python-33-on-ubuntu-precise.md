@@ -43,4 +43,27 @@ sudo make install
 export PATH=$PATH:/opt/python3.6/bin
 ~~~
 
+# Change default Python version on CentOS
+
+`alternatives --config python` will be done.
+
+```
+# alternatives --config python 
+
+There are 3 programs which provide 'python'.
+
+  Selection    Command
+-----------------------------------------------
+*  1           /usr/libexec/no-python
+   2           /usr/bin/python2
+ + 3           /usr/bin/python3
+
+Enter to keep the current selection[+], or type selection number: 2
+# python
+Python 2.7.18 (default, Oct  9 2022, 20:43:49) 
+[GCC 8.5.0 20210514 (Red Hat 8.5.0-10)] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 
+```
+
 License: [(CC 3.0) BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
