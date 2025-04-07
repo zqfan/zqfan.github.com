@@ -81,6 +81,8 @@ signing.password = gpgPassword
 signing.secretKeyRingFile = /path/to/.gnupg/secring.gpg
 ```
 
+maven账号和密码由于官方服务器权限更新，需要用[user token](https://central.sonatype.org/publish/generate-token/)替代对应位置，否则可能报错：`> Failed to publish publication 'release' to repository 'maven'   > Could not PUT 'xxx.aar'. Received status code 401 from server: Content access is protected by token`
+
 GPG 密钥信息可以使用 gpg2 工具生成，并上传公钥到服务器。如果环境上此前已经生成过密钥，使用 `gpg -K` 命令查看：
 
 ```
