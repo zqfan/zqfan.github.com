@@ -29,9 +29,8 @@ export PATH=$JAVA_HOME/bin:$PATH
 在 Android 官网找到下载页面，例如 [https://developer.android.com/studio#downloads](https://developer.android.com/studio#downloads)，找到 "Command line tools only" 章节，Platform 选择 Linux 栏，点击下载链接，拉到弹窗页面底部，勾选同意协议，右键下载按钮，复制链接地址，例如 [https://dl.google.com/android/repository/commandlinetools-linux-13114758_latest.zip](https://dl.google.com/android/repository/commandlinetools-linux-13114758_latest.zip)，打开 CentOS 终端命令行，执行以下命令：
 
 ```
-# cd /opt
-# mkdir android
-# cd android
+# mkdir /opt/android
+# cd /opt/android
 # wget https://dl.google.com/android/repository/commandlinetools-linux-13114758_latest.zip
 # unzip commandlinetools-linux-13114758_latest.zip
 ```
@@ -170,7 +169,7 @@ buildscript {
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
-    // 必填，否则发布阶段将会报错 compress 类找不到
+    // 必填，否则发布阶段将会报错 commons-compress 某个类方法找不到
     configurations.classpath {
         resolutionStrategy {
             force 'org.apache.commons:commons-compress:1.27.1'
@@ -191,7 +190,7 @@ buildscript {
 ## 问题
 
 - 报错：`Could not get unknown property ‘release’ for SoftwareComponentInternal set of type org.gradle.api.internal.component.DefaultSoftwareComponentContainer.`，需要在 `build.gradle` 的 `android` 项增加 `publishing` 方法。
-- 报错：`java.lang.NoSuchMethodError: 'org.apache.commons.compress.archivers.zip.ZipFile$Builder org.apache.commons.compress.archivers.zip.ZipFile.builder()'`，需要在项目根目录 `build.gradle` 文件指定 apache commons-compress 依赖。单纯在子项目中指定依赖是无效的。
-- 报错：`Failed to find target with hash string 'android-31' in: /opt/android/cmdline-tools`，升级到 `commandlinetools-linux-13114758_latest` 后，需将环境变量 `ANDROID_SDK_ROOT` 设置为 `/opt/android`。
+- 报错：`java.lang.NoSuchMethodError: 'org.apache.commons.compress.archivers.zip.ZipFile$Builder org.apache.commons.compress.archivers.zip.ZipFile.builder()'`，需要在项目根目录 `build.gradle` 文件指定 apache `commons-compress` 依赖，单纯在子项目中指定依赖是无效的。
+- 报错：`Failed to find target with hash string 'android-31' in: /opt/android/cmdline-tools`，升级到 `commandlinetools-linux-13114758_latest` 后，需将环境变量 `ANDROID_SDK_ROOT` 设置为 `/opt/android`，而非此前的 `/opt/android/cmdline-tools`。
 
-[原文](https://zqfan.github.io/2022/04/07/centos-gradle-publish-aar-to-maven) 由 [zqfan (zhiqiangfan@tencent.com)](https://github.com/zqfan) 发表。版权声明（License）: (CC 4.0) BY-NC-SA
+[原文](https://zqfan.github.io/2025/08/26/centos7-publish-android-to-maven-portal-with-gradle) 由 [zqfan (zhiqiangfan@tencent.com)](https://github.com/zqfan) 发表。版权声明（License）: (CC 4.0) BY-NC-SA
