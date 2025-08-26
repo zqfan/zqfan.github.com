@@ -6,6 +6,8 @@ description: not working
 keywords: centos, gradle, maven, aar, android
 ---
 
+**注意：因 Maven Central 更新，本文不再有效，请参考最新文章 [https://zqfan.github.io/2025/08/26/centos7-publish-android-to-maven-portal-with-gradle](https://zqfan.github.io/2025/08/26/centos7-publish-android-to-maven-portal-with-gradle)**
+
 虽然在 Android Studio 中也可直接发布 AAR 文件到 Maven 中央仓库，但大型项目通常需要在专门的构建机器上完成打包和发布。本文简要介绍如何在 CentOS 7 操作系统上，使用 Gradle 发布 Android SDK AAR 文件到 Maven 中央仓库。
 
 ### 安装 Java 11
